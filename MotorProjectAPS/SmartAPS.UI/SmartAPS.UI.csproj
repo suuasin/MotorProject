@@ -1,0 +1,544 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{599B180C-CEB8-4B08-A2D5-4A060C55FF37}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SmartAPS.UI</RootNamespace>
+    <AssemblyName>SmartAPS.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>3</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>3</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v19.1.Core, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.CodeParser.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.DataAccess.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.DataAccess.v19.1.UI, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Diagram.v19.1.Core, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VMS\Mozart\Client\Bin\DevExpress.Diagram.v19.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Office.v19.1.Core, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.PivotGrid.v19.1.Core, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v19.1.Core, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v19.1.Core, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Sparkline.v19.1.Core, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Spreadsheet.v19.1.Core, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v19.1.UI, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v19.1.Extensions, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v19.1.UI, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v19.1.Wizard, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraDiagram.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VMS\Mozart\Client\Bin\DevExpress.XtraDiagram.v19.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraGauges.v19.1.Core, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Program Files (x86)\DevExpress 19.1\Components\Bin\Framework\DevExpress.XtraLayout.v19.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPivotGrid.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v19.1.Extensions, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraRichEdit.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraSpreadsheet.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraVerticalGrid.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VMS\Mozart\Client\Bin\DevExpress.XtraVerticalGrid.v19.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Mozart.Common">
+      <HintPath>C:\Program Files (x86)\VMS\Mozart\Client\Bin\Mozart.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Mozart.Core">
+      <HintPath>C:\Program Files (x86)\VMS\Mozart\Client\Bin\Mozart.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Mozart.Data.Entity">
+      <HintPath>C:\Program Files (x86)\VMS\Mozart\Client\Bin\Mozart.Data.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Mozart.DataActions">
+      <HintPath>C:\Program Files (x86)\VMS\Mozart\Client\Bin\Mozart.DataActions.dll</HintPath>
+    </Reference>
+    <Reference Include="Mozart.SeePlan">
+      <HintPath>C:\ProgramData\Mozart\Execution\2021.120.2.24\Mozart.SeePlan.dll</HintPath>
+    </Reference>
+    <Reference Include="Mozart.Studio">
+      <HintPath>C:\Program Files (x86)\VMS\Mozart\Client\Bin\Mozart.Studio.dll</HintPath>
+    </Reference>
+    <Reference Include="Mozart.Studio.TaskCommon, Version=2020.118.1.50498, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\VMS\Mozart\Client\Bin\Mozart.Studio.TaskCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="Mozart.Studio.TaskModel, Version=2020.117.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VMS\Mozart\Client\Bin\Mozart.Studio.TaskModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Mozart.Studio.TaskModel.UserLibrary">
+      <HintPath>C:\Program Files (x86)\VMS\Mozart\Client\Bin\Mozart.Studio.TaskModel.UserLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Mozart.Studio.UIComponents">
+      <HintPath>C:\Program Files (x86)\VMS\Mozart\Client\Bin\Mozart.Studio.UIComponents.dll</HintPath>
+    </Reference>
+    <Reference Include="Mozart.Task.Model">
+      <HintPath>C:\Program Files (x86)\VMS\Mozart\Client\Bin\Mozart.Task.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Northwoods.Go, Version=4.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Northwoods.Go.dll</HintPath>
+    </Reference>
+    <Reference Include="Northwoods.Go.Layout, Version=4.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Northwoods.Go.Layout.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="SmartAPSModel.Schema, Version=2021.11.8.9, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SmartAPS\Generated\SmartAPSModel.Schema.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analysis\RTFViewDetailPopUp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\RTFViewDetailPopUp.Designer.cs">
+      <DependentUpon>RTFViewDetailPopUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\RTFViewPopUp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\RTFViewPopUp.Designer.cs">
+      <DependentUpon>RTFViewPopUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\PlanReportView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\PlanReportView.Designer.cs">
+      <DependentUpon>PlanReportView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ProductRouteView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\ProductRouteView.Designer.cs">
+      <DependentUpon>ProductRouteView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\DemandvsPlan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\DemandvsPlan.Designer.cs">
+      <DependentUpon>DemandvsPlan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\DetailView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Analysis\DetailView.Designer.cs">
+      <DependentUpon>DetailView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\DispatchingAnalysisView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\DispatchingAnalysisView.Designer.cs">
+      <DependentUpon>DispatchingAnalysisView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\DispatchingInfoViewPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Analysis\DispatchingInfoViewPopup.designer.cs">
+      <DependentUpon>DispatchingInfoViewPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\EqpUtilizationView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\EqpUtilizationView.Designer.cs">
+      <DependentUpon>EqpUtilizationView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\PSI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\PSI.Designer.cs">
+      <DependentUpon>PSI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\RTFView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\RTFView.Designer.cs">
+      <DependentUpon>RTFView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\StepMoveTrendView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\StepMoveTrendView.designer.cs">
+      <DependentUpon>StepMoveTrendView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\PeggingView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\PeggingView.Designer.cs">
+      <DependentUpon>PeggingView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\TargetMoveAnalysisView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\TargetMoveAnalysisView.Designer.cs">
+      <DependentUpon>TargetMoveAnalysisView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ValidationView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\ValidationView.Designer.cs">
+      <DependentUpon>ValidationView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\WipMoveTrendView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\WipMoveTrendView.Designer.cs">
+      <DependentUpon>WipMoveTrendView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gantts\DetailBarInfoView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gantts\DetailBarInfoView.Designer.cs">
+      <DependentUpon>DetailBarInfoView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gantts\ProductGantt.cs" />
+    <Compile Include="Gantts\ProductGanttView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gantts\ProductGanttView.Designer.cs">
+      <DependentUpon>ProductGanttView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\ConditionHelper.cs" />
+    <Compile Include="Analysis\StepWipSnapshotView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\StepWipSnapshotView.Designer.cs">
+      <DependentUpon>StepWipSnapshotView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\StepWipTrendView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Analysis\StepWipTrendView.Designer.cs">
+      <DependentUpon>StepWipTrendView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ETCTools\ReplaceDBDataTool.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ETCTools\ReplaceDBDataTool.Designer.cs">
+      <DependentUpon>ReplaceDBDataTool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gantts\EqpGantt.cs" />
+    <Compile Include="Gantts\EqpGanttLoadQtyView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gantts\EqpGanttLoadQtyView.Designer.cs">
+      <DependentUpon>EqpGanttLoadQtyView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gantts\EqpGanttPopUpView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gantts\EqpGanttPopUpView.Designer.cs">
+      <DependentUpon>EqpGanttPopUpView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gantts\EqpGanttView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gantts\EqpGanttView.Designer.cs">
+      <DependentUpon>EqpGanttView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gantts\EqpMaster.cs" />
+    <Compile Include="Gantts\GanttBar.cs" />
+    <Compile Include="Gantts\GanttMaster.cs" />
+    <Compile Include="Helper\DataServiceHelper.cs" />
+    <Compile Include="Helper\EngControlHelper.cs" />
+    <Compile Include="Helper\MyHelper.cs" />
+    <Compile Include="Gantts\LotBar.cs" />
+    <Compile Include="Gantts\LotBarDetailView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gantts\LotBarDetailView.Designer.cs">
+      <DependentUpon>LotBarDetailView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gantts\LotGantt.cs" />
+    <Compile Include="Gantts\LotGanttMaster.cs" />
+    <Compile Include="Gantts\LotGanttView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gantts\LotGanttView.Designer.cs">
+      <DependentUpon>LotGanttView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SimpleDataView\DataTableGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SimpleDataView\DataTableGridView.Designer.cs">
+      <DependentUpon>DataTableGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SimpleDataView\DataTablePivotGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SimpleDataView\DataTablePivotGridView.Designer.cs">
+      <DependentUpon>DataTablePivotGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateLcdUserInterfacePackage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\MyXtraGridTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utils\MyXtraPivotGridTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SmartAPS.UI.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Analysis\RTFViewDetailPopUp.resx">
+      <DependentUpon>RTFViewDetailPopUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\RTFViewPopUp.resx">
+      <DependentUpon>RTFViewPopUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\PlanReportView.resx">
+      <DependentUpon>PlanReportView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\ProductRouteView.resx">
+      <DependentUpon>ProductRouteView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\DemandVsPlan.resx">
+      <DependentUpon>DemandvsPlan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\DetailView.resx">
+      <DependentUpon>DetailView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\DispatchingAnalysisView.resx">
+      <DependentUpon>DispatchingAnalysisView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\DispatchingInfoViewPopup.resx">
+      <DependentUpon>DispatchingInfoViewPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\EqpUtilizationView.resx">
+      <DependentUpon>EqpUtilizationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\PSI.resx">
+      <DependentUpon>PSI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\RTFView.resx">
+      <DependentUpon>RTFView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\StepMoveTrendView.resx">
+      <DependentUpon>StepMoveTrendView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\PeggingView.resx">
+      <DependentUpon>PeggingView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\TargetMoveAnalysisView.resx">
+      <DependentUpon>TargetMoveAnalysisView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\ValidationView.resx">
+      <DependentUpon>ValidationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\WipMoveTrendView.resx">
+      <DependentUpon>WipMoveTrendView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\StepWipSnapshotView.resx">
+      <DependentUpon>StepWipSnapshotView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Analysis\StepWipTrendView.resx">
+      <DependentUpon>StepWipTrendView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ETCTools\ReplaceDBDataTool.resx">
+      <DependentUpon>ReplaceDBDataTool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gantts\EqpGanttLoadQtyView.resx">
+      <DependentUpon>EqpGanttLoadQtyView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gantts\EqpGanttPopUpView.resx">
+      <DependentUpon>EqpGanttPopUpView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gantts\ProductGanttView.resx">
+      <DependentUpon>ProductGanttView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gantts\EqpGanttView.resx">
+      <DependentUpon>EqpGanttView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gantts\LotBarDetailView.resx">
+      <DependentUpon>LotBarDetailView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gantts\LotGanttView.resx">
+      <DependentUpon>LotGanttView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SimpleDataView\DataTableGridView.resx">
+      <DependentUpon>DataTableGridView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SimpleDataView\DataTablePivotGridView.resx">
+      <DependentUpon>DataTablePivotGridView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Utils\MyXtraGridTemplate.resx">
+      <DependentUpon>MyXtraGridTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utils\MyXtraPivotGridTemplate.resx">
+      <DependentUpon>MyXtraPivotGridTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SmartAPS.UserLibrary\SmartAPS.UserLibrary.csproj">
+      <Project>{c9435733-d2d9-4b5e-ae43-084bf9486503}</Project>
+      <Name>SmartAPS.UserLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>set PROCESSOR_ARCHITEW6432
+if ERRORLEVEL 1 GOTO x86
+if NOT ERRORLEVEL 1 GOTO x64
+
+:x86
+xcopy "$(TargetDir)$(ProjectName).*" "C:\Program Files (x86)\VMS\Mozart\Client\bin\" /D /C /V /Y /R
+xcopy "$(ProjectDir)SmartAPS.UI.config" "C:\Program Files (x86)\VMS\Mozart\Client\bin\" /D /C /V /Y /R
+GOTO end
+
+:x64
+xcopy "$(TargetDir)$(ProjectName).*" "C:\Program Files (x86)\VMS\Mozart\Client\bin\" /D /C /V /Y /R
+xcopy "$(ProjectDir)SmartAPS.UI.config" "C:\Program Files (x86)\VMS\Mozart\Client\bin\" /D /C /V /Y /R
+GOTO end
+
+:end</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,3018 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mozart.Data.Entity</name>
+    </assembly>
+    <members>
+        <member name="T:Mozart.Data.EditableAdapters.EditablePropertyDescriptor">
+            <summary>
+            A property descriptor that uses delegates to read and write the properties. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditablePropertyDescriptor.#ctor(Mozart.Reflection.MemberAccessor,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="!:DelegatedPropertyDescriptor"/> class.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="componentType">Type of the component.</param>
+            <param name="propertyType">Type of the property.</param>
+            <param name="getValueCallback">The get value callback.</param>
+            <param name="setValueCallback">The set value callback.</param>
+        </member>
+        <member name="P:Mozart.Data.EditableAdapters.EditablePropertyDescriptor.ComponentType">
+            <summary>
+            When overridden in a derived class, gets the type of the component this property is bound to.
+            </summary>
+            <value></value>
+            <returns>A <see cref="T:System.Type"/> that represents the type of component this property is bound to. When the <see cref="M:System.ComponentModel.PropertyDescriptor.GetValue(System.Object)"/> or <see cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)"/> methods are invoked, the object specified might be an instance of this type.</returns>
+        </member>
+        <member name="P:Mozart.Data.EditableAdapters.EditablePropertyDescriptor.IsReadOnly">
+            <summary>
+            When overridden in a derived class, gets a value indicating whether this property is read-only.
+            </summary>
+            <value></value>
+            <returns>true if the property is read-only; otherwise, false.</returns>
+        </member>
+        <member name="P:Mozart.Data.EditableAdapters.EditablePropertyDescriptor.PropertyType">
+            <summary>
+            When overridden in a derived class, gets the type of the property.
+            </summary>
+            <value></value>
+            <returns>A <see cref="T:System.Type"/> that represents the type of the property.</returns>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditablePropertyDescriptor.CanResetValue(System.Object)">
+            <summary>
+            When overridden in a derived class, returns whether resetting an object changes its value.
+            </summary>
+            <param name="component">The component to test for reset capability.</param>
+            <returns>
+            true if resetting the component changes its value; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditablePropertyDescriptor.GetValue(System.Object)">
+            <summary>
+            When overridden in a derived class, gets the current value of the property on a component.
+            </summary>
+            <param name="component">The component with the property for which to retrieve the value.</param>
+            <returns>
+            The value of a property for a given component.
+            </returns>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditablePropertyDescriptor.SetValue(System.Object,System.Object)">
+            <summary>
+            When overridden in a derived class, sets the value of the component to a different value.
+            </summary>
+            <param name="component">The component with the property value that is to be set.</param>
+            <param name="value">The new value.</param>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditablePropertyDescriptor.ShouldSerializeValue(System.Object)">
+            <summary>
+            When overridden in a derived class, determines a value indicating whether the value of this property needs to be persisted.
+            </summary>
+            <param name="component">The component with the property to be examined for persistence.</param>
+            <returns>
+            true if the property should be persisted; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditableAdapter`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Data.EditableAdapters.EditableAdapter`1"/> class.
+            </summary>
+            <param name="current">The object being wrapped.</param>
+        </member>
+        <member name="P:Mozart.Data.EditableAdapters.EditableAdapter`1.Instance">
+            <summary>
+            Gets the current item.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.EditableAdapters.EditableAdapter`1.Mozart#Data#EditableAdapters#IEditable#Instance">
+            <summary>
+            Gets the current item.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditableAdapter`1.Mozart#Data#EditableAdapters#IEditable#ReadProperty(Mozart.Reflection.MemberAccessor)">
+            <summary>
+            Reads the property.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="property">The property.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditableAdapter`1.Mozart#Data#EditableAdapters#IEditable#WriteProperty(Mozart.Reflection.MemberAccessor,System.Object)">
+            <summary>
+            Writes the property.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="property">The property.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditableAdapter`1.ReadUncommitted(System.String)">
+            <summary>
+            Gets the edited value of a property, even if the value has not yet been committed to the underlying item.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <returns></returns>
+        </member>
+        <member name="E:Mozart.Data.EditableAdapters.EditableAdapter`1.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditableAdapter`1.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Raises the <see cref="E:PropertyChanged"/> event.
+            </summary>
+            <param name="e">The <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditableAdapter`1.OnPropertyChanged(System.String)">
+            <summary>
+            Raises the <see cref="E:PropertyChanged"/> event.
+            </summary>
+            <param name="propertyName">The name of the property that changed.</param>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditableAdapter`1.BeginEdit">
+            <summary>
+            Begins an edit on an object.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditableAdapter`1.CancelEdit">
+            <summary>
+            Discards changes since the last <see cref="M:System.ComponentModel.IEditableObject.BeginEdit"/> call.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditableAdapter`1.EndEdit">
+            <summary>
+            Pushes changes since the last <see cref="M:System.ComponentModel.IEditableObject.BeginEdit"/> or <see cref="M:System.ComponentModel.IBindingList.AddNew"/> call into the underlying object.
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.EditableAdapters.EditableTypeDescriptionProvider">
+            <summary>
+            A TypeDescriptionProvider that provides TypeDescriptor information for EditableWrapper objects.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditableTypeDescriptionProvider.CreateInstance(System.IServiceProvider,System.Type,System.Type[],System.Object[])">
+            <summary>
+            Creates an object that can substitute for another data type.
+            </summary>
+            <param name="provider">An optional service provider.</param>
+            <param name="objectType">The type of object to create. This parameter is never null.</param>
+            <param name="argTypes">An optional array of types that represent the parameter types to be passed to the object's constructor. This array can be null or of zero length.</param>
+            <param name="args">An optional array of parameter values to pass to the object's constructor.</param>
+            <returns>
+            The substitute <see cref="T:System.Object"/>.
+            </returns>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditableTypeDescriptionProvider.GetTypeDescriptor(System.Type,System.Object)">
+            <summary>
+            Gets a custom type descriptor for the given type and object.
+            </summary>
+            <param name="objectType">The type of object for which to retrieve the type descriptor.</param>
+            <param name="instance">An instance of the type. Can be null if no instance was passed to the <see cref="T:System.ComponentModel.TypeDescriptor"/>.</param>
+            <returns>
+            An <see cref="T:System.ComponentModel.ICustomTypeDescriptor"/> that can provide metadata for the type.
+            </returns>
+        </member>
+        <member name="T:Mozart.Data.EditableAdapters.EditableTypeDescriptor">
+            <summary>
+            A type descriptor for EditableWrapper objects that enable data binding.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditableTypeDescriptor.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="!:DesignTimeTypeDescriptor"/> class.
+            </summary>
+            <param name="objectType">Type of the object.</param>
+            <param name="instance">The instance.</param>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditableTypeDescriptor.GetProperties">
+            <summary>
+            Returns the properties for this instance of a component.
+            </summary>
+            <returns>
+            A <see cref="T:System.ComponentModel.PropertyDescriptorCollection"/> that represents the properties for this component instance.
+            </returns>
+        </member>
+        <member name="M:Mozart.Data.EditableAdapters.EditableTypeDescriptor.GetProperties(System.Attribute[])">
+            <summary>
+            Returns the properties for this instance of a component using the attribute array as a filter.
+            </summary>
+            <param name="attributes">An array of type <see cref="T:System.Attribute"/> that is used as a filter.</param>
+            <returns>
+            A <see cref="T:System.ComponentModel.PropertyDescriptorCollection"/> that represents the filtered properties for this component instance.
+            </returns>
+        </member>
+        <member name="T:Mozart.Data.EditableAdapters.IEditable">
+            <summary>
+            An interface for editable wrapper objects so that they can be reflected at design time. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Entity.EntityEventHandler">
+            <summary>
+            레코드 데이터의 상태가 변경될 때 호출되는 대리자입니다.
+            </summary>
+            <param name="sender">레코드 데이터가 속한 EntityTable입니다.</param>
+            <param name="e">Entity 관련 정보입니다.</param>
+            <summary>
+            Represents the method that will handle events each time the state of the data record in <em>EntityTable</em> changes. 
+            </summary>
+            <param name="sender">The specified <em>EntityTable</em> which the data record belongs to.</param>
+            <param name="e">The information of the <em>Entity</em>.</param>
+        </member>
+        <member name="T:Mozart.Data.Entity.EntityEventArgs">
+            <summary>
+            레코드 데이터 관련 정보가 들어있는 클래스입니다.
+            </summary>
+            <summary>
+            The class that contains the information of the data record.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityEventArgs.Entity">
+            <summary>
+            상태가 변경된 레코드 데이터를 가져옵니다.
+            </summary>
+            <summary>
+            Gets the data record that changed state. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEventArgs.#ctor(System.Object)">
+            <summary>
+            주어진 레코드 데이터를 사용하여 새로운 EntityEventArgs를 생성합니다.
+            </summary>
+            <param name="entity">상태가 변경된 Entity입니다.</param>
+            <summary>
+            Initiates a new instancne of the <em>EntityEventArgs</em> class with the specified data record object. 
+            </summary>
+            <param name="entity">The <em>Entity</em> object that changed state.</param>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityStateEntry`1.AcceptChanges(Mozart.Data.Entity.EntityTable{`0})">
+            <summary>
+                API to accept the current values as original values and  mark the entity as Unchanged.
+            </summary>
+            <param> </param>
+            <returns> </returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityStateEntry`1.Delete(Mozart.Data.Entity.EntityTable{`0})">
+            <summary>
+                API to mark the entity deleted. if entity is in added state, it will be detached
+            </summary>
+            <param> </param>
+            <returns> </returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityStateEntry`1.GetModifiedProperties(Mozart.Data.Entity.EntityTable{`0})">
+            <summary>
+                API to return properties that are marked modified
+            </summary>
+            <param> </param>
+            <returns> IEnumerable of modified properties names, names are in term of c-space </returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityStateEntry`1.SetModified(Mozart.Data.Entity.EntityTable{`0})">
+            <summary>
+                set the state to Modified.
+            </summary>
+            <param> </param>
+            <returns> </returns>
+            <exception cref="T:System.InvalidOperationException">If State is not Modified or Unchanged</exception>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityStateEntry`1.SetModifiedProperty(Mozart.Data.Entity.EntityTable{`0},System.String)">
+            <summary>
+                Marks specified property as modified.
+            </summary>
+            <param name="propertyName"> This API recognizes the names in terms of OSpace </param>
+            <exception cref="T:System.InvalidOperationException">If State is not Modified or Unchanged</exception>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityStateEntry`1.RejectPropertyChanges(Mozart.Data.Entity.EntityTable{`0},System.String)">
+            <summary>
+                Rejects any changes made to the property with the given name since the property was last loaded,
+                attached, saved, or changes were accepted. The orginal value of the property is stored and the
+                property will no longer be marked as modified.
+            </summary>
+            <remarks>
+                If the result is that no properties of the entity are marked as modified, then the entity will
+                be marked as Unchanged.
+                Changes to properties can only rejected for entities that are in the Modified or Unchanged state.
+                Calling this method for entities in other states (Added, Deleted, or Detached) will result in
+                an exception being thrown.
+                Rejecting changes to properties of an Unchanged entity or unchanged properties of a Modifed
+                is a no-op.
+            </remarks>
+            <param name="propertyName"> The name of the property to change. </param>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityStateEntry`1.IsPropertyChanged(Mozart.Data.Entity.EntityTable{`0},System.String)">
+            <summary>
+                Note that this may be different from the property being marked as modified 
+                since a property which has not changed can still be marked as modified.
+            </summary>
+            <param name="propertyName"> The name of the property. </param>
+            <returns> True if the property has changed; false otherwise. </returns>
+        </member>
+        <member name="T:Mozart.Data.Entity.EntityTable`1">
+             <summary>
+            The EntityTable class to store Entity.
+             </summary>
+             <remarks>
+             Writes record to EntityTable.
+             Gets data through Key value.
+             </remarks>
+        </member>
+        <member name="F:Mozart.Data.Entity.EntityTable`1.defaultView">
+            <summary>
+            Default EntityView of DataTable.
+            </summary>
+        </member>
+        <member name="F:Mozart.Data.Entity.EntityTable`1.enforceConstraints">
+            <summary>
+            The variable to determine if there are duplicated Row IDs.
+            </summary>
+        </member>
+        <member name="F:Mozart.Data.Entity.EntityTable`1.inDataLoad">
+            <summary>
+            The variable to determine to check for Data Loading.
+            </summary>
+            <remarks>
+            When Data Loading starts, return true, or else, return false. 
+            </remarks>
+        </member>
+        <member name="F:Mozart.Data.Entity.EntityTable`1.initialLoad">
+            <summary>
+            The variable to check if EntityTable is in initial state with no Records. 
+            </summary>
+        </member>
+        <member name="F:Mozart.Data.Entity.EntityTable`1.tableName">
+            <summary>
+            The Table name string variable.
+            </summary>
+        </member>
+        <member name="E:Mozart.Data.Entity.EntityTable`1.OnEntityAdd">
+            <summary>
+            EntityTable에 레코드 데이터가 추가될 때 호출되는 이벤트입니다.
+            </summary>
+            <summary>
+            An event called when data record changes in the <em>EntityTable</em>.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityTable`1.Rows">
+            <summary>
+            	<para>The Record data stored in EntityTable.</para>
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityTable`1.TableName">
+            <summary>
+            	<para>Sets or Returns EntityTable name.</para>
+            </summary>
+            <remarks>EntityTable name can be changed based on Locale.</remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityTable`1.PrimaryKey">
+            <summary>
+            	<para>Define or Return primaryKey of EntityTable.</para>
+            </summary>
+            <remarks>
+            Retrun empty string if no primaryKey is deisgnated. 
+            The latest set key value is the primaryKey and the corresponding key value is used to Cash(Index) with EntityTable.
+            When data is retrieved during EntityTable initialization, the primaryKey set after all phases on initilization is completed.
+            </remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityTable`1.CaseSensitive">
+            <summary>
+            Determines whether to ignore upper/lower case letters when comparing strings. 
+            </summary>
+            <remarks>
+            If upper/lower case is ignored, return true, or else, return false.
+            The Reord data of the current EntityTable is re-sorted after newly configured string comparison and calls OnListChanged Event. 
+            </remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityTable`1.Locale">
+            <summary>
+            	<para>Returns the CultureInfo class that stores the date/time and string sort type.</para>
+            </summary>
+            <remarks>
+            Excpetion is thrown when Locale could not be changed to target Locale.
+            </remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityTable`1.DefaultView">
+            <summary>
+            	<para>Creates default EntityView or returns existing EntityView.</para> 
+            </summary>
+            <remarks>
+            When there is no defaultView set, the EntityView with default configuration will be created and assigned as defaultView.
+            </remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityTable`1.Members">
+            <summary>
+            EntityMember 정보를 IEnumerable형식의 IEntityMemberInfo값을 순차적으로 반환합니다.
+            Converts EntityMember information in order as IEntityMemberInfo value of IEnumerable type 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.#ctor(System.String,System.Boolean)">
+            <summary>
+            	<para>This is the EntityTable constructor which could configure the table name and write authority of property.</para>
+            </summary>
+            <param name="tableName">The tableName variable to set EntityTable name.</param>
+            <param name="edit">Edit variable to determine the write authority of Property.</param>
+            <remarks>
+            Destructor is not called. 
+            EntityTable variables are initialized. 
+            tableName is set through the target tableName. 
+            If the target edit value is true, trackChange Event is activated for EntutyState and EntityValue Change.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.#ctor">
+            <summary>
+            	<para>This is the EntityTable constructor which could configure the table name and write authority of property.</para>
+            </summary>
+            <remarks>
+            Destructor is not called. 
+            EntityTable variables are initialized. 
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.#ctor(System.String)">
+            <summary>
+            	<para>This is the EntityTable constructor which could configure the table name and write authority of property.</para>
+            </summary>
+            <param name="tableName">tableName variable to set name for EntityTable.</param>
+            <remarks>
+            Destructor is not called. 
+            EntityTable variables are initialized. 
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.Reset(System.Type)">
+            <summary>
+            	<para>Initialize EntityTable according to target typeInfo and configure primaryKey.</para>
+            </summary>
+            <param name="typeInfo">typeInfo class used for reset.</param>
+            <remarks>
+            Exception is thrown when target typesInfo and Row data do not exist while having identical Parent Table(IsSameOrParentOf).
+            EntityCollection is initialized and primaryKey is configured.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.BeginInit">
+            <summary>
+            	<para>Delays primaryKey Cash activity.</para>
+            </summary>
+            <remarks>
+            Uses EndInit() function as Pair.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.BeginLoadData">
+            <summary>
+            	<para>The function to be called before Data Loading. This function organizes the Cash(Index) which is processed during Data Loading.</para>
+            </summary>
+            <remarks>
+            Works as Pair with EndLoadData().
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.Clear">
+            <summary>
+            	<para>Clears the data and Cash(Index) of EntityTable.</para> 
+            </summary>
+            <remarks>
+            Clears saved Records.
+            Clears saved Indexes.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.CompareString(System.Object,System.Object)">
+            <summary>
+            	<para>Compares target string objects.</para>
+            </summary>
+            <param name="obj1">Object 1 for comparison.</param>
+            <param name="obj2">Object 2 for comparison.</param>
+            <remarks>
+            Compares and returns the result of the target string objects with same space and length accorind to compareFlags.
+            </remarks>
+            <returns>비교한 결과를 [1, 0, -1]으로 반환합니다.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.EndInit">
+            <summary>
+            	<para>Proceed the delayed primaryKey Cash.</para>
+            </summary>
+            <remarks>
+            EndInit should be used by pairing up with BeginInit() function.
+            Defines RowFilter and calls OnInitialized Event.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.EndLoadData">
+            <summary>
+            	<para>Organizes Cash(Index) after Data Loading.</para>
+            </summary>
+            <remarks>
+            EndLoadData should be used by pairing up with BeginLoadData() function.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.FindByPrimaryKey(System.Object[])">
+            <summary>
+            	<para>대상 Value를 검색하고 그 결과를 T형식의 값으로 반환합니다.</para>
+            </summary>
+            <param name="object[][]">검색할 대상 values 객체 입니다.</param>
+            <returns>primaryIndex로 검색된 결과를 T형식의 값으로 반환합니다.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Mozart.Data.Entity.EntityTable`1.FindRow(Mozart.Data.Entity.IndexField[],System.Object[])" -->
+        <member name="M:Mozart.Data.Entity.EntityTable`1.GetIndex(Mozart.Data.Entity.IndexField[])">
+            <summary>
+            	<para>Return IndexField values in indexDesc as T type Index value.</para>
+            </summary>
+            <param name="indexDesc">The target IndexField class variable to be searched.</param>
+            <returns>Returns T type Index value.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.GetIndex(Mozart.Data.Entity.IndexField[],Mozart.Data.Entity.IFilter{`0},Mozart.Data.Entity.IndexType)">
+            <summary>
+            	<para>Returns the Cash(Index) matching with indexDesc value based on rowFilter from Indexes</para>
+            </summary>
+            <param name="IndexField">The array type IndexField class variable.</param>
+            <param name="rowFilter">T type IndexFilter object variable.</param>
+            <param name="indexType">`Enumuration type Index variable</param>
+            <remarks>
+            indextType can be skipped, the default value uses indexType.BiinaryTree.
+            In case indexDesc, rowFilter do not exits, new indexDesc, rowFilter are created.
+            The indexField value that is Cashed(Indexed) will return the saved Index value.
+            </remarks>
+            <returns>Returns the matching result Index value.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.GetIndex(System.String,Mozart.Data.Entity.IFilter{`0},Mozart.Data.Entity.IndexType)">
+            <summary>
+            	<para>Returns the sorting result according to sorting expression as T type Index value.</para>
+            </summary>
+            <param name="sort">The variable that indicates the string type sorting expression.</param>
+            <param name="rowFilter">Target T type IFilter class variable.</param>
+            <param name="indexType">indextType type Enumuration variable. </param>
+            <remarks>The default value of indexType is IndexType.BinaryTree.</remarks>
+            <returns>Returns the searched Records as T type Index value.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.NewEntity">
+            <summary>
+            	<para>Creates new Entity, and returns the created Entity as T type variable value.</para>
+            </summary>
+            <returns>
+            T type data through TypeAccessor class and returns the created value.
+            </returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.ToString">
+            <summary>
+            	<para>Returns the configured EntityTable name.</para>
+            </summary>
+            <returns>
+            Returns the string type TableName.
+            </returns>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityTable`1.IsInitialized">
+            <summary>
+            	<para>Determines the initialization of EntityTable.</para>
+            </summary>
+            <returns>
+            Returns whether to initialize EntityTable or not.
+            </returns>
+        </member>
+        <member name="E:Mozart.Data.Entity.EntityTable`1.Initialized">
+            <summary>
+            	<para>Defines the EventHandler to be called when initializing EntityTable.</para>
+            </summary>
+            <returns>
+            Calls the defined Event during EntityTable initialization.
+            </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Mozart.Data.Entity.EntityTable`1.ImportTable(Mozart.Data.Entity.IEntityTable{`0})" -->
+        <!-- Badly formed XML comment ignored for member "M:Mozart.Data.Entity.EntityTable`1.ImportRow(`0)" -->
+        <member name="P:Mozart.Data.Entity.EntityTable`1.TrackInternal">
+            <summary>
+            EntityTable에 속한 EntityObject의 값이 변경되었을 때 EntityObject의 Tracker가 이를 추적할 수 있는지 여부를 가져오거나 설정합니다.
+            </summary>
+            <summary>
+            Gets or sets the value to indicate whether if the <em>Tracker</em> of the <em>EntityObject</em>, to track the changes made to the value of <em>EntityObject</em> in the <em>EntityTable</em>
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityTable`1.TrackChanges">
+            <summary>
+            EntityTable에 속한 EntityObject의 상태가 변경되었을 때 EntityObject의 Tracker가 이를 추적할 수 있는지 여부를 가져오거나 설정합니다. 
+            </summary>
+            <summary>
+            Gets or sets the value to indicate whether if the <em>Tracker</em> of the <em>EntityObject</em>, to track the state changes of the <em>EntityObject</em> in the <em>EntityTable</em>
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.BeginEdit(`0)">
+            <summary>
+            주어진 레코드 데이터에 대한 변경을 시작합니다. 
+            </summary>
+            <param name="row">변경하려는 레코드 데이터입니다.</param>
+            <summary>
+            Begins the modification of the specified data record.  
+            </summary>
+            <param name="row">The data record to modify.</param>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.EndEdit(`0)">
+            <summary>
+            주어진 레코드 데이터에 대한 변경을 완료합니다.
+            </summary>
+            <param name="row">변경이 완료된 레코드 데이터입니다.</param>
+            <summary>
+            Ends the modification of the specified data record. 
+            </summary>
+            <param name="row">The data record to end the modification.</param>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.CancelEdit(`0)">
+            <summary>
+            주어진 레코드 데이터에 대한 변경을 취소합니다.
+            </summary>
+            <param name="row">변경을 취소하려는 레코드 데이터입니다.</param>
+            <summary>
+            Cancels the modification of the specified data record.
+            </summary>
+            <param name="row">The data record to cancel the modification.</param>
+        </member>
+        <member name="E:Mozart.Data.Entity.EntityTable`1.OnBeginEdit">
+            <summary>
+            레코드 데이터의 변경이 시작될 때 호출되는 이벤트입니다.
+            </summary>
+            <summary>
+            The event to call when data record modification begins. 
+            </summary>
+        </member>
+        <member name="E:Mozart.Data.Entity.EntityTable`1.OnEndEdit">
+            <summary>
+            레코드 데이터의 변경이 완료되었을 때 호출되는 이벤트입니다.
+            </summary>
+            <summary>
+            The event to call when data record modification ends. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.AcceptChanges(`0)">
+            <summary>
+            Commits all the changes made to this row
+            since the last time <see cref='!:Mozart.Data.Entity.EntityObject.AcceptChanges'/> was called.
+            </summary>
+            <param name="row"></param>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.RejectChanges(`0)">
+            <summary>
+             Rejects all changes made to the row since <see cref='!:Mozart.Data.Entity.EntityObject.AcceptChanges'/> 
+                  was last called.
+            </summary>
+            <param name="row"></param>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.AcceptChanges">
+            <summary>
+            마지막으로 이 개체의 AcceptChanges 함수가 호출된 뒤로 발생한 모든 변경 사항을 커밋합니다.
+            </summary>
+            <summary>
+            Commits all the changes made to this <em>EntityTable</em> since the last time <em>AccecptChanges()</em> was called. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTable`1.RejectChanges">
+            <summary>
+            마지막으로 이 개체의 AcceptChanges 함수가 호출된 뒤로 발생한 모든 변경 사항을 롤백합니다.
+            </summary>
+            <summary>
+            Roll back all changes that have been made to the <em>EntityTable</em> since it was loaded, or the last time <em>AcceptChagnes()</em> was called. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Entity.EntityTableChangeEventArgs`1">
+            <summary>
+            EntityTable의 상태 변경 정보가 들어있는 클래스입니다.
+            </summary>
+            <typeparam name="T">Entity의 형식입니다.</typeparam>
+            <summary>
+            Contains the state change information of the <em>EntityTable</em>.
+            </summary>
+            <typeparam name="T">The type of <em>Entity</em>.</typeparam>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityTableChangeEventArgs`1.Entity">
+            <summary>
+            EntityTable의 상태를 야기시킨 레코드 데이터를 가져옵니다.
+            </summary>
+            <summary>
+            The data record that caused the state change of the <em>EntityTable</em>.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityTableChangeEventArgs`1.Action">
+            <summary>
+            EntityTable의 상태 변경 유형입니다.
+            </summary>
+            <summary>
+            The state change type of the <em>EntityTable</em>. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableChangeEventArgs`1.#ctor(`0,Mozart.Data.Entity.EntityTableAction)">
+            <summary>
+            주어진 레코드 데이터와 EntityTable의 상태 변경 유형을 사용하여 새로운 EntityTableChangeEventArgs를 생성합니다.
+            </summary>
+            <param name="entity">EntityTable의 상태를 야기시킨 레코드 데이터입니다.</param>
+            <param name="action">EntityTable의 상태 변경 유형입니다.</param>
+            <summary>
+            Initializes a new instance of the class <em>EntityTableChangeEventArgs</em> with the specified data record and the enumerator that specifies type of the state change of the specified <em>EntityTable</em>.
+            </summary>
+            <param name="entity">The data record that caused the state change of the <em>EntityTable</em>.</param>
+            <param name="action">Specifies the  type of the state change of the <em>EntityTable</em> </param>
+        </member>
+        <member name="T:Mozart.Data.Entity.EntityTableAction">
+            <summary>
+            EntityTable의 상태 변경 유형입니다.
+            </summary>
+            <summary>
+            Specifies the state change type of the <em>EntityTable</em>.
+            </summary>
+        </member>
+        <member name="F:Mozart.Data.Entity.EntityTableAction.Nothing">
+            <summary>
+            변경된 내용이 없음을 나타냅니다.
+            </summary>
+            <summary>
+            Specifies no change has been made to the <em>EntityTable</em>.
+            </summary>
+        </member>
+        <member name="F:Mozart.Data.Entity.EntityTableAction.Delete">
+            <summary>
+            레코드 데이터가 제거되었음을 나타냅니다.
+            </summary>
+            <summary>
+            레코드 데이터가 변경되었음을 나타냅니다.
+            </summary>
+            <summary>
+            Specifies that the data record has been removed.. 
+            </summary>
+        </member>
+        <member name="F:Mozart.Data.Entity.EntityTableAction.Change">
+            <summary>
+            Specifies the data record has been modified. 
+            </summary>
+        </member>
+        <member name="F:Mozart.Data.Entity.EntityTableAction.Rollback">
+            <summary>
+            레코드 데이터의 변경 사항이 롤백되었음을 나타냅니다.
+            </summary>
+            <summary>
+            Specifies that the modified data has been rolled back.  
+            </summary>
+        </member>
+        <member name="F:Mozart.Data.Entity.EntityTableAction.Commit">
+            <summary>
+            Specifies the changed data record is committed. 
+            </summary>
+        </member>
+        <member name="F:Mozart.Data.Entity.EntityTableAction.Add">
+            <summary>
+            레코드 데이터가 추가되었음을 나타냅니다.
+            </summary>
+            <summary>
+            Specifies that the data record has been appended.
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Entity.EntityTableChangeEventHandler`1">
+            <summary>
+            EntityTable의 상태가 변경될 때 호출되는 대리자입니다.
+            </summary>
+            <typeparam name="T">레코드의 유형입니다.</typeparam>
+            <param name="sender">EntityTable의 상태 변경을 야기시킨 레코드 데이터입니다.</param>
+            <param name="e">EntityTable의 상태 변경 정보입니다.</param>
+            <summary>
+            Represents the method that will handle events when state of the <em>EntityTable</em> changes. 
+            </summary>
+            <typeparam name="T">The type of the record.</typeparam>
+            <param name="sender">The data record that caused the state change of the <em>EntityTable</em>.</param>
+            <param name="e">The state change information of the <em>EntityTable</em>.</param>
+        </member>
+        <member name="T:Mozart.Data.Entity.EntityTableExtensions">
+            <summary>
+            This is the EntityTableExtensions class providing extension functions to EntityTable.
+            </summary>
+            <remarks>
+            <para>The following functions are provided to EntityTable.</para>
+            <para>1. Gets sorted Record result through Key value of the target EntityTable.</para>
+            <para>2. Saves DataTable data to the target EntityTable. </para>
+            <para>3. Gets Record result from EntityTable searched through specific conditions. </para>
+            <para>4. Saves EntityView or multiple EntityTable Records to one single EntityTable.</para>
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableExtensions.ToEntityTable``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            Generated EntityTable based on target source and writes the corresponding Record values.
+            </summary>
+            <param name="source">TRow type target source IEnumerable variable.</param>
+            <param name="name">string type name variable.</param>
+            <remarks>
+            TRow type should be a class that inherits IEntityObject. 
+            "name" can be left out. If "name" is skipped, set TypeInfo value as default of TableName.
+            </remarks>
+            <returns>Return the generated EntityTable value.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableExtensions.Where``1(Mozart.Data.Entity.EntityTable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            LINQ's Where operator for generic EnumerableRowCollection. 
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableExtensions.OrderBy``2(Mozart.Data.Entity.EntityTable{``0},System.Func{``0,``1})">
+            <summary>
+            LINQ's OrderBy operator for generic EnumerableRowCollection. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableExtensions.OrderBy``2(Mozart.Data.Entity.EntityTable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1})">
+            <summary>
+            LINQ's OrderBy operator for generic EnumerableRowCollection.
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableExtensions.OrderByDescending``2(Mozart.Data.Entity.EntityTable{``0},System.Func{``0,``1})">
+            <summary> 
+            LINQ's OrderByDescending operator for generic EnumerableRowCollection. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableExtensions.OrderByDescending``2(Mozart.Data.Entity.EntityTable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1})">
+            <summary> 
+            LINQ's OrderByDescending operator for generic EnumerableRowCollection.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableExtensions.Select``2(Mozart.Data.Entity.EntityTable{``0},System.Func{``0,``1})">
+            <summary>
+            Executes a Select (Projection) on EnumerableDataTable. If the selector returns a different 
+            type than the type of rows, then AsLinqDataView is disabled, and the returning EnumerableDataTable 
+            represents an enumerable over the LINQ Query.
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableExtensions.AsEnumerable``1(Mozart.Data.Entity.EntityTable{``0})">
+            <summary>
+              This method returns a IEnumerable of TRow. 
+            </summary> 
+            <param name="source">
+              The source DataTable to make enumerable. 
+            </param>
+            <returns>
+              IEnumerable of datarows.
+            </returns> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableExtensions.ElementAtOrDefault``1(Mozart.Data.Entity.EntityTable{``0},System.Int32)">
+            <summary>
+            Return the Record from the corresponding index location from the target EntityTable.
+            </summary>
+            <param name="source">TRow type source variable.</param>
+            <param name="index">Integer type index variable.</param>
+            <remarks>
+            If not in the corresponding Recrod range, default(TRow) value is returned.
+            </remarks>
+            <returns>Return the TRow type Reocrd located in the target index.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableExtensions.CopyToDataTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+              This method takes an input sequence of DataRows and produces a DataTable object 
+              with copies of the source rows. 
+              Also note that this will cause the rest of the query to execute at this point in time
+            </summary>
+            <param name="source">
+              The input sequence of DataRows
+            </param> 
+            <remarks>
+            if source is null, then throw ArgumentNullException
+            if source is empty, then throw ArgumentNullException
+            (e.g. there is no more delayed execution after this sequence operator). 
+            </remarks>
+            <returns>
+              DataTable containing copies of the source DataRows. 
+              Properties for the DataTable table will be taken from first DataRow in the source. 
+            </returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableExtensions.CopyToDataTable``1(System.Collections.Generic.IEnumerable{``0},System.Data.DataTable,System.Data.LoadOption)">
+            <summary> 
+              delegates to other CopyToDataTable overload with a null FillErrorEventHandler.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableExtensions.CopyToDataTable``1(System.Collections.Generic.IEnumerable{``0},System.Data.DataTable,System.Data.LoadOption,System.Data.FillErrorEventHandler)">
+             <summary>
+               This method takes an input sequence of DataRows and produces a DataTable object 
+               with copies of the source rows.
+               Also note that this will cause the rest of the query to execute at this point in time 
+               (e.g. there is no more delayed execution after this sequence operator). 
+             </summary>
+             <param name="source"> 
+               The input sequence of DataRows
+            
+               CopyToDataTable uses DataRowVersion.Default when retrieving values from source DataRow
+               which will include proposed values for DataRow being edited. 
+            
+               Null DataRow in the sequence are skipped. 
+             </param> 
+             <param name="table">
+               The target DataTable to load. 
+             </param>
+             <param name="options">
+               The target DataTable to load.
+             </param> 
+             <param name="errorHandler">
+             Error handler for recoverable errors. 
+             Recoverable errors include: 
+                 A source DataRow is in the deleted or detached state state.
+                 DataTable.LoadDataRow threw an exception, i.e. wrong # of columns in source row 
+             Unrecoverable errors include:
+                 exceptions from IEnumerator, DataTable.BeginLoadData or DataTable.EndLoadData
+             </param>
+             <remarks>
+             if source is null, then throw ArgumentNullException
+             if table is null, then throw ArgumentNullException
+             if source DataRow is in Deleted or Detached state, then throw InvalidOperationException
+             </remarks>
+             <returns> 
+               DataTable containing copies of the source DataRows.
+             </returns> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableExtensions.AsEntityView``1(Mozart.Data.Entity.EntityTable{``0})">
+            <summary> 
+            Creates a EntityView of entity over the input table.
+            </summary>
+            <param name="table">EntityTable that the view is over.</param>
+            <returns>An instance of EntityView.</returns> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityTableExtensions.AsEntityView``1(Mozart.Data.Entity.EntityEnumerable{``0})">
+            <summary>
+            Creates a EntityView from EnumerableEntityCollection
+            </summary>
+            <typeparam name="T">Type of the entity in the table. Must inherit from EntityObject</typeparam> 
+            <param name="source">The enumerable-entities over which view must be created.</param> 
+            <returns>Generated EntityView of type T</returns>
+        </member>
+        <member name="T:Mozart.Data.Entity.EntityView`1">
+            <summary>
+            This is the EntityView class that provides the function to control EntityTable.
+            </summary>
+            <remarks>
+            The following functions are provided to control EntityTable.
+            1. Fast EntityTable control through caching Key.
+            2. Delete specific Record using key value. 
+            3. Search and get record value through key value.
+            4. Checks for Key value duplication. 
+            5. Configure authorization to use edit, add, delete function of EntityTable.
+            </remarks>
+        </member>
+        <member name="E:Mozart.Data.Entity.EntityView`1.Initialized">
+            <summary>
+            Defines the EventGandler to be called when OnInitialized Event is triggered. 
+            </summary>
+        </member>
+        <member name="E:Mozart.Data.Entity.EntityView`1.ListChanged">
+            <summary>
+            Defines the ListChangedEventHandler called when OnListChanged event is triggered.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityView`1.Table">
+            <summary>
+            Defines the EntityTable that is configured when EntityView is created.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.#ctor(Mozart.Data.Entity.EntityTable{`0})">
+            <summary>
+            Constructor of EntityView.
+            </summary>
+            <param name="EntityTable">T type Entity Table class.</param>
+            <remarks>
+            Initializes the expression type of Sort and RowFilter.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.#ctor(Mozart.Data.Entity.EntityTable{`0},System.Boolean)">
+            <summary>
+            Constructor of EntityView..
+            </summary>
+            <param name="EntityTable">T type Entity Table class.</param>
+            <param name="locked">Variable "locked" is Boolean type. .</param>
+            <remarks>
+            Destructor is not called. 
+            If target EntityTable is not assigned, ArgumentNullException is thrown.
+            Registers RegisterMetaData Event to ColumnPropertyChanged, CollectionChanged.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.#ctor(Mozart.Data.Entity.EntityTable{`0},System.Predicate{`0},System.Comparison{`0},Mozart.Data.Entity.IndexType)">
+            <summary>
+            Constructor of EntityView.
+            </summary>
+            <param name="EntityTable">T type target EntityTable class..</param>
+            <param name="Predicate">T type target Predicate method.</param>
+            <param name="Comparison">T type target Comparison class.</param>
+            <param name="IndexType">Enumuration type target IndexType variable.</param>
+            <remarks>
+            Destructor is not called. 
+            If target EntityTable is not assigned, ArgumentNullException is thrown.
+            Registers RegisterMetaData Event to ColumnPropertyChanged, CollectionChanged.
+            Registers to RowFilter if target Predicate method type is assigned.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.#ctor(Mozart.Data.Entity.EntityTable{`0},System.String,System.String,Mozart.Data.Entity.IndexType)">
+            <summary>
+            Constructor of EntityView.
+            </summary>
+            <param name="EntityTable">Target EntityTable class.</param>
+            <param name="string">RowFilter expression variable.</param>
+            <param name="string">Sort expression variable.</param>
+            <param name="IndexType">Enumuration type target IndexType variable.</param>
+            <remarks>
+            Destructor is not called. 
+            If target EntityTable is not assigned, ArgumentNullException is thrown.
+            Registers RegisterMetaData Event to ColumnPropertyChanged, CollectionChanged.
+            Registers to RowFilter if rowFilter expression is assigned. 
+            Registers to Sort if sort expression is assigned.
+            </remarks>
+        </member>
+        <member name="F:Mozart.Data.Entity.EntityView`1.comparerKeyRow">
+            <summary> 
+            A Comparer that compares a Key and a Row.
+            </summary> 
+        </member>
+        <member name="F:Mozart.Data.Entity.EntityView`1.sortExpressionBuilder">
+            <summary>
+            Builds the sort expression in case multiple selector/comparers are added 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.#ctor(Mozart.Data.Entity.EntityTable{`0},Mozart.Data.Entity.SortExpressionBuilder{`0})">
+            <summary>
+            Constructs a LinkDataView and its parent DataView. 
+            Does not create index on the DataView since filter and sort expressions are not yet provided.
+            </summary>
+            <param name="table">The input table from which LinkDataView is to be created.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Mozart.Data.Entity.EntityView`1.#ctor(Mozart.Data.Entity.EntityTable{`0},System.Func{`0,System.Boolean},System.Predicate{`0},System.Comparison{`0},System.Func{System.Object,`0,System.Int32},Mozart.Data.Entity.SortExpressionBuilder{`0})" -->
+        <member name="M:Mozart.Data.Entity.EntityView`1.AddNew">
+            <summary>
+            Creates new Entity to EntityVeiw and returns the created Entity.
+            </summary>
+            <remarks>
+            If DataTable of EntityView is not Opened, InvalidOperationException is thrown..
+            Registers OnListChanged EventHandler for ItemAdd.
+            </remarks>
+            <returns>Return the created T type Record value.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.BeginInit">
+            <summary>
+            	<para>Handles the initialization of EntityView, delays Sort and Filter handling</para>
+            </summary>
+            <remarks>
+            Should be used with EndInit() as a pair.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.EndInit">
+            <summary>
+            	<para>Handles delayed Sort and Filter activity.</para>
+            </summary>
+            <remarks>
+            Should be used with  BeginInit() as a pair.
+            Defines indexes Sort method and RowFilter and calls OnInitialized Event.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.CopyTo(System.Array,System.Int32)">
+            <summary>
+            	<para>Copies the Index data of EntityView to the target Array.</para>
+            </summary>
+            <param name="array">Target Array type array object.</param> 
+            <param name="int">Integer type index variable.</param> 
+            <remarks>
+            Copies the index array data of Entity view to the index location of the target array.        
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.Delete(`0)">
+            <summary>
+            	<para>Delete target row from EntityTable.</para>
+            </summary>
+            <param name="row">T type row object</param> 
+            <remarks>
+            If DataTable of EntityView is not Opened, InvalidOperationException is thrown.
+            Deletes the designated row from EntityTable.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.Delete(System.Int32)">
+            <summary>
+            	<para>Deletes the record from EntityTable corresondent to the target index.</para>
+            </summary>
+            <param name="index">Integer type index variable.</param> 
+            <remarks>
+            If DataTable of EntityView is not Opened, InvalidOperationException is thrown.
+            Deletes the record from EntityTable corresondent to the target index.
+            </remarks>        
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.Dispose">
+            <summary>
+            	<para>Defines the handler called when DataTableView is ended..</para>
+            </summary>
+            <remarks>
+            Closes the EntityTable of EntityView.
+            Updates Index data and calls OnListChanged Event if EntityTable of EntityView is Opened.
+            Disables the M
+            Disables the MetaDataEvent registration of EntityView.
+            Destructor is not called.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.Equals(Mozart.Data.Entity.EntityView{`0})">
+             <summary>
+            Compare the target DataTableView with the current DataTableView and return the comparison result. 
+             </summary>
+             <param name="EntityView">T type EntityView class.</param>
+             <returns>Return the result of EntityView distinction.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.Find(System.Object[])">
+            <summary>
+            	<para>Return the matching result searched with the Key array from DataTableView.</para>
+            </summary>
+            <param name="object">Target Key object array.</param>
+            <returns>Return the matching Index of the Record as integer type. </returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.Find(System.Object)">
+            <summary>
+            	<para>Return the matching result searched with the Key from DataTableView..</para>
+            </summary>
+            <param name="object">Target key object.</param>
+            <returns>Return the matching Index of the Record as integer type.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.FindByKey(System.Object[])">
+            <summary>
+            Since EntityView LINQ  does not support multiple selectors/comparers, it does not make sense for
+            them to Find using multiple keys.
+            This overriden method prevents users calling multi-key find on dataview. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.FindByKey(System.Object)">
+            <summary>
+            Searches the index and finds a single row where the sort-key matches the input key 
+            </summary>
+            <param name="key">Value of the key to find</param>
+            <returns>Index of the first match of input key</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.FindRows(System.Object[])">
+            <summary>
+            	<para>Return the matching Record searched with the Key array from DataTableView.</para>
+            </summary>
+            <param name="object">Array type Key object.</param>
+            <returns>Return the mathcing Records in a sequence as T type IEnumerable value. </returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.GetUniqueValues">
+            <summary>
+            	<para>Return the UniqueValue of Record of DataTableView in a sequence.</para>
+            </summary>
+            <remarks>
+            If there is no input data in IndexFiled value of DataTableView, return T type Array.Empty.
+            </remarks>
+            <returns>Return the UniqueValue of Record in a sequence as T type IEnumerable value.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.FindRows(`0)">
+            <summary>
+            Search for the key value mathing with the sample value from DataTableView, and return the Record of the matching key value.
+            </summary>
+            <param name="object">T type sample object.</param>
+            <remarks>
+            If there is no input data in IndexFiled value of DataTableView, return T type Array.Empty.
+            </remarks>
+            <returns>Return the Record of the matching key value as T type IEnumerable value.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.FindRowsByKey(System.Object[])">
+            <summary>
+            Searches the index and finds rows where the sort-key matches the input key. 
+            Since EntityView LINQ does not support multiple selectors/comparers, it does not make sense for
+            them to Find using multiple keys. This overriden method prevents users calling multi-key find on dataview. 
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.GetEnumerator">
+            <summary>
+            	<para>Return the Index values of DataTableView in a sequence.</para>
+            </summary>
+            <returns>Return the Index values as T type IEnumerable value</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.ToTable">
+            <summary>
+            	<para>Copies the value of DataTable from DataTableView, creates  and returns the copied DataTable.</para>
+            </summary>
+            <remarks>
+            If there is no tablename value, ArgumentNullException is thrown.
+            Creates new DataTable and copies the Value and Table Column of DataTableView to the new DataTable.
+            </remarks>
+            <returns>Return the new DataTable.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.ToTable(System.String)">
+            <summary>
+            	<para>Copies the value of DataTable from DataTableView, creates  and returns the copied DataTable.</para>
+            </summary>
+            <param name="tableName">String type tablename variable.</param>
+            <remarks>
+            If there is no tablename value, ArgumentNullException is thrown.
+            Creates new DataTable and copies the Value and Table Column of DataTableView to the new DataTable.
+            </remarks>
+            <returns>Return the new DataTable.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.ToTable(System.Boolean,System.String[])">
+            <summary>
+            	<para>Copies the value of DataTable from DataTableView, creates and returns the copied DataTable.</para>
+            </summary>
+            <param name="distinct">Distinction type distinct variable.</param>
+            <param name="columnNames">Params string array type columnNames variable.</param>
+            <remarks>
+            If there is no tablename value, ArgumentNullException is thrown.
+            Creates new DataTable and copies the Value and Table Column of DataTableView to the new DataTable.
+            </remarks>
+            <returns>Return the new DataTable.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityView`1.ToTable(System.String,System.Boolean,System.String[])">
+            <summary>
+            	<para>Copies the value of DataTable from DataTableView, creates  and returns the copied DataTable.</para>
+            </summary>
+            <param name="tableName">String type tablename variable.</param>
+            <param name="distinct">Distinction type distinct variable.</param>
+            <param name="columnNames">Params string array type columnNames variable.</param>
+            <remarks>
+            If there is no tablename value, ArgumentNullException is thrown.
+            Creates new DataTable and copies the Value and Table Column of DataTableView to the new DataTable.
+            </remarks>
+            <returns>Return the new DataTable.</returns>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityView`1.AllowDelete">
+            <summary>
+            	<para>Returns or configures allowDelete value from DataTableView.</para>
+            </summary>
+            <remarks>
+            If allowDelete value of DataTableView is changed, OnListChanged Event is called.
+            </remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityView`1.AllowEdit">
+            <summary>
+            	<para>Returns or configures allowEdit value from DataTableView.</para>
+            </summary>
+            <remarks>
+            If allowEdit value of DataTableView is changed, OnListChanged Event is called.
+            </remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityView`1.AllowNew">
+            <summary>
+            	<para>Returns or configures allowNew value from DataTableView.</para>
+            </summary>
+            <remarks>
+            If allowNew value of DataTableView is changed, OnListChanged Event is called.
+            </remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityView`1.ApplyDefaultSort">
+            <summary>
+            	<para>Returns or configures allowDefaultSort value from DataTableView.</para>
+            </summary>
+            <remarks>
+            If allowDefaultSort value of DataTableView is changed, OnListChanged Event is called.
+            </remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityView`1.Count">
+            <summary>
+            	<para>Return the numbers of Records in DataTableView.</para>
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityView`1.CountFromIndex">
+            <summary>
+            	<para>Return the numbers of Records in DataTableView.</para>
+            </summary>
+            <remarks>
+            If no Index value exists in DataTableView, return 0.
+            </remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityView`1.IsInitialized">
+            <summary>
+            	<para>Return the initilization distinction of DataTableView.</para>
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityView`1.IsOpen">
+            <summary>
+            	<para>Return the whether to Open DataTable of DataTableView</para>
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityView`1.Item(System.Int32)">
+            <summary>
+            	<para>Return the value located in recordIndex from the Record of DataTableView</para>
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityView`1.RowFilter">
+            <summary>
+            	<para>Return or change RowFilter expression</para>
+            </summary>
+            <remarks>
+            Return null if BaseFilter is used, or else, return RowFilter expression. 
+            RowFilter could be redfined by overriding.
+            </remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityView`1.RowPredicate">
+            <summary>
+            	<para>Return or change BaseFilter expression</para>
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.EntityView`1.Sort">
+            <summary>
+            	<para>Return or change Sort expression.</para>
+            </summary>
+            <remarks>
+            If there is no standard for Sort comnfigured and record value exitsts, sort the records according to the Sort expression.
+            </remarks>
+        </member>
+        <member name="T:Mozart.Data.Entity.EntityEnumerable`1">
+            <summary>
+            This class provides a wrapper for EntityTable to allow for querying via LINQ. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerable`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Boolean,Mozart.Data.Entity.EntityTable{`0})">
+            <summary> 
+            This constructor is used when Select operator is called with output Type other than input row Type.
+            Basically fail on GetEntityView(), but other LINQ operators must work. 
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerable`1.#ctor(Mozart.Data.Entity.EntityTable{`0})">
+            <summary>
+            Basic Constructor 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerable`1.#ctor(Mozart.Data.Entity.EntityEnumerable{`0},System.Collections.Generic.IEnumerable{`0},System.Func{`0,`0})">
+            <summary>
+            Copy Constructor that sets the input IEnumerable as enumerableRows 
+            Used to maintain IEnumerable that has linq operators executed in the same order as the user 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerable`1.GetEnumerator">
+            <summary>
+             This method returns an strongly typed iterator 
+             for the underlying Entity collection.
+            </summary> 
+            <returns> 
+              A strongly typed iterator.
+            </returns> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerable`1.GetEntityView">
+            <summary> 
+            Evaluates filter and sort if necessary and returns
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerable`1.AddPredicate(System.Func{`0,System.Boolean})">
+            <summary>
+            Used to add a filter predicate. 
+            A conjunction of all predicates are evaluated in LinqDataView
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerable`1.AddSortExpression``1(System.Func{`0,``0},System.Boolean,System.Boolean)">
+            <summary> 
+            Adds a sort expression when Keyselector is provided but not Comparer
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerable`1.AddSortExpression``1(System.Func{`0,``0},System.Collections.Generic.IComparer{``0},System.Boolean,System.Boolean)">
+            <summary>
+            Adds a sort expression when Keyselector and Comparer are provided. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Entity.OrderedEnumerableEntityCollection`1">
+            <summary>
+            This class provides a wrapper for EntityTables representing an ordered sequence.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.OrderedEnumerableEntityCollection`1.#ctor(Mozart.Data.Entity.EntityEnumerable{`0},System.Collections.Generic.IEnumerable{`0})">
+            <summary> 
+            Copy Constructor that sets enumerableEntities to the one given in the input 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Entity.EntityEnumerableExtensions">
+            <summary>
+            This static class defines the extension methods that add LINQ operator functionality 
+            within IEnumerableDT and IOrderedEnumerableDT.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerableExtensions.Where``1(Mozart.Data.Entity.EntityEnumerable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            LINQ's Where operator for generic EnumerableRowCollection. 
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerableExtensions.OrderBy``2(Mozart.Data.Entity.EntityEnumerable{``0},System.Func{``0,``1})">
+            <summary> 
+            LINQ's OrderBy operator for generic EnumerableRowCollection.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerableExtensions.OrderBy``2(Mozart.Data.Entity.EntityEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1})">
+            <summary>
+            LINQ's OrderBy operator for generic EnumerableRowCollection. 
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerableExtensions.OrderByDescending``2(Mozart.Data.Entity.EntityEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            LINQ's OrderByDescending operator for generic EnumerableRowCollection.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerableExtensions.OrderByDescending``2(Mozart.Data.Entity.EntityEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1})">
+            <summary> 
+            LINQ's OrderByDescending operator for generic EnumerableRowCollection. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerableExtensions.ThenBy``2(Mozart.Data.Entity.OrderedEnumerableEntityCollection{``0},System.Func{``0,``1})">
+            <summary>
+            LINQ's ThenBy operator for generic EnumerableRowCollection. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerableExtensions.ThenBy``2(Mozart.Data.Entity.OrderedEnumerableEntityCollection{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1})">
+            <summary>
+            LINQ's ThenBy operator for generic EnumerableRowCollection.
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerableExtensions.ThenByDescending``2(Mozart.Data.Entity.OrderedEnumerableEntityCollection{``0},System.Func{``0,``1})">
+            <summary>
+            LINQ's ThenByDescending operator for generic EnumerableRowCollection.
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerableExtensions.ThenByDescending``2(Mozart.Data.Entity.OrderedEnumerableEntityCollection{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1})">
+            <summary>
+            LINQ's ThenByDescending operator for generic EnumerableRowCollection.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.EntityEnumerableExtensions.Select``2(Mozart.Data.Entity.EntityEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            Executes a Select (Projection) on EnumerableDataTable. If the selector returns a different
+            type than the type of rows, then AsLinqDataView is disabled, and the returning EnumerableDataTable
+            represents an enumerable over the LINQ Query. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.HashHelper.ExpandPrime(System.Int32)">
+            <summary>
+            Expand to new capacity. New capacity is next prime greater than or equal to suggested 
+            size. This is called when the underlying array is filled. This performs no
+            defragmentation, allowing faster execution; note that this is reasonable since
+            Insert attempts to insert new elements in re-opened spots.
+            </summary> 
+        </member>
+        <member name="P:Mozart.Data.Entity.Hashtable`1.Comparer">
+            <summary> 
+            Gets the IEqualityComparer that is used to determine equality of keys for 
+            the HashSet.
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable`1.Clear">
+            <summary>
+            Remove all items from this set. This clears the elements but not the underlying
+            buckets and slots array. Follow this call by TrimExcess to release these.
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            Copy items in this hashset to array, starting at arrayIndex 
+            </summary>
+            <param name="array">array to add items to</param> 
+            <param name="arrayIndex">index to start at</param> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable`1.Insert(`0,System.Boolean)">
+            <summary> 
+            Add item to this HashSet. Returns bool indicating whether item was added (won't be 
+            added if already present)
+            </summary> 
+            <param name="item"></param>
+            <returns>true if added, false if already present</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable`1.Delete(`0)">
+            <summary>
+            Remove item from this hashset 
+            </summary>
+            <param name="item">item to remove</param> 
+            <returns>true if removed; false if not (i.e. if the item wasn't in the HashSet)</returns> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable`1.TrimExcess">
+             <summary> 
+             Sets the capacity of this list to the size of the list (rounded up to nearest prime),
+             unless count is 0, in which case we release references. 
+            
+             This method can be used to minimize a list's memory overhead once it is known that no
+             new elements will be added to the list. To completely clear a list and release all
+             memory referenced by the list, execute the following statements: 
+            
+             list.Clear(); 
+             list.TrimExcess(); 
+             </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable`1.ToArray">
+            <summary> 
+            Copies this to an array. Used for DebugView 
+            </summary>
+            <returns></returns> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable`1.DeleteMultiple(System.Int32,Mozart.Data.Entity.Hashtable{`0}.SlotPtr,Mozart.Data.Entity.Hashtable{`0}.SlotPtr,Mozart.Data.Entity.Hashtable{`0}.SlotPtr)">
+            <summary>
+            
+            </summary>
+            <param name="bucket">bucket index</param>
+            <param name="pprev">previous bucket node</param>
+            <param name="p">key head bucket node</param>
+            <param name="qprev">previous key node</param>
+            <param name="q">target node</param>
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable`1.Initialize(System.Int32)">
+            <summary>
+            Initializes buckets and slots arrays. Uses suggested capacity by finding next prime 
+            greater than or equal to capacity.
+            </summary> 
+            <param name="capacity"></param> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable`1.CheckLoadFactor">
+            <summary>
+            Expand to new capacity. New capacity is next prime greater than or equal to suggested 
+            size. This is called when the underlying array is filled. This performs no
+            defragmentation, allowing faster execution; note that this is reasonable since
+            Insert attempts to insert new elements in re-opened spots.
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable`1.Resize(System.Int32,System.Boolean)">
+            <summary> 
+            Set the underlying buckets array to size newSize and rehash.  Note that newSize
+            *must* be a prime.  It is very likely that you want to call Resize()
+            instead of this method.
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable`1.Search(`0,System.Int32,System.Int32@)">
+            <summary> 
+            Used internally by set operations which have to rely on bit array marking. This is like
+            Contains but returns index in slots array. 
+            </summary>
+            <param name="key"></param>
+            <param name="hashCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable`1.Hash(`0)">
+            <summary> 
+            Workaround Comparers that throw ArgumentNullException for GetHashCode(null).
+            </summary> 
+            <param name="item"></param>
+            <returns>hash code</returns>
+        </member>
+        <member name="T:Mozart.Data.Entity.IEntityCollection`1">
+            <summary>
+            레코드 데이터를 관리하는 컬렉션의 인터페이스입니다.
+            </summary>
+            <typeparam name="T">레코드 데이터의 형식입니다.</typeparam>
+            <summary>
+            Defines the methods to manage data record.
+            </summary>
+            <typeparam name="T">The type of the data record elements in the collection</typeparam>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityCollection`1.Contains(System.Object[])">
+            <summary>
+            지정된 키의 값을 갖는 레코드 데이터가 컬렉션에 있는지 여부를 확인합니다.
+            </summary>
+            <param name="keys">컬렉션에서 찾을 레코드 데이터의 키 배열입니다.</param>
+            <returns>지정된 키의 값을 갖는 레코드 데이터가 컬렉션에 있으면 true이고, 그렇지 않으면 false입니다.</returns>
+            <summary>
+            Gets a value that indicates whether the key of data records in the collection contain the values specified in the object array. 
+            </summary>
+            <param name="keys">The array of the key values to seek data records.</param>
+            <returns><em>true</em> if the <em>IEntityCollection</em> contains a data record with the specified key values; otherwise, false.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityCollection`1.Find(System.Object[])">
+            <summary>
+            지정된 키의 값을 갖는 레코드 데이터를 반환합니다.
+            </summary>
+            <param name="keys">컬렉션에서 찾을 레코드 데이터의 키 배열입니다.</param>
+            <returns>지정된 키의 값을 갖는 레코드 데이터가 있으면 해당 요소이고, 그렇지 않으면 T 형식의 기본값입니다.</returns>
+            <summary>
+            Returns the data record in the collection by the key values specified in the object array.
+            </summary>
+            <param name="keys">The array of the key values to seek data records.</param>
+            <returns>The data record element that matches the key values specified, if found; otherwise, the default value for type <em>T</em>. </returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityCollection`1.IndexOf(`0)">
+            <summary>
+            컬렉션에서 지정된 레코드의 인텍스(0부터 시작)을 반환합니다.
+            </summary>
+            <param name="entity">컬렉션에서 찾을 레코드 데이터입니다.</param>
+            <returns>컬렉션에 레코드 데이터가 있으면 레코드 데이터의 인덱스(0부터 시작)이고, 그렇지 않으면 -1입니다.</returns>
+            <summary>
+            Reports the zero-based index of the first occurence of the specified data record object. 
+            </summary>
+            <param name="entity">The object to seek.</param>
+            <returns>Returns the zero-based index position of <em>entity</em> if that object is found, or -1 if it is not.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityCollection`1.InsertAt(`0,System.Int32)">
+            <summary>
+            컬렉션의 지정된 인덱스에 레코드 데이터를 삽입합니다.
+            </summary>
+            <param name="entity">삽입할 레코드 데이터입니다.</param>
+            <param name="pos">레코드 데이터를 삽입해야 하는 0부터 시작하는 인덱스입니다.</param>
+            <summary>
+            Inserts a data record into the collection at the specified index. 
+            </summary>
+            <param name="entity">The data record to insert into the collection.</param>
+            <param name="pos">The zero-based index at which <em>entity</em> should be inserted.</param>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityCollection`1.RemoveAt(System.Int32)">
+            <summary>
+            컬렉션의 지정한 인덱스에서 레코드 데이터를 제거합니다.
+            </summary>
+            <param name="index">제거할 레코드 데이터의 0부터 시작하는 인덱스입니다.</param>
+            <summary>
+            Removes a data recrod from the collection at the specified index. 
+            </summary>
+            <param name="index">The zero-based index of the data record to remove.</param>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityCollection`1.Item(System.Int32)">
+            <summary>
+            지정한 인덱스에 있는 레코드 데이터를 가져옵니다.
+            </summary>
+            <param name="index">가져올 레코드 데이터의 0부터 시작하는 인덱스입니다.</param>
+            <returns>지정한 인덱스의 레코드 데이터입니다.</returns>
+            <summary>
+            Gets the data record from the collection at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the data record to seek.</param>
+            <returns>The data record of the specified index position.</returns>
+        </member>
+        <member name="T:Mozart.Data.Entity.IEntityTable">
+            <summary>
+            레코드 데이터를 테이블 형태로 관리하는 컬랙션의 인터페이스입니다.
+            </summary>
+            <summary>
+            Defines the methods to manange data records as <em>EntityTable</em>. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityTable.TableName">
+            <summary>
+            	<para>Sets or Returns EntityTable name.</para>
+            </summary>
+            <remarks>EntityTable name can be changed based on Locale.</remarks>    
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityTable.DefaultView">
+            <summary>
+            	<para>Creates default EntityView or returns existing EntityView.</para> 
+            </summary>
+            <remarks>
+            When there is no defaultView set, the EntityView with default configuration will be created and assigned as defaultView.
+            </remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityTable.PrimaryKey">
+            <summary>
+            	<para>Define or Return primaryKey of EntityTable.</para>
+            </summary>
+            <remarks>
+            Retrun empty string if no primaryKey is deisgnated. 
+            The latest set key value is the primaryKey and the corresponding key value is used to Cash(Index) with EntityTable.
+            When data is retrieved during EntityTable initialization, the primaryKey set after all phases on initilization is completed.
+            </remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityTable.CaseSensitive">
+            <summary>
+            문자열 비교 시 대/소문자를 구분할지 여부를 가져오거나 설정합니다.
+            </summary>
+            <summary>
+            Indicates whether the string comparisons within the table are case-sensitive. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityTable.Locale">
+            <summary>
+            문자열 비교 시 사용할 문화권 정보를 가져오거나 설정합니다.
+            </summary>
+            <summary>
+            Gets or sets the locale information used to compare strings within the table.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityTable.Members">
+            <summary>
+            EntityTable을 구성하는 멤버 정보의 목록을 가져옵니다.
+            </summary>
+            <summary>
+            Gets the list of information about the members that composes the <em>EntityTable</em>.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityTable.TrackInternal">
+            <summary>
+            EntityTable에 속한 EntityObject의 값이 변경되었을 때 EntityObject의 Tracker가 이를 추적할 수 있는지 여부를 가져오거나 설정합니다.
+            </summary>
+            <summary>
+            Gets or sets the value to indicate whether if the <em>Tracker</em> of the <em>EntityObject</em>, to track the changes made to the value of <em>EntityObject</em> in the <em>EntityTable</em>
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityTable.TrackChanges">
+            <summary>
+            EntityTable에 속한 EntityObject의 상태가 변경되었을 때 EntityObject의 Tracker가 이를 추적할 수 있는지 여부를 가져오거나 설정합니다. 
+            </summary>
+            <summary>
+            Gets or sets the value to indicate whether if the <em>Tracker</em> of the <em>EntityObject</em>, to track the state changes of the <em>EntityObject</em> in the <em>EntityTable</em>
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable.Clear">
+            <summary>
+            	<para>Clears the data and Cash(Index) of EntityTable.</para> 
+            </summary>
+            <remarks>
+            Clears saved Records.
+            Clears saved Indexes.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable.CompareString(System.Object,System.Object)">
+            <summary>
+            	<para>Compares two specified string objects and returns an integer that indicates their relative position in the sort order.</para>
+            </summary>
+            <param name="obj1">The first string object to compare.</param>
+            <param name="obj2">The second string object to compare.</param>
+            <remarks>
+            Compares and returns the result of the target string objects with same space and length accorind to compareFlags.
+            </remarks>
+            <returns>Returns a signed integer that indicates the relative values of <em>x</em> and <em>y</em>, as shown below.
+                <para>Less than zero : <em>x</em> precedes <em>y</em> in the sort order.</para>
+                <para>Zero : <em>x</em> occurs in the smae position as <em>y</em> in the sort order.</para>
+                <para>Greater than zero : <em>x</em> follows <em>y</em> in the sort order.</para>
+             </returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable.GetRow(System.Int32)">
+            <summary>
+            지정된 인덱스의 레코드 데이터를 반환합니다.
+            </summary>
+            <param name="index">반환할 행의 인덱스(0부터 시작)입니다.</param>
+            <returns>지정된 레코드 데이터입니다.</returns>
+            <summary>
+            Gets a row of the <em>EntityTable</em> at the specified index.
+            </summary>
+            <param name="index">The zero-based index of row to seek.</param>
+            <returns>The <em>EntityTable</em> row of the specified index position.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable.SetValue(System.Int32,System.Int32,System.Object)">
+            <summary>
+            지정된 위치의 값을 설정합니다.
+            </summary>
+            <param name="row">지정된 위치의 열 정보입니다.</param>
+            <param name="col">지정된 위치의 행 정보입니다.</param>
+            <param name="value">설정할 값입니다.</param>
+            <summary>
+            Sets a value to the <em>EntityTable</em> at the specified location. 
+            </summary>
+            <param name="row">The row location in the <em>EntityTable</em> to set the <em>value</em>.</param>
+            <param name="col">The column location in the <em>EntityTable</em> to set the <em>value</em>.</param>
+            <param name="value">The value to set to the specified location.</param>
+        </member>
+        <member name="T:Mozart.Data.Entity.IEntityTable`1">
+            <summary>
+            레코드 데이터를 테이블 형태로 관리하는 컬랙션의 인터페이스입니다.
+            </summary>
+            <typeparam name="T">레코드 데이터의 형식입니다.</typeparam>
+            <summary>
+            Defines the method to manage data record collections. 
+            </summary>
+            <typeparam name="T">The type of the data record elements in the collection.</typeparam>
+        </member>
+        <member name="E:Mozart.Data.Entity.IEntityTable`1.OnEntityAdd">
+            <summary>
+            EntityTable에 레코드 데이터가 추가될 때 호출되는 이벤트입니다.
+            </summary>
+            <summary>
+            The event called when the data record is being appended to <em>EntityTable</em>.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityTable`1.Rows">
+            <summary>
+            	<para>The Record data stored in EntityTable.</para>
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityTable`1.DefaultView">
+            <summary>
+            	<para>Creates default EntityView or returns existing EntityView.</para> 
+            </summary>
+            <remarks>
+            When there is no defaultView set, the EntityView with default configuration will be created and assigned as defaultView.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable`1.Reset(System.Type)">
+            <summary>
+            	<para>Initialize EntityTable according to target typeInfo and configure primaryKey.</para>
+            </summary>
+            <param name="typeInfo">typeInfo class used for reset.</param>
+            <remarks>
+            Exception is thrown when target typesInfo and Row data do not exist while having identical Parent Table(IsSameOrParentOf).
+            EntityCollection is initialized and primaryKey is configured.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable`1.BeginLoadData">
+            <summary>
+            	<para>The function to be called before Data Loading. This function organizes the Cash(Index) which is processed during Data Loading.</para>
+            </summary>
+            <remarks>
+            Works as Pair with EndLoadData().
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable`1.EndLoadData">
+            <summary>
+            	<para>Organizes Cash(Index) after Data Loading.</para>
+            </summary>
+            <remarks>
+            EndLoadData should be used by pairing up with BeginLoadData() function.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable`1.NewEntity">
+            <summary>
+            	<para>Creates new Entity, and returns the created Entity as T type variable value.</para>
+            </summary>
+            <returns>
+            T type data through TypeAccessor class and returns the created value.
+            </returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable`1.ImportTable(Mozart.Data.Entity.IEntityTable{`0})">
+            <summary>
+            	<para>Saves the target EntityTable's Record to the current EntityTable.</para>
+            </summary>
+            <param name="src">T type EntityTable class.</param>
+            <remarks>
+            If the target EntityTable is identical to the current EntityTable, ArgumentException is thrown.      
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable`1.ImportRow(`0)">
+            <summary>
+            	<para>Deletes the target Entity from target Table and includes it throguh EntityTable.</para>
+            </summary>
+            <param name="entity">T type Entity class.</param>
+            <remarks>
+            If the source Table of the Entity is identical to the target Table, ArgumentException is thrown.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable`1.BeginEdit(`0)">
+            <summary>
+            주어진 레코드 데이터에 대한 변경을 시작합니다. 
+            </summary>
+            <param name="row">변경하려는 레코드 데이터입니다.</param>
+            <summary>
+            Starts an edit operation on a specified data record.  
+            </summary>
+            <param name="row">The data record to edit.</param>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable`1.EndEdit(`0)">
+            <summary>
+            주어진 레코드 데이터에 대한 변경을 완료합니다.
+            </summary>
+            <param name="row">변경이 완료된 레코드 데이터입니다.</param>
+            <summary>
+            Ends the edit occuring on the specified data record. 
+            </summary>
+            <param name="row">The data record to end the edit occurrence.</param>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable`1.CancelEdit(`0)">
+            <summary>
+            주어진 레코드 데이터에 대한 변경을 취소합니다.
+            </summary>
+            <param name="row">변경을 취소하려는 레코드 데이터입니다.</param>
+            <summary>
+            Cancels the current edit on the specified data record. 
+            </summary>
+            <param name="row">The data record to cancel the edit.</param>
+        </member>
+        <member name="E:Mozart.Data.Entity.IEntityTable`1.OnBeginEdit">
+            <summary>
+            레코드 데이터의 변경이 시작될 때 호출되는 이벤트입니다.
+            </summary>
+            <summary>
+            The event called when data record edit operation starts. 
+            </summary>
+        </member>
+        <member name="E:Mozart.Data.Entity.IEntityTable`1.OnEndEdit">
+            <summary>
+            레코드 데이터의 변경이 완료되었을 때 호출되는 이벤트입니다.
+            </summary>
+            <summary>
+            The event called when data record edit occurring ends. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable`1.AcceptChanges">
+            <summary>
+            마지막으로 이 개체의 AcceptChanges 함수가 호출된 뒤로 발생한 모든 변경 사항을 커밋합니다.
+            </summary>
+            <summary>
+            Commits all the changes made to this <em>EntityTable</em> since the last time <em>AccecptChanges()</em> was called. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityTable`1.RejectChanges">
+            <summary>
+            마지막으로 이 개체의 AcceptChanges 함수가 호출된 뒤로 발생한 모든 변경 사항을 롤백합니다.
+            </summary>
+            <summary>
+            Roll back all changes that have been made to the <em>EntityTable</em> since it was loaded, or the last time <em>AcceptChanges()</em> was called. 
+            </summary>
+        </member>
+        <member name="F:Mozart.Data.Entity.Trie`1.root">
+            <summary>
+            The root node of the trie.
+            </summary>
+        </member>
+        <member name="F:Mozart.Data.Entity.Trie`1.count">
+            <summary>
+            The number of nodes are in the trie
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.Trie`1.FindNode(System.String,System.Boolean)">
+            <summary>
+            Find a node for a given key, somewhere under the root.
+            </summary>
+            <param name="key">The bytes to search for, where key[0] corresponds to a child
+            node of the root.</param>
+            <param name="create">Create nodes that don't exist, while searching.</param>
+            <returns>The node if found. If the node doesn't exist and create is true, the node created; otherwise null.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.Trie`1.FindNode(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Finds a node in the given sub-tree.
+            </summary>
+            <param name="key">The key to search on, where key[0] corresponds to a child of startAt.</param>
+            <param name="startAt">The node to search under</param>
+            <param name="create">Create nodes that don't exist, while searching.</param>
+            <returns>The node if found. If the node doesn't exist and create is true, the node created; otherwise null.</returns>
+        </member>
+        <member name="P:Mozart.Data.Entity.Trie`1.NodePtr.Key">
+            <summary>
+            Retrive the full key for this node, traversing parent-ward toward the root.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.Trie`1.NodePtr.IsEmpty">
+            <summary>
+            Are there children of this node?
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.Trie`1.NodePtr.Item(System.Char,System.Boolean)">
+            <summary>
+            Gets the child associated with the specified byte, or null if one does not exist.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.Trie`1.NodePtr.GetOrCreate(System.Char,System.Boolean,System.Boolean)">
+            <summary>
+            Gets the child associated with the specified byte, or null if one does not exist.
+            If create is true, a node will be added with a null value
+            if a node does not already exist, so that this can be used
+            as an lvalue.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.Trie`1.NodePtr.Add(System.Char,System.Boolean)">
+            <summary>
+            Adds a child to this node.
+            </summary>
+            <param name="key">The key for the child.</param>
+            <returns>The child noded added to this node.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.Trie`1.NodePtr.Remove(System.Char,System.Boolean)">
+            <summary>
+            Remove the child at the given char
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Mozart.Data.Entity.Trie`1.NodePtr.GetEnumerator">
+            <summary>
+            Iterates over the child nodes.
+            </summary>
+            <returns>An IEnumerator to parse over the child nodes.</returns>
+        </member>
+        <member name="P:Mozart.Data.Entity.Hashtable1`2.Comparer">
+            <summary> 
+            Gets the IEqualityComparer that is used to determine equality of keys for 
+            the HashSet.
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable1`2.Clear">
+            <summary>
+            Remove all items from this set. This clears the elements but not the underlying
+            buckets and slots array. Follow this call by TrimExcess to release these.
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable1`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
+            <summary>
+            Copy items in this hashset to array, starting at arrayIndex 
+            </summary>
+            <param name="array">array to add items to</param> 
+            <param name="arrayIndex">index to start at</param> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable1`2.Add(`0,`1)">
+            <summary> 
+            Add item to this HashSet. Returns bool indicating whether item was added (won't be 
+            added if already present)
+            </summary> 
+            <param name="item"></param>
+            <returns>true if added, false if already present</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable1`2.Delete(`0,`1@)">
+            <summary>
+            Remove item from this hashset 
+            </summary>
+            <param name="key">item to remove</param> 
+            <returns>true if removed; false if not (i.e. if the item wasn't in the HashSet)</returns> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable1`2.TrimExcess">
+             <summary> 
+             Sets the capacity of this list to the size of the list (rounded up to nearest prime),
+             unless count is 0, in which case we release references. 
+            
+             This method can be used to minimize a list's memory overhead once it is known that no
+             new elements will be added to the list. To completely clear a list and release all
+             memory referenced by the list, execute the following statements: 
+            
+             list.Clear(); 
+             list.TrimExcess(); 
+             </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable1`2.Initialize(System.Int32)">
+            <summary>
+            Initializes buckets and slots arrays. Uses suggested capacity by finding next prime 
+            greater than or equal to capacity.
+            </summary> 
+            <param name="capacity"></param> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable1`2.CheckLoadFactor">
+            <summary>
+            Expand to new capacity. New capacity is next prime greater than or equal to suggested 
+            size. This is called when the underlying array is filled. This performs no
+            defragmentation, allowing faster execution; note that this is reasonable since
+            Insert attempts to insert new elements in re-opened spots.
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable1`2.Resize(System.Int32,System.Boolean)">
+            <summary> 
+            Set the underlying buckets array to size newSize and rehash.  Note that newSize
+            *must* be a prime.  It is very likely that you want to call Resize()
+            instead of this method.
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable1`2.Search(`0,System.Int32,System.Int32@)">
+            <summary> 
+            Used internally by set operations which have to rely on bit array marking. This is like
+            Contains but returns index in slots array. 
+            </summary>
+            <param name="key"></param>
+            <param name="hashCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.Hashtable1`2.Hash(`0)">
+            <summary> 
+            Workaround Comparers that throw ArgumentNullException for GetHashCode(null).
+            </summary> 
+            <param name="key"></param>
+            <returns>hash code</returns>
+        </member>
+        <member name="T:Mozart.Data.Entity.IEntityView">
+            <summary>
+            EntityTable을 관리하기 위한 기능을 제공하는 인터페이스입니다.
+            </summary>
+            <summary>
+            Provides functionality to manage <em>EntityTable</em>
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityView.Table">
+            <summary>
+            관리 대상 EntityTable을 가져옵니다.
+            </summary>
+            <summary>
+            Gets the <em>EntityTable</em> to manage. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityView.ApplyDefaultSort">
+            <summary>
+            기본 정렬을 사용할지 여부를 나타내는 값을 가져오거나 설정합니다. 기본 정렬은 PrimaryKey에 지정된 대로 모든 기본 키에 의한 오름차순 정렬입니다.
+            </summary>
+            <summary>
+            Gets or sets a value that indicates whether to use the default sort. The default sort is (ascending) by all primary keys as specified by <em>PrimaryKey</em>.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView.GetRow(System.Int32)">
+            <summary>
+            지정된 인덱스의 레코드 데이터를 반환합니다.
+            </summary>
+            <param name="index">가져올 레코드 데이터의 0부터 시작하는 인덱스입니다.</param>
+            <returns>지정된 인덱스의 레코드 데이터입니다.</returns>
+            <summary>
+            Returns a row of the <em>EntityTable</em> at the specified index.
+            </summary>
+            <param name="index">The zero-based index of row to seek.</param>
+            <returns>The <em>EntityTable</em> row of the specified index position.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView.SetValue(System.Int32,System.Int32,System.Object)">
+            <summary>
+            지정된 위치의 값을 설정합니다.
+            </summary>
+            <param name="row">지정된 위치의 열 정보입니다.</param>
+            <param name="col">지정된 위치의 행 정보입니다.</param>
+            <param name="value">설정할 값입니다.</param>
+            <summary>
+            Sets a value to the <em>EntityTable</em> at the specified location. 
+            </summary>
+            <param name="row">The row location in the <em>EntityTable</em> to set the <em>value</em>.</param>
+            <param name="col">The column location in the <em>EntityTable</em> to set the <em>value</em>.</param>
+            <param name="value">The value to set to the specified location.</param>
+        </member>
+        <member name="T:Mozart.Data.Entity.IEntityView`1">
+            <summary>
+            This is the EntityView class that provides the function to control EntityTable.
+            </summary>
+            <remarks>
+            <para>The following functions are provided to control EntityTable.</para>
+            <para>1. Fast EntityTable control through caching Key.</para>
+            <para>2. Delete specific Record using key value. </para>
+            <para>3. Search and get record value through key value.</para>
+            <para>4. Checks for Key value duplication.</para> 
+            <para>5. Configure authorization to use edit, add, delete function of EntityTable.</para>
+            </remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityView`1.Table">
+            <summary>
+            Defines the EntityTable that is configured when EntityView is created.
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView`1.AddNew">
+            <summary>
+            Creates new Entity to EntityVeiw and returns the created Entity.
+            </summary>
+            <remarks>
+            If DataTable of EntityView is not Opened, InvalidOperationException is thrown..
+            Registers OnListChanged EventHandler for ItemAdd.
+            </remarks>
+            <returns>Return the created T type Record value.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView`1.Delete(`0)">
+            <summary>
+            	<para>Delete target row from EntityTable.</para>
+            </summary>
+            <param name="row">T type row object</param> 
+            <remarks>
+            If DataTable of EntityView is not Opened, InvalidOperationException is thrown.
+            Deletes the designated row from EntityTable.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView`1.Delete(System.Int32)">
+            <summary>
+            	<para>Deletes the record from EntityTable corresondent to the target index.</para>
+            </summary>
+            <param name="index">Integer type index variable.</param> 
+            <remarks>
+            If DataTable of EntityView is not Opened, InvalidOperationException is thrown.
+            Deletes the record from EntityTable corresondent to the target index.
+            </remarks>        
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView`1.Equals(Mozart.Data.Entity.IEntityView{`0})">
+             <summary>
+            Compare the target DataTableView with the current DataTableView and return the comparison result. 
+             </summary>
+             <param name="EntityView">T type EntityView class.</param>
+             <returns>Return the result of EntityView distinction.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView`1.Find(System.Object[])">
+            <summary>
+            	<para>Return the matching result searched with the Key array from DataTableView.</para>
+            </summary>
+            <param name="object">Target Key object array.</param>
+            <returns>Return the matching Index of the Record as integer type. </returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView`1.Find(System.Object)">
+            <summary>
+            	<para>Return the matching result searched with the Key from DataTableView..</para>
+            </summary>
+            <param name="object">Target key object.</param>
+            <returns>Return the matching Index of the Record as integer type.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView`1.FindRows(System.Object[])">
+            <summary>
+            	<para>Return the matching Record searched with the Key array from DataTableView.</para>
+            </summary>
+            <param name="object">Array type Key object.</param>
+            <returns>Return the mathcing Records in a sequence as T type IEnumerable value. </returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView`1.GetUniqueValues">
+            <summary>
+            	<para>Return the UniqueValue of Record of DataTableView in a sequence.</para>
+            </summary>
+            <remarks>
+            If there is no input data in IndexFiled value of DataTableView, return T type Array.Empty.
+            </remarks>
+            <returns>Return the UniqueValue of Record in a sequence as T type IEnumerable value.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView`1.FindRows(`0)">
+            <summary>
+            Search for the key value mathing with the sample value from DataTableView, and return the Record of the matching key value.
+            </summary>
+            <param name="object">T type sample object.</param>
+            <remarks>
+            If there is no input data in IndexFiled value of DataTableView, return T type Array.Empty.
+            </remarks>
+            <returns>Return the Record of the matching key value as T type IEnumerable value.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView`1.ToTable">
+            <summary>
+            	<para>Copies the value of DataTable from DataTableView, creates  and returns the copied DataTable.</para>
+            </summary>
+            <remarks>
+            If there is no tablename value, ArgumentNullException is thrown.
+            Creates new DataTable and copies the Value and Table Column of DataTableView to the new DataTable.
+            </remarks>
+            <returns>Return the new DataTable.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView`1.ToTable(System.String)">
+            <summary>
+            	<para>Copies the value of DataTable from DataTableView, creates  and returns the copied DataTable.</para>
+            </summary>
+            <param name="tableName">String type tablename variable.</param>
+            <remarks>
+            If there is no tablename value, ArgumentNullException is thrown.
+            Creates new DataTable and copies the Value and Table Column of DataTableView to the new DataTable.
+            </remarks>
+            <returns>Return the new DataTable.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView`1.ToTable(System.Boolean,System.String[])">
+            <summary>
+            	<para>Copies the value of DataTable from DataTableView, creates and returns the copied DataTable.</para>
+            </summary>
+            <param name="distinct">Distinction type distinct variable.</param>
+            <param name="columnNames">Params string array type columnNames variable.</param>
+            <remarks>
+            If there is no tablename value, ArgumentNullException is thrown.
+            Creates new DataTable and copies the Value and Table Column of DataTableView to the new DataTable.
+            </remarks>
+            <returns>Return the new DataTable.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.IEntityView`1.ToTable(System.String,System.Boolean,System.String[])">
+            <summary>
+            	<para>Copies the value of DataTable from DataTableView, creates  and returns the copied DataTable.</para>
+            </summary>
+            <param name="tableName">String type tablename variable.</param>
+            <param name="distinct">Distinction type distinct variable.</param>
+            <param name="columnNames">Params string array type columnNames variable.</param>
+            <remarks>
+            If there is no tablename value, ArgumentNullException is thrown.
+            Creates new DataTable and copies the Value and Table Column of DataTableView to the new DataTable.
+            </remarks>
+            <returns>Return the new DataTable.</returns>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityView`1.RowFilter">
+            <summary>
+            	<para>Return or change RowFilter expression</para>
+            </summary>
+            <remarks>
+            Return null if BaseFilter is used, or else, return RowFilter expression. 
+            RowFilter could be redfined by overriding.
+            </remarks>
+        </member>
+        <member name="P:Mozart.Data.Entity.IEntityView`1.Sort">
+            <summary>
+            	<para>Return or change Sort expression.</para>
+            </summary>
+            <remarks>
+            If there is no standard for Sort comnfigured and record value exitsts, sort the records according to the Sort expression.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.RedBlackTree`1.#ctor(Mozart.Data.Entity.IIndexComparer{`0},Mozart.Data.Entity.TreeAccessMethod)">
+            <summary>
+            Tree constructor with comparer
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Entity.RedBlackTree`1.GetIndex(`0)">
+            <summary>
+            Gets index of the specified record. returns (-1) if specified record is not found. 
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Mozart.Data.Entity.RedBlackTree`1.GetIndexByNode(System.Int32)" -->
+        <member name="M:Mozart.Data.Entity.RedBlackTree`1.insert(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
+             <summary>
+             if root_id is NIL -> use Compare else use CompareDuplicates
+            
+             Satelite tree creation: 
+             First Duplicate value encountered. Create a *new* tree whose root will have the same key value as the current node.
+             The Duplicate tree nodes have same key when used with CompareRecords but distinct record ids. 
+             The current record at all times will have the same *key* as the duplicate tree root. 
+             </summary>
+             <param name="root_id">root_id of the tree to which a node has to be inserted. it is NIL for inserting to Main tree. </param>
+             <param name="x_id">node_id of node to be inserted </param>
+             <param name="main_id"></param>
+             <returns>The root of the tree to which the specified node was added. its NIL if the node was added to Main RedBlackTree.</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.RedBlackTree`1.erase(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Case 1: Node is in main tree only        (decrease size in main tree) 
+            Case 2: Node's key is shared with a main tree node whose next is non-NIL
+                                                  (decrease size in both trees)
+            Case 3: special case of case 2: After deletion, node leaves satelite tree with only 1 node (only root),
+                        it should collapse the satelite tree - go to case 4. (decrease size in both trees) 
+            Case 4: (1) Node is in Main tree and is a satelite tree root AND
+                        (2) It is the only node in Satelite tree 
+                              (Do not decrease size in any tree, as its a collpase operation) 
+            </summary>
+            <param name="root_id"> root_id of the tree. it is NIL for Main tree.</param>
+            <param name="z_id">node_id of node to be deleted</param>
+            <param name="main_id"></param>
+            <returns>The id of the spliced node </returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.RedBlackTree`1.deleteFixup(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Fix the specified tree for RedBlack properties
+            </summary>
+            <param name="root_id"></param>
+            <param name="x_id"></param>
+            <param name="px_id">px is parent of x, handle for case x = NIL</param>
+            <param name="main_id"></param>
+            <returns>The id of the root</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.RedBlackTree`1.leftRotate(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            It returns the node id for the root id of rotated tree
+            </summary>
+            <param name="root_id"></param>
+            <param name="x_id"></param>
+            <param name="main_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.RedBlackTree`1.rightRotate(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            It returns the node id for the root of the rotated tree
+            </summary>
+            <param name="root_id"></param>
+            <param name="x_id"></param>
+            <param name="main_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.RedBlackTree`1.GetNodeByKey(`0,System.Int32@,System.Int32@)">
+            <returns>Determine node and the branch it took to get there.</returns> 
+        </member>
+        <member name="M:Mozart.Data.Entity.RedBlackTree`1.GetIndexByNode(System.Int32,System.Int32)">
+            <summary>Determine tree index position from node path.</summary> 
+            <remarks>This differs from GetIndexByNode which would search for the main tree node instead of just knowing it</remarks>
+        </member>
+        <member name="M:Mozart.Data.Entity.RedBlackTree`1.GetNodeByIndex(System.Int32,System.Int32@,System.Int32@)">
+            <returns>Determine node and the branch it took to get there.</returns> 
+            <exception cref="T:System.IndexOutOfRangeException"></exception>
+        </member>
+        <member name="T:Mozart.Data.Entity.RedBlackTree`1.NodePath">
+            <summary>Represents the node in the tree and the satellite branch it took to get there.</summary>
+        </member>
+        <member name="F:Mozart.Data.Entity.RedBlackTree`1.NodePath.NodeID">
+            <summary>Represents the node in the tree</summary>
+        </member>
+        <member name="F:Mozart.Data.Entity.RedBlackTree`1.NodePath.MainTreeNodeID">
+            <summary>
+            When not NIL, it represents the fact NodeID is has duplicate values in the tree.
+            This is the 'fake' node in the main tree that redirects to the root of the satellite tree.
+            By tracking this value, we don't have to repeatedly search for this node.
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Entity.SortExpressionBuilder`1">
+            <summary>
+            This class represents a combined sort expression build using mutiple sort expressions.
+            </summary>
+            <typeparam name="T"></typeparam> 
+        </member>
+        <member name="F:Mozart.Data.Entity.SortExpressionBuilder`1.selectors">
+              This class ensures multiple orderby/thenbys are handled correctly. Its semantics is as follows:
+             
+             Query 1:
+             orderby a
+             thenby  b
+             orderby c 
+             orderby d
+             thenby  e 
+             
+             is equivalent to:
+             
+             Query 2:
+             orderby d
+             thenby  e
+             thenby  c 
+             thenby  a
+             thenby  b 
+             
+            
+        </member>
+        <member name="M:Mozart.Data.Entity.SortExpressionBuilder`1.Add(System.Func{`0,System.Object},System.Comparison{System.Object},System.Boolean)">
+            <summary>
+            Adds a sorting selector/comparer in the correct order
+            </summary> 
+        </member>
+        <member name="M:Mozart.Data.Entity.SortExpressionBuilder`1.Select(`0,System.Int32)">
+            <summary>
+            Represents a Combined selector of all selectors added thusfar.
+            </summary> 
+            <returns>List of 'objects returned by each selector'. This list is the combined-selector</returns>
+        </member>
+        <member name="M:Mozart.Data.Entity.SortExpressionBuilder`1.Compare(System.Object[],System.Object[])">
+            <summary>
+            Represents a Comparer (of IComparer) that compares two combined-selectors using
+            provided comparers for each individual selector. 
+            Note: Comparison is done in the order it was Added.
+            </summary> 
+            <returns>Comparison result of the combined Sort comparer expression</returns> 
+        </member>
+        <member name="M:Mozart.Data.Entity.SortExpressionBuilder`1.Clone">
+            <summary> 
+            Clones the SortexpressionBuilder and returns a new object
+            that points to same comparer and selectors (in the same order).
+            </summary>
+            <returns></returns> 
+        </member>
+        <member name="M:Mozart.Data.Entity.SortExpressionBuilder`1.CloneCast``1">
+            <summary>
+            Clones the SortExpressinBuilder and casts to type TResult.
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Properties.Resources">
+            <summary>
+              지역화된 문자열 등을 찾기 위한 강력한 형식의 리소스 클래스입니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.ResourceManager">
+            <summary>
+              이 클래스에서 사용하는 캐시된 ResourceManager 인스턴스를 반환합니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Culture">
+            <summary>
+              이 강력한 형식의 리소스 클래스를 사용하여 모든 리소스 조회에 대해 현재 스레드의 CurrentUICulture 속성을
+              재정의합니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_InvalidExpression">
+            <summary>
+              {0} has an invalid value과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_InvalidFormat">
+            <summary>
+              {0} has an invalid format과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_InvalidUri">
+            <summary>
+              {0} is not a valid URI과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_IsInvalid">
+            <summary>
+              {0} is invalid과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_IsRequired">
+            <summary>
+              {0} is required과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_LengthMustBeBetween">
+            <summary>
+              {0} length must be between {1} and {2}과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_LengthMustBeGreaterThan">
+            <summary>
+              {0} length must be greater than {1}과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_LengthMustBeLessThan">
+            <summary>
+              {0} length must be less than {1}과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_MustBeBetween">
+            <summary>
+              {0} must be between {1} and {2}과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_MustBeEqualTo">
+            <summary>
+              {0} must be equal to {1}과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_MustBeGreaterThan">
+            <summary>
+              {0} must be greater than {1}과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_MustBeGreaterThanOrEqualTo">
+            <summary>
+              {0} must be greater than or equal to {1}과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_MustBeLessThan">
+            <summary>
+              {0} must be less than {1}과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_MustBeLessThanOrEqualTo">
+            <summary>
+              {0} must be less than or equal to {1}과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_MustBeUnique">
+            <summary>
+              {0} must be unique과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_MustNotBeEqualTo">
+            <summary>
+              {0} must be not equal to {1}과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Properties.Resources.Validation_ObjectInvalid">
+            <summary>
+              The object [{0}] could not be saved because it is invalid.{1}{1}The errors are:{1}{1}{2}과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateComparisonAttribute.ComparisonOperator">
+            <summary>
+            Gets the operator used in the comparison. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateComparisonAttribute.Value">
+            <summary>
+            Gets the object to compare to. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateComparisonAttribute.ValidationRule">
+            <summary>
+            Gets the validation rule. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.ValidateEmailAddressAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the ValidateEmailAddressAttribute class. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.ValidateEmailAddressAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the ValidateEmailAddressAttribute class. 
+            </summary>
+            <param name="isRequired">True, if the target is required to be present.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateEmailAddressAttribute.IsRequired">
+            <summary>
+            Whether the target is required to be present. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateEmailAddressAttribute.ValidationRule">
+            <summary>
+            Gets the validation rule. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.ValidateFormatAttribute">
+            <summary>
+            Associates a FormatValidationRule with the attribute target. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.ValidateFormatAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the ValidateFormatAttribute class. 
+            </summary>
+            <param name="pattern">The regex pattern.</param>
+        </member>
+        <member name="M:Mozart.Data.Validation.ValidateFormatAttribute.#ctor(System.Text.RegularExpressions.Regex)">
+            <summary>
+            Initializes a new instance of the ValidateFormatAttribute class. 
+            </summary>
+            <param name="regex">The regex pattern.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateFormatAttribute.Pattern">
+            <summary>
+            Gets the regex pattern. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateFormatAttribute.ValidationRule">
+            <summary>
+            Gets the validation rule. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.ValidateLengthAttribute">
+            <summary>
+            Associates a LengthValidationRule with the attribute target. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.ValidateLengthAttribute.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the ValidateLengthAttribute class. 
+            </summary>
+            <param name="minimum">The minimum length.</param>
+            <param name="maximum">The maximum length.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateLengthAttribute.Maximum">
+            <summary>
+            Gets the maximum length. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateLengthAttribute.Minimum">
+            <summary>
+            Gets the minimum length. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateLengthAttribute.ValidationRule">
+            <summary>
+            Gets the validation rule. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.ValidateMaxLengthAttribute">
+            <summary>
+            Associates a MaxLengthValidationRule with the attribute target. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.ValidateMaxLengthAttribute.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the ValidateMaxLengthAttribute class. 
+            </summary>
+            <param name="maxLength">The maximum length.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateMaxLengthAttribute.MaxLength">
+            <summary>
+            Gets the maximum length. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateMaxLengthAttribute.ValidationRule">
+            <summary>
+            Gets the validation rule. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.ValidateMaxValueAttribute">
+            <summary>
+            Associates a MaxValueValidationRule with the attribute target. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.ValidateMaxValueAttribute.#ctor(System.IComparable)">
+            <summary>
+            Initializes a new instance of the ValidateMaxValueAttribute class. 
+            </summary>
+            <param name="minValue">The maximum value.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateMaxValueAttribute.MaxValue">
+            <summary>
+            Gets the maximum value. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateMaxValueAttribute.ValidationRule">
+            <summary>
+            Gets the validation rule. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.ValidateMinLengthAttribute">
+            <summary>
+            Associates a MinLengthValidationRule with the attribute target. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.ValidateMinLengthAttribute.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the ValidateMinLengthAttribute class. 
+            </summary>
+            <param name="minLength">The minimum length.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateMinLengthAttribute.MinLength">
+            <summary>
+            Gets the minimum length. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateMinLengthAttribute.ValidationRule">
+            <summary>
+            Gets the validation rule. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.ValidateMinValueAttribute">
+            <summary>
+            Associates a MinValueValidationRule with the attribute target. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.ValidateMinValueAttribute.#ctor(System.IComparable)">
+            <summary>
+            Initializes a new instance of the ValidateMinValueAttribute class. 
+            </summary>
+            <param name="minValue">The minimum value.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateMinValueAttribute.MinValue">
+            <summary>
+            Gets the minimum value. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateMinValueAttribute.ValidationRule">
+            <summary>
+            Gets the validation rule. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.ValidateRangeAttribute">
+            <summary>
+            Associates a RangeValidationRule with the attribute target, validating that a value is greater than the low value and less than the high value. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.ValidateRangeAttribute.#ctor(System.Object,System.Object)">
+            <summary>
+            Initializes a new instance of the ValidateRangeAttribute class. 
+            </summary>
+            <param name="low">The lower bound of the permitted range.</param>
+            <param name="high">The upper bound of the permitted range.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateRangeAttribute.High">
+            <summary>
+            Gets the upper bound of the permitted range. 
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Mozart.Data.Validation.ValidateRangeAttribute.Low" -->
+        <member name="P:Mozart.Data.Validation.ValidateRangeAttribute.ValidationRule">
+            <summary>
+            Gets the validation rule. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateRequiredAttribute.AllowEmptyString">
+            <summary>
+            Gets or sets whether the empty string is treated as present. The default value is false, 
+            i.e. the empty string is treated as not present and will cause a validation failure. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateRequiredAttribute.ValidationRule">
+            <summary>
+            Gets the validation rule. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ExpressionValidationRule.DefaultMessage">
+            <summary>
+            Returns the default error message format string. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.ComparisonOperator">
+            <summary>
+            Operators used in a ComparisonValidationRule
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.ComparisonValidationRule">
+            <summary>
+            Validates the target by comparing it to a given IComparable using a supplied ComparisonOperator. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.ComparisonValidationRule.#ctor(Mozart.Data.Validation.ComparisonOperator,System.IComparable)">
+            <summary>
+            Initializes a new instance of the ComparisonValidationRule class. 
+            </summary>
+            <param name="comparisonOperator">The operator used in the comparison.</param>
+            <param name="comparable">The object to compare to.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.ComparisonValidationRule.DefaultMessage">
+            <summary>
+            Returns the default error message format string. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ComparisonValidationRule.Value">
+            <summary>
+            Gets the value against which the rule compares. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.EmailAddressValidationRule">
+            <summary>
+            Validates that the target is a valid email address. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.EmailAddressValidationRule.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the EmailAddressValidationRule class. 
+            </summary>
+            <param name="isRequired">True, if the target is required to be present.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.EmailAddressValidationRule.DefaultMessage">
+            <summary>
+            Returns the default error message format string. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.EmailAddressValidationRule.IsRequired">
+            <summary>
+            Whether the target is required to be present. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.FormatValidationRule">
+            <summary>
+            Validates that the target conforms to a given format specified by a supplied regular expression 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.FormatValidationRule.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the FormatValidationRule class. 
+            </summary>
+            <param name="pattern">The regex pattern.</param>
+        </member>
+        <member name="M:Mozart.Data.Validation.FormatValidationRule.#ctor(System.Text.RegularExpressions.Regex)">
+            <summary>
+            Initializes a new instance of the FormatValidationRule class. 
+            </summary>
+            <param name="regex">The regex.</param>
+        </member>
+        <member name="M:Mozart.Data.Validation.FormatValidationRule.Validate(Mozart.Data.Validation.ValidationContext)">
+            <summary>
+            Perform the validation logic associated with this rule. 
+            </summary>
+            <param name="validationContext">The validation context.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.FormatValidationRule.DefaultMessage">
+            <summary>
+            Returns the default error message format string. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.FormatValidationRule.Regex">
+            <summary>
+            Gets the regex used for format validation. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.LengthValidationRule">
+            <summary>
+            Validates that the target is within the specified range (inclusive). 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.LengthValidationRule.#ctor(System.Int32,System.Int32)">
+            <summary>
+              Initializes a new instance of the LengthValidationRule class. 
+            </summary>
+            <param name="minimum">The minimum length.</param>
+            <param name="maximum">The maximum length.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.LengthValidationRule.DefaultMessage">
+            <summary>
+            Returns the default error message format string. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.LengthValidationRule.Maximum">
+            <summary>
+            Gets the maximum length. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.LengthValidationRule.Minimum">
+            <summary>
+            Gets the minimum length. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.MaxLengthValidationRule.DefaultMessage">
+            <summary>
+            Returns the default error message format string. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.MaxValueValidationRule.DefaultMessage">
+            <summary>
+            Returns the default error message format string. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.MinLengthValidationRule.DefaultMessage">
+            <summary>
+            Returns the default error message format string. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.MinValueValidationRule.DefaultMessage">
+            <summary>
+            Returns the default error message format string. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.RangeValidationRule">
+            <summary>
+            Validates that the target is within the specified range (inclusive). 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.RangeValidationRule.#ctor">
+            <summary>
+            Initializes a new instance of the RangeValidationRule class. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.RangeValidationRule.#ctor(System.IComparable,System.IComparable)">
+            <summary>
+            Initializes a new instance of the RangeValidationRule class. 
+            </summary>
+            <param name="low">The low.</param>
+            <param name="high">The high.</param>
+        </member>
+        <member name="M:Mozart.Data.Validation.RangeValidationRule.Validate(Mozart.Data.Validation.ValidationContext)">
+            <summary>
+            Perform the validation logic associated with this rule. 
+            </summary>
+            <param name="validationContext">The validation context.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.RangeValidationRule.DefaultMessage">
+            <summary>
+            Returns the default error message format string. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.RangeValidationRule.High">
+            <summary>
+            Gets the high value. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.RangeValidationRule.Low">
+            <summary>
+            Gets the low value. 
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Mozart.Data.Validation.RequiredValidationRule" -->
+        <member name="M:Mozart.Data.Validation.RequiredValidationRule.Validate(Mozart.Data.Validation.ValidationContext)">
+            <summary>
+            Perform the validation logic associated with this rule. 
+            </summary>
+            <param name="validationContext">The validation context.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.RequiredValidationRule.AllowEmptyString">
+            <summary>
+            Gets or sets whether the empty string is treated as present. The default value is false, i.e. 
+            the empty string is treated as not present and will cause a validation failure. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.RequiredValidationRule.DefaultMessage">
+            <summary>
+            Returns the default error message format string. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.UriValidationRule">
+            <summary>
+            Validates that the target is a valid URI. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.UriValidationRule.DefaultMessage">
+            <summary>
+            Returns the default error message format string. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.UriValidationRule.IsRequired">
+            <summary>
+            Gets or sets whether empty or null strings will be rejected as invalid. The default value is true, 
+            meaning that an empty or null string will be considered invalid. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.UriValidationRule.UriType">
+            <summary>
+            Gets or sets the type of URI that is acceptable (e.g. absolute or relative). The default value is UriKind.Absolute. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.ValidateAttribute">
+            <summary>
+            Allows custom validations to be applied. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.ValidateAttribute.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the ValidateAttribute class. 
+            </summary>
+            <param name="validationRuleType">Type of the custom validation rule.</param>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateAttribute.ValidationRule">
+            <summary>
+            Gets the validation rule. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateExpressionPropertyAttribute.ValidationRule">
+            <summary>
+            Gets the validation rule. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidateExpressionClassAttribute.ValidationRule">
+            <summary>
+            Gets the validation rule. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.ValidationAttribute">
+            <summary>
+            Base class for all validation attributes. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidationAttribute.Message">
+            <summary>
+            Allows a custom error message to be specified. Use {0} as a placeholder for the name of the attribute being validated. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidationAttribute.ValidationRule">
+            <summary>
+            Gets the validation rule. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Data.Validation.ValidationContext">
+            <summary>
+            The context passed to a ValidationRule. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidationContext.MemberName">
+            <summary>
+            Gets the field name on the field info which is being validated 
+            </summary>
+        </member>
+        <member name="M:Mozart.Data.Validation.ValidationContext.AddError(Mozart.Data.Validation.ValidationError)">
+            <summary>
+            Adds a validation error. 
+            </summary>
+            <param name="validationError">The <seealso cref="T:Mozart.Data.Validation.ValidationError"/></param>
+        </member>
+        <member name="M:Mozart.Data.Validation.ValidationContext.AddError(System.String)">
+            <summary>
+            Adds a validation error. 
+            </summary>
+            <param name="errorMessage">The error message.</param>
+        </member>
+        <member name="M:Mozart.Data.Validation.ValidationContext.AddError(System.String,Mozart.Data.Validation.ValidationRule)">
+            <summary>
+            Adds a validation error. 
+            </summary>
+            <param name="errorMessage">The error message.</param>
+            <param name="rule">The rule adding the validation error.</param>
+        </member>
+        <member name="T:Mozart.Data.Validation.ValidationError">
+            <summary>
+            Represents a single validation error. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidationError.Entity">
+            <summary>
+            If the error is that an associated object is invalid, gets the associated object. Otherwise, returns null. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidationError.ChildErrors">
+            <summary>
+            Returns the list of errors for an invalid associated object. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidationError.ErrorMessage">
+            <summary>
+            Gets the error message. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidationError.PropertyName">
+            <summary>
+            Gets the name of the property in error. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Data.Validation.ValidationError.Rule">
+            <summary>
+            Gets the ValidationRule that raised this ValidationError. 
+            <remarks>
+            This may be null if the error does not correspond to a specific rule (for example, an 'associated entity has errors' error) or
+            a custom validation rule does not provide the information when raising the error. The validation rule is copied before being returned; 
+            you cannot modify the validation through this rule reference.
+            </remarks>
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Mozart.Data.Validation.ValidationError.RuleType" -->
+        <member name="T:Mozart.Data.Validation.ValidationRule">
+            <summary>
+            Base class for all validation rules. 
+            </summary>
+        </member>
+    </members>
+</doc>

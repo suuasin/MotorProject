@@ -1,0 +1,3403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<vxml:Document xmlns:vxml="http://www.vms-solutions.com/mozart/vxml/2012/1" xmlns:def="definitions" xmlns:ref="references" ContentType="vmodel" ContentKey="SmartAPSModel" xmlns="Mozart.Task.Execution.Design, Version=2022.123.1.39, Culture=neutral, PublicKeyToken=null" xmlns:ctf="clr-namespace:Mozart.Task.Framework;assembly:Mozart.Task.Framework, Version=2022.123.1.39, Culture=neutral, PublicKeyToken=null" xmlns:ctm="clr-namespace:Mozart.Task.Model;assembly:Mozart.Task.Model, Version=2022.123.1.39, Culture=neutral, PublicKeyToken=null" xmlns:cdd="clr-namespace:Mozart.DataActions;assembly:Mozart.DataActions, Version=2022.123.1.39, Culture=neutral, PublicKeyToken=null" xmlns:cdm="clr-namespace:Mozart.DataActions.Metadata;assembly:Mozart.DataActions, Version=2022.123.1.39, Culture=neutral, PublicKeyToken=null">
+  <Content>
+    <VModelDoc Name="SmartAPSModel" OverrideValues="" InputStorageType="File" OutputStorageType="File">
+      <TargetDefinition>
+        <ctf:TargetDefinition Guid="51134ca2-2d7b-40b4-8295-bc3e27ae8bb0" Title="SmartAPS" BaseLibrary="SeePlan.General" BaseLibraryVersion="2021.120.2.24" Category="Site" Description="" AssemblyName="SmartAPS" ConfigurationFile="" PrivatePath="C:\github\MotorProject\MotorProjectAPS\SmartAPS\bin\Debug" UiPackage="SmartAPS.UI" UiAppConfig="C:\github\MotorProject\MotorProjectAPS\SmartAPS.UI\bin\Debug\SmartAPS.UI.config" />
+      </TargetDefinition>
+      <ArgumentArray>
+        <ctm:ArgumentInfo-Array>
+          <ctm:ArgumentInfo Category="0. Basic" Name="start-time" TypeEnum="DateTime">
+            <InitialValue>
+              <String>2023-03-13 00:00:00</String>
+            </InitialValue>
+          </ctm:ArgumentInfo>
+          <ctm:ArgumentInfo Category="0. Basic" Name="period" TypeEnum="Int32">
+            <InitialValue>
+              <String>365</String>
+            </InitialValue>
+          </ctm:ArgumentInfo>
+          <ctm:ArgumentInfo Category="0. Basic" Name="data-collection-by-fst" TypeEnum="Boolean" Description="FST(SeePlanConfig의 FACTORY_START_TIME) 사용 여부">
+            <InitialValue>
+              <String>FALSE</String>
+            </InitialValue>
+          </ctm:ArgumentInfo>
+          <ctm:ArgumentInfo Category="0. Basic" Name="company" TypeEnum="String">
+            <InitialValue>
+              <String>KAMTEC</String>
+            </InitialValue>
+          </ctm:ArgumentInfo>
+          <ctm:ArgumentInfo Category="0. Basic" Name="site" TypeEnum="String">
+            <InitialValue>
+              <String>DJ</String>
+            </InitialValue>
+          </ctm:ArgumentInfo>
+          <ctm:ArgumentInfo Category="0. Basic" Name="system" TypeEnum="String">
+            <InitialValue>
+              <String>APS</String>
+            </InitialValue>
+          </ctm:ArgumentInfo>
+          <ctm:ArgumentInfo Category="0. Basic" Name="is-anomaly" TypeEnum="Boolean">
+            <InitialValue>
+              <String>FALSE</String>
+            </InitialValue>
+          </ctm:ArgumentInfo>
+          <ctm:ArgumentInfo Category="0. Basic" Name="use-shift" TypeEnum="Boolean">
+            <InitialValue>
+              <String>FALSE</String>
+            </InitialValue>
+          </ctm:ArgumentInfo>
+        </ctm:ArgumentInfo-Array>
+      </ArgumentArray>
+      <ConfigArray>
+        <ctm:ArgumentInfo-Array />
+      </ConfigArray>
+      <TestValues>
+        <ctm:ArgCache>
+          <KeyMapArray>
+            <String-Array>
+              <String>DEMAND_HIS=VERSION_NO,DEMAND_VER,DEMAND_ID,PRODUCT_ID,CUSTOMER_ID,DUE_DATE,DEMAND_QTY,PRIORITY,DEMAND_HIS_ID</String>
+              <String>MATERIAL_HISTORY=VERSION_NO,MATERIAL_HISTORY_ID,MAT_ID,MAT_TYPE,PRODUCT_ID,STEP_ID,LOT_ID,QTY,USE_QTY,USE_DATE,USE_TYPE</String>
+              <String>PRESET_INFO_HIS=VERSION_NO,PRESET_ID,FACTOR_ID,FACTOR_TYPE,FACTOR_WEIGHT,ORDER_TYPE,SEQUENCE,CRITERIA,DESCRIPTION</String>
+              <String>WIP_HIS=VERSION_NO,LOT_ID,LINE_ID,PRODUCT_ID,PROCESS_ID,STEP_ID,UNIT_QTY,EQP_ID,LINE_IN_TIME,STEP_ARRIVE_TIME,STATE,STATE_TIME,OUT_QTY,DEMAND_ID</String>
+              <String>ANALYSIS_PSI=VERSION_NO,CUSTOMER_ID,PRODUCT_ID,PRODUCT_NAME,ITEM,QTY,RTF_RATE,PSI_DATE,ANALYSIS_PSI_ID</String>
+              <String>ERROR_LOG=VERSION_NO,SEVERITY,CATEGORY,REASON,ITEM,DEMAND_ID,PRODUCT_ID,STEP_ID,EQP_ID,LOT_ID,LOG_TIME,ERROR_LOG_ID</String>
+              <String>INIT_WIP_LOG=VERSION_NO,LOT_ID,PRODUCT_ID,ORG_STEP_ID,REV_STEP_ID,ORG_STATUS,REV_STATUS,AVAILABLE_TIME,CATEGORY</String>
+              <String>RUN_HISTORY=VERSION_NO,INPUT_VER,ENG_START_TIME,ENG_END_TIME,SIM_START_TIME,FACTORY_START_TIME,STATE,DATA_COLLECTION_BY_FST,PERIOD</String>
+              <String>INPUT_PLAN=VERSION_NO,BATCH_ID,PRODUCT_ID,PLAN_DATE,PLAN_QTY</String>
+              <String>PEG_HISTORY=VERSION_NO,LINE_ID,LOT_ID,STEP_ID,PRODUCT_ID,LOT_QTY,PEG_QTY,STATE,MO_DEMAND_ID,MO_PRODUCT_ID,MO_DUE_DATE,PEG_HISTORY_ID,UNIT_QTY</String>
+              <String>STEP_TARGET=VERSION_NO,PRODUCT_ID,STEP_ID,IN_QTY,OUT_QTY,TARGET_DATE,MO_DEMAND_ID,MO_PRODUCT_ID,MO_DUE_DATE,STEP_TARGET_ID</String>
+              <String>UNPEG_HISTORY=VERSION_NO,LINE_ID,LOT_ID,STEP_ID,PRODUCT_ID,LOT_QTY,STATE,REMAIN_QTY,UNPEG_CATEGORY,UNPEG_REASON,UNPEG_HISTORY_ID,UNIT_QTY,UNPEG_QTY</String>
+              <String>EQP_DISPATCH_LOG=VERSION_NO,EQP_ID,DISPATCHING_TIME,PRESET_ID,INIT_WIP_CNT,FILTERED_WIP_CNT,SELECTED_WIP_CNT,SELECTED_WIP,FILTERED_WIP_LOG,DISPATCH_WIP_LOG</String>
+              <String>EQP_PLAN=VERSION_NO,LINE_ID,EQP_ID,LOT_ID,PRODUCT_ID,PROCESS_ID,STEP_ID,PROCESS_QTY,DISPATCH_IN_TIME,START_TIME,END_TIME,MACHINE_STATE,EQP_PLAN_ID,STEP_TYPE,STEP_IN_TIME,EQP_START_TIME,EQP_END_TIME,EQP_STATE_CODE,DUE_DATE,TARGET_DATE,AUTOMATION,DEMAND_ID,INPUT_PROC_TIME,INPUT_TACT_TIME,UTILIZATION,EFFICIENCY,APPLY_PROC_TIME,APPLY_TACT_TIME</String>
+              <String>LOAD_HISTORY=VERSION_NO,LOAD_HISTORY_ID,LINE_ID,EQP_ID,TARGET_DATE,INFO_GZIP,INFO_GZIP_2,INFO_GZIP_3</String>
+              <String>LOAD_STAT=VERSION_NO,LOAD_STAT_ID,LINE_ID,EQP_ID,TARGET_DATE,SETUP,BUSY,IDLERUN,IDLE,PM,DOWN</String>
+              <String>RELEASE_HISTORY=VERSION_NO,BATCH_ID,LOT_ID,PRODUCT_ID,RELEASE_DATE,INPUT_STEP_ID,QTY</String>
+              <String>STEP_MOVE=VERSION_NO,LINE_ID,PRODUCT_ID,PROCESS_ID,STEP_ID,EQP_ID,PLAN_DATE,IN_QTY,OUT_QTY,DEMAND_ID</String>
+              <String>STEP_WIP=VERSION_NO,LINE_ID,PRODUCT_ID,PROCESS_ID,STEP_ID,TARGET_DATE,RUN_QTY,WAIT_QTY,RUN_LOT_QTY,WAIT_LOT_QTY</String>
+              <String>TOOL_SEIZE_LOG=VERSION_NO,TOOL_ID,EQP_ID,SEIZE_TIME,RELEASE_TIME,TOOL_LIST,AVAILABLES,CAPACITY,SEIZED_INFOS</String>
+              <String>UNKIT_REMAIN_WIPLOG=VERSION_NO,LOT_ID,MERGE_KEY,WAIT_START,WAITING_MINUTES,ORG_QTY,REMAIN_QTY,MERGE_CNT</String>
+              <String>UNLOADED_LOTLOG=VERSION_NO,UNLOADED_LOTLOG_ID,LOT_ID,LAST_STEP_ID,PRODUCT_ID,UNIT_QTY</String>
+            </String-Array>
+          </KeyMapArray>
+        </ctm:ArgCache>
+      </TestValues>
+      <Inputs Name="Inputs" Storage="C:\Users\jds.DESKTOP-GLFJCK3\source\repos\SmartAPS\SmartAPS\Generated\Data">
+        <ItemArray>
+          <cdd:DataItem-Array>
+            <cdd:DataItem Name="EQUIPMENT" Category="RESOURCE">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="EQUIPMENT" Description="장비 모델입니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" Description="공장의 고유 ID" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" Description="장비 고유 ID​" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="EQP_MODEL" PropertyType="string" Description="장비의 모델명, 제조사에서 부여한 고유 모델명 등의 정보" />
+                    <cdm:PropertyMeta Name="EQP_GROUP" PropertyType="string" Description="내부 관리 그룹" />
+                    <cdm:PropertyMeta Name="SIM_TYPE" PropertyType="string" Description="TABLE,INLINE,LOTBATCH,BATCHINLINE,CHAMBER">
+                      <DefaultValue>
+                        <String>Table</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="PRESET_ID" PropertyType="string" Description="DISPATCHING_TYPE 이 WeightPreset 을 사용하는 경우 PRESET_ID (PRESET_ID@PRESET_INFO)​" />
+                    <cdm:PropertyMeta Name="DISPATCHER_TYPE" PropertyType="string" Description="Fifo,WeightSum,WeightSorted">
+                      <DefaultValue>
+                        <String>Fifo</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="EQP_STATE" PropertyType="string" Description="DOWN,PM,BUSY,IDLE,SETUP,IDLERUN,WAIT_SETUP">
+                      <DefaultValue>
+                        <String>IDLE</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="EQP_STATE_CODE" PropertyType="string" Description="상태 중 DOWN, PM 인 경우 상세 코드에 따라 UP TIME 정보를 모델링 하기 위한 세부 상태 코드가 있다면 이를 반영 (FACTORY_BREAK, PM_PLANd의 STATE_CODE와 연결)" />
+                    <cdm:PropertyMeta Name="STATE_CHANGE_TIME" PropertyType="DateTime" Description="EQP_STATE 로 변경된 시각 정보" />
+                    <cdm:PropertyMeta Name="AUTOMATION" PropertyType="string" Description="AUTO : 자동화 장비 (장비 Down시 진행하던 Lot까지 진행 후 신규 투입만 막는다.), MANUAL : 수동 장비 (장비 Down 시 작업 하던 Lot도 중단 된다.)">
+                      <DefaultValue>
+                        <String>AUTO</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="EQUIPMENT_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.LINE_ID, 
+	A.EQP_ID, 
+	A.EQP_MODEL, 
+	A.EQP_GROUP, 
+	A.SIM_TYPE, 
+	A.PRESET_ID, 
+	A.DISPATCHER_TYPE, 
+	A.EQP_STATE, 
+	A.EQP_STATE_CODE, 
+	A.STATE_CHANGE_TIME, 
+	A.AUTOMATION
+FROM 
+	EQUIPMENT A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="EQUIPMENT_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="LINE_INFO" Category="RESOURCE">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="LINE_INFO" Description="공장에 대한 모델입니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" Description="공장에 고유 ID" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="LINE_NAME" PropertyType="string" Description="공장 명칭​" />
+                    <cdm:PropertyMeta Name="LINE_TYPE" PropertyType="string" Description="INHOUSE, OUTSOURCING">
+                      <DefaultValue>
+                        <String>INHOUSE</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="LINE_INFO_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.LINE_ID, 
+	A.LINE_NAME, 
+	A.LINE_TYPE
+FROM 
+	LINE_INFO A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="LINE_INFO_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="PRODUCT" Category="BOP">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="PRODUCT" Description="제품 정보 모델입니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="제품 ID" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="PRODUCT_TYPE" PropertyType="string" Description="PART, FG (PART : 중간 부품 (투입부터 중간 조립품까지 모두 PART)​, FG : 최종생산품(생산출하품)​)" IsPrimaryKey="True" AllowNulls="False">
+                      <DefaultValue>
+                        <String>FG</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="PRODUCT_NAME" PropertyType="string" Description="제품 명" />
+                    <cdm:PropertyMeta Name="PROCESS_ID" PropertyType="string" Description="제품 생산을 위한 ROUTE 를 정의한 PROCESS_ID@PROCESS, PROCESS_ID@​" />
+                    <cdm:PropertyMeta Name="LOT_SIZE" PropertyType="int" Description="제품이 Lot으로 구성되는 크기" />
+                    <cdm:PropertyMeta Name="PROPERTY_NAME" PropertyType="string" Description="제품속성에 대한 이름 정의" />
+                    <cdm:PropertyMeta Name="PROPERTY_VALUE" PropertyType="string" Description="제품속성에 대한 값 정의" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>PRODUCT_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="PRODUCT_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.PRODUCT_ID, 
+	A.PRODUCT_NAME, 
+	A.PRODUCT_TYPE, 
+	A.PROCESS_ID, 
+	A.LOT_SIZE, 
+	A.INPUT_BATCH_SIZE
+FROM 
+	PRODUCT A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="PRODUCT_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="PROCESS" Category="BOP">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="PROCESS" Description="Process에 대한 정보입니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="PROCESS_ID" PropertyType="string" Description="프로세스 ID" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="PROCESS_NAME" PropertyType="string" Description="프로세스 명" />
+                    <cdm:PropertyMeta Name="DESCRIPTION" PropertyType="string" Description="프로세스에 대한 설명" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="PROCESS_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.PROCESS_ID, 
+	A.PROCESS_NAME, 
+	A.DESCRIPTION
+FROM 
+	PROCESS A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="PROCESS_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="PRODUCT_ROUTE" Category="BOP">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="PRODUCT_ROUTE" Description="제품의 변경, 조립관계 모델">
+                  <Properties>
+                    <cdm:PropertyMeta Name="FROM_PRODUCT_ID" PropertyType="string" Description="변경 전 제품 ID" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="변경이 발생하는 공정 ID​" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="TO_PRODUCT_ID" PropertyType="string" Description="변경 후 제품 ID" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="IN_QTY" PropertyType="double" Description="변경 전 제품의 투입 수량" />
+                    <cdm:PropertyMeta Name="OUT_QTY" PropertyType="double" Description="변경 후 제품의 생산 수량" />
+                    <cdm:PropertyMeta Name="ROUTE_TYPE" PropertyType="string" Description="BOM, CHANGE" />
+                    <cdm:PropertyMeta Name="CHANGE_TYPE" PropertyType="string" Description="WAIT,IN,OUT (제품 코드가 바뀌는 시점 정의 (WAIT : 대기 시점에 PART 변경, IN : 공정 시작 시점에 PART 변경, OUT : 공정 종료 시점에 PART 변경))" />
+                    <cdm:PropertyMeta Name="PRIORITY" PropertyType="int" Description="만일 ALTERNATIVE 관계의 제품 구조가 있는 경우 제품의 우선순위를 정의할 수 있음 ​(ASC ORDER)" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="ViewFromProductID" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>FROM_PRODUCT_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                        <cdm:DataViewItem Name="ViewToProductID" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>TO_PRODUCT_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="PRODUCT_ROUTE_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.FR_PRODUCT_ID AS FROM_PRODUCT_ID, 
+	A.OPER_ID AS STEP_ID, 
+	A.TO_PRODUCT_ID, 
+	A.IN_QTY, 
+	A.OUT_QTY, 
+	A.ROUTE_TYPE, 
+	A.CHANGE_TYPE, 
+	A.PRIORITY
+FROM 
+	PRODUCT_ROUTE A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="PRODUCT_ROUTE_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="STD_STEP_INFO" Category="BOP">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="STD_STEP_INFO" Description="표준 공정 모델입니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="STD_STEP_ID" PropertyType="string" Description="표준공정에 대한 ID 입니다.​" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="STD_STEP_NAME" PropertyType="string" Description="표준공정 명" />
+                    <cdm:PropertyMeta Name="STEP_TAT" PropertyType="double" Description="표준공정에 대한 TAT 입니다. STEP_TAT 가 설정되지 않은 경우 이 값을 공정의 TAT 로 사용합니다. ​(MIN)" />
+                    <cdm:PropertyMeta Name="STEP_YIELD" PropertyType="double" Description="표준공정의 수율 입니다. 0~1 의 실수로 설정됩니다. 이상 수치가 입력되는 경우 수율은 1 로 고정됩니다. ​">
+                      <DefaultValue>
+                        <String>1</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="STEP_SETUP" PropertyType="double" Description="표준공정의 Setup Time 입니다. SETUP_OPTION을 USE_STEP_SETUP로 설정했을 경우 이 값을 사용합니다. (MIN)" />
+                    <cdm:PropertyMeta Name="BUCKET_CAPACITY​" PropertyType="double" Description="연계된 STEP_ROUTE 의 STEP 이 BUCKETING 대상 공정인 경우 공정의 CAPACITY 를 설정할 수 있습니다. ​" />
+                    <cdm:PropertyMeta Name="TRANSFER_TIME" PropertyType="double" Description="공정 이동 시간 (MIN), 값이 0일 경우 SeePlan Config의 Default Transfer Time 사용" />
+                    <cdm:PropertyMeta Name="UNIT" PropertyType="string" Description="표준공정에서 사용하는 시간단위 {SEC, MIN, HOUR, DAY} 입니다.">
+                      <DefaultValue>
+                        <String>MIN</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="STEP_SEQ" PropertyType="double" Description="표준 공정 순서" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="STD_STEP_INFO_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.STD_STEP_ID, 
+	A.STD_STEP_NAME, 
+	A.STEP_TAT, 
+	A.STEP_YIELD, 
+	A.STEP_SETUP, 
+	A.BUCKET_CAPACITY,
+	A.TRANSFER_TIME
+FROM 
+	STD_STEP_INFO A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="STD_STEP_INFO_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="STEP_ROUTE" Category="BOP">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="STEP_ROUTE" Description="제품생산 공정 라우트에 대한 정보입니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="PROCESS_ID" PropertyType="string" Description="프로세스 ID" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="공정 ID" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="STEP_SEQ" PropertyType="int" Description="공정 순서​" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="STD_STEP_ID" PropertyType="string" Description="표준공정 ID (STD_STEP_ID@STD_STEP_INFO)​" />
+                    <cdm:PropertyMeta Name="STEP_TYPE" PropertyType="string" Description="null, IN, OUT (null : 일반 공정, IN : 최초 라인의 투입공정, Out : 제품의 생산 Out 공정)" />
+                    <cdm:PropertyMeta Name="PROCESS_TYPE" PropertyType="string" Description="DUMMY,BUCKETING,PROCESSING (DUMMY : 공정을 SKIP 처리, BUCKETING : 공정을 BUCKETING 처리, PROCESSING = null : 기본 처리)">
+                      <DefaultValue>
+                        <String>PROCESSING</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="IN_STOCK" PropertyType="string" Description="공정이 IN STOCK 과 연결된 공정인 경우 IN STOCK 의 ID 설정 (STOCK_ID@STOCK_INFO)​" />
+                    <cdm:PropertyMeta Name="OUT_STOCK" PropertyType="string" Description="공정이 OUT STOCK 과 연결된 공정인 경우 OUT STOCK 의 ID 설정 (STOCK_ID@STOCK_INFO)​" />
+                    <cdm:PropertyMeta Name="IS_SAME_PROC" PropertyType="bool" Description="LOT을 분할하여 진행(LOT SPLIT / 동시가공)" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>PROCESS_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="STEP_ROUTE_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.PROCESS_ID, 
+	A.STEP_ID, 
+	A.STEP_SEQ, 
+	A.STD_STEP_ID, 
+	A.STEP_TYPE, 
+	A.PROCESS_TYPE, 
+	A.IN_STOCK, 
+	A.OUT_STOCK,
+	A.IS_NOT_APPLY_TRANSTIME,
+	A.IS_SAME_PROC
+FROM 
+	STEP_ROUTE A
+	</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="STEP_ROUTE_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="DEMAND" Category="TARGET">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="DEMAND" Description="DEMAND 정보입니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="DEMAND_VER" PropertyType="string" Description="계획시스템이나 시나리오 PLAN 을 만들기 위해 계획의 VERSION 을 가져가는 경우 사용할 수 있음​" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="DEMAND_ID" PropertyType="string" Description="DEMAND 별 ID ​" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="제품 ID (PRODUCT_ID@PRODUCT)​" />
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" Description="DEMAND의 LINE ID" />
+                    <cdm:PropertyMeta Name="CUSTOMER_ID" PropertyType="string" Description="고객 ID" />
+                    <cdm:PropertyMeta Name="DUE_DATE" PropertyType="DateTime" Description="납기요청일" />
+                    <cdm:PropertyMeta Name="DEMAND_QTY" PropertyType="double" Description="생산 요청 수량 (단위: UNIT )​" />
+                    <cdm:PropertyMeta Name="PRIORITY" PropertyType="float" Description="납기 우선 순위" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>PRODUCT_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                        <cdm:DataViewItem Name="ViewById" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>DEMAND_ID</String>
+                            <String>PRODUCT_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                        <cdm:DataViewItem Name="IDView" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>DEMAND_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="DEMAND_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.DEMAND_VER, 
+	A.DEMAND_ID, 
+	A.PRODUCT_ID, 
+	A.CUSTOMER_ID, 
+	A.INDUE_DATE,
+	A.DUE_DATE, 
+	A.DEMAND_QTY, 
+	A.LOT_SIZE, 
+	A.PRIORITY
+FROM 
+	DEMAND A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="DEMAND_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="WIP" Category="TARGET">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="WIP" Description="재공 정보 모델입니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="LOT_ID" PropertyType="string" Description="LOT 의 고유 ID​" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" Description="LOT 이 위치한 라인의 ID​" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="PRODUCT ID​" />
+                    <cdm:PropertyMeta Name="PROCESS_ID" PropertyType="string" Description="제품 생산 공정 Route ID​" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="현재 공정" />
+                    <cdm:PropertyMeta Name="UNIT_QTY" PropertyType="double" Description="LOT 을 구성하고 있는 생산 UNIT 의 수량​" />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" Description="현재 가공중인 경우 장비 ID, 장비에서 가공중인 경우에만 데이터" />
+                    <cdm:PropertyMeta Name="LINE_IN_TIME" PropertyType="DateTime" Description="현재 공장에 투입된 시각" />
+                    <cdm:PropertyMeta Name="STEP_IN_TIME" PropertyType="DateTime" Description="현재 공정에 도착한 시각" />
+                    <cdm:PropertyMeta Name="STATE" PropertyType="string" Description="HOLD,WAIT,RUN" />
+                    <cdm:PropertyMeta Name="STATE_CHANGE_TIME" PropertyType="DateTime" Description="LOT 이 최종 상태 변경된 시각" />
+                    <cdm:PropertyMeta Name="OUT_QTY" PropertyType="double" Description="LOT의 실적 수량 (입력 시 STATE_TIME = 현재 시간 - 실적 수량 시간)" />
+                    <cdm:PropertyMeta Name="DEMAND_ID" PropertyType="string" Description="DEMAND의 ID (USE_HARD_PEGGING Option true 시 사용)" />
+                    <cdm:PropertyMeta Name="PREP_EFF_END_TIME" PropertyType="DateTime" Description="컬럼이 예약 재공인 경우 예약 정보 유효 시간" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="WIP_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.LOT_ID, 
+	A.LINE_ID, 
+	A.PRODUCT_ID, 
+	A.PROCESS_ID, 
+	A.STEP_ID, 
+	A.UNIT_QTY, 
+	A.EQP_ID, 
+	A.LINE_IN_TIME, 
+	A.STEP_ARRIVE_TIME AS STEP_IN_TIME, 
+	A.STATE, 
+	A.STATE_TIME AS STATE_CHANGE_TIME, 
+	A.OUT_QTY, 
+	A.DEMAND_ID
+FROM 
+	WIP A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="WIP_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="STEP_TAT" Category="BOP">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="STEP_TAT" Description="공정별 TAT 정보입니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="제품 ID" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="공정 ID" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="WAIT_TAT" PropertyType="double" Description="대기 TAT 입니다. (단위 = MIN)​" />
+                    <cdm:PropertyMeta Name="RUN_TAT" PropertyType="double" Description="PROCESSING TAT 입니다. (단위 = MIN), FORWARD BUCKETING 시에 사용됩니다. ​" />
+                    <cdm:PropertyMeta Name="TOTAL_TAT" PropertyType="double" Description="WAIT_TAT + RUN_TAT​, 공정의 TOTAL TAT 정보로서 BACKWARD TARGET 생성시에 사용됩니다. ​" />
+                    <cdm:PropertyMeta Name="UNIT" PropertyType="string" Description="TAT의 시간단위 {SEC, MIN, HOUR, DAY}">
+                      <DefaultValue>
+                        <String>MIN</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>PRODUCT_ID</String>
+                            <String>STEP_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="STEP_TAT_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>SELECT 
+	A.PRODUCT_ID, 
+	A.STEP_ID, 
+	A.WAIT_TAT, 
+	A.RUN_TAT, 
+	A.TOTAL_TAT
+FROM 
+	STEP_TAT A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="STEP_TAT_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="STEP_YIELD" Category="BOP">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="STEP_YIELD" Description="공정별 수율 정보입니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="제품 ID 입니다. " IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="공정 ID 입니다. " IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="YIELD_VALUE" PropertyType="double" Description="공정 수율입니다. 0~1 의 실수로 설정됩니다.">
+                      <DefaultValue>
+                        <String>1</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="1">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="2">
+                            <String>PRODUCT_ID</String>
+                            <String>STEP_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="STEP_YIELD_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>SELECT 
+	A.PRODUCT_ID, 
+	A.STEP_ID, 
+	A.YIELD_VALUE
+FROM 
+	STEP_YIELD A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="STEP_YIELD_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="EQP_ARRANGE" Category="RESOURCE">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="EQP_ARRANGE" Description="작업물의 공정별 작업가능 장비 및 작업시간 정보입니다. (장비별 작업가능 제품/공정정보)&#xD;&#xA;Key : PRODUCT_ID, PROCESS_ID, STEP_ID, EQP_ID">
+                  <Properties>
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="제품 ID 입니다. " IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="PROCESS_ID" PropertyType="string" Description="생산 ROUTE ID 입니다." IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="공정 ID 입니다. " IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" Description="장비 ID 입니다. (EQP_ID@EQUIPMENT)" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="TACT_TIME" PropertyType="float" Description="UNIT 당 생산 간격입니다. 단위=SEC " />
+                    <cdm:PropertyMeta Name="PROC_TIME" PropertyType="float" Description="UNIT 당 생산 시간입니다. TABLE, LOTBATCH 타입의 장비에서는 TACT_TIME 과 PROC_TIME 이 동일합니다. " />
+                    <cdm:PropertyMeta Name="EFF_START_DATE" PropertyType="string" Description="대상 정보의 유효 시작시각" />
+                    <cdm:PropertyMeta Name="EFF_END_DATE" PropertyType="string" Description="대상 정보의 유효 완료시각" />
+                    <cdm:PropertyMeta Name="UTILIZATION" PropertyType="double" Description="생산능력" />
+                    <cdm:PropertyMeta Name="EFFICIENCY" PropertyType="double" Description="적용효율" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="8">
+                        <cdm:DataViewItem Name="StepView" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>PRODUCT_ID</String>
+                            <String>PROCESS_ID</String>
+                            <String>STEP_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                        <cdm:DataViewItem Name="EqpView" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>EQP_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                        <cdm:DataViewItem Name="TimeView" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>PRODUCT_ID</String>
+                            <String>PROCESS_ID</String>
+                            <String>STEP_ID</String>
+                            <String>EQP_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                        <cdm:DataViewItem Name="LineView" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>PRODUCT_ID</String>
+                            <String>PROCESS_ID</String>
+                            <String>STEP_ID</String>
+                            <String>LINE_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                        <cdm:DataViewItem Name="ProdStep" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>PRODUCT_ID</String>
+                            <String>STEP_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="EQP_ARRANGE_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.PRODUCT_ID, 
+	A.PROCESS_ID, 
+	A.STEP_ID, 
+	A.EQP_ID, 
+	A.TACT_TIME, 
+	A.PROC_TIME, 
+	A.EFF_START_DATE, 
+	A.EFF_END_DATE
+FROM 
+	EQP_ARRANGE A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="EQP_ARRANGE_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="PRESET_INFO" Category="RESOURCE">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="PRESET_INFO" Description="PRESET 정보입니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="PRESET_ID" PropertyType="string" Description="PRESET ID​" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="FACTOR_ID" PropertyType="string" Description="우선순위 요소 ID  Project 의 Weights 에 Factor 가 구현되어 있는 경우만 Valid 하게 동작함​" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="FACTOR_DETAIL" PropertyType="string" Description="우선순위 설정 범위" />
+                    <cdm:PropertyMeta Name="FACTOR_TYPE" PropertyType="string" Description="LOTTYPE,STEPTYPE (LOTTYPE:모든 Lot 별로 factor 값 계산, STEPTYPE:동일제품의 동일 공정(Step)의 경우 Dispatching 시 최초 1회만 값 계산)" />
+                    <cdm:PropertyMeta Name="FACTOR_WEIGHT" PropertyType="float" Description="FACTOR 의 가중합을 계산할 때 사용될 가중치​, 장비의 PRESE_ID 가 설정되어 있고, DISPATCHER_TYPE = 'WeightSum' 인 경우에 동작" />
+                    <cdm:PropertyMeta Name="ORDER_TYPE" PropertyType="string" Description="ASC,DESC (점수 정렬 방식, WeightSorted 에만 적용)" />
+                    <cdm:PropertyMeta Name="SEQUENCE" PropertyType="int" Description="장비의 PRESE_ID 가 설정되어 있고, DISPATCHER_TYPE= 'WeightSorted'인 경우에 동작​, PRESET 내의 FACTOR 중 대상 FACTOR 의 소팅 우선순위, 오름차순으로 소팅 됨​" />
+                    <cdm:PropertyMeta Name="CRITERIA" PropertyType="string" Description="장비의 PRESE_ID 가 설정되어 있고, DISPATCHER_TYPE= 'WeightSorted'인 경우에 동작, ​FACTOR 계산에 사용되는 PARAMETER 값" />
+                    <cdm:PropertyMeta Name="DESCRIPTION" PropertyType="string" Description="설명" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="FactorView" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>FACTOR_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="PRESET_INFO_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.PRESET_ID, 
+	A.FACTOR_ID, 
+	A.FACTOR_TYPE, 
+	A.FACTOR_WEIGHT, 
+	A.ORDER_TYPE, 
+	A.SEQUENCE, 
+	A.CRITERIA
+FROM 
+	PRESET_INFO A
+WHERE IS_USE = 1
+
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="PRESET_INFO_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="EXECUTION_OPTION_CONFIG" Category="EXECUTION">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="EXECUTION_OPTION_CONFIG" Description="사전 정의된 모듈의 실행옵션 설정 정보입니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="OPTION_ID" PropertyType="string" Description="옵션의 ID 입니다. 옵션에 대한 참조는 SmartAPS 실행 옵션을 참조합니다. " IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="OPTION_VALUE" PropertyType="object" Description="옵션 ID 의 설정 값입니다. 설정 값은 모두 문자열로 설정합니다. " />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="1">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="1">
+                            <String>OPTION_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="EXECUTION_OPTION_CONFIG_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.OPTION_ID, 
+	A.OPTION_VALUE
+FROM 
+	EXECUTION_OPTION_CONFIG A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="EXECUTION_OPTION_CONFIG_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="PM_PLAN" Category="RESOURCE" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="PM_PLAN" Description="공장의 장비별 PM 계획 입니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="EQP_STATE_CODE" PropertyType="string" Description="장비 Down 상태 코드 (EQUIPMENT Table의 EQP_STATE_CODE와 연결)" />
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" Description="공장의 고유 ID" />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" Description="장비 고유 ID​" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="START_TIME" PropertyType="DateTime" Description="PM 시작 시간" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="PERIOD" PropertyType="double" Description="PM 기간 (SEC)" AllowNulls="False" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="1">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="1">
+                            <String>EQP_STATE_CODE</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>
+                      </CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="FACTORY_BREAK" Category="RESOURCE">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="FACTORY_BREAK" Description="공장 가동 중단 시간에 대한 정보 (일 단위)">
+                  <Properties>
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" Description="공장의 고유 ID" />
+                    <cdm:PropertyMeta Name="START_TIME" PropertyType="DateTime" Description="Break 시작 시간" />
+                    <cdm:PropertyMeta Name="PERIOD" PropertyType="double" Description="Break 기간 (SEC)" />
+                    <cdm:PropertyMeta Name="PERIOD_UNIT" PropertyType="string" Description="Break 기간의 단위 UNIT {SEC, MIN, HOUR, DAY}">
+                      <DefaultValue>
+                        <String>SEC</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="REPEAT_CYCLE" PropertyType="string" Description="반복 주기 {NONE/DAY/WEEK/MONTH/YEAR}">
+                      <DefaultValue>
+                        <String>NONE</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="STATE_CODE" PropertyType="string" Description="장비 Down 상태 코드 (EQUIPMENT Table의 EQP_STATE_CODE와 연결)" />
+                    <cdm:PropertyMeta Name="IS_APPLY" PropertyType="bool" Description="FACTORY_BREKA 적용여부">
+                      <DefaultValue>
+                        <String>TRUE</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>STATE_CODE</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="FACTORY_BREAK_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>SELECT 
+	A.LINE_ID, 
+	A.START_TIME, 
+	A.PERIOD, 
+	A.STATE_CODE, 
+	A.REPEAT_CYCLE
+FROM 
+	FACTORY_BREAK A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="FACTORY_BREAK_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="SETUP_INFO" Category="RESOURCE" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="SETUP_INFO">
+                  <Properties>
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" Description="설비 ID" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="ITEM" PropertyType="string" Description="변경 항목 {PRODUCT_ID, STEP_ID, PROPERTY}" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="ITEM_DETAIL" PropertyType="string" Description="변경 항목 중 속성값 " />
+                    <cdm:PropertyMeta Name="SETUP_TIME" PropertyType="double" Description="SETUP 소요 시간" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="TIME_UNIT" PropertyType="string" Description="시간 단위 {HOUR/MINUTE/SECOND}, Default :SECOND" AllowNulls="False" BasePaths=" " />
+                    <cdm:PropertyMeta Name="PRIORITY" PropertyType="int" Description="우선 순위" AllowNulls="False" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>EQP_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                        <cdm:DataViewItem Name="TimeView" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>EQP_ID</String>
+                            <String>ITEM</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>SELECT * 
+FROM APSLIB.SETUP_INFO
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="FIRM_PLAN" Category="TARGET">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="FIRM_PLAN">
+                  <Properties>
+                    <cdm:PropertyMeta Name="LOT_ID" PropertyType="string" Description="LOT 의 고유 ID​" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="확정된 공정" />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" Description="확정된 장비" />
+                    <cdm:PropertyMeta Name="START_TIME" PropertyType="DateTime" Description="확정된 생산 시작 시간" />
+                    <cdm:PropertyMeta Name="END_TIME" PropertyType="DateTime" Description="확정된 생산 종료 시간" />
+                    <cdm:PropertyMeta Name="FIRM_TYPE" PropertyType="string" Description="{DELAY/NORMAL/SPLIT} DELAY : 확정계획이 있으면 재공 투입을 진행하고 지연된 시간만큼 지연 후 확정계획 진행 / NORMAL : 확정계획이 있으면 로딩을 막고, 확정계획을 정시에 진행 / SPLIT : 확정계획이 있어도 로딩을 하고 로딩된 계획을 확정 계획에 맞춰 SPLIT 하여 진행">
+                      <DefaultValue>
+                        <String>NORMAL</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="FIRM_PLAN_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>SELECT 
+	A.LOT_ID, 
+	A.STEP_ID, 
+	A.EQP_ID, 
+	A.START_TIME, 
+	A.END_TIME, 
+	A.FIRM_TYPE
+FROM 
+	FIRM_PLAN A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="FIRM_PLAN_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="REPLENISH_PLAN" Category="RESOURCE">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="REPLENISH_PLAN" Description="자재 재충전 계획에 대한 정보입니다.&#xD;&#xA;">
+                  <Properties>
+                    <cdm:PropertyMeta Name="MAT_ID" PropertyType="string" Description="자재 ID 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="MAT_TYPE" PropertyType="string" Description="자재 종류 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="MAT_QTY" PropertyType="double" Description="자재 충전 수량 입니다.">
+                      <DefaultValue>
+                        <String>0</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="REPLENISH_DATE" PropertyType="DateTime" Description="자재 충전 일자 입니다." />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="REPLENISH_PLAN_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.MAT_ID, 
+	A.MAT_TYPE, 
+	A.QTY AS MAT_QTY, 
+	A.REPLENISH_DATE
+FROM 
+	REPLENISH_PLAN A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="REPLENISH_PLAN_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="MATERIAL" Category="RESOURCE">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="MATERIAL" Description="자재에 대한 정보입니다.&#xD;&#xA;">
+                  <Properties>
+                    <cdm:PropertyMeta Name="MAT_ID" PropertyType="string" Description="자재 ID 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="MAT_TYPE" PropertyType="string" Description="자재 종류 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="MAT_QTY" PropertyType="double" Description="자재 수량 입니다.">
+                      <DefaultValue>
+                        <String>0</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="IS_INFINITY" PropertyType="string" Description="자재의 수량 제약이 없는지 여부입니다. (Y/N)">
+                      <DefaultValue>
+                        <String>N</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="MATERIAL_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.MAT_ID, 
+	A.MAT_TYPE, 
+	A.QTY AS MAT_QTY, 
+	A.IS_INFINITY
+FROM 
+	MATERIAL A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="MATERIAL_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="MATERIAL_BOM" Category="RESOURCE">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="MATERIAL_BOM" Description="제품, 공정별 자재 조립에 대한 정보입니다.&#xD;&#xA;">
+                  <Properties>
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="자재가 필요한 제품의 ID 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="자재가 필요한 공정의 ID 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="MAT_TYPE" PropertyType="string" Description="자재 종류 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="COMP_QTY" PropertyType="double" Description="UNIT당 필요한 자재 수량입니다." />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="MATERIAL_BOM_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.PRODUCT_ID, 
+	A.OPER_ID AS STEP_ID, 
+	A.MAT_TYPE, 
+	A.COMP_QTY
+FROM 
+	MATERIAL_BOM A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="MATERIAL_BOM_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="OUT_ACT" Category="TARGET" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="OUT_ACT" Description="완제품 창고 정보 모델입니다. 값이 들어 있을 경우 같은 제품인 DEMAND의 수량이 차감되어 투입 계획이 생성됩니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="제품 ID" />
+                    <cdm:PropertyMeta Name="ACT_QTY" PropertyType="double" Description="입고 수량" />
+                    <cdm:PropertyMeta Name="OUT_DATE" PropertyType="DateTime" Description="입고 일자" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>SELECT PRODUCT_ID
+	 , ACT_QTY
+	 , CASE WHEN COALESCE(OUT_DATE, '') &lt;&gt; '' THEN date(to_date(OUT_DATE, 'YYYYMMDD HH24:MI:SS')) ELSE '0001-01-01 00:00:00' END AS OUT_DATE  
+FROM APSLIB.VW_OUT_ACT
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="IN_PLAN" Category="TARGET" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="IN_PLAN">
+                  <Properties>
+                    <cdm:PropertyMeta Name="DEMAND_ID" PropertyType="string" Description="DEMAND_ID(있을 경우 입력)" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="제품 ID" />
+                    <cdm:PropertyMeta Name="PLAN_DATE" PropertyType="datetime" Description="투입이 되어야 하는 일자" />
+                    <cdm:PropertyMeta Name="PLAN_QTY" PropertyType="int" Description="투입 수량" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>
+                      </CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="SPLIT_INFO" Category="RESOURCE" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="SPLIT_INFO">
+                  <Properties>
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" IsPrimaryKey="True" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="CRITERIA" PropertyType="string" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="VALUE" PropertyType="int" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="MERGE_STEP_ID" PropertyType="string" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>PRODUCT_ID</String>
+                            <String>STEP_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>
+                      </CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="PLAN_REPORT_TARGET" Category="EXECUTION" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="PLAN_REPORT_TARGET">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" />
+                    <cdm:PropertyMeta Name="ITEM_KEY" PropertyType="string" />
+                    <cdm:PropertyMeta Name="ITEM_NAME" PropertyType="string" />
+                    <cdm:PropertyMeta Name="CATEGORY" PropertyType="string" />
+                    <cdm:PropertyMeta Name="WEIGHT" PropertyType="string" />
+                    <cdm:PropertyMeta Name="DESCRIPTION" PropertyType="string" />
+                    <cdm:PropertyMeta Name="TARGET" PropertyType="string" />
+                    <cdm:PropertyMeta Name="UPDATE_TIME" PropertyType="string" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>SELECT *
+FROM APSLIB.PLAN_REPORT_TARGET 
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="CONFIG" Category="EXECUTION" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="CONFIG">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" />
+                    <cdm:PropertyMeta Name="CODE_GROUP" PropertyType="string" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="CODE_NAME" PropertyType="string" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="CODE_VALUE" PropertyType="string" />
+                    <cdm:PropertyMeta Name="DESCRIPTION" PropertyType="string" />
+                    <cdm:PropertyMeta Name="UPDATA_TIME" PropertyType="string" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>SELECT *
+FROM APSLIB.CONFIG
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="TOOL" Category="RESOURCE" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="TOOL">
+                  <Properties>
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="TOOL_ID" PropertyType="string" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>
+                      </CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="TOOL_ARRANGE" Category="RESOURCE" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="TOOL_ARRANGE">
+                  <Properties>
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="TOOL_ID" PropertyType="string" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="1">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="3">
+                            <String>LINE_ID</String>
+                            <String>STEP_ID</String>
+                            <String>PRODUCT_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>
+                      </CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="PEG_CONDITION" Category="TARGET">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="PEG_CONDITION">
+                  <Properties>
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="ITEM" PropertyType="string" />
+                    <cdm:PropertyMeta Name="ITEM_DETAIL" PropertyType="string" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>STEP_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="PEG_CONDITION_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True" />
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="PEG_CONDITION_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="VALIDATION_BOP" Category="BOP" ActiveAction="" Hidden="True">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="VALIDATION_BOP">
+                  <Properties>
+                    <cdm:PropertyMeta Name="PROCESS___PROCESS_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="PRODUCT___PRODUCT_ID__PROCESS_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="EQP_ARRANGE___PRODUCT_ID__PROCESS_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="EQP_ARRANGE___PROCESS_ID__STEP_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="STEP_ROUTE___PROCESS_ID__STEP_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="STD_STEP_INFO___STD_STEP_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="EQP_ARRANGE___EQP_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="EQUIPMENT___EQP_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="DEMAND___PRODUCT_ID" PropertyType="string" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>/* SELECT A.PROCESS_ID AS "PROCESS___PROCESS_ID",
+B.PRODUCT_ID || ' &amp; ' || B.PROCESS_ID AS "PRODUCT___PRODUCT_ID__PROCESS_ID",
+E.PRODUCT_ID || ' &amp; ' || E.PROCESS_ID AS "EQP_ARRANGE___PRODUCT_ID__PROCESS_ID",
+E.PROCESS_ID || ' &amp; ' || E.STEP_ID AS "EQP_ARRANGE___PROCESS_ID__STEP_ID",
+C.PROCESS_ID || ' &amp; ' || C.STEP_ID AS "STEP_ROUTE___PROCESS_ID__STEP_ID",
+D.STD_STEP_ID AS "STD_STEP_INFO___STD_STEP_ID",
+E.EQP_ID AS "EQP_ARRANGE___EQP_ID",
+F.EQP_ID AS "EQUIPMENT___EQP_ID",
+G.PRODUCT_ID AS "DEMAND___PRODUCT_ID"
+FROM APSLIB.VW_PROCESS A
+FULL JOIN APSLIB.VW_PRODUCT B
+ON A.PROCESS_ID = B.PROCESS_ID
+FULL JOIN APSLIB.VW_STEP_ROUTE C
+ON A.PROCESS_ID = C.PROCESS_ID
+FULL JOIN APSLIB.VW_STD_STEP_INFO D
+ON C.STEP_ID = D.STD_STEP_ID
+FULL JOIN APSLIB.VW_EQP_ARRANGE E
+ON E.PRODUCT_ID = B.PRODUCT_ID
+AND E.PROCESS_ID = B.PROCESS_ID
+AND E.STEP_ID = C.STEP_ID
+AND E.PROCESS_ID = C.PROCESS_ID
+FULL JOIN APSLIB.VW_EQUIPMENT F
+ON E.EQP_ID = F.EQP_ID
+FULL JOIN (
+SELECT PRODUCT_ID
+FROM APSLIB.VW_DEMAND
+GROUP BY PRODUCT_ID ) G
+ON G.PRODUCT_ID = B.PRODUCT_ID
+WHERE A.PROCESS_ID IS NULL OR B.PROCESS_ID IS NULL OR C.PROCESS_ID IS NULL OR D.STD_STEP_ID IS NULL OR C.STEP_ID IS NULL OR E.PRODUCT_ID IS NULL OR B.PRODUCT_ID IS NULL
+OR E.EQP_ID IS NULL OR F.EQP_ID IS NULL OR E.PRODUCT_ID IS NULL OR E.PROCESS_ID IS NULL OR E.STEP_ID IS NULL OR G.PRODUCT_ID IS NULL                    
+
+*/ </CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="EQP_UTILIZATION" Category="RESOURCE">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="EQP_UTILIZATION">
+                  <Properties>
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" Description="라인명" />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" Description="장비명" />
+                    <cdm:PropertyMeta Name="UTILIZATION" PropertyType="double" Description="생산능력">
+                      <DefaultValue>
+                        <String>100</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="EFFICIENCY" PropertyType="double" Description="적용효율">
+                      <DefaultValue>
+                        <String>100</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="START_TIME" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="END_TIME" PropertyType="DateTime" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>LINE_ID</String>
+                            <String>EQP_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="EQP_UTILIZATION_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>SELECT 
+	A.PRODUCT_ID, 
+	A.PROCESS_ID, 
+	A.STEP_ID, 
+	A.EQP_ID, 
+	A.TACT_TIME, 
+	A.PROC_TIME, 
+	A.EFF_START_DATE, 
+	A.EFF_END_DATE
+FROM 
+	EQP_ARRANGE A
+</CommandText>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="EQP_UTILIZATION_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+            <cdd:DataItem Name="SHIFT_TIME_CONFIG" Category="EXECUTION">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="SHIFT_TIME_CONFIG">
+                  <Properties>
+                    <cdm:PropertyMeta Name="SHIFT_START_TIME" PropertyType="string" Description="생산 근무 시작시간" />
+                    <cdm:PropertyMeta Name="SPLIT_START_TIME" PropertyType="string" Description="분할 근무 시작시간" />
+                    <cdm:PropertyMeta Name="SHIFT_END_TIME" PropertyType="string" Description="생산 근무 종료시간" />
+                    <cdm:PropertyMeta Name="SPLIT_END_TIME" PropertyType="string" Description="분할 근무 종료시간" />
+                    <cdm:PropertyMeta Name="SHIFT_NAME" PropertyType="string" Description="비고" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="SHIFT_TIME_CONFIG_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True" />
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="SHIFT_TIME_CONFIG_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
+          </cdd:DataItem-Array>
+        </ItemArray>
+      </Inputs>
+      <Outputs Name="Outputs">
+        <ItemArray>
+          <cdd:DataItem-Array>
+            <cdd:DataItem Name="MATERIAL_HISTORY" Category="Simulation">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="MATERIAL_HISTORY" Description="자재 사용 History 입니다.">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과에 대한 VERSION 문자열입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="MAT_ID" PropertyType="string" Description="사용된 자재 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="MAT_TYPE" PropertyType="string" Description="사용된 자재 종류 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="자재가 사용된 제품 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="자재가 사용된 공정 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="LOT_ID" PropertyType="string" Description="자재가 사용된 LOT입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="QTY" PropertyType="double" Description="사용 전 자재 수량입니다." />
+                    <cdm:PropertyMeta Name="USE_QTY" PropertyType="double" Description="사용 된 자재 수량 입니다." />
+                    <cdm:PropertyMeta Name="USE_DATE" PropertyType="DateTime" Description="사용 된 날짜 입니다." />
+                    <cdm:PropertyMeta Name="USE_TYPE" PropertyType="string" Description="사용된 자재 종류 입니다. (MAT : 기존 자재, PLAN : 자재 계획 자재)" />
+                    <cdm:PropertyMeta Name="MATERIAL_HISTORY_ID" PropertyType="string" Description="Material History ID" IsPrimaryKey="True" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="MATERIAL_HISTORY_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>DELETE FROM 
+	APSLIB.MATERIAL_HISTORY 
+WHERE 
+	(VERSION_NO = @VERSION_NO)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.MATERIAL_HISTORY 
+	(
+	MATERIAL_HISTORY_ID, 
+	VERSION_NO, 
+	MAT_ID, 
+	MAT_TYPE, 
+	PRODUCT_ID, 
+	STEP_ID, 
+	LOT_ID, 
+	QTY, 
+	USE_QTY, 
+	USE_DATE, 
+	USE_TYPE) 
+VALUES 
+	(@MATERIAL_HISTORY_ID, @VERSION_NO, @MAT_ID, @MAT_TYPE, @PRODUCT_ID, @STEP_ID, @LOT_ID, @QTY, @USE_QTY, @USE_DATE, @USE_TYPE)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@MATERIAL_HISTORY_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MAT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MAT_TYPE" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@USE_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@USE_DATE" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@USE_TYPE" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="MATERIAL_HISTORY_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="UNLOADED_LOTLOG" Category="Simulation">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="UNLOADED_LOTLOG">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과 계획에 대한 VERSION 문자열입니다." />
+                    <cdm:PropertyMeta Name="LOT_ID" PropertyType="string" Description="LOT_ID 입니다. " />
+                    <cdm:PropertyMeta Name="LAST_STEP_ID" PropertyType="string" Description="LOT이 마지막으로 위치 했던 공정 입니다." />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="제품 ID 입니다." />
+                    <cdm:PropertyMeta Name="UNIT_QTY" PropertyType="double" Description="Lot Size 입니다." />
+                    <cdm:PropertyMeta Name="UNLOADED_LOTLOG_ID" PropertyType="string" Description="Unloaded Lotlog ID" IsPrimaryKey="True" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="UNLOADED_LOTLOG_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>DELETE FROM 
+	APSLIB.UNLOADED_LOTLOG
+WHERE 
+	(VERSION_NO = @VERSION_NO)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.UNLOADED_LOTLOG 
+	(
+	UNLOADED_LOTLOG_ID, 
+	VERSION_NO, 
+	LOT_ID, 
+	LAST_STEP_ID, 
+	PRODUCT_ID, 
+	UNIT_QTY) 
+VALUES 
+	(@UNLOADED_LOTLOG_ID, @VERSION_NO, @LOT_ID, @LAST_STEP_ID, @PRODUCT_ID, @UNIT_QTY)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@UNLOADED_LOTLOG_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LAST_STEP_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@UNIT_QTY" Size="255" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="UNLOADED_LOTLOG_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="PRODUCT_ROUTE_LOG" Category="Simulation" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="PRODUCT_ROUTE_LOG" Description="조립 공정에서 조립 된 재공에 대한 로그 입니다. &#xD;&#xA;">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과에 대한 VERSION 문자열입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="FROM_LOT_ID" PropertyType="string" Description="제품 변경 전의 LOT_ID 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="TO_LOT_ID" PropertyType="string" Description="제품 변경 후의 LOT_ID 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="FROM_PRODUCT_ID" PropertyType="string" Description="제품 변경 전 제품 ID" />
+                    <cdm:PropertyMeta Name="TO_PRODUCT_ID" PropertyType="string" Description="제품 변경 후 제품 ID" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="제품 변경이 발생하는 공정 ID" />
+                    <cdm:PropertyMeta Name="FROM_UNIT_QTY" PropertyType="double" Description="제품 변경 전 Unit 수량" />
+                    <cdm:PropertyMeta Name="TO_UNIT_QTY" PropertyType="double" Description="제품 변경 후 Unit 수량" />
+                    <cdm:PropertyMeta Name="PREP_CMPL_TIME" PropertyType="DateTime" Description="제품 변경 전 LOT의 제품 변경 대기 시작 시간" />
+                    <cdm:PropertyMeta Name="CMPL_TIME" PropertyType="DateTime" Description="제품 변경 된 시간" />
+                    <cdm:PropertyMeta Name="ROUTE_TYPE" PropertyType="string" Description="제품 변경 Type" />
+                    <cdm:PropertyMeta Name="PRODUCT_ROUTE_LOG_ID" PropertyType="string" Description="Merge Wiplog ID" IsPrimaryKey="True" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>DELETE FROM 
+	APSLIB.PRODUCT_ROUTE_LOG
+WHERE 
+	(VERSION_NO = @VERSION_NO)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.PRODUCT_ROUTE_LOG 
+	(
+	PRODUCT_ROUTE_LOG_ID, 
+	VERSION_NO, 
+	FROM_LOT_ID, 
+	TO_LOT_ID, 
+	FROM_PRODUCT_ID, 
+	TO_PRODUCT_ID, 
+	STEP_ID, 
+	FROM_UNIT_QTY, 
+	TO_UNIT_QTY, 
+	CMPL_TIME,
+	PREP_CMPL_TIME,
+	ROUTE_TYPE) 
+VALUES 
+	(@PRODUCT_ROUTE_LOG_ID, @VERSION_NO, @FROM_LOT_ID, @TO_LOT_ID, @FROM_PRODUCT_ID, @TO_PRODUCT_ID, @STEP_ID, @FROM_UNIT_QTY, @TO_UNIT_QTY, @CMPL_TIME, @PREP_CMPL_TIME, @ROUTE_TYPE)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@PRODUCT_ROUTE_LOG_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@FROM_LOT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@TO_LOT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@FROM_PRODUCT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@TO_PRODUCT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@FROM_UNIT_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@TO_UNIT_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@CMPL_TIME" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PREP_CMPL_TIME" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@ROUTE_TYPE" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="ANALYSIS_PSI" Category="Log">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="ANALYSIS_PSI">
+                  <Properties>
+                    <cdm:PropertyMeta Name="ANALYSIS_PSI_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" />
+                    <cdm:PropertyMeta Name="CUSTOMER_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="PRODUCT_NAME" PropertyType="string" />
+                    <cdm:PropertyMeta Name="ITEM" PropertyType="string" />
+                    <cdm:PropertyMeta Name="QTY" PropertyType="double" />
+                    <cdm:PropertyMeta Name="RTF_RATE" PropertyType="double?" />
+                    <cdm:PropertyMeta Name="PSI_DATE" PropertyType="string" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="ANALYSIS_PSI_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>DELETE FROM 
+	APSLIB.ANALYSIS_PSI
+WHERE 
+	(VERSION_NO = @VERSION_NO)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.ANALYSIS_PSI 
+	(
+	VERSION_NO, 
+	CUSTOMER_ID, 
+	PRODUCT_ID, 
+	PRODUCT_NAME, 
+	ITEM, 
+	QTY, 
+	RTF_RATE, 
+	PSI_DATE,
+	ANALYSIS_PSI_ID) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@CUSTOMER_ID, 
+	@PRODUCT_ID, 
+	@PRODUCT_NAME, 
+	@ITEM, 
+	@QTY, 
+	@RTF_RATE, 
+	@PSI_DATE,
+	@ANALYSIS_PSI_ID)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@CUSTOMER_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_NAME" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@ITEM" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@RTF_RATE" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PSI_DATE" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@ANALYSIS_PSI_ID" Size="255" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="ANALYSIS_PSI_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="UNKIT_REMAIN_WIPLOG" Category="Simulation">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="UNKIT_REMAIN_WIPLOG">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과 계획에 대한 VERSION 문자열입니다." />
+                    <cdm:PropertyMeta Name="LOT_ID" PropertyType="string" Description="LOT ID 입니다." />
+                    <cdm:PropertyMeta Name="FROM_PRODUCT_ID" PropertyType="string" Description="제품 변경 이전의 Product ID" />
+                    <cdm:PropertyMeta Name="TO_PRODUCT_ID" PropertyType="string" Description="제품 변경이 되어야 할 Product ID" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="제품 변경이 진행되는 Step ID" />
+                    <cdm:PropertyMeta Name="PREP_CMPL_TIME" PropertyType="DateTime" Description="LOT 이 조립 대기하기 시작한 시점입니다. MERGER 에 투입된 시각" />
+                    <cdm:PropertyMeta Name="WAITING_TIME" PropertyType="double" Description="분단위로 대기한 총시간, = END_TIME – WAIT_START" />
+                    <cdm:PropertyMeta Name="ORG_QTY" PropertyType="float" Description="Lot에 포함된 Original Unit 수량 (Merger 에 들어온 시점)" />
+                    <cdm:PropertyMeta Name="REMAIN_QTY" PropertyType="float" Description="부분적으로 조립된 경우 현재 남은 수량" />
+                    <cdm:PropertyMeta Name="ASSEMBLY_CNT" PropertyType="int" Description="조립이 된 횟수 (반제품 분할 수량)" />
+                    <cdm:PropertyMeta Name="UNKIT_REMAIN_WIPLOG_ID" PropertyType="string" Description="Unkit Remain Wiplog ID" IsPrimaryKey="True" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="UNKIT_REMAIN_WIPLOG_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>INSERT INTO 
+	UNKIT_REMAIN_WIPLOG 
+	(
+	VERSION_NO, 
+	LOT_ID, 
+	MERGE_KEY, 
+	WAIT_START, 
+	WAITTING_MINUTES, 
+	ORG_QTY, 
+	REMAIN_QTY, 
+	MERGE_CNT) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@LOT_ID, 
+	@MERGE_KEY, 
+	@WAIT_START, 
+	@WAITING_MINUTES, 
+	@ORG_QTY, 
+	@REMAIN_QTY, 
+	@MERGE_CNT)
+</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_ID" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MERGE_KEY" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@WAIT_START" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@WAITING_MINUTES" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@ORG_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@REMAIN_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MERGE_CNT" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="UNKIT_REMAIN_WIPLOG_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="STEP_WIP" Category="Simulation">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="STEP_WIP">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과 계획에 대한 VERSION 문자열입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" Description="재공이 위치한 라인 ID 입니다." />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="제품 ID" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="PROCESS_ID" PropertyType="string" Description="Process ID" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="공정 ID" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="TARGET_DATE" PropertyType="DateTime" Description="StepWip을 기록하는 날짜" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="RUN_LOT_QTY" PropertyType="float" Description="가공중인 재공 수량" />
+                    <cdm:PropertyMeta Name="WAIT_LOT_QTY" PropertyType="float" Description="대기중인 재공 수량" />
+                    <cdm:PropertyMeta Name="RUN_UNIT_QTY" PropertyType="float" Description="가공중인 재공 LOT 수량" />
+                    <cdm:PropertyMeta Name="WAIT_UNIT_QTY" PropertyType="float" Description="대기중인 재공 LOT 수량" />
+                    <cdm:PropertyMeta Name="STEP_WIP_ID" PropertyType="string" Description="Step Wip ID" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="DEMAND_ID" PropertyType="string" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="STEP_WIP_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>INSERT INTO 
+	STEP_WIP 
+	(
+	VERSION_NO, 
+	LINE_ID, 
+	PRODUCT_ID, 
+	PROCESS_ID, 
+	STEP_ID, 
+	TARGET_DATE, 
+	RUN_QTY, 
+	WAIT_QTY, 
+	RUN_LOT_QTY, 
+	WAIT_LOT_QTY) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@LINE_ID, 
+	@PRODUCT_ID, 
+	@PROCESS_ID, 
+	@STEP_ID, 
+	@TARGET_DATE, 
+	@RUN_QTY, 
+	@WAIT_QTY, 
+	@RUN_LOT_QTY, 
+	@WAIT_LOT_QTY)
+</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LINE_ID" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PROCESS_ID" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@TARGET_DATE" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@RUN_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@WAIT_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@RUN_LOT_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@WAIT_LOT_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="STEP_WIP_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="INPUT_PLAN" Category="Pegging">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="INPUT_PLAN">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과 계획에 대한 VERSION 문자열입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="BATCH_ID" PropertyType="string" Description="임의로 부여한 ID 입니다. " IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="제품 ID" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="PLAN_DATE" PropertyType="DateTime" Description="투입이 되어야 하는 일자입니다. " />
+                    <cdm:PropertyMeta Name="PLAN_QTY" PropertyType="double" Description="투입 수량입니다. " />
+                    <cdm:PropertyMeta Name="INPUT_PLAN_ID" PropertyType="string" Description="Input Plan ID" IsPrimaryKey="True" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="INPUT_PLAN_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>INSERT INTO 
+	INPUT_PLAN 
+	(
+	VERSION_NO, 
+	BATCH_ID, 
+	PRODUCT_ID, 
+	PLAN_DATE, 
+	PLAN_QTY) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@BATCH_ID, 
+	@PRODUCT_ID, 
+	@PLAN_DATE, 
+	@PLAN_QTY)
+</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@BATCH_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PLAN_DATE" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PLAN_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="INPUT_PLAN_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="RELEASE_HISTORY" Category="Simulation">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="RELEASE_HISTORY">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과 계획에 대한 VERSION 문자열입니다." />
+                    <cdm:PropertyMeta Name="BATCH_ID" PropertyType="string" Description="Lot 을 생성할 때 소진한 INPUT_PLAN 의 BATCH_ID 입니다. " />
+                    <cdm:PropertyMeta Name="LOT_ID" PropertyType="string" Description="LOT_ID 입니다. " />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="제품 ID" />
+                    <cdm:PropertyMeta Name="RELEASE_DATE" PropertyType="DateTime" Description="Lot 이 실제로 공장에 투입된 시각입니다. " />
+                    <cdm:PropertyMeta Name="INPUT_STEP_ID" PropertyType="string" Description="투입 공정 ID 입니다. " />
+                    <cdm:PropertyMeta Name="QTY" PropertyType="int" Description="LOT 을 구성하는 Unit 의 수량입니다. " />
+                    <cdm:PropertyMeta Name="RELEASE_HISTORY_ID" PropertyType="string" Description="Release History ID" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="MO_PRODUCT_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="MO_DEMAND_ID" PropertyType="string" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="RELEASE_HISTORY_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	RELEASE_HISTORY 
+	(
+	VERSION_NO, 
+	BATCH_ID, 
+	LOT_ID, 
+	PRODUCT_ID, 
+	RELEASE_DATE, 
+	INPUT_STEP_ID, 
+	QTY) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@BATCH_ID, 
+	@LOT_ID, 
+	@PRODUCT_ID, 
+	@RELEASE_DATE, 
+	@INPUT_STEP_ID, 
+	@QTY)
+</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@BATCH_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@RELEASE_DATE" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@INPUT_STEP_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="RELEASE_HISTORY_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="RUN_HISTORY" Category="Log">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="RUN_HISTORY">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" />
+                    <cdm:PropertyMeta Name="INPUT_VER" PropertyType="string" />
+                    <cdm:PropertyMeta Name="ENG_START_TIME" PropertyType="dateTime" />
+                    <cdm:PropertyMeta Name="ENG_END_TIME" PropertyType="dateTime" />
+                    <cdm:PropertyMeta Name="SIM_START_TIME" PropertyType="dateTime" />
+                    <cdm:PropertyMeta Name="FACTORY_START_TIME" PropertyType="string" />
+                    <cdm:PropertyMeta Name="STATE" PropertyType="string" />
+                    <cdm:PropertyMeta Name="DATA_COLLECTION_BY_FST" PropertyType="char" />
+                    <cdm:PropertyMeta Name="PERIOD" PropertyType="int" AllowNulls="False" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="RUN_HISTORY_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.RUN_HISTORY 
+	(
+	VERSION_NO, 
+	INPUT_VER, 
+	ENG_START_TIME, 
+	ENG_END_TIME, 
+	SIM_START_TIME, 
+	FACTORY_START_TIME, 
+	STATE, 
+	DATA_COLLECTION_BY_FST, 
+	PERIOD) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@INPUT_VER, 
+	@ENG_START_TIME, 
+	@ENG_END_TIME, 
+	@SIM_START_TIME, 
+	@FACTORY_START_TIME, 
+	@STATE, 
+	@DATA_COLLECTION_BY_FST, 
+	@PERIOD)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@INPUT_VER" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@ENG_START_TIME" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@ENG_END_TIME" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@SIM_START_TIME" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@FACTORY_START_TIME" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STATE" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DATA_COLLECTION_BY_FST" Size="1" DbType="AnsiStringFixedLength" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PERIOD" DbType="Decimal" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="RUN_HISTORY_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="EQP_PLAN" Category="Simulation">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="EQP_PLAN">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과 계획에 대한 VERSION 문자열입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" Description="장비가 위치한 라인 ID" />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" Description="장비 ID" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="LOT_ID" PropertyType="string" Description="장비에서 작업한 LOT ID" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="작업대상 LOT 의 PRODUCT ID" />
+                    <cdm:PropertyMeta Name="PROCESS_ID" PropertyType="string" Description="작업대상 LOT 의 PROCESS ID" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="작업대상 LOT 의 작업 공정 ID" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="STEP_TYPE" PropertyType="string" Description="null, IN, OUT (null : 일반 공정, IN : 최초 라인의 투입공정, Out : 제품의 생산 Out 공정)" />
+                    <cdm:PropertyMeta Name="PROCESS_QTY" PropertyType="float" Description="작업대상 LOT 의 가공 수량(통상 해당 LOT 의 현재 UNIT 수량임)" />
+                    <cdm:PropertyMeta Name="STEP_IN_TIME" PropertyType="DateTime" Description="작업대상 LOT 이 해당 공정에 대기 시작한 시점(해당 공정에 도착한 시각으로 판단)" />
+                    <cdm:PropertyMeta Name="EQP_START_TIME" PropertyType="datetime" Description="공정 작업 시작 시점" />
+                    <cdm:PropertyMeta Name="EQP_END_TIME" PropertyType="datetime" Description="공정 작업 완료 시점" />
+                    <cdm:PropertyMeta Name="EQP_STATE_CODE" PropertyType="string" Description="장비 상태 (BUSY, SETUP, PM, IDLE...)" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="TARGET_DATE" PropertyType="datetime" />
+                    <cdm:PropertyMeta Name="DEMAND_ID" PropertyType="string" Description="작업물과 연결된 Demand의 ID" />
+                    <cdm:PropertyMeta Name="DUE_DATE" PropertyType="datetime" Description="작업물과 연결된 Demand의 MO_DUE_DATE" />
+                    <cdm:PropertyMeta Name="AUTOMATION" PropertyType="string" Description="작업물과 연결된 EQP의 AUTOMATION 정보" />
+                    <cdm:PropertyMeta Name="EQP_PLAN_ID" PropertyType="string" Description="작업물과 연결된 Demand의 LPST" />
+                    <cdm:PropertyMeta Name="TOOL_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="INPUT_PROC_TIME" PropertyType="double" Description="Input 정보로 부터 구한 proc time" />
+                    <cdm:PropertyMeta Name="INPUT_TACT_TIME" PropertyType="double" Description="Input 정보로 부터 구한 tact time" />
+                    <cdm:PropertyMeta Name="UTILIZATION" PropertyType="double" Description="생산능력" />
+                    <cdm:PropertyMeta Name="EFFICIENCY" PropertyType="double" Description="적용효율" />
+                    <cdm:PropertyMeta Name="APPLY_PROC_TIME" PropertyType="double" Description="생산능력, 적용효율이 반영된 proc time. InputProcTime*(100/Utilization)*(100/Efficiency) " />
+                    <cdm:PropertyMeta Name="APPLY_TACT_TIME" PropertyType="double" Description="생산능력, 적용효율이 반영된 tact time. InputTactTime*(100/Utilization)*(100/Efficiency) " />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="EQP_PLAN_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>INSERT INTO 
+	EQP_PLAN 
+	(
+	VERSION_NO, 
+	LINE_ID, 
+	EQP_ID, 
+	LOT_ID, 
+	PRODUCT_ID, 
+	PROCESS_ID, 
+	STEP_ID, 
+	PROCESS_QTY, 
+	DISPATCH_IN_TIME, 
+	START_TIME, 
+	END_TIME, 
+	MACHINE_STATE) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@LINE_ID, 
+	@EQP_ID, 
+	@LOT_ID, 
+	@PRODUCT_ID, 
+	@PROCESS_ID, 
+	@STEP_ID, 
+	@PROCESS_QTY, 
+	@DISPATCH_IN_TIME, 
+	@START_TIME, 
+	@END_TIME, 
+	@MACHINE_STATE)
+</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LINE_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EQP_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PROCESS_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PROCESS_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DISPATCH_IN_TIME" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@START_TIME" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@END_TIME" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MACHINE_STATE" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.EQP_PLAN 
+	(
+	EQP_PLAN_ID, 
+	VERSION_NO, 
+	LINE_ID, 
+	EQP_ID, 
+	LOT_ID, 
+	PRODUCT_ID, 
+	PROCESS_ID, 
+	STEP_ID,
+	STEP_TYPE,
+	PROCESS_QTY, 
+	STEP_IN_TIME, 
+	EQP_START_TIME, 
+	EQP_END_TIME, 
+	EQP_STATE_CODE, 
+	DUE_DATE,
+	TARGET_DATE,
+	AUTOMATION,
+	DEMAND_ID,
+	INPUT_PROC_TIME,
+	INPUT_TACT_TIME,
+	UTILIZATION, 
+	EFFICIENCY,
+	APPLY_PROC_TIME,
+	APPLY_TACT_TIME
+	) 
+VALUES 
+	(@EQP_PLAN_ID, @VERSION_NO, @LINE_ID, @EQP_ID, @LOT_ID, @PRODUCT_ID, @PROCESS_ID, @STEP_ID, @STEP_TYPE, @PROCESS_QTY, @STEP_IN_TIME, @EQP_START_TIME, @EQP_END_TIME, @EQP_STATE_CODE, @DUE_DATE, @TARGET_DATE, @AUTOMATION, @DEMAND_ID,
+	 @INPUT_PROC_TIME, @INPUT_TACT_TIME, @UTILIZATION, @EFFICIENCY, @APPLY_PROC_TIME, @APPLY_TACT_TIME)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@EQP_PLAN_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LINE_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EQP_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PROCESS_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PROCESS_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_IN_TIME" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EQP_START_TIME" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EQP_END_TIME" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EQP_STATE_CODE" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DUE_DATE" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DEMAND_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_TYPE" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@TARGET_DATE" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@AUTOMATION" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@INPUT_PROC_TIME" DbType="Double" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@INPUT_TACT_TIME" DbType="Double" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@UTILIZATION" DbType="Double" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EFFICIENCY" DbType="Double" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@APPLY_PROC_TIME" DbType="Double" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@APPLY_TACT_TIME" DbType="Double" Precision="10" Scale="3" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="EQP_PLAN_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="ERROR_LOG" Category="Log">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="ERROR_LOG">
+                  <Properties>
+                    <cdm:PropertyMeta Name="ERR_CODE" PropertyType="string" Description="ERROR 키값으로 사용되는 코드입니다. (Prefix: IN = Input, PE = Pegging, SI = Simulation)" />
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과 계획에 대한 VERSION 문자열입니다." />
+                    <cdm:PropertyMeta Name="SEVERITY" PropertyType="string" Description="ERROR 의 정도 (INFO : OUTPUT 에 영향을 미치지는 못하지만 엔진수행 중 로깅이 필요한 항목, WARNING : OUTPUT 에 일부 영향을 미치지만 치명적인 오류는 아닌 항목, CRITICAL : OUTPUT 에 미치는 영향도가 너무 커서 반드시 기준정보나 로직의 정합성 검토가 필요한 항목)" />
+                    <cdm:PropertyMeta Name="CATEGORY" PropertyType="string" Description="오류 그룹 – 사용자 지정가능(기준정보, SIMULATION, PEGGIN 등의 분류 등 사용자 정의형의 ERROR GROUP 입니다. " />
+                    <cdm:PropertyMeta Name="REASON" PropertyType="string" Description="오류의 상세한 원인" />
+                    <cdm:PropertyMeta Name="ITEM" PropertyType="string" Description="대상 오류발생 항목에 대한 서술형 정보" />
+                    <cdm:PropertyMeta Name="DEMAND_ID" PropertyType="string" Description="오류 대상 LOT 에 대한 제품정보" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="오류 대상 LOT 의 오류 발생 공정정보" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="오류 대상 공정 정보" />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" Description="오류 대상 장비 정보" />
+                    <cdm:PropertyMeta Name="LOT_ID" PropertyType="string" Description="오류 대상 LOT 정보" />
+                    <cdm:PropertyMeta Name="LOG_TIME" PropertyType="DateTime" Description="ERROR 발생시각, PEGGING 오류의 경우 PLAN START TIME 으로 동일하며, SCHEDULE 오류는 SIMULATION CLOCK 기준 시각이 기록됩니다." />
+                    <cdm:PropertyMeta Name="ERROR_LOG_ID" PropertyType="string" Description="Error Log ID" IsPrimaryKey="True" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="ERROR_LOG_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>DELETE FROM 
+	APSLIB.ERROR_LOG
+WHERE 
+	(VERSION_NO = @VERSION_NO)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.ERROR_LOG 
+	(
+	VERSION_NO, 
+	SEVERITY, 
+	CATEGORY, 
+	REASON, 
+	ITEM, 
+	DEMAND_ID, 
+	PRODUCT_ID, 
+	STEP_ID, 
+	EQP_ID, 
+	LOT_ID, 
+	LOG_TIME,
+	ERROR_LOG_ID) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@SEVERITY, 
+	@CATEGORY, 
+	@REASON, 
+	@ITEM, 
+	@DEMAND_ID, 
+	@PRODUCT_ID, 
+	@STEP_ID, 
+	@EQP_ID, 
+	@LOT_ID, 
+	@LOG_TIME,
+	@ERROR_LOG_ID)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@SEVERITY" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@CATEGORY" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@REASON" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@ITEM" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DEMAND_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EQP_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOG_TIME" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@ERROR_LOG_ID" Size="255" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="ERROR_LOG_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="PEG_HISTORY" Category="Pegging">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="PEG_HISTORY">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과 계획에 대한 VERSION 문자열입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" Description="재공(lot) 이 위치한 라인의 정보입니다." />
+                    <cdm:PropertyMeta Name="LOT_ID" PropertyType="string" Description="재공 식별 ID 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="재공의 현재 Step 정보입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="재공의 현재 Product ID 입니다." />
+                    <cdm:PropertyMeta Name="ITEM_DETAIL" PropertyType="string" Description="재공 Product 의 속성값." />
+                    <cdm:PropertyMeta Name="UNIT_QTY" PropertyType="double" Description="재공에 포함된 Unit 수량입니다." />
+                    <cdm:PropertyMeta Name="PEG_QTY" PropertyType="double" Description="재공 수량 중 Demand 에 Pegging 된 수량입니다. PEG_QTY &lt; LOT_QTY" />
+                    <cdm:PropertyMeta Name="STATE" PropertyType="string" Description="재공의 상태(초기 상태를 의미함) -&gt; Wip 정보의 State 와 동일한 값을 가집니다." />
+                    <cdm:PropertyMeta Name="IN_OUT" PropertyType="string" Description="재공이 상태에 따라 IN인지 OUT인지 확인(STATE가 WAIT/HOLD면 IN, RUN이면 OUT) " />
+                    <cdm:PropertyMeta Name="MO_DEMAND_ID" PropertyType="string" Description="Demand 에 대한 식별 ID 입니다. " IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="MO_PRODUCT_ID" PropertyType="string" Description="Demand 의 PRODUCT ID 입니다." />
+                    <cdm:PropertyMeta Name="MO_DUE_DATE" PropertyType="DateTime" Description="DEMAND 의 납기일입니다." />
+                    <cdm:PropertyMeta Name="PEG_HISTORY_ID" PropertyType="string" Description="Peg History ID" IsPrimaryKey="True" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="PEG_HISTORY_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>INSERT INTO 
+	PEG_HISTORY 
+	(
+	VERSION_NO, 
+	LINE_ID, 
+	LOT_ID, 
+	STEP_ID, 
+	PRODUCT_ID, 
+	LOT_QTY, 
+	PEG_QTY, 
+	STATE,
+	MO_DEMAND_ID, 
+	MO_PRODUCT_ID, 
+	MO_DUE_DATE) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@LINE_ID, 
+	@LOT_ID, 
+	@STEP_ID, 
+	@PRODUCT_ID, 
+	@LOT_QTY, 
+	@PEG_QTY, 
+	@STATE, 
+	@MO_DEMAND_ID, 
+	@MO_PRODUCT_ID, 
+	@MO_DUE_DATE)
+</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LINE_ID" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_ID" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PEG_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STATE" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MO_DEMAND_ID" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MO_PRODUCT_ID" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MO_DUE_DATE" DbType="DateTime" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.PEG_HISTORY 
+	(
+	PEG_HISTORY_ID, 
+	VERSION_NO, 
+	LINE_ID, 
+	LOT_ID, 
+	STEP_ID, 
+	PRODUCT_ID, 
+	UNIT_QTY, 
+	PEG_QTY, 
+	STATE, 
+	MO_DEMAND_ID, 
+	MO_PRODUCT_ID, 
+	MO_DUE_DATE) 
+VALUES 
+	(@PEG_HISTORY_ID, @VERSION_NO, @LINE_ID, @LOT_ID, @STEP_ID, @PRODUCT_ID, @UNIT_QTY, @PEG_QTY, @STATE, @MO_DEMAND_ID, @MO_PRODUCT_ID, @MO_DUE_DATE)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@PEG_HISTORY_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LINE_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@UNIT_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PEG_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STATE" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MO_DEMAND_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MO_PRODUCT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MO_DUE_DATE" DbType="DateTime" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="PEG_HISTORY_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="LOAD_STAT" Category="Simulation">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="LOAD_STAT">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과 계획에 대한 VERSION 문자열입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" Description="장비가 위치한 라인 ID" />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" Description="장비 ID" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="TARGET_DATE" PropertyType="string" Description="장비의 Load Stat을 기록하는 날짜" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="SETUP" PropertyType="float" Description="해당일에 Setup 시간 점유비율 (1일 중 2.4시간인 경우 0.1 로 표시됨)" />
+                    <cdm:PropertyMeta Name="BUSY" PropertyType="float" Description="해당일에 Processing 시간 점유비율 " />
+                    <cdm:PropertyMeta Name="IDLERUN" PropertyType="float" Description="해당일에 Idlerun 시간 점유비율 (Inline 유형의 장비에서만 집계됨, 투입이 가능한 시점에 투입이 안되는 경우 Idlerun으로 판별)" />
+                    <cdm:PropertyMeta Name="IDLE" PropertyType="float" Description="해당일에 장비 Idle 시간 점유비율" />
+                    <cdm:PropertyMeta Name="PM" PropertyType="float" Description="해당일에 장비 PM 시간 점유비율" />
+                    <cdm:PropertyMeta Name="DOWN" PropertyType="float" Description="해당일에 장비 Down 시간 점유비율 (초기 Down 후 장비 Up 시뮬레이션을 하는 경우에만 집계됨)" />
+                    <cdm:PropertyMeta Name="BREAK" PropertyType="float" Description="해당일에 장비 Break 시간 점유비율" />
+                    <cdm:PropertyMeta Name="LOAD_STAT_ID" PropertyType="string" Description="Load Stat ID" AllowNulls="False" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="LOAD_STAT_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>DELETE FROM 
+	APSLIB.LOAD_STAT
+WHERE 
+	(VERSION_NO = @VERSION_NO)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.LOAD_STAT 
+	(
+	LOAD_STAT_ID, 
+	VERSION_NO, 
+	LINE_ID, 
+	EQP_ID, 
+	TARGET_DATE, 
+	SETUP, 
+	BUSY, 
+	IDLERUN, 
+	IDLE, 
+	PM, 
+	DOWN) 
+VALUES 
+	(@LOAD_STAT_ID, @VERSION_NO, @LINE_ID, @EQP_ID, @TARGET_DATE, @SETUP, @BUSY, @IDLERUN, @IDLE, @PM, @DOWN)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@LOAD_STAT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LINE_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EQP_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@TARGET_DATE" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@SETUP" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@BUSY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@IDLERUN" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@IDLE" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PM" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DOWN" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="LOAD_STAT_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="LOAD_HISTORY" Category="Simulation" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="LOAD_HISTORY">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과 계획에 대한 VERSION 문자열입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" Description="장비가 위치한 라인 ID" />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" Description="장비 ID" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="TARGET_DATE" PropertyType="string" Description="장비의 Load History 를 기록하는 Date 정보" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="INFO_GZIP" PropertyType="string" Description="Loading 결과 문자열 압축 데이터, 하기 2, 3의 데이터를 모두 이어 붙여 전체 정보를 재구성 할 수 있습니다. " />
+                    <cdm:PropertyMeta Name="INFO_GZIP_2" PropertyType="string" Description="Loading 결과 문자열 압축 데이터" />
+                    <cdm:PropertyMeta Name="INFO_GZIP_3" PropertyType="string" Description="Loading 결과 문자열 압축 데이터" />
+                    <cdm:PropertyMeta Name="LOAD_HISTORY_ID" PropertyType="string" Description="LoadHistory ID" AllowNulls="False" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>DELETE FROM 
+	APSLIB.LOAD_HISTORY
+WHERE 
+	(VERSION_NO = @VERSION_NO)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.LOAD_HISTORY 
+	(
+	LOAD_HISTORY_ID, 
+	VERSION_NO, 
+	LINE_ID, 
+	EQP_ID, 
+	TARGET_DATE, 
+	INFO_GZIP, 
+	INFO_GZIP_2, 
+	INFO_GZIP_3) 
+VALUES 
+	(@LOAD_HISTORY_ID, @VERSION_NO, @LINE_ID, @EQP_ID, @TARGET_DATE, @INFO_GZIP, @INFO_GZIP_2, @INFO_GZIP_3)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@LOAD_HISTORY_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LINE_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EQP_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@TARGET_DATE" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@INFO_GZIP" Size="10000" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@INFO_GZIP_2" Size="10000" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@INFO_GZIP_3" Size="10000" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="STEP_TARGET" Category="Pegging">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="STEP_TARGET">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과 계획에 대한 VERSION 문자열입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="재공의 현재 Product ID 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="재공의 현재 Step 정보입니다. " IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="IN_QTY" PropertyType="double" Description="공정(STEP_ID) 의 투입 목표수량 입니다. TARGET_DATE 에 투입 필요한 수량입니다. " />
+                    <cdm:PropertyMeta Name="OUT_QTY" PropertyType="double" Description="공정(STEP_ID) 의 생산 목표수량 입니다. TARGET_DATE 에 생산(OUT) 필요한 수량입니다. " />
+                    <cdm:PropertyMeta Name="IN_OUT" PropertyType="string" />
+                    <cdm:PropertyMeta Name="TARGET_DATE" PropertyType="DateTime" Description="목표시간 입니다." />
+                    <cdm:PropertyMeta Name="MO_DEMAND_ID" PropertyType="string" Description="DEMAND 에 대한 식별 ID 입니다. " IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="MO_PRODUCT_ID" PropertyType="string" Description="DEMAND 의 PRODUCT ID 입니다. " />
+                    <cdm:PropertyMeta Name="MO_DUE_DATE" PropertyType="DateTime" Description="DEMAND 의 납기일입니다." />
+                    <cdm:PropertyMeta Name="STEP_TARGET_ID" PropertyType="string" Description="Step Target ID" IsPrimaryKey="True" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="STEP_TARGET_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>INSERT INTO 
+	STEP_TARGET 
+	(
+	VERSION_NO, 
+	PRODUCT_ID, 
+	STEP_ID, 
+	IN_QTY, 
+	OUT_QTY, 
+	TARGET_DATE, 
+	MO_DEMAND_ID, 
+	MO_PRODUCT_ID, 
+	MO_DUE_DATE) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@PRODUCT_ID, 
+	@STEP_ID, 
+	@IN_QTY, 
+	@OUT_QTY, 
+	@TARGET_DATE, 
+	@MO_DEMAND_ID, 
+	@MO_PRODUCT_ID, 
+	@MO_DUE_DATE)
+</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@IN_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@OUT_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@TARGET_DATE" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MO_DEMAND_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MO_PRODUCT_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MO_DUE_DATE" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.STEP_TARGET 
+	(
+	STEP_TARGET_ID, 
+	VERSION_NO, 
+	PRODUCT_ID, 
+	STEP_ID, 
+	IN_QTY, 
+	OUT_QTY, 
+	TARGET_DATE, 
+	MO_DEMAND_ID, 
+	MO_PRODUCT_ID, 
+	MO_DUE_DATE) 
+VALUES 
+	(@STEP_TARGET_ID, @VERSION_NO, @PRODUCT_ID, @STEP_ID, @IN_QTY, @OUT_QTY, @TARGET_DATE, @MO_DEMAND_ID, @MO_PRODUCT_ID, @MO_DUE_DATE)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@STEP_TARGET_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@IN_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@OUT_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@TARGET_DATE" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MO_DEMAND_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MO_PRODUCT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MO_DUE_DATE" DbType="DateTime" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="STEP_TARGET_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="WIP_HIS" Category="InputData" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="WIP_HIS">
+                  <Properties>
+                    <cdm:PropertyMeta Name="WIP_HIS_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" />
+                    <cdm:PropertyMeta Name="LOT_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="PROCESS_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="UNIT_QTY" PropertyType="double" />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="LINE_IN_TIME" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="STEP_ARRIVE_TIME" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="STATE" PropertyType="string" />
+                    <cdm:PropertyMeta Name="STATE_TIME" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="OUT_QTY" PropertyType="double" />
+                    <cdm:PropertyMeta Name="DEMAND_ID" PropertyType="string" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd2">
+                      <CommandText>DELETE FROM 
+	APSLIB.WIP_HIS
+WHERE 
+	(VERSION_NO = @VERSION_NO)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.WIP_HIS 
+	(
+	VERSION_NO, 
+	LOT_ID, 
+	LINE_ID, 
+	PRODUCT_ID, 
+	PROCESS_ID, 
+	STEP_ID, 
+	UNIT_QTY, 
+	EQP_ID, 
+	LINE_IN_TIME, 
+	STEP_ARRIVE_TIME, 
+	STATE, 
+	STATE_TIME, 
+	OUT_QTY, 
+	DEMAND_ID) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@LOT_ID, 
+	@LINE_ID, 
+	@PRODUCT_ID, 
+	@PROCESS_ID, 
+	@STEP_ID, 
+	@UNIT_QTY, 
+	@EQP_ID, 
+	@LINE_IN_TIME, 
+	@STEP_ARRIVE_TIME, 
+	@STATE, 
+	@STATE_TIME, 
+	@OUT_QTY, 
+	@DEMAND_ID)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LINE_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PROCESS_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@UNIT_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EQP_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LINE_IN_TIME" DbType="DateTime2" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ARRIVE_TIME" DbType="DateTime2" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STATE" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STATE_TIME" DbType="DateTime2" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@OUT_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DEMAND_ID" Size="255" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="STEP_MOVE" Category="Simulation">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="STEP_MOVE">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" />
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="PROCESS_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="PLAN_DATE" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="IN_QTY" PropertyType="float" />
+                    <cdm:PropertyMeta Name="OUT_QTY" PropertyType="float" />
+                    <cdm:PropertyMeta Name="DEMAND_ID" PropertyType="string" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="STEP_MOVE_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>DELETE FROM 
+	APSLIB.STEP_MOVE
+WHERE 
+	(VERSION_NO = @VERSION_NO)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.STEP_MOVE 
+	(
+	VERSION_NO, 
+	LINE_ID, 
+	PRODUCT_ID, 
+	PROCESS_ID, 
+	STEP_ID, 
+	EQP_ID, 
+	PLAN_DATE, 
+	IN_QTY,
+	OUT_QTY,
+	DEMAND_ID) 
+VALUES 
+	(@VERSION_NO, @LINE_ID, @PRODUCT_ID, @PROCESS_ID, @STEP_ID, @EQP_ID, @PLAN_DATE, @IN_QTY, @OUT_QTY, @DEMAND_ID)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LINE_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PROCESS_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EQP_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PLAN_DATE" Size="15" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@IN_QTY" Size="20" DbType="Double" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@OUT_QTY" Size="20" DbType="Double" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DEMAND_ID" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="STEP_MOVE_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="TOOL_SEIZE_LOG" Category="Simulation" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="TOOL_SEIZE_LOG">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" />
+                    <cdm:PropertyMeta Name="TOOL_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="SEIZE_TIME" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="RELEASE_TIME" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="TOOL_LIST" PropertyType="string" />
+                    <cdm:PropertyMeta Name="AVAILABLES" PropertyType="int" />
+                    <cdm:PropertyMeta Name="CAPACITY" PropertyType="int" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>DELETE FROM 
+	APSLIB.TOOL_SEIZE_LOG
+WHERE 
+	(VERSION_NO = @VERSION_NO)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.TOOL_SEIZE_LOG 
+	(
+	VERSION_NO, 
+	MOLD_ID, 
+	EQP_ID, 
+	SEIZE_TIME, 
+	RELEASE_TIME, 
+	MOLD_LIST, 
+	AVAILABLES, 
+	CAPACITY, 
+	SEIZED_INFOS) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@TOOL_ID, 
+	@EQP_ID, 
+	@SEIZE_TIME, 
+	@RELEASE_TIME, 
+	@TOOL_LIST, 
+	@AVAILABLES, 
+	@CAPACITY, 
+	@SEIZED_INFOS)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="200" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@TOOL_ID" Size="200" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EQP_ID" Size="200" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@SEIZE_TIME" Size="200" DbType="DateTime2" Precision="30" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@RELEASE_TIME" Size="200" DbType="DateTime2" Precision="30" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@TOOL_LIST" Size="200" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@AVAILABLES" DbType="Int32" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@CAPACITY" DbType="Int32" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@SEIZED_INFOS" Size="200" DbType="AnsiString" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="PRESET_INFO_HIS" Category="InputData">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="PRESET_INFO_HIS">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="VERSION_NO" />
+                    <cdm:PropertyMeta Name="PRESET_ID" PropertyType="string" Description="PRESET ID​" />
+                    <cdm:PropertyMeta Name="FACTOR_ID" PropertyType="string" Description="우선순위 요소 ID  Project 의 Weights 에 Factor 가 구현되어 있는 경우만 Valid 하게 동작함​" />
+                    <cdm:PropertyMeta Name="FACTOR_TYPE" PropertyType="string" Description="LOTTYPE,STEPTYPE (LOTTYPE:모든 Lot 별로 factor 값 계산, STEPTYPE:동일제품의 동일 공정(Step)의 경우 Dispatching 시 최초 1회만 값 계산)" />
+                    <cdm:PropertyMeta Name="FACTOR_WEIGHT" PropertyType="float" Description="FACTOR 의 가중합을 계산할 때 사용될 가중치​, 장비의 PRESE_ID 가 설정되어 있고, DISPATCHER_TYPE = 'WeightSum' 인 경우에 동작" />
+                    <cdm:PropertyMeta Name="FACTOR_DETAIL" PropertyType="string" Description="사용한 FACTOR의 속성값" />
+                    <cdm:PropertyMeta Name="ORDER_TYPE" PropertyType="string" Description="ASC,DESC (점수 정렬 방식, WeightSorted 에만 적용)" />
+                    <cdm:PropertyMeta Name="SEQUENCE" PropertyType="int" Description="장비의 PRESE_ID 가 설정되어 있고, DISPATCHER_TYPE= 'WeightSorted'인 경우에 동작​, PRESET 내의 FACTOR 중 대상 FACTOR 의 소팅 우선순위, 오름차순으로 소팅 됨​" />
+                    <cdm:PropertyMeta Name="CRITERIA" PropertyType="string" Description="장비의 PRESE_ID 가 설정되어 있고, DISPATCHER_TYPE= 'WeightSorted'인 경우에 동작, ​FACTOR 계산에 사용되는 PARAMETER 값" />
+                    <cdm:PropertyMeta Name="DESCRIPTION" PropertyType="string" Description="설명" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="PRESET_INFO_HIS_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>DELETE FROM 
+	APSLIB.PRESET_INFO_HIS
+WHERE 
+	(VERSION_NO = @VERSION_NO)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.PRESET_INFO_HIS 
+	(
+	VERSION_NO, 
+	PRESET_ID, 
+	FACTOR_ID, 
+	FACTOR_TYPE, 
+	FACTOR_WEIGHT, 
+	ORDER_TYPE, 
+	SEQUENCE, 
+	CRITERIA, 
+	DESCRIPTION) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@PRESET_ID, 
+	@FACTOR_ID, 
+	@FACTOR_TYPE, 
+	@FACTOR_WEIGHT, 
+	@ORDER_TYPE, 
+	@SEQUENCE, 
+	@CRITERIA, 
+	@DESCRIPTION)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRESET_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@FACTOR_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@FACTOR_TYPE" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@FACTOR_WEIGHT" DbType="Int32" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@ORDER_TYPE" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@SEQUENCE" DbType="Int32" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@CRITERIA" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DESCRIPTION" Size="255" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="PRESET_INFO_HIS_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="INIT_WIP_LOG" Category="Log" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="INIT_WIP_LOG">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" />
+                    <cdm:PropertyMeta Name="LOT_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="ORG_STEP_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="REV_STEP_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="ORG_STATUS" PropertyType="string" />
+                    <cdm:PropertyMeta Name="REV_STATUS" PropertyType="string" />
+                    <cdm:PropertyMeta Name="AVAILABLE_TIME" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="CATEGORY" PropertyType="string" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <Actions>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>DELETE FROM 
+	APSLIB.INIT_WIP_LOG
+WHERE 
+	(VERSION_NO = @VERSION_NO)</CommandText>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.INIT_WIP_LOG 
+	(
+	VERSION_NO, 
+	LOT_ID, 
+	PRODUCT_ID, 
+	ORG_STEP_ID, 
+	REV_STEP_ID, 
+	ORG_STATUS, 
+	REV_STATUS, 
+	AVAILABLE_TIME, 
+	CATEGORY) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@LOT_ID, 
+	@PRODUCT_ID, 
+	@ORG_STEP_ID, 
+	@REV_STEP_ID, 
+	@ORG_STATUS, 
+	@REV_STATUS, 
+	@AVAILABLE_TIME, 
+	@CATEGORY)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@ORG_STEP_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@REV_STEP_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@ORG_STATUS" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@REV_STATUS" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@AVAILABLE_TIME" Size="20" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@CATEGORY" Size="255" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="EQP_DISPATCH_LOG" Category="Simulation">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="EQP_DISPATCH_LOG">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과 계획에 대한 VERSION 문자열입니다." />
+                    <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" Description="장비 ID" />
+                    <cdm:PropertyMeta Name="DISPATCHING_TIME" PropertyType="string" />
+                    <cdm:PropertyMeta Name="PRESET_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="INIT_WIP_CNT" PropertyType="int" />
+                    <cdm:PropertyMeta Name="FILTERED_WIP_CNT" PropertyType="int" />
+                    <cdm:PropertyMeta Name="SELECTED_WIP_CNT" PropertyType="int" />
+                    <cdm:PropertyMeta Name="SELECTED_WIP" PropertyType="string" />
+                    <cdm:PropertyMeta Name="FILTERED_WIP_LOG" PropertyType="string" />
+                    <cdm:PropertyMeta Name="DISPATCH_WIP_LOG" PropertyType="string" />
+                    <cdm:PropertyMeta Name="EQP_DISPATCH_LOG_ID" PropertyType="string" Description="Eqp Dispatch Log ID" IsPrimaryKey="True" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="EQP_DISPATCH_LOG_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>INSERT INTO 
+	EQP_DISPATCH_LOG 
+	(
+	VERSION_NO, 
+	EQP_ID, 
+	DISPATCHING_TIME, 
+	PRESET_ID, 
+	INIT_WIP_CNT, 
+	FILTERED_WIP_CNT, 
+	SELECTED_WIP_CNT, 
+	SELECTED_WIP, 
+	FILTERED_WIP_LOG, 
+	DISPATCH_WIP_LOG) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@EQP_ID, 
+	@DISPATCHING_TIME, 
+	@PRESET_ID, 
+	@INIT_WIP_CNT, 
+	@FILTERED_WIP_CNT, 
+	@SELECTED_WIP_CNT, 
+	@SELECTED_WIP, 
+	@FILTERED_WIP_LOG, 
+	@DISPATCH_WIP_LOG)
+</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EQP_ID" Size="50" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DISPATCHING_TIME" Size="50" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRESET_ID" Size="50" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@INIT_WIP_CNT" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@FILTERED_WIP_CNT" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@SELECTED_WIP_CNT" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@SELECTED_WIP" Size="50" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@FILTERED_WIP_LOG" Size="50" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DISPATCH_WIP_LOG" Size="50" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="EQP_DISPATCH_LOG_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="DEMAND_HIS" Category="InputData">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="DEMAND_HIS">
+                  <Properties>
+                    <cdm:PropertyMeta Name="DEMAND_HIS_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" />
+                    <cdm:PropertyMeta Name="DEMAND_VER" PropertyType="string" />
+                    <cdm:PropertyMeta Name="DEMAND_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="CUSTOMER_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="DUE_DATE" PropertyType="DATETime" />
+                    <cdm:PropertyMeta Name="DEMAND_QTY" PropertyType="double" />
+                    <cdm:PropertyMeta Name="PRIORITY" PropertyType="float" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="DEMAND_HIS_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>DELETE FROM 
+	APSLIB.DEMAND_HIS
+WHERE 
+	(VERSION_NO = @VERSION_NO)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.DEMAND_HIS 
+	(
+	DEMAND_VER, 
+	VERSION_NO, 
+	DEMAND_ID, 
+	PRODUCT_ID, 
+	CUSTOMER_ID, 
+	DUE_DATE, 
+	DEMAND_QTY, 
+	PRIORITY,
+	DEMAND_HIS_ID) 
+VALUES 
+	(
+	@DEMAND_VER, 
+	@VERSION_NO, 
+	@DEMAND_ID, 
+	@PRODUCT_ID, 
+	@CUSTOMER_ID, 
+	@DUE_DATE, 
+	@DEMAND_QTY, 
+	@PRIORITY,
+	@DEMAND_HIS_ID)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@DEMAND_VER" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DEMAND_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@CUSTOMER_ID" Size="255" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DUE_DATE" Size="255" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DEMAND_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRIORITY" DbType="Decimal" Precision="10" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DEMAND_HIS_ID" Size="255" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="DEMAND_HIS_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="UNPEG_HISTORY" Category="Pegging">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="UNPEG_HISTORY">
+                  <Properties>
+                    <cdm:PropertyMeta Name="VERSION_NO" PropertyType="string" Description="결과 계획에 대한 VERSION 문자열입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" Description="재공(lot) 이 위치한 라인의 정보입니다." />
+                    <cdm:PropertyMeta Name="LOT_ID" PropertyType="string" Description="재공 식별 ID 입니다. " IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="재공의 현재 Step 정보입니다. " />
+                    <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="재공의 현재 Product ID 입니다. " />
+                    <cdm:PropertyMeta Name="UNIT_QTY" PropertyType="double" Description="재공에 포함된 Unit 수량입니다. " />
+                    <cdm:PropertyMeta Name="STATE" PropertyType="string" Description="재공의 상태(초기 상태를 의미함) -&gt; Wip 정보의 State 와 동일한 값입니다. " />
+                    <cdm:PropertyMeta Name="UNPEG_QTY" PropertyType="double" Description="Lot 의 Pegging 안된 잔여 수량입니다. 항상 UNPEG_QTY &lt; LOT_QTY" />
+                    <cdm:PropertyMeta Name="UNPEG_CATEGORY" PropertyType="string" Description="UNPEG 이 된 사유의 분류입니다. 예를 들어 EXCESS(DEMAND 보다 재공이 많은 경우), WIP(재공의 이슈로 Pegging 안되는 경우), TARGET (TARGET 이 충분하지 않거나 없는 경우)" />
+                    <cdm:PropertyMeta Name="UNPEG_REASON" PropertyType="string" Description="UNPEG의 자세한 사유입니다. 코드화하여 처리할 수 있습니다." />
+                    <cdm:PropertyMeta Name="UNPEG_HISTORY_ID" PropertyType="string" Description="Unpeg History ID" IsPrimaryKey="True" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="UNPEG_HISTORY_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Cmd1">
+                      <CommandText>INSERT INTO 
+	UNPEG_HISTORY 
+	(
+	VERSION_NO, 
+	LINE_ID, 
+	LOT_ID, 
+	STEP_ID, 
+	PRODUCT_ID, 
+	LOT_QTY, 
+	STATE, 
+	REMAIN_QTY, 
+	UNPEG_CATEGORY, 
+	UNPEG_REASON) 
+VALUES 
+	(
+	@VERSION_NO, 
+	@LINE_ID, 
+	@LOT_ID, 
+	@STEP_ID, 
+	@PRODUCT_ID, 
+	@LOT_QTY, 
+	@STATE, 
+	@REMAIN_QTY, 
+	@UNPEG_CATEGORY, 
+	@UNPEG_REASON)
+</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@VERSION_NO" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LINE_ID" Size="50" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_ID" Size="50" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" Size="50" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="50" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STATE" Size="50" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@REMAIN_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@UNPEG_CATEGORY" Size="50" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@UNPEG_REASON" Size="50" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	APSLIB.UNPEG_HISTORY 
+	(
+	UNPEG_HISTORY_ID, 
+	VERSION_NO, 
+	LINE_ID, 
+	LOT_ID, 
+	STEP_ID, 
+	PRODUCT_ID, 
+	UNIT_QTY, 
+	STATE, 
+	UNPEG_QTY, 
+	UNPEG_CATEGORY, 
+	UNPEG_REASON) 
+VALUES 
+	(@UNPEG_HISTORY_ID, @VERSION_NO, @LINE_ID, @LOT_ID, @STEP_ID, @PRODUCT_ID, @UNIT_QTY, @STATE, @UNPEG_QTY, @UNPEG_CATEGORY, @UNPEG_REASON)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@UNPEG_HISTORY_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LINE_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@UNIT_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STATE" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@UNPEG_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@UNPEG_CATEGORY" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@UNPEG_REASON" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                      </Parameters>
+                    </cdd:DataCommand>
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="UNPEG_HISTORY_Default" />
+              </Actions>
+            </cdd:DataItem>
+            <cdd:DataItem Name="APS_STATUS_MASTER" Category="AnomalyDetection" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="APS_STATUS_MASTER">
+                  <Properties>
+                    <cdm:PropertyMeta Name="APS_CODE" PropertyType="string" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="APS_VALUE" PropertyType="string" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+            </cdd:DataItem>
+            <cdd:DataItem Name="APS_LOG_HISTORY" Category="AnomalyDetection" ActiveAction="">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="APS_LOG_HISTORY">
+                  <Properties>
+                    <cdm:PropertyMeta Name="LOG_ID" PropertyType="string" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="LOG_DATETIME" PropertyType="DateTime" AllowNulls="False" />
+                    <cdm:PropertyMeta Name="LOG_TEXT" PropertyType="string" />
+                  </Properties>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+            </cdd:DataItem>
+          </cdd:DataItem-Array>
+        </ItemArray>
+      </Outputs>
+      <DataSources>
+        <Items>
+          <Entry>
+            <String>DBCONN_APS</String>
+            <cdd:DataSource Name="DBCONN_APS" Description="">
+              <Items Capacity="4">
+                <cdd:DataSourceItem Name="kamtec" ProviderName="IBM.Data.DB2.iSeries" ConnectionString="Data Source=175.200.81.7;UserID=QSECOFR;Password=goddns;" />
+              </Items>
+            </cdd:DataSource>
+          </Entry>
+          <Entry>
+            <String>DBCONN_MES</String>
+            <cdd:DataSource Name="DBCONN_MES" Description="">
+              <Items Capacity="4">
+                <cdd:DataSourceItem Name="Dev_MES" ProviderName="SqlServer" ConnectionString="Database=active_sungwon;Data Source=192.168.11.74;User ID=emes;Password=emes;" />
+              </Items>
+            </cdd:DataSource>
+          </Entry>
+        </Items>
+      </DataSources>
+      <PersistOutput>
+        <RootItem ExceptionPolicy="StopAtThrown" AutoBatch="True" IsPerformance="True" Name="Outputs" Description="Output saving">
+          <Items Capacity="5">
+            <GroupItem IsPerformance="True" Name="Simulation Persists">
+              <Items Capacity="12">
+                <EntityItem IsPerformance="True" Name="MATERIAL_HISTORY" />
+                <EntityItem IsPerformance="True" Name="UNLOADED_LOTLOG" />
+                <EntityItem IsPerformance="True" Name="PRODUCT_ROUTE_LOG" />
+                <EntityItem IsPerformance="True" Name="UNKIT_REMAIN_WIPLOG" />
+                <EntityItem IsPerformance="True" Name="STEP_WIP" />
+                <EntityItem IsPerformance="True" Name="RELEASE_HISTORY" />
+                <EntityItem WriterType="Buffered" IsPerformance="True" Name="EQP_PLAN" />
+                <EntityItem IsPerformance="True" Name="LOAD_STAT" />
+                <EntityItem IsPerformance="True" Name="LOAD_HISTORY" />
+                <EntityItem IsPerformance="True" Name="STEP_MOVE" />
+                <EntityItem IsPerformance="True" Name="TOOL_SEIZE_LOG" />
+                <EntityItem IsPerformance="True" Name="EQP_DISPATCH_LOG" />
+              </Items>
+            </GroupItem>
+            <GroupItem IsPerformance="True" Name="Log Persists">
+              <Items Capacity="4">
+                <EntityItem IsPerformance="True" Name="ANALYSIS_PSI" />
+                <EntityItem IsPerformance="True" Name="RUN_HISTORY" />
+                <EntityItem IsPerformance="True" Name="ERROR_LOG" />
+                <EntityItem IsPerformance="True" Name="INIT_WIP_LOG" />
+              </Items>
+            </GroupItem>
+            <GroupItem IsPerformance="True" Name="Pegging Persists">
+              <Items Capacity="4">
+                <EntityItem IsPerformance="True" Name="INPUT_PLAN" />
+                <EntityItem IsPerformance="True" Name="PEG_HISTORY" />
+                <EntityItem IsPerformance="True" Name="STEP_TARGET" />
+                <EntityItem IsPerformance="True" Name="UNPEG_HISTORY" />
+              </Items>
+            </GroupItem>
+            <GroupItem IsPerformance="True" Name="InputData Persists">
+              <Items Capacity="3">
+                <EntityItem IsPerformance="True" Name="WIP_HIS" />
+                <EntityItem IsPerformance="True" Name="PRESET_INFO_HIS" />
+                <EntityItem IsPerformance="True" Name="DEMAND_HIS" />
+              </Items>
+            </GroupItem>
+            <GroupItem IsPerformance="True" Name="AnomalyDetection Persists">
+              <Items Capacity="2">
+                <EntityItem IsPerformance="True" Name="APS_STATUS_MASTER" />
+                <EntityItem IsPerformance="True" Name="APS_LOG_HISTORY" />
+              </Items>
+            </GroupItem>
+          </Items>
+        </RootItem>
+      </PersistOutput>
+      <PersistInput>
+        <RootItem ExceptionPolicy="StopAtThrown" AutoBatch="True" IsPerformance="True" Name="Inputs" Description="Input loading">
+          <Items Capacity="5">
+            <GroupItem IsPerformance="True" IsPreloading="True" Name="* Preloading *" />
+            <GroupItem IsPerformance="True" Name="EXECUTION Persists">
+              <Items Capacity="6">
+                <EntityItem IsPerformance="True" Name="EXECUTION_OPTION_CONFIG" />
+                <EntityItem IsPerformance="True" Name="CONFIG" />
+                <EntityItem IsPerformance="True" Name="PLAN_REPORT_TARGET" />
+                <EntityItem IsPerformance="True" Name="SHIFT_TIME_CONFIG" />
+              </Items>
+            </GroupItem>
+            <GroupItem IsPerformance="True" Name="BOP Persists">
+              <Items Capacity="8">
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_STD_STEP_INFO" Name="STD_STEP_INFO" />
+                <EntityItem IsPerformance="True" Name="STEP_ROUTE" Action="OnAction_STEP_ROUTE" />
+                <EntityItem IsPerformance="True" Name="STEP_TAT" />
+                <EntityItem IsPerformance="True" Name="STEP_YIELD" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_PROCESS" Name="PROCESS" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_PRODUCT" Name="PRODUCT" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_PRODUCT_ROUTE" Name="PRODUCT_ROUTE" />
+                <EntityItem IsPerformance="True" Name="VALIDATION_BOP" />
+              </Items>
+            </GroupItem>
+            <GroupItem IsPerformance="True" Name="RESOURCE Persists">
+              <Items Capacity="14">
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_PRESET_INFO" Name="PRESET_INFO" Action="OnAction_PRESET_INFO" />
+                <EntityItem IsPerformance="True" Name="SETUP_INFO" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_EQUIPMENT" Name="EQUIPMENT" />
+                <EntityItem IsPerformance="True" Name="LINE_INFO" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_EQP_ARRANGE" Name="EQP_ARRANGE" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_FACTORY_BREAK" Name="FACTORY_BREAK" />
+                <EntityItem IsPerformance="True" Name="PM_PLAN" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_REPLENISH_PLAN" Name="REPLENISH_PLAN" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_MATERIAL" Name="MATERIAL" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_MATERIAL_BOM" Name="MATERIAL_BOM" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_SPLIT_INFO" Name="SPLIT_INFO" />
+                <EntityItem IsPerformance="True" Name="TOOL" />
+                <EntityItem IsPerformance="True" Name="TOOL_ARRANGE" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_EQP_UTILIZATION" Name="EQP_UTILIZATION" />
+              </Items>
+            </GroupItem>
+            <GroupItem IsPerformance="True" Name="TARGET Persists">
+              <Items Capacity="6">
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_OUT_ACT" Name="OUT_ACT" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_DEMAND" Name="DEMAND" Action="OnAction_DEMAND" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_WIP" Name="WIP" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_FIRM_PLAN" Name="FIRM_PLAN" Action="OnAction_FIRM_PLAN" />
+                <EntityItem IsPerformance="True" Name="IN_PLAN" />
+                <EntityItem IsPerformance="True" Name="PEG_CONDITION" Action="OnAction_PEG_CONDITION" />
+              </Items>
+            </GroupItem>
+          </Items>
+        </RootItem>
+      </PersistInput>
+    </VModelDoc>
+  </Content>
+</vxml:Document>

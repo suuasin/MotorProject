@@ -1,0 +1,2288 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mozart.Studio.UIComponents</name>
+    </assembly>
+    <members>
+        <member name="F:Mozart.Studio.UIComponents.Fx.LogName">
+            <summary>
+            The source name for the events.
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.Fx.LogEntryId">
+            <summary>
+            The default entry Id.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.VirtualSplitter.DrawSplitBar(System.Int32)">
+            <summary>
+                Draws the splitter bar at the current location. Will automatically
+                cleanup anyplace the splitter was drawn previously.
+            </summary>
+            <param name="mode"></param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.VirtualSplitter.CalcSplitLine(System.Int32,System.Int32)">
+            <summary>
+                Calculates the bounding rect of the split line. minWeight refers
+                to the minimum height or width of the splitline.
+            </summary>
+            <param name="splitSize"></param>
+            <param name="minWeight"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.VirtualSplitter.DrawSplitHelper(System.Int32)">
+            <summary>
+            Draws the splitter line at the requested location. Should only be called by drawSpltBar.
+            </summary>
+            <param name="splitSize"></param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.VirtualSplitter.GetSplitSize(System.Int32,System.Int32)">
+            <summary>
+            Calculates the split size based on the mouse position (x, y).
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DataSchema.IDataSchemaElement.FieldType">
+            <summary>
+            The type of the element
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DataSchema.IDataSchemaElement.IsCalculatedField">
+            <summary>
+            Indicates whether the data schema element is a calculated field
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DataSchema.IDataSchemaElement.Name">
+            <summary>
+            The name of the element (usually displayed as the node's text)
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DataSchema.IDataSchemaElement.Description">
+            <summary>
+            The description of the element (usually displayed in the node's tooltip)
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DataSchema.IDataSchemaElement.ImageIndex">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DataSchema.IDataSchemaElement.AllowedEffects">
+            <summary>
+            Determines whether the element could be drag-dropped
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DataSchema.IDataSchemaElement.Children">
+            <summary>
+            Child schema elements, if any
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DataSchema.IDataSchemaElement.Model">
+            <summary>
+            The data model's element associated with the current element
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DataSchema.IDataSchemaElement.Expression">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.CredentialsDialog">
+            <summary>
+            Dialog box which prompts for user credentials using the Win32 CREDUI methods.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CredentialsDialog.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.CredentialsDialog"/> class.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CredentialsDialog.#ctor(System.String,System.String,System.String,Mozart.Studio.UIComponents.CredentialsDialogOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.CredentialsDialog"/> class.
+            </summary>
+            <param name="caption">The caption.</param>
+            <param name="message">The message.</param>
+            <param name="userName">Name of the user.</param>
+            <param name="options">The options.</param>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CredentialsDialog.AuthenticationError">
+            <summary>
+            Gets or sets the Windows Error Code that caused this credential dialog to appear, if applicable.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CredentialsDialog.Banner">
+            <summary>
+            Gets or sets the image to display as the banner for the dialog
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CredentialsDialog.Caption">
+            <summary>
+            Gets or sets the caption for the dialog
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CredentialsDialog.EncryptPassword">
+            <summary>
+            Gets or sets a value indicating whether to encrypt password.
+            </summary>
+            <value><c>true</c> if password is to be encrypted; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CredentialsDialog.Message">
+            <summary>
+            Gets or sets the message to display on the dialog
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CredentialsDialog.Options">
+            <summary>
+            Gets or sets the options for the dialog.
+            </summary>
+            <value>The options.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CredentialsDialog.Password">
+            <summary>
+            Gets the password entered by the user
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CredentialsDialog.SaveChecked">
+            <summary>
+            Gets or sets a boolean indicating if the save check box was checked
+            </summary>
+            <remarks>
+            Only valid if <see cref="P:Mozart.Studio.UIComponents.CredentialsDialog.Options"/> has the <see cref="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.DoNotPersist"/> flag set.
+            </remarks>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CredentialsDialog.SecurePassword">
+            <summary>
+            Gets the password entered by the user using an encrypted string
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CredentialsDialog.Target">
+            <summary>
+            Gets or sets the name of the target for these credentials
+            </summary>
+            <remarks>
+            This value is used as a key to store the credentials if persisted
+            </remarks>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CredentialsDialog.UserName">
+            <summary>
+            Gets or sets the username entered
+            </summary>
+            <remarks>
+            If non-empty before calling <see cref="M:Mozart.Studio.UIComponents.CredentialsDialog.RunDialog(System.IntPtr)"/>, this value will be displayed in the dialog
+            </remarks>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CredentialsDialog.ValidatePassword">
+            <summary>
+            Gets or sets a value indicating whether the password should be validated before returning.
+            </summary>
+            <value>
+              <c>true</c> if the password should be validated; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CredentialsDialog.DefaultTarget">
+            <summary>
+            Gets a default value for the target.
+            </summary>
+            <value>The default target.</value>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CredentialsDialog.ConfirmCredentials(System.Boolean)">
+            <summary>
+            Confirms the credentials.
+            </summary>
+            <param name="storedCredentials">If set to <c>true</c> the credentials are stored in the credential manager.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CredentialsDialog.Reset">
+            <summary>
+            When overridden in a derived class, resets the properties of a common dialog box to their default values.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CredentialsDialog.RunDialog(System.IntPtr)">
+            <summary>
+            When overridden in a derived class, specifies a common dialog box.
+            </summary>
+            <param name="parentWindowHandle">A value that represents the window handle of the owner window for the common dialog box.</param>
+            <returns>
+            true if the dialog box was successfully run; otherwise, false.
+            </returns>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.CredentialsDialogOptions">
+            <summary>
+            Options for the display of the <see cref="T:Mozart.Studio.UIComponents.CredentialsDialog"/> and its functionality.
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.Default">
+            <summary>
+            Default flags settings These are the following values:
+            <see cref="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.GenericCredentials"/>, <see cref="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.AlwaysShowUI"/> and <see cref="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.ExpectConfirmation"/>
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.None">
+            <summary>No options are set.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.IncorrectPassword">
+            <summary>Notify the user of insufficient credentials by displaying the "Logon unsuccessful" balloon tip.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.DoNotPersist">
+            <summary>Do not store credentials or display check boxes. You can pass ShowSaveCheckBox with this flag to display the Save check box only, and the result is returned in the <see cref="P:Mozart.Studio.UIComponents.CredentialsDialog.SaveChecked"/> property.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.RequestAdministrator">
+            <summary>Populate the combo box with local administrators only.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.ExcludeCertificates">
+            <summary>Populate the combo box with user name/password only. Do not display certificates or smart cards in the combo box.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.RequireCertificate">
+            <summary>Populate the combo box with certificates and smart cards only. Do not allow a user name to be entered.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.ShowSaveCheckBox">
+            <summary>If the check box is selected, show the Save check box and return <c>true</c> in the <see cref="P:Mozart.Studio.UIComponents.CredentialsDialog.SaveChecked"/> property, otherwise, return <c>false</c>. Check box uses the value in the <see cref="P:Mozart.Studio.UIComponents.CredentialsDialog.SaveChecked"/> property by default.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.AlwaysShowUI">
+            <summary>Specifies that a user interface will be shown even if the credentials can be returned from an existing credential in credential manager. This flag is permitted only if GenericCredentials is also specified.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.RequireSmartcard">
+            <summary>Populate the combo box with certificates or smart cards only. Do not allow a user name to be entered.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.PasswordOnlyOk">
+            <summary></summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.ValidateUsername">
+            <summary></summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.CompleteUsername">
+            <summary></summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.Persist">
+            <summary>Do not show the Save check box, but the credential is saved as though the box were shown and selected.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.ServerCredential">
+            <summary>This flag is meaningful only in locating a matching credential to prefill the dialog box, should authentication fail. When this flag is specified, wildcard credentials will not be matched. It has no effect when writing a credential. CredUI does not create credentials that contain wildcard characters. Any found were either created explicitly by the user or created programmatically, as happens when a RAS connection is made.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.ExpectConfirmation">
+            <summary>Specifies that the caller will call ConfirmCredentials after checking to determine whether the returned credentials are actually valid. This mechanism ensures that credentials that are not valid are not saved to the credential manager. Specify this flag in all cases unless DoNotPersist is specified.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.GenericCredentials">
+            <summary>Consider the credentials entered by the user to be generic credentials, rather than windows credentials.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.UsernameTargetCredentials">
+            <summary>The credential is a "runas" credential. The TargetName parameter specifies the name of the command or program being run. It is used for prompting purposes only.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CredentialsDialogOptions.KeepUsername">
+            <summary></summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.UIResources">
+            <summary>
+              지역화된 문자열 등을 찾기 위한 강력한 형식의 리소스 클래스입니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.UIResources.ResourceManager">
+            <summary>
+              이 클래스에서 사용하는 캐시된 ResourceManager 인스턴스를 반환합니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.UIResources.Culture">
+            <summary>
+              이 강력한 형식의 리소스 클래스를 사용하여 모든 리소스 조회에 대해 현재 스레드의 CurrentUICulture 속성을
+              재정의합니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.UIResources.collapse_box">
+            <summary>
+              System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.UIResources.collapsed_classic">
+            <summary>
+              System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.UIResources.expand_chevron">
+            <summary>
+              System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.UIResources.expand_circle16">
+            <summary>
+              System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.UIResources.expand_circle24">
+            <summary>
+              System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.UIResources.expand_circle32">
+            <summary>
+              System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.UIResources.minus">
+            <summary>
+              System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.UIResources.node_closed_empty">
+            <summary>
+              System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.UIResources.node_closed_full">
+            <summary>
+              System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.UIResources.node_open">
+            <summary>
+              System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.UIResources.node_open_empty">
+            <summary>
+              System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.UIResources.plus">
+            <summary>
+              System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.DragDropListBox">
+            <summary>
+            ListBox which provides a fully integrated drag-and-drop functionality, which also works when multiple ListBox items are selected (multiselect).
+            Items can be moved and copied between different DragDropListBoxes or can be moved inside of one DragDropListBox in order to be reordered.
+            Drag-and-drop works also with or types of controls implementing IDragDropSource.
+            </summary>
+            <remarks>Provides additional properties for the fine-tuning of the drag-and-drop behavior in the section
+            "Behavior (drag-and-drop)" of the properties window of the form designer. </remarks>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DragDropListBox.DragDropGroup">
+            <summary>
+            Drag-and-drop group to which the control belongs. Drag-and-drop is restricted to happen between controls having the same DragDropGroup.
+            </summary>
+            <example>Let's assume that we have a form with four DragDropListBoxes on it. Two of them contain cats and two of them contain dogs.
+            We only want to be able to move cats between the cat lists and dogs between the dog lists (cats and dogs don't like each other).
+            We can achieve this simply by setting the DragDropGroup property of the cat lists to "cats". In the dog lists we can leave the
+            DragDropGroup empty or we can set it to "dogs" for instance. It just has to be different from the DragDropGroup in the cat lists.
+            <code>catList1.DragDropGroup = "cats";   catList2.DragDropGroup = "cats";</code>
+            </example>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DragDropListBox.IsDragDropCopySource">
+            <summary>
+            Indicates whether the user can copy items from this control by draging them to another control.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DragDropListBox.IsDragDropMoveSource">
+            <summary>
+            Indicates whether the user can remove items from this control by draging them to another control.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DragDropListBox.GetSelectedItems">
+            <summary>
+            Returns the selected list items in a array.
+            </summary>
+            <returns>Array with the selected items.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DragDropListBox.RemoveSelectedItems(System.Int32@)">
+            <summary>
+            Removes the selected items from the list and adjusts the item-index passed to this method,
+            so that this index points to the same item afterwards.
+            </summary>
+            <param name="itemIndexToAjust">Item-index to be adjusted.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DragDropListBox.OnDropped(Mozart.Studio.UIComponents.DroppedEventArgs)">
+            <summary>
+            Is called when a drag-and-drop operation is completed in order to raise the Dropped event.
+            </summary>
+            <param name="e">Event arguments which hold information on the completed operation.</param>
+            <remarks>Is called for the target as well as for the source.
+            The role a control plays (source or target) can be determined from e.Operation.</remarks>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DragDropListBox.AllowReorder">
+            <summary>
+            Indicates whether the user can redorder the list by dragging items.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DragDropListBox.IsDragDropTarget">
+            <summary>
+            Indicates whether the user can drop items from another control.
+            </summary>
+        </member>
+        <member name="E:Mozart.Studio.UIComponents.DragDropListBox.Dropped">
+            <summary>
+            Occurs when a extended DragDropListBox drag-and-drop operation is completed.
+            </summary>
+            <remarks>This event is raised for the target as well as for the source.
+            The role a control plays (source or target) can be determined from the Operation property of the DroppedEventArgs.</remarks>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DragDropListBox.RestoreSelection(System.Int32)">
+            <summary>
+            Restores the lost selection from the array selectionSave.
+            </summary>
+            <remarks>If the user clicks into the selection, he might want to drag the selected items,
+            but the mouse click destroys the current selection, if more than one item is selected. </remarks>
+            <param name="clickedItemIndex">The zero-based index which specifies the location of the mouse pointer where the item is clicked.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DragDropListBox.SaveSelection">
+            <summary>
+            Saves the current selection to the array selectionSave.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DragDropListBox.DropIndex(System.Int32)">
+            <summary>
+            Gets the index of the item before which items are being dropped. The index is calculated from the vertical position of the mouse.
+            If the drop position lies after the last item in the list, then the index of the last item + 1 (which is equal to Item.Count) is returned instead.
+            </summary>
+            <param name="yScreen">y-coordinate of the mouse expressed in screen coordinates.</param>
+            <returns>Index of an item in the list or Items.Count</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DragDropListBox.GetDragDropEffect(System.Windows.Forms.DragEventArgs)">
+            <summary>
+            Determines the drag-and-drop operation which is beeing performed, which can be either None, Move or Copy. 
+            </summary>
+            <param name="drgevent">DragEventArgs.</param>
+            <returns>The current drag-and-drop operation.</returns>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.DragDropListBox.VisualCue">
+            <summary>
+            Horizontal line, which indicates the current drop position.
+            </summary>
+            <remarks>In order to be able to delete the visual cue properly, we need to draw in inverted mode. Since
+            Microsoft has not included this option into the BCL, we need to fall back on the Win32 API.</remarks>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.DragDropListBox.VisualCue.NoVisualCue">
+            <summary>
+            Indicates that no visual cue has been drawn.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DragDropListBox.VisualCue.#ctor(System.Windows.Forms.ListBox)">
+            <summary>
+            Initializes a new instance of the VisualCue class.
+            </summary>
+            <param name="listBox">ListBox or control derived from ListBox which owns the visual cue.</param>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DragDropListBox.VisualCue.Index">
+            <summary>
+            Gets the index of the item before which the visual cue has been drawn or NoVisualCue if no visual cue has been drawn.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DragDropListBox.VisualCue.Clear">
+            <summary>
+            Clears the visual cue, if some visual cue is visible.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DragDropListBox.VisualCue.Draw(System.Int32)">
+            <summary>
+            Draws a visual cue before (above) the list item indicated by itemIndex. If itemIndex is greater than
+            the index of the last item of the list, then the visual cue is drawn after (below) the last list item.
+            </summary>
+            <remarks>Remembers the passed index for later use by the Clear method and for the Index property.</remarks>
+            <param name="itemIndex">Index of a list item.</param>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ListViewEx.RowHeight">
+            <summary>
+            Specify the height of each row in the control in pixels.
+            </summary>
+            <remarks><para>The row height in a listview is normally determined by the font size and the small image list size.
+            This setting allows that calculation to be overridden (within reason: you still cannot set the line height to be
+            less than the line height of the font used in the control). </para>
+            <para>Setting it to -1 means use the normal calculation method.</para>
+            <para><bold>This feature is experiemental!</bold> Strange things may happen to your program,
+            your spouse or your pet if you use it.</para>
+            </remarks>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ListViewEx.RowHeightEffective">
+            <summary>
+            How many pixels high is each row?
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ListViewEx.BaseSmallImageList">
+            <summary>
+            Give access to the image list that is actually being used by the control
+            </summary>
+            <remarks>
+            Normally, it is preferable to use SmallImageList. Only use this property
+            if you know exactly what you are doing.
+            </remarks>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ListViewEx.SmallImageList">
+            <summary>
+            Override the SmallImageList property so we can correctly shadow its operations.
+            </summary>
+            <remarks><para>If you use the RowHeight property to specify the row height, the SmallImageList
+            must be fully initialised before setting/changing the RowHeight. If you add new images to the image
+            list after setting the RowHeight, you must assign the imagelist to the control again. Something as simple
+            as this will work:
+            <code>listView1.SmallImageList = listView1.SmallImageList;</code></para>
+            </remarks>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ListViewEx.SmallImageSize">
+            <summary>
+            Return the size of the images in the small image list or a reasonable default
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ListViewEx.UseExplorerTheme">
+            <summary>
+             Gets or sets whether this ObjectListView will use the same hot item and selection 
+             mechanism that Vista Explorer does.
+             </summary>
+             <remarks>This property has many imperfections:
+             <list type="bullet">
+             <item><description>This only works on Vista and later</description></item>
+             <item><description>It does nothing for owner drawn lists.
+             Owner drawn lists are (naturally) controlled by their renderers.</description></item>
+             <item><description>It does not work well with AlternateRowBackColors.</description></item>
+             <item><description>It does not play well with HotItemStyles.</description></item>
+             <item><description>It looks a little bit silly is FullRowSelect is false.</description></item>
+             </list>
+             But if you absolutely have to look like Vista, this is your property. 
+             Do not complain if settings this messes up other things.
+             </remarks>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ListViewEx.ShowImagesOnSubItems">
+            <summary>
+            Should the list view show images on subitems?
+            </summary>
+            <remarks>
+            <para>Virtual lists have to be owner drawn in order to show images on subitems</para>
+            </remarks>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ListViewEx.UseSubItemCheckBoxes">
+            <summary>
+            Should this control be configured to show check boxes on subitems?
+            </summary>
+            <remarks>If this is set to True, the control will be given a SmallImageList if it
+            doesn't already have one. Also, if it is a virtual list, it will be set to owner
+            drawn, since virtual lists can't draw check boxes without being owner drawn.</remarks>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ListViewEx.TriStateCheckBoxes">
+            <summary>
+            Should each row have a tri-state checkbox?
+            </summary>
+            <remarks>
+            If this is true, the user can choose the third state (normally Indeterminate). Otherwise, user clicks
+            alternate between checked and unchecked. CheckStateGetter can still return Indeterminate when this
+            setting is false.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewEx.ApplyExtendedStyles">
+            <summary>
+            Apply all required extended styles to our control.
+            </summary>
+            <remarks>
+            <para>
+            Whenever .NET code sets an extended style, it erases all other extended styles
+            that it doesn't use. So, we have to explicit reapply the styles that we have
+            added.
+            </para>
+            <para>
+            Normally, we would override CreateParms property and update
+            the ExStyle member, but ListView seems to ignore all ExStyles that
+            it doesn't already know about. Worse, when we set the LVS_EX_HEADERINALLVIEWS 
+            value, bad things happen (the control crashes!).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewEx.OnHandleCreated(System.EventArgs)">
+            <summary>
+            Called when the handle of the underlying control is created
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewEx.OnControlCreated">
+            <summary>
+            This method is called after the control has been fully created.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewEx.GetItemCount">
+            <summary>
+            Return the number of items in the list
+            </summary>
+            <returns>the number of items in the list</returns>
+            <remarks>If a filter is installed, this will return the number of items that match the filter.</remarks>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewEx.AutoResizeColumns">
+            <summary>
+            Resize the columns to the maximum of the header width and the data.
+            </summary>		
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewEx.AutoSizeColumns">
+            <summary>
+            Set up any automatically initialized column widths (columns that 
+            have a width of 0 or -1 will be resized to the width of their 
+            contents or header respectively).
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewEx.SetupBaseImageList">
+            <summary>
+            Update our externally visible image list so it holds the same images as our shadow list, but sized correctly
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewEx.MakeResizedImageList(System.Int32,System.Int32,System.Windows.Forms.ImageList)">
+            <summary>
+            Return a copy of the given source image list, where each image has been resized to be height x height in size.
+            If source is null, an empty image list of the given size is returned
+            </summary>
+            <param name="width">Height and width of the new images</param>
+            <param name="height">Height and width of the new images</param>
+            <param name="source">Source of the images (can be null)</param>
+            <returns>A new image list</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewEx.MakeResizedImage(System.Int32,System.Int32,System.Drawing.Image,System.Drawing.Color)">
+            <summary>
+            Return a bitmap of the given height x height, which shows the given image, centred.
+            </summary>
+            <param name="width">Height and width of new bitmap</param>
+            <param name="height">Height and width of new bitmap</param>
+            <param name="image">Image to be centred</param>
+            <param name="transparent">The background color</param>
+            <returns>A new bitmap</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewEx.InitializeStateImageList">
+            <summary>
+            Initialize the state image list with the required checkbox images
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.ListViewEx.CHECKED_KEY">
+            <summary>
+            The name of the image used when a check box is checked
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.ListViewEx.UNCHECKED_KEY">
+            <summary>
+            The name of the image used when a check box is unchecked
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.ListViewEx.INDETERMINATE_KEY">
+            <summary>
+            The name of the image used when a check box is Indeterminate
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewEx.SetupSubItemCheckBoxes">
+            <summary>
+            Setup this control so it can display check boxes on subitems
+            (or primary checkboxes in virtual mode)
+            </summary>
+            <remarks>This gives the ListView a small image list, if it doesn't already have one.</remarks>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewEx.InitializeSubItemCheckBoxImages">
+            <summary>
+            Make sure the small image list for this control has checkbox images 
+            (used for sub-item checkboxes).
+            </summary>
+            <remarks>
+            <para>
+            This gives the ListView a small image list, if it doesn't already have one.
+            </para>
+            <para>
+            ObjectListView has to manage checkboxes on subitems separate from the checkboxes on each row.
+            The underlying ListView knows about the per-row checkboxes, and to make them work, OLV has to 
+            correctly configure the StateImageList. However, the ListView cannot do checkboxes in subitems,
+            so ObjectListView has to handle them in a differnt fashion. So, per-row checkboxes are controlled
+            by images in the StateImageList, but per-cell checkboxes are handled by images in the SmallImageList.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.ListViewItemSorter">
+            <summary> 
+            Sorts items in a ListView. 
+            The user can select the column to sort by clicking on the column header. 
+            </summary> 
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ListViewItemSorter.ListView">
+            <summary> 
+            Gets the ListView this ListViewItemSorter is associated with. 
+            </summary> 
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ListViewItemSorter.SortColumnIndex">
+            <summary> 
+            Gets or sets the index of the list view column that is currently sorted. 
+            Assigning a value to this property causes the ListView to be re-sorted. 
+            </summary> 
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ListViewItemSorter.SortOrder">
+            <summary> 
+            Gets or sets the current sort order. 
+            Assigning a value to this property causes the ListView to be re-sorted. 
+            </summary> 
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewItemSorter.#ctor(System.Windows.Forms.ListView,System.Boolean)">
+            <summary> 
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.ListViewItemSorter"/> class 
+            that can sort all columns by their text content 
+            and attaches the new instance to the specified ListView. 
+            </summary> 
+            <param name="listView">The ListView that should be sorted and monitored for column click events.</param>
+            <param name="showSortArrow">Indicates a value to visulize the sorting arrow direction.</param>
+            <remarks> 
+            Note that the ListViewItemSorter constructor adds two bitmaps to the 
+            SmallImageList of the ListView (an empty ImageList will be created 
+            first if none is assigned). 
+            </remarks> 
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewItemSorter.#ctor(System.Windows.Forms.ListView,Mozart.Studio.UIComponents.IListViewItemComparer[],System.Boolean)">
+            <summary> 
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.ListViewItemSorter"/> class 
+            that uses the specified comparers to sort columns 
+            and attaches the new instance to the specified ListView. 
+            </summary> 
+            <param name="listView">The ListView that should be sorted and monitored for column click events.</param> 
+            <param name="itemComparers">An array of objects that implement IListViewItemComparer. 
+            <param name="showSortArrow">Indicates a value to visulize the sorting arrow direction.</param>
+            The index of the comparer in the array corresponds to the index of the list view column that it sorts. 
+            If an element is <c>null</c>, the corresponding column cannot be sorted. 
+            If this parameter is <c>null</c>, all columns can be sorted by their text content.</param> 
+            <remarks> 
+            Note that the ListViewItemSorter constructor adds two bitmaps to the 
+            SmallImageList of the ListView (an empty ImageList will be created 
+            first if none is assigned). 
+            </remarks> 
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewItemSorter.Dispose">
+            <summary> 
+            Cleans up all used resources. 
+            </summary> 
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.IListViewItemComparer">
+            <summary>
+            Provides the ability to compare two ListViewItems with regard to
+            a specific column.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.IListViewItemComparer.Compare(System.Windows.Forms.ListViewItem,System.Windows.Forms.ListViewItem,System.Int32)">
+            <summary>
+            Compares two ListViewItems with regard to the specified column.
+            </summary>
+            <returns>
+            Less than zero if <paramref name="lhs"/> is less than <paramref name="rhs"/>.
+            Zero if <paramref name="lhs"/> is equal to <paramref name="rhs"/>.
+            Greater than zero if <paramref name="lhs"/> is greater than <paramref name="rhs"/>.
+            </returns>
+            <remarks>
+            The implementation must always compare the specified items in ascending order.
+            </remarks>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.AbstractListViewSubItemComparer">
+            <summary>
+            Provides the ability to compare two ListViewItems by the
+            ListViewSubItems of a specific column.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.AbstractListViewSubItemComparer.Compare(System.Windows.Forms.ListViewItem.ListViewSubItem,System.Windows.Forms.ListViewItem.ListViewSubItem)">
+            <summary>
+            Compares two ListViewSubItems.
+            </summary>
+            <returns>
+            Less than zero if <paramref name="lhs"/> is less than <paramref name="rhs"/>.
+            Zero if <paramref name="lhs"/> is equal to <paramref name="rhs"/>.
+            Greater than zero if <paramref name="lhs"/> is greater than <paramref name="rhs"/>.
+            </returns>
+            <remarks>
+            The implementation must always compare the specified subitems in ascending order.
+            </remarks>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.AbstractListViewParseableColumnComparer`1">
+            <summary>
+            Provides the ability to compare two ListViewItems by the
+            content of ListViewSubItems of a specific column.
+            The text content is converted to the type T by parsing
+            and the parsed value is compared using its IComparable implementation.
+            Values that are not parseable are considered less than other values
+            and are compared by their text value.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.AbstractListViewParseableColumnComparer`1.TryParse(System.String,`0@)">
+            <summary>
+            Tries to convert a text value to a value of type T.
+            </summary>
+            <param name="textValue">The text value to convert.</param>
+            <param name="parsedValue">Receives the converted value if successful. When <c>true</c> is returned, this parameter must not be set to <c>null</c> by the method.</param>
+            <returns><c>true</c> if the text value has been converted successfully, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.ListViewIntegerParseColumnComparer">
+            <summary>
+            Compares ListViewItems by the signed integer content of a specific column.
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.ListViewTextColumnComparer">
+            <summary>
+            Compares ListViewItems by the text of a specific column.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewTextColumnComparer.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:Mozart.Studio.UIComponents.ListViewTextColumnComparer"/> class
+            with a culture-independent and case-sensitive string comparer.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewTextColumnComparer.#ctor(System.Collections.Generic.IComparer{System.String})">
+            <summary>
+            Creates a new instance of the <see cref="T:Mozart.Studio.UIComponents.ListViewTextColumnComparer"/> class
+            with the specified string comparer.
+            </summary>
+            <param name="stringComparer">The string comparer used to compare the item texts.</param>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.ListViewMultipleColumnsComparer">
+            <summary>
+            Compares ListViewItems by comparing multiple columns,
+            using an object that implements <see cref="T:Mozart.Studio.UIComponents.IListViewItemComparer"/>
+            for every column to compare.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewMultipleColumnsComparer.#ctor(Mozart.Studio.UIComponents.IListViewItemComparer,System.Int32,Mozart.Studio.UIComponents.IListViewItemComparer,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.ListViewMultipleColumnsComparer"/> class.
+            </summary>
+            <param name="firstComparer">The <see cref="T:Mozart.Studio.UIComponents.IListViewItemComparer"/> to use to compare the first column.</param>
+            <param name="firstColumn">The 0-based index of the first column to compare.</param>
+            <param name="secondComparer">The <see cref="T:Mozart.Studio.UIComponents.IListViewItemComparer"/> to use to compare the second column.</param>
+            <param name="secondColumn">The 0-based index of the second column to compare.</param>
+            <remarks>
+            You can add more columns to compare by using the <see cref="M:Mozart.Studio.UIComponents.ListViewMultipleColumnsComparer.AddComparer(Mozart.Studio.UIComponents.IListViewItemComparer,System.Int32)"/> method.
+            </remarks>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ListViewMultipleColumnsComparer.AddComparer(Mozart.Studio.UIComponents.IListViewItemComparer,System.Int32)">
+            <summary>
+            Adds another column to compare.
+            </summary>
+            <param name="comparer">The <see cref="T:Mozart.Studio.UIComponents.IListViewItemComparer"/> to use to compare this column.</param>
+            <param name="column">The 0-based index of the column to compare.</param>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.CustomComboBox">
+            <summary>
+            <c>CustomComboBox</c> is an extension of <see cref="T:System.Windows.Forms.ComboBox"/> which provides drop-down customization.
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomComboBox.droppedDown">
+            <summary>Indicates if drop-down is currently shown.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomComboBox.isResizable">
+            <summary>Indicates if drop-down is resizable.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomComboBox.dropDownCtrl">
+            <summary>Actual drop-down control itself.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomComboBox.lastHideTime">
+            <summary>Time drop-down was last hidden.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomComboBox.popupCtrl">
+            <summary>Popup control.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomComboBox.sizeCombo">
+            <summary>Original size of combo box dropdown when first assigned.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomComboBox.sizeMode">
+            <summary>Indicates current sizing mode.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomComboBox.sizeOriginal">
+            <summary>Original size of control dimensions when first assigned.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomComboBox.timerAutoFocus">
+            <summary>Automatic focus timer helps make sure drop-down control is focused for user input upon drop-down.</summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomComboBox.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.CustomComboBox"/> class.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomComboBox.#ctor(System.Windows.Forms.Control)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.CustomComboBox"/> class.
+            </summary>
+            <param name="dropControl">The control to display in the drop-down.</param>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.CustomComboBox.SizeMode">
+            <summary>
+            Sizing mode for the CustomComboBox drop-down area.
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomComboBox.SizeMode.UseComboSize">
+            <summary>
+            Uses the width of the parent.
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomComboBox.SizeMode.UseControlSize">
+            <summary>
+            Uses the width of the supplied control for the drop-down.
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomComboBox.SizeMode.UseDropDownSize">
+            <summary>
+            Uses the width of the combo box drop-down box.
+            </summary>
+        </member>
+        <member name="E:Mozart.Studio.UIComponents.CustomComboBox.DropDown">
+            <summary>
+            Occurs when the drop-down portion of a <see cref="T:Mozart.Studio.UIComponents.CustomComboBox"/> is shown.
+            </summary>
+        </member>
+        <member name="E:Mozart.Studio.UIComponents.CustomComboBox.DropDownClosed">
+            <summary>
+            Occurs when the drop-down portion of the <see cref="T:Mozart.Studio.UIComponents.CustomComboBox"/> is no longer visible.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.AllowResizeDropDown">
+            <summary>
+            Indicates if drop-down is resizable.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.ControlSize">
+            <summary>
+            Gets or sets the size of the drop-down control itself.
+            </summary>
+            <value>The size of the drop-down control.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.DisplayMember">
+            <summary>
+            Gets or sets the property to display for this <see cref="T:System.Windows.Forms.ListControl"/>.
+            </summary>
+            <value></value>
+            <returns>
+            A <see cref="T:System.String"/> specifying the name of an object property that is contained in the collection specified by the <see cref="P:System.Windows.Forms.ListControl.DataSource"/> property. The default is an empty string ("").
+            </returns>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.DropDownControl">
+            <summary>
+            Gets or sets drop-down control itself.
+            </summary>
+            <value>The drop down control.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.DropDownHeight">
+            <summary>
+            Gets or sets the height in pixels of the drop-down portion of the <see cref="T:System.Windows.Forms.ComboBox"/>.
+            </summary>
+            <value></value>
+            <returns>
+            The height, in pixels, of the drop-down box.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            The specified value is less than one.
+            </exception>
+            <PermissionSet>
+            	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+            	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            </PermissionSet>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.DropDownSizeMode">
+            <summary>
+            Gets or sets the sizing mode for the drop-down.
+            </summary>
+            <value>The drop down size mode.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.DropDownStyle">
+            <summary>
+            Gets or sets a value specifying the style of the combo box.
+            </summary>
+            <value></value>
+            <returns>
+            One of the <see cref="T:System.Windows.Forms.ComboBoxStyle"/> values. The default is DropDown.
+            </returns>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException">
+            The assigned value is not one of the <see cref="T:System.Windows.Forms.ComboBoxStyle"/> values.
+            </exception>
+            <PermissionSet>
+            	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+            	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            </PermissionSet>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.DropDownWidth">
+            <summary>
+            Gets or sets the width of the of the drop-down portion of a combo box.
+            </summary>
+            <value></value>
+            <returns>
+            The width, in pixels, of the drop-down box.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            The specified value is less than one.
+            </exception>
+            <PermissionSet>
+            	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+            	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            </PermissionSet>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.DropSize">
+            <summary>
+            Gets or sets the size of the drop-down area.
+            </summary>
+            <value>The size of the drop-down area.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.IntegralHeight">
+            <summary>
+            Gets or sets a value indicating whether the control should resize to avoid showing partial items.
+            </summary>
+            <value></value>
+            <returns>true if the list portion can contain only complete items; otherwise, false. The default is true.
+            </returns>
+            <PermissionSet>
+            	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+            	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            </PermissionSet>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.IsDroppedDown">
+            <summary>
+            Indicates if drop-down is currently shown.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is dropped down; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.ItemHeight">
+            <summary>
+            Gets or sets the height of an item in the combo box.
+            </summary>
+            <value></value>
+            <returns>
+            The height, in pixels, of an item in the combo box.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            The item height value is less than zero.
+            </exception>
+            <PermissionSet>
+            	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+            	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            </PermissionSet>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.Items">
+            <summary>
+            Gets an object representing the collection of the items contained in this <see cref="T:System.Windows.Forms.ComboBox"/>.
+            </summary>
+            <value></value>
+            <returns>
+            A <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection"/> representing the items in the <see cref="T:System.Windows.Forms.ComboBox"/>.
+            </returns>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.MaxDropDownItems">
+            <summary>
+            Gets or sets the maximum number of items to be shown in the drop-down portion of the <see cref="T:System.Windows.Forms.ComboBox"/>.
+            </summary>
+            <value></value>
+            <returns>
+            The maximum number of items of in the drop-down portion. The minimum for this property is 1 and the maximum is 100.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            The maximum number is set less than one or greater than 100.
+            </exception>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.PreventPopupHide">
+            <summary>
+            Gets or sets a value indicating whether to prevent hiding the popup window.
+            </summary>
+            <value><c>true</c> if hiding is prevented; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.SelectedIndex">
+            <summary>
+            Gets or sets the index specifying the currently selected item.
+            </summary>
+            <value></value>
+            <returns>
+            A zero-based index of the currently selected item. A value of negative one (-1) is returned if no item is selected.
+            </returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            The specified index is less than or equal to -2.
+            -or-
+            The specified index is greater than or equal to the number of items in the combo box.
+            </exception>
+            <PermissionSet>
+            	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+            	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            </PermissionSet>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.SelectedItem">
+            <summary>
+            Gets or sets currently selected item in the <see cref="T:System.Windows.Forms.ComboBox"/>.
+            </summary>
+            <value></value>
+            <returns>
+            The object that is the currently selected item or null if there is no currently selected item.
+            </returns>
+            <PermissionSet>
+            	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+            	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            </PermissionSet>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.SelectedText">
+            <summary>
+            Gets or sets the text that is selected in the editable portion of a <see cref="T:System.Windows.Forms.ComboBox"/>.
+            </summary>
+            <value></value>
+            <returns>
+            A string that represents the currently selected text in the combo box. If <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle"/> is set to <see cref="F:System.Windows.Forms.ComboBoxStyle.DropDownList"/>, the return value is an empty string ("").
+            </returns>
+            <PermissionSet>
+            	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+            	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            </PermissionSet>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.SelectedValue">
+            <summary>
+            Gets or sets the value of the member property specified by the <see cref="P:System.Windows.Forms.ListControl.ValueMember"/> property.
+            </summary>
+            <value></value>
+            <returns>
+            An object containing the value of the member of the data source specified by the <see cref="P:System.Windows.Forms.ListControl.ValueMember"/> property.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">
+            The assigned value is null or the empty string ("").
+            </exception>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.SelectionLength">
+            <summary>
+            Gets or sets the number of characters selected in the editable portion of the combo box.
+            </summary>
+            <value></value>
+            <returns>
+            The number of characters selected in the combo box.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            The value was less than zero.
+            </exception>
+            <PermissionSet>
+            	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+            	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            </PermissionSet>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.SelectionStart">
+            <summary>
+            Gets or sets the starting index of text selected in the combo box.
+            </summary>
+            <value></value>
+            <returns>
+            The zero-based index of the first character in the string of the current text selection.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            The value is less than zero.
+            </exception>
+            <PermissionSet>
+            	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+            	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            </PermissionSet>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.Sorted">
+            <summary>
+            Gets or sets a value indicating whether the items in the combo box are sorted.
+            </summary>
+            <value></value>
+            <returns>true if the combo box is sorted; otherwise, false. The default is false.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            An attempt was made to sort a <see cref="T:System.Windows.Forms.ComboBox"/> that is attached to a data source.
+            </exception>
+            <PermissionSet>
+            	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+            	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            </PermissionSet>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.Text">
+            <summary>
+            Gets or sets the text associated with this control.
+            </summary>
+            <value></value>
+            <returns>
+            The text associated with this control.
+            </returns>
+            <PermissionSet>
+            	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+            	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            </PermissionSet>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomComboBox.ValueMember">
+            <summary>
+            Gets or sets the property to use as the actual value for the items in the <see cref="T:System.Windows.Forms.ListControl"/>.
+            </summary>
+            <value></value>
+            <returns>
+            A <see cref="T:System.String"/> representing the name of an object property that is contained in the collection specified by the <see cref="P:System.Windows.Forms.ListControl.DataSource"/> property. The default is an empty string ("").
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            The specified property cannot be found on the object specified by the <see cref="P:System.Windows.Forms.ListControl.DataSource"/> property.
+            </exception>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomComboBox.HideDropDown">
+            <summary>
+            Hides drop-down area of combo box, if shown.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomComboBox.PreProcessMessage(System.Windows.Forms.Message@)">
+            <summary>
+            Preprocesses keyboard or input messages within the message loop before they are dispatched. 
+            </summary>
+            <param name="m">A <see cref="T:System.Windows.Forms.Message"/>, passed by reference, that represents the message to process. The possible values are WM_KEYDOWN, WM_SYSKEYDOWN, WM_CHAR, and WM_SYSCHAR.</param>
+            <returns><c>true</c> if the message was processed by the control; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomComboBox.ShowDropDown">
+            <summary>
+            Displays drop-down area of combo box, if not already shown.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomComboBox.AssignControl(System.Windows.Forms.Control)">
+            <summary>
+            Assigns control to custom drop-down area of combo box.
+            </summary>
+            <param name="control">Control to be used as drop-down. Please note that this control must not be contained elsewhere.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomComboBox.AutoSizeDropDown">
+            <summary>
+            Automatically resize drop-down from properties.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomComboBox.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ComboBox"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomComboBox.OnDropDown(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Mozart.Studio.UIComponents.CustomComboBox.DropDown"/> event.
+            </summary>
+            <param name="args">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomComboBox.OnDropDownClosed(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Mozart.Studio.UIComponents.CustomComboBox.DropDownClosed"/> event.
+            </summary>
+            <param name="args">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomComboBox.WndProc(System.Windows.Forms.Message@)">
+            <summary>
+            Processes Windows messages.
+            </summary>
+            <param name="m">The Windows <see cref="T:System.Windows.Forms.Message"/> to process.</param>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.CustomPopup">
+            <summary>
+            <c>CustomComboBox</c> is an extension of <see cref="T:System.Windows.Forms.ComboBox"/> which provides drop-down customization.
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomPopup.droppedDown">
+            <summary>Indicates if drop-down is currently shown.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomPopup.isResizable">
+            <summary>Indicates if drop-down is resizable.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomPopup.dropDownCtrl">
+            <summary>Actual drop-down control itself.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomPopup.popupCtrl">
+            <summary>Popup control.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomPopup.sizeCombo">
+            <summary>Original size of combo box dropdown when first assigned.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.CustomPopup.timerAutoFocus">
+            <summary>Automatic focus timer helps make sure drop-down control is focused for user input upon drop-down.</summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomPopup.#ctor(System.Windows.Forms.Control,System.Windows.Forms.Control)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.CustomPopup"/> class.
+            </summary>
+            <param name="dropControl">The control to display in the drop-down.</param>
+            <param name="hostControl">The host control of the pop-up.</param>
+        </member>
+        <member name="E:Mozart.Studio.UIComponents.CustomPopup.DropDown">
+            <summary>
+            Occurs when the drop-down portion of a <see cref="T:Mozart.Studio.UIComponents.CustomPopup"/> is shown.
+            </summary>
+        </member>
+        <member name="E:Mozart.Studio.UIComponents.CustomPopup.DropDownClosed">
+            <summary>
+            Occurs when the drop-down portion of the <see cref="T:Mozart.Studio.UIComponents.CustomPopup"/> is no longer visible.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomPopup.AllowResizeDropDown">
+            <summary>
+            Indicates if drop-down is resizable.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomPopup.DropDownControl">
+            <summary>
+            Gets or sets drop-down control itself.
+            </summary>
+            <value>The drop down control.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomPopup.DropSize">
+            <summary>
+            Gets or sets the size of the drop-down area.
+            </summary>
+            <value>The size of the drop-down area.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.CustomPopup.IsDroppedDown">
+            <summary>
+            Indicates if drop-down is currently shown.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is dropped down; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomPopup.AssignControl(System.Windows.Forms.Control)">
+            <summary>
+            Assigns control to custom drop-down area of combo box.
+            </summary>
+            <param name="control">Control to be used as drop-down. Please note that this control must not be contained elsewhere.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomPopup.AutoSizeDropDown">
+            <summary>
+            Automatically resize drop-down from properties.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomPopup.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ComboBox"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomPopup.OnDropDown(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Mozart.Studio.UIComponents.CustomPopup.DropDown"/> event.
+            </summary>
+            <param name="args">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomPopup.OnDropDownClosed(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Mozart.Studio.UIComponents.CustomPopup.DropDownClosed"/> event.
+            </summary>
+            <param name="args">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.CustomPopup.ShowDropDown">
+            <summary>
+            Displays drop-down area of combo box, if not already shown.
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.DropDownCheckList">
+            <summary>
+            A check list in a drop down combo box.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckList.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.DropDownCheckList"/> class.
+            </summary>
+        </member>
+        <member name="E:Mozart.Studio.UIComponents.DropDownCheckList.SelectedItemsChanged">
+            <summary>
+            Occurs when the <see cref="P:Mozart.Studio.UIComponents.DropDownCheckList.SelectedItems"/> property changes.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DropDownCheckList.AllowOnlyOneCheckedItem">
+            <summary>
+            Gets or sets a value indicating whether to allow only one checked item.
+            </summary>
+            <value>
+            	<c>true</c> if allowing only one checked item; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DropDownCheckList.CheckAllText">
+            <summary>
+            Gets or sets the text used on the Check All Items item that, when clicked, will check all the other items.
+            </summary>
+            <value>The text.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DropDownCheckList.CheckedFlagValue">
+            <summary>
+            Gets or sets the logical AND value of all checked items.
+            </summary>
+            <value>The checked flags bitwise value.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DropDownCheckList.FormattingEnabled">
+            <summary>
+            Gets or sets a value indicating whether formatting is applied to the <see cref="P:System.Windows.Forms.ListControl.DisplayMember"/> property of the <see cref="T:System.Windows.Forms.ListControl"/>.
+            </summary>
+            <value></value>
+            <returns>true if formatting of the <see cref="P:System.Windows.Forms.ListControl.DisplayMember"/> property is enabled; otherwise, false. The default is false.
+            </returns>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DropDownCheckList.Items">
+            <summary>
+            Gets the list of all check list items.
+            </summary>
+            <value>The items.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DropDownCheckList.MultiColumnList">
+            <summary>
+            Gets or sets a value indicating whether to display the list with multiple columns.
+            </summary>
+            <value><c>true</c> if multi-column; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DropDownCheckList.SelectedItems">
+            <summary>
+            Gets the selected items.
+            </summary>
+            <value>The selected items.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DropDownCheckList.Sorted">
+            <summary>
+            Gets or sets a value indicating whether the items in the combo box are sorted.
+            </summary>
+            <returns>true if the combo box is sorted; otherwise, false. The default is false.</returns>
+            <exception cref="T:System.ArgumentException">
+            An attempt was made to sort a <see cref="T:System.Windows.Forms.ComboBox"/> that is attached to a data source.
+            </exception>
+            <PermissionSet>
+              <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+              <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+              <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+              <IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+              </PermissionSet>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckList.GetItemChecked(System.Int32)">
+            <summary>
+            Gets the check state of the specified item.
+            </summary>
+            <param name="index">The index of the item.</param>
+            <returns><c>true</c> if item is checked; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckList.InitializeFromEnum(System.Type,System.Resources.ResourceManager,System.String)">
+            <summary>
+            Initializes the check list from an enumerated type.
+            </summary>
+            <param name="enumType">The enumerated type.</param>
+            <param name="mgr">The <see cref="T:System.Resources.ResourceManager"/> that holds the display text for each enumerated value.</param>
+            <param name="prefix">The prefix used in front of the enumeration value to pull from the resource file.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckList.RemoveItem(System.Int32)">
+            <summary>
+            Removes the specifed item from the check list.
+            </summary>
+            <param name="index">The index of the item to remove.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckList.SetItemChecked(System.Int32,System.Boolean)">
+            <summary>
+            Sets the specified item's check state.
+            </summary>
+            <param name="index">The index of the item.</param>
+            <param name="value">Checked if set to <c>true</c>; otherwise unchecked.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckList.UpdateText">
+            <summary>
+            Updates the text associated with each item of the check list.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckList.OnDropDownClosed(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.ComboBox.DropDownClosed"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckList.OnSelectedItemsChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Mozart.Studio.UIComponents.DropDownCheckList.SelectedItemsChanged"/> event.
+            </summary>
+            <param name="eventArgs">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.DropDownCheckListItem">
+            <summary>
+            An item in a <see cref="T:Mozart.Studio.UIComponents.DropDownCheckList"/>.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckListItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.DropDownCheckListItem"/> class.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckListItem.#ctor(System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.DropDownCheckListItem"/> class.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckListItem.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.DropDownCheckListItem"/> class.
+            </summary>
+            <param name="text">The text.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckListItem.#ctor(System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.DropDownCheckListItem"/> class.
+            </summary>
+            <param name="text">The text.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DropDownCheckListItem.Text">
+            <summary>
+            Gets or sets the text.
+            </summary>
+            <value>The text.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DropDownCheckListItem.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckListItem.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object"/> to compare with this instance.</param>
+            <returns>
+            	<c>true</c> if the specified <see cref="T:System.Object"/> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+            <exception cref="T:System.NullReferenceException">
+            The <paramref name="obj"/> parameter is null.
+            </exception>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckListItem.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownCheckListItem.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents this instance.
+            </returns>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.ExpandablePanel">
+            <summary>
+            The Expand control displays a header that has a collapsible window that displays content.
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.ExpandablePanel._previousParentSize">
+            <summary>
+            Last stored size of panel's parent control
+            <remarks>used for handling panel's Anchor property sets to Bottom when panel collapsed
+            in OnSizeChanged method</remarks>
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.ExpandablePanel._useAnimation">
+            <summary>
+            Enable pretty simple animation of panel on expanding or collapsing
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.ExpandablePanel._expandedHeight">
+            <summary>
+            Height of panel in expanded state
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ExpandablePanel.CollapsedHeight">
+            <summary>
+            Height of panel in collapsed state
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.ExpandablePanel._expanded">
+            <summary>
+             Image displays expanded state of button
+             </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.ExpandablePanel._collapsed">
+            <summary>
+            Image displays collapsed state of button
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.ExpandablePanel._isExpanded">
+            <summary>
+            Set flag for expand or collapse button
+            (true - expanded, false - collapsed)
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ExpandablePanel.ExpandedHeight">
+            <summary>
+            Height of panel in expanded state
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ExpandablePanel.IsExpanded">
+            <summary>
+            Set flag for expand or collapse panel content
+            (true - expanded, false - collapsed)
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ExpandablePanel.Text">
+            <summary>
+            Header of panel
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ExpandablePanel.UseAnimation">
+            <summary>
+            Enable pretty simple animation of panel on expanding or collapsing
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.ExpandablePanel.ExpandButtonStyle">
+            <summary>
+            Visual styles of the expand-collapse button.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ExpandablePanel.ButtonStyle">
+            <summary>
+            Visual style of the expand-collapse button.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ExpandablePanel.InitButtonRect">
+            <summary>
+            Resize and arrange child controls according to ButtonSize preset
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.ExpandablePanel.AutoScroll">
+            <summary>
+            AutoScroll property
+            <remarks>Overridden only to hide from designer as mindless and useless</remarks>
+            </summary>
+        </member>
+        <member name="E:Mozart.Studio.UIComponents.ExpandablePanel.ExpandCollapse">
+            <summary>
+            Occurs when the panel has expanded or collapsed
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ExpandablePanel.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ExpandablePanel.MakeGrayscale3(System.Drawing.Image)">
+            <summary>
+            Utillity method for createing a grayscale copy of image
+            </summary>
+            <param name="original">original image</param>
+            <returns>grayscale copy of image</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ExpandablePanel.ExpandOrCollapse(System.Boolean)">
+            <summary>
+            Handle state changing
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ExpandablePanel.OnExpandCollapseChanged(System.Boolean)">
+            <summary>
+            Handle button expand-collapse state changed event
+            </summary>
+            <param name="isExpanded">Indicates a value whether to expand the panel.<em>true</em> to expand panel; otherwise <em>false</em>.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ExpandablePanel.Expand">
+            <summary>
+            Expand panel content
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ExpandablePanel.Collapse">
+            <summary>
+            Collapse panel content
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ExpandablePanel.OnSizeChanged(System.EventArgs)">
+            <summary>
+            Handle panel resize event
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ExpandablePanel.StartAnimation">
+            <summary>
+            Initialize animation values and start the timer
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ExpandablePanel.SetControlsOpacity(System.Int32)">
+            <summary>
+            Changes the transparency of controls based upon the height of the XPPanel
+            </summary>
+            <remarks>
+            Only used during animation
+            </remarks>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.ExpandablePanel._internalPanelState">
+            <summary>
+            Internal state of panel used for checking that panel is animating now
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.ExpandablePanel.InternalPanelState">
+            <summary>
+            Internal state of panel
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.ExpandablePanel.InternalPanelState.Normal">
+            <summary>
+            No animation, completely expanded or collapsed
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.ExpandablePanel.InternalPanelState.Expanding">
+            <summary>
+            Expanding animation
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.ExpandablePanel.InternalPanelState.Collapsing">
+            <summary>
+            Collapsing animation
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.ExpandablePanel.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ExpandablePanel.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.ExpandablePanel.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.ExpandablePanelActionList">
+            <summary>
+            DesignerActionList-derived class defines smart tag entries and resultant actions. 
+            <remarks>http://msdn.microsoft.com/en-us/library/ms171829.aspx</remarks>
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.ExpandablePanelDesigner">
+            <summary>
+            Designer for the ExpandCollapsePanel control with support for a smart tag panel.
+            <remarks>http://msdn.microsoft.com/en-us/library/ms171829.aspx</remarks>
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.ExpandCollapseEventArgs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.FolderBrowserDialog2">
+            <summary>
+            Class to let the user browse for a folder.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.FolderBrowserDialog2.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.FolderBrowserDialog2"/> class.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FolderBrowserDialog2.ComputerBrowser">
+            <summary>
+            Gets a <see cref="T:Mozart.Studio.UIComponents.FolderBrowserDialog2"/> that browses network computers.
+            </summary>
+            <returns>A <see cref="T:Mozart.Studio.UIComponents.FolderBrowserDialog2"/> that browses network computers.</returns>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FolderBrowserDialog2.PrinterBrowser">
+            <summary>
+            Gets a <see cref="T:Mozart.Studio.UIComponents.FolderBrowserDialog2"/> that browses printers.
+            </summary>
+            <returns>A <see cref="T:Mozart.Studio.UIComponents.FolderBrowserDialog2"/> that browses printers.</returns>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.FolderBrowserDialog2.BrowseForFolderMessages">
+            <summary>
+            Enumeration with dialog messages used by the Browse For Folder dialog box.
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.FolderBrowserDialog2.BrowseInfoFlag">
+            <summary>
+            Flags enumeration to specify the dialog style.
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.FolderBrowserDialog2.CoInit">
+            <summary>
+            Enumeration used when initializing the COM library
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.FolderBrowserDialog2.BrowseCallBackProc">
+            <summary>
+            Signature for the BrowseCallBackProc callback.
+            </summary>
+            <param name="hwnd">Window handle of the browse dialog box.</param>
+            <param name="uMsg">Dialog box event that generated the statusMessage.</param>
+            <param name="lParam">Value whose meaning depends on the event specified in uMsg.</param>
+            <param name="lpData">Application-defined value that was specified in the lParam member of the BROWSEINFO structure used in the call to SHBrowseForFolder.</param>
+            <returns>Returns 0 except in the case of BFFM_VALIDATEFAILED. For that flag, returns 0 to dismiss the dialog or nonzero to keep the dialog displayed.</returns>
+        </member>
+        <member name="E:Mozart.Studio.UIComponents.FolderBrowserDialog2.Initialized">
+            <summary>
+            Occurs when dialog box has been initialized and primary values have been set.
+            </summary>
+        </member>
+        <member name="E:Mozart.Studio.UIComponents.FolderBrowserDialog2.InvalidFolderSelected">
+            <summary>
+            Event that is raised when the user selects an invalid folder.
+            </summary>
+        </member>
+        <member name="E:Mozart.Studio.UIComponents.FolderBrowserDialog2.SelectedPathChanged">
+            <summary>
+            Occurs when <see cref="P:Mozart.Studio.UIComponents.FolderBrowserDialog2.SelectedPath"/> property has changed.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FolderBrowserDialog2.BrowserFlag">
+            <summary>
+            Gets or sets an additional settings flag.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FolderBrowserDialog2.Caption">
+            <summary>
+            Gets or sets the caption of the dialog box.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FolderBrowserDialog2.Description">
+            <summary>
+            Gets or sets the description shown to the user.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FolderBrowserDialog2.OkText">
+            <summary>
+            Gets or sets the text on the OK button.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FolderBrowserDialog2.RootFolder">
+            <summary>
+            Gets or sets the root folder.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FolderBrowserDialog2.SelectedPath">
+            <summary>
+            Gets or sets the path selected by the user. The initially selected path if set before 
+            the dialog box is shown.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FolderBrowserDialog2.ShowFiles">
+            <summary>
+            Gets or sets whether or not to show files as well.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FolderBrowserDialog2.ShowFolderPathEditBox">
+            <summary>
+            Gets or sets whether or not to show an edit box for the folder path.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FolderBrowserDialog2.ShowNewFolderButton">
+            <summary>
+            Gets or sets whether or not to show the new folder button.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.FolderBrowserDialog2.Reset">
+            <summary>
+            When overridden in a derived class, resets the properties of a common dialog box to their default values.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.FolderBrowserDialog2.RunDialog(System.IntPtr)">
+            <summary>
+            Shows the dialog box to let the user browse for and select a folder.
+            </summary>
+            <param name="parentWindowHandle">The HWND of the parent window.</param>
+            <returns>The selected folder or <c>null</c> if no folder was selected by the user.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.FolderBrowserDialog2.OnBrowseEvent(System.IntPtr,System.UInt32,System.IntPtr,System.IntPtr)">
+            <summary>
+            Callback for Windows.
+            </summary>
+            <param name="hwnd">Window handle of the browse dialog box.</param>
+            <param name="uMsg">Dialog box event that generated the statusMessage.</param>
+            <param name="lParam">Value whose meaning depends on the event specified in uMsg.</param>
+            <param name="lpData">Application-defined value that was specified in the lParam member of the BROWSEINFO structure used in the call to SHBrowseForFolder.</param>
+            <returns>Returns 0 except in the case of BFFM_VALIDATEFAILED. For that flag, returns 0 to dismiss the dialog or nonzero to keep the dialog displayed.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.FolderBrowserDialog2.EnableOk(System.IntPtr,System.Boolean)">
+            <summary>
+            Enables or disables the OK button in the dialog box.
+            </summary>
+            <param name="hwnd">The hwnd of the dialog box.</param>
+            <param name="isEnabled">Whether or not the OK button should be enabled.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.FolderBrowserDialog2.SetStatusText(System.IntPtr,System.String)">
+            <summary>
+            Sets the status text of the dialog box.
+            </summary>
+            <param name="hwnd">The hwnd of the dialog box.</param>
+            <param name="statusText">The status text to set.</param>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.FolderBrowserDialog2.BROWSEINFO">
+            <summary>
+            Structure used for the WIN32 API SHBrowseForFolder.
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.FolderBrowserDialog2.UnsafeNativeMethods">
+            <summary>
+            Static class with P/Invoke signatures.
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.InvalidFolderEventArgs">
+            <summary>
+            Event arguments for when an invalid fodler is selected.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.InvalidFolderEventArgs.#ctor(System.String,System.Boolean)">
+            <summary>
+            Constructs an instance.
+            </summary>
+            <param name="folderName">The name of the invalid folder.</param>
+            <param name="dismissDialog">Whether or not to dismiss the dialog.</param>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.InvalidFolderEventArgs.DismissDialog">
+            <summary>
+            Gets or sets whether or not to dismiss the dialog box.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.InvalidFolderEventArgs.FolderName">
+            <summary>
+            Gets the name of the invalid folder.
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.FolderBrowserDialogInitializedEventArgs">
+            <summary>
+            Event arguments for when the <see cref="T:Mozart.Studio.UIComponents.FolderBrowserDialog2"/> has been initialized.
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.FolderBrowserDialogInitializedEventArgs.hwnd">
+            <summary>
+            The HWND of the dialog box.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.FolderBrowserDialogInitializedEventArgs.#ctor(System.IntPtr)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.FolderBrowserDialogInitializedEventArgs"/> class.
+            </summary>
+            <param name="hwnd">The HWND of the dialog box.</param>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.FullDateTimePickerTimeFormat">
+            <summary>
+            Determines the format of the <see cref="T:Mozart.Studio.UIComponents.FullDateTimePicker"/> control.
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.FullDateTimePickerTimeFormat.LongTime">
+            <summary>Shows hours, minutes and seconds</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.FullDateTimePickerTimeFormat.ShortTime">
+            <summary>Shows hours and minutes</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.FullDateTimePickerTimeFormat.Hidden">
+            <summary>No time box shown</summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.FullDateTimePicker">
+            <summary>
+            A single control that can represent a full date and time.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.FullDateTimePicker.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mozart.Studio.UIComponents.FullDateTimePicker"/> class.
+            </summary>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.FullDateTimePicker.FieldConversionUtcCheckBehavior">
+            <summary>
+            Behavior of producing value when Utc check is checked
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.FullDateTimePicker.FieldConversionUtcCheckBehavior.ConvertLocalToUtc">
+            <summary>Takes time in fields as local and produces value in Utc.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeUtc">
+            <summary>Takes time in fields as Utc and produces value in local.</summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeLocal">
+            <summary>Takes time in fields as local and leaves them local.</summary>
+        </member>
+        <member name="E:Mozart.Studio.UIComponents.FullDateTimePicker.ValueChanged">
+            <summary>
+            Occurs when the <see cref="P:Mozart.Studio.UIComponents.FullDateTimePicker.Value"/> property changes.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FullDateTimePicker.AutoSize">
+            <summary>
+            Gets or sets a value indicating whether [auto size].
+            </summary>
+            <value><c>true</c> if [auto size]; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FullDateTimePicker.AutoSizeMode">
+            <summary>
+            Gets or sets how the control will resize itself.
+            </summary>
+            <value></value>
+            <returns>
+            A value from the <see cref="T:System.Windows.Forms.AutoSizeMode"/> enumeration. The default is <see cref="F:System.Windows.Forms.AutoSizeMode.GrowOnly"/>.
+            </returns>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FullDateTimePicker.Text">
+            <summary>
+            Gets or sets the text associated with this control.
+            </summary>
+            <value></value>
+            <returns>A string that represents the text associated with this control.</returns>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FullDateTimePicker.TimeFormat">
+            <summary>
+            Gets or sets the format of the time portion of the control.
+            </summary>
+            <value>The time format.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FullDateTimePicker.UtcCheckBehavior">
+            <summary>
+            Gets or sets how fields are processed when the Utc Checkbox is checked.
+            </summary>
+            <value>The UTC check behavior.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FullDateTimePicker.UTCPrompt">
+            <summary>
+            Gets or sets the text prompt for the UTC CheckBox. Leave blank to remove the CheckBox.
+            </summary>
+            <value>The text prompt for the UTC CheckBox.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FullDateTimePicker.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.FullDateTimePicker.ValueIsUTC">
+            <summary>
+            Gets a value indicating whether value is UTC.
+            </summary>
+            <value><c>true</c> if value is UTC; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.FullDateTimePicker.OnValueChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Mozart.Studio.UIComponents.FullDateTimePicker.ValueChanged"/> event.
+            </summary>
+            <param name="eventArgs">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.FullDateTimePicker.SelectDate">
+            <summary>
+            Selects the date control.
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.UIComponents.FullDateTimePicker.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.FullDateTimePicker.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.FullDateTimePicker.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetInteger(System.String)">
+            <summary>
+            Overloaded. Converts the string parameter value to integer.
+            </summary>
+            <param name="val">String representation of the integer.</param>
+            <returns>Integer number.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetInteger(System.String,System.String@)">
+            <summary>
+            Converts the string parameter value to integer.
+            </summary>
+            <param name="val">String representation of the integer.</param>
+            <param name="suffix">String which indicates the type of measurement.</param>
+            <returns>Integer value from the string parameter value.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetFloat(System.String)">
+            <summary>
+            Overloaded. Converts the string parameter value to float.
+            </summary>
+            <param name="val">String representation of the float number.</param>
+            <returns>Float value from the string parameter value.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetFloat(System.String,System.String@)">
+            <summary>
+            Converts the string parameter value to float.
+            </summary>
+            <param name="val">String value of float.</param>
+            <param name="suffix">Type of number measurement.</param>
+            <returns>Float value from the string parameter value.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetBool(System.String)">
+            <summary>
+            Returns boolean value from the string value.
+            </summary>
+            <param name="val">String representation of the bool.</param>
+            <returns>Boolean value.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetPoint(System.String)">
+            <summary>
+            Overloaded. Converts the string value to point.
+            </summary>
+            <param name="val">String representation of the point.</param>
+            <returns>Point value.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetPoint(System.String,System.String@)">
+            <summary>
+            Converts the string value to point.
+            </summary>
+            <param name="val">String representation of point.</param>
+            <param name="suffix">Type of number measurement.</param>
+            <returns>Point value.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetTriangle(System.String)">
+            <summary>
+            Overloaded. Converts the string value to triangle.
+            </summary>
+            <param name="val">String representation of the three numbers.</param>
+            <returns>Rectangle with three values.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetTriangle(System.String,System.String@)">
+            <summary>
+            Converts the string value to triangle.
+            </summary>
+            <param name="val">String representation of three numbers.</param>
+            <param name="suffix">Type of measurement.</param>
+            <returns>Three numbers.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetRectangle(System.String)">
+            <summary>
+            Overloaded. Converts the string value to rectangle.
+            </summary>
+            <param name="val">String representation of the rectangle.</param>
+            <returns>Rectangle object.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetRectangle(System.String,System.String@)">
+            <summary>
+            Converts the string value to rectangle.
+            </summary>
+            <param name="val">String representation of four numbers.</param>
+            <param name="suffix">Type of measurement.</param>
+            <returns>Four numbers from the string.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetColor(System.String)">
+            <summary>
+            Converts the string to color structure.
+            </summary>
+            <param name="val">String representation of the color.</param>
+            <returns>Color object.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetFontFamily(System.String)">
+            <summary>
+            Returns the font family for the format.
+            </summary>
+            <param name="val">String representation of the font family.</param>
+            <returns>String family name.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetFontStyle(System.String)">
+            <summary>
+            Returns the font style for the format.
+            </summary>
+            <param name="val">String representation of the font style.</param>
+            <returns>FontStyle object.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetTextDecoration(System.String)">
+            <summary>
+            Returns the TextDecoration for the format.
+            </summary>
+            <param name="val">String representation of the text decoration.</param>
+            <returns>FontStyle object.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.GetFontWeight(System.String)">
+            <summary>
+            Returns the font weight for the format.
+            </summary>
+            <param name="val">String representation of the font weight.</param>
+            <returns>Font style object.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.DeleteWhiteSpace(System.String)">
+            <summary>
+            Trims big whitespaces to single, skip tabs, new lines, etc.
+            </summary>
+            <param name="val">String value.</param>
+            <returns>String after deleting whitespaces.</returns>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.Markup.AttributeParser.IsWhitespace(System.String)">
+            <summary>
+            Indicates whether the value has whitespace data only.
+            </summary>
+            <param name="val">String value.</param>
+            <returns>True if value has whitespace data only; False otherwise.</returns>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DropDownListView.Items">
+            <summary>
+            Gets the list of all check list items.
+            </summary>
+            <value>The items.</value>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownListView.OnDropDownClosed(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.ComboBox.DropDownClosed"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.DropDownTreeView.Items">
+            <summary>
+            Gets the list of all check list items.
+            </summary>
+            <value>The items.</value>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.DropDownTreeView.OnDropDownClosed(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.ComboBox.DropDownClosed"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.IPopupControlHost.HideDropDown">
+            <summary>
+            Hides drop-down area of combo box, if shown.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.IPopupControlHost.ShowDropDown">
+            <summary>
+            Displays drop-down area of combo box, if not already shown.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.PopupControl.PopupControlHost">
+            <summary>
+            Gets or sets the popup control host, this is used to hide/show popup.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.PopupDropDown.ResizeMode">
+            <summary>
+            Type of resize mode, grips are automatically drawn at bottom-left and bottom-right corners.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.PopupDropDown.GripBounds">
+            <summary>
+            Bounds of active grip box position.
+            </summary>
+        </member>
+        <member name="P:Mozart.Studio.UIComponents.PopupDropDown.IsGripShown">
+            <summary>
+            Indicates when a grip box is shown.
+            </summary>
+        </member>
+        <member name="M:Mozart.Studio.UIComponents.PopupDropDown.ProcessGrip(System.Windows.Forms.Message@)">
+            <summary>
+            Processes the resizing messages.
+            </summary>
+            <param name="m">The message.</param>
+            <returns>true, if the WndProc method from the base class shouldn't be invoked.</returns>
+        </member>
+        <member name="T:Mozart.Studio.UIComponents.VsWebBrowser">
+            <summary>
+            Microsoft didn't include the URL being surfed to in the NewWindow event args,
+            but here is the workaround:
+            </summary>
+        </member>
+        <member name="F:Mozart.Studio.Interop.BUTTON_IMAGELIST_ALIGN_LEFT">
+            <summary>
+            Buttons
+            </summary>
+        </member>
+    </members>
+</doc>

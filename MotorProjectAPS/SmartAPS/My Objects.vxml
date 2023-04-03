@@ -1,0 +1,1595 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<vxml:Document xmlns:vxml="http://www.vms-solutions.com/mozart/vxml/2012/1" xmlns:def="definitions" xmlns:ref="references" ContentType="dataclass" ContentKey="My Objects" xmlns="Mozart.Task.Execution.Design, Version=2022.123.1.39, Culture=neutral, PublicKeyToken=null" xmlns:ctm="clr-namespace:Mozart.Task.Model;assembly:Mozart.Task.Model, Version=2022.123.1.39, Culture=neutral, PublicKeyToken=null" xmlns:cdm="clr-namespace:Mozart.DataActions.Metadata;assembly:Mozart.DataActions, Version=2022.123.1.39, Culture=neutral, PublicKeyToken=null" xmlns:csg="clr-namespace:Mozart.SeePlan.General.Pegging;assembly:Mozart.SeePlan.General, Version=2021.120.2.24, Culture=neutral, PublicKeyToken=null" xmlns:csd="clr-namespace:Mozart.SeePlan.DataModel;assembly:Mozart.SeePlan, Version=2021.120.2.24, Culture=neutral, PublicKeyToken=null" xmlns:csg2="clr-namespace:Mozart.SeePlan.General.DataModel;assembly:Mozart.SeePlan.General, Version=2021.120.2.24, Culture=neutral, PublicKeyToken=null" xmlns:csg3="clr-namespace:Mozart.SeePlan.General.Simulation;assembly:Mozart.SeePlan.General, Version=2021.120.2.24, Culture=neutral, PublicKeyToken=null" xmlns:css="clr-namespace:Mozart.SeePlan.Simulation;assembly:Mozart.SeePlan, Version=2021.120.2.24, Culture=neutral, PublicKeyToken=null">
+  <Content>
+    <FDataClassRoot Name="My Objects">
+      <DataMarts>
+        <FDataMarts Name="DataMarts">
+          <Children Capacity="4">
+            <FDataMartRoot Name="InputMart">
+              <Children Capacity="16">
+                <FDataMartFolder Name="Common">
+                  <Children Capacity="16">
+                    <FDataMartObject Name="RemoveEqpPlan" DataType="output.EQP_PLAN" CollectionContainer="True" ContainerType="List" ContainerInitializerAuto="True" />
+                    <FDataMartObject Name="strCnt" DataType="int" CollectionContainer="True" ContainerType="Dictionary" ContainerKeys="string" ContainerInitializerAuto="True" />
+                    <FDataMartObject Name="TempWipInfo" DataType="object" CollectionContainer="True" ContainerType="Dictionary" ContainerKeys="string" ContainerInitializerAuto="True" />
+                    <FDataMartObject Name="WriteEqpPlans" DataType="output.EQP_PLAN" CollectionContainer="True" ContainerType="List" ContainerInitializerAuto="True" />
+                  </Children>
+                </FDataMartFolder>
+                <FDataMartFolder Name="Simulation">
+                  <Children Capacity="16">
+                    <FDataMartObject Name="EqpPlans" DataType="output.EQP_PLAN" CollectionContainer="True" ContainerType="List" ContainerInitializerAuto="True" />
+                    <FDataMartObject Name="LotIdCnt" DataType="int" CollectionContainer="True" ContainerType="Dictionary" ContainerKeys="string" ContainerInitializerAuto="True" />
+                    <FDataMartObject Name="Lots" DataType="custom.SmartAPSLot" CollectionContainer="True" ContainerType="Dictionary" ContainerKeys="string" ContainerInitializerAuto="True" />
+                    <FDataMartObject Name="MergeLots" DataType="custom.SmartAPSLot" CollectionContainer="True" ContainerType="List" ContainerInitializerAuto="True" />
+                  </Children>
+                </FDataMartFolder>
+                <FDataMartFolder Name="My Objects">
+                  <Children Capacity="4">
+                    <FDataMartFolder Name="Common">
+                      <Children Capacity="16">
+                        <FDataMartObject Name="FactoryShiftIndex" DataType="int" />
+                        <FDataMartObject Name="FactoryShiftName" DataType="string" />
+                        <FDataMartObject Name="FactoryShiftNames" DataType="string[]" ContainerInitializer="Mozart.SeePlan.FactoryConfiguration.Current.ShiftNames" />
+                        <FDataMartObject Name="PlanDays" DataType="int" />
+                        <FDataMartObject Name="PlanHours" DataType="int" />
+                        <FDataMartObject Name="SimDayWatch" DataType="System.Diagnostics.Stopwatch" />
+                        <FDataMartObject Name="SimHourWatch" DataType="System.Diagnostics.Stopwatch" />
+                        <FDataMartObject Name="SimWatch" DataType="System.Diagnostics.Stopwatch" Description="simwatch" />
+                      </Children>
+                    </FDataMartFolder>
+                  </Children>
+                </FDataMartFolder>
+              </Children>
+            </FDataMartRoot>
+          </Children>
+        </FDataMarts>
+      </DataMarts>
+      <Constants>
+        <FConstantItem Name="Constants">
+          <ArgumentArray>
+            <ctm:ArgumentInfo-Array>
+              <ctm:ArgumentInfo Category="b" Name="MODEL_NAME" TypeEnum="String">
+                <InitialValue>
+                  <String>MODEL_NAME</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="USE_STD_STEP_TAT_INFO" TypeEnum="String" Description="StdStepInfo의 Tat를 사용할 지 StepTat의 Tat를 사용할지 여부">
+                <InitialValue>
+                  <String>USE_STD_STEP_TAT_INFO</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="USE_STD_STEP_YIELD_INFO" TypeEnum="String" Description="StdStepInfo의 Yield를 사용할 지 StepYield의 Yield를 사용할지 여부">
+                <InitialValue>
+                  <String>USE_STD_STEP_YIELD_INFO</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="RELEASE_LOT_OPTION" TypeEnum="String" Description="{INPUT_ALL_AT_START/PERIODIC}, 장비 투입시점을 정할 때 사용하는 옵션">
+                <InitialValue>
+                  <String>RELEASE_LOT_OPTION</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="PART_PROD_SPLIT_OPTION" TypeEnum="String" Description="반제품을 완제품으로 만들 때 1개의 Lot을 분할하여 만들 수 있는 경우 True로 설정 합니다.">
+                <InitialValue>
+                  <String>PART_PROD_SPLIT_OPTION</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="ADD_LOTS_ASSY_CONSTRAINT" TypeEnum="String" Description="반제품을 완제품으로 만들 때 2개 이상의 Lot을 병합하여 만들 수 없는 경우 True로 설정 합니다.">
+                <InitialValue>
+                  <String>ADD_LOTS_ASSY_CONSTRAINT</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="NOT_FOUND_DEST_OPTION" TypeEnum="String" Description="{ERROR/DUMMY_BUCKET}, LOT이 목적지(장비)를 찾지 못하였을 때 사용하는 옵션">
+                <InitialValue>
+                  <String>NOT_FOUND_DEST_OPTION</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="USE_CALC_STATE_TIME" TypeEnum="String" Description="FixStartTime 계산 시 OutQty를 활용한 계산된 StateTime 사용 여부">
+                <InitialValue>
+                  <String>USE_CALC_STATE_TIME</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="RELEASE_TIME_OPTION" TypeEnum="String" Description="{NORMAL/INPUT_ALL_AT_START/BUFFER}, Demand 투입 시간을 조절하는 옵션">
+                <InitialValue>
+                  <String>RELEASE_TIME_OPTION</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="RELEASE_TIME_BUFFER" TypeEnum="String" Description="납기 - RELEASE_TIME_BUFFER 전에 투입 (HOUR)">
+                <InitialValue>
+                  <String>RELEASE_TIME_BUFFER</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="SETUP_TIME_OPTION" TypeEnum="String" Description="{NONE/DEFAULT/USE_STEP_SETUP/USE_EQP_GRP_SETUP/CUSTOM}, Setup Time 옵션">
+                <InitialValue>
+                  <String>SETUP_TIME_OPTION</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="USE_SIMPLE_EQP_ARRANGE" TypeEnum="String" Description="SIMPLE_EQP_ARRANGE 사용 여부 (사용시 EQP_ARRANGE 대신 SIMPLE_EQPARRANGE 사용)">
+                <InitialValue>
+                  <String>USE_SIMPLE_EQP_ARRANGE</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="USE_HARD_PEGGING_OPTION" TypeEnum="String" Description="Hart Pegging을 사용할지 정하는 옵션 (true : Demand단위 패깅, false : Product단위 패깅)">
+                <InitialValue>
+                  <String>USE_HARD_PEGGING_OPTION</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="USE_IN_PLAN_OPTION" TypeEnum="String" Description="bool / true일 경우 InputPlan을 IN_PLAN의 값으로 채움">
+                <InitialValue>
+                  <String>USE_IN_PLAN_OPTION</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="KIT_OPTION" TypeEnum="String" Description="KIT_ID를 사용하는 경우 어떤 OPTION을 사용할지 여부">
+                <InitialValue>
+                  <String>KIT_OPTION</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="USE_UNPEG_WIP_OPTION" TypeEnum="String" Description="UNPEG된 WIP을 사용할지 여부">
+                <InitialValue>
+                  <String>USE_UNPEG_WIP_OPTION</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="BLOCK_IN_TARGET_LOTS" TypeEnum="String" Description="IN_TARGET을 기반으로 가상 재공을 생성하여 FW에 투입시키는 로직 적용 유무 옵션">
+                <InitialValue>
+                  <String>BLOCK_IN_TARGET_LOTS</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="2.DispatcherType" Name="FIFO" TypeEnum="String">
+                <InitialValue>
+                  <String>FIFO</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="2.DispatcherType" Name="WEIGHTSUM" TypeEnum="String">
+                <InitialValue>
+                  <String>WEIGHTSUM</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="2.DispatcherType" Name="WEIGHTSORTED" TypeEnum="String">
+                <InitialValue>
+                  <String>WEIGHTSORTED</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="2.DispatcherType" Name="EDD" TypeEnum="String">
+                <InitialValue>
+                  <String>EDD</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="2.DispatcherType" Name="SPT" TypeEnum="String">
+                <InitialValue>
+                  <String>SPT</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="2.DispatcherType" Name="LPT" TypeEnum="String">
+                <InitialValue>
+                  <String>LPT</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="2.DispatcherType" Name="MIN_SETUP" TypeEnum="String">
+                <InitialValue>
+                  <String>MIN_SETUP</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="3.TimeOption" Name="AbbrDAY" TypeEnum="String">
+                <InitialValue>
+                  <String>D</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="3.TimeOption" Name="AbbrHOUR" TypeEnum="String">
+                <InitialValue>
+                  <String>H</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="3.TimeOption" Name="AbbrMIN" TypeEnum="String">
+                <InitialValue>
+                  <String>M</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="3.TimeOption" Name="AbbrSEC" TypeEnum="String">
+                <InitialValue>
+                  <String>S</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="3.TimeOption" Name="DayValue" TypeEnum="Int32">
+                <InitialValue>
+                  <String>216000</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="3.TimeOption" Name="HourValue" TypeEnum="Int32">
+                <InitialValue>
+                  <String>3600</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="3.TimeOption" Name="MinValue" TypeEnum="Int32">
+                <InitialValue>
+                  <String>60</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="3.TimeOption" Name="SECOND" TypeEnum="String">
+                <InitialValue>
+                  <String>SECOND</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="3.TimeOption" Name="HOUR" TypeEnum="String">
+                <InitialValue>
+                  <String>HOUR</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="3.TimeOption" Name="MINUTE" TypeEnum="String">
+                <InitialValue>
+                  <String>MINUTE</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="4.SortOption" Name="ASC" TypeEnum="String">
+                <InitialValue>
+                  <String>ASC</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="4.SortOption" Name="DESC" TypeEnum="String">
+                <InitialValue>
+                  <String>DESC</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="5.SplitOption" Name="QTY" TypeEnum="String">
+                <InitialValue>
+                  <String>QTY</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="5.SplitOption" Name="CNT" TypeEnum="String">
+                <InitialValue>
+                  <String>CNT</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="5.SplitOption" Name="PARTIAL_QTY" TypeEnum="String">
+                <InitialValue>
+                  <String>PARTIAL_QTY</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="9.Default" Name="DEFAULT" TypeEnum="String" Description="Default">
+                <InitialValue>
+                  <String>DEFAULT</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="9.Default" Name="DEFAULT_INPUT_BATCH_SIZE" TypeEnum="String" Description="Product의 INPUT_BATCH_SIZE가 0인 경우 사용합니다. 두 값이 모두 0이면 결과는 0이 됩니다.">
+                <InitialValue>
+                  <String>DEFAULT_INPUT_BATCH_SIZE</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="9.Default" Name="DEFAULT_STEP_YIELD" TypeEnum="String" Description="StdStepInfo의 STEP_YIELD가 0인 경우 사용합니다. 두 값이 모두 0이면 결과는 0이 됩니다.">
+                <InitialValue>
+                  <String>DEFAULT_STEP_YIELD</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="9.Default" Name="DEFAULT_STEP_TAT_MINUTES" TypeEnum="String" Description="StdStepInfo의 STEP_TAT가 0인 경우 사용합니다. 두 값이 모두 0이면 결과는 0이 됩니다.">
+                <InitialValue>
+                  <String>DEFAULT_STEP_TAT_MINUTES</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="9.Default" Name="DEFAULT_RELEASE_TERM" TypeEnum="String" Description="투입계획을 투입 시에 일정한 간격으로 투입을 하기 위하여 사용 됩니다.">
+                <InitialValue>
+                  <String>DEFAULT_RELEASE_TERM</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="9.Default" Name="DEFAULT_LOT_SIZE" TypeEnum="String" Description="Product의 LOT_SIZE가 0인 경우 사용합니다. 두 값이 모두 0이면 SeePlan Config의 LotUnitSize를 사용합니다.">
+                <InitialValue>
+                  <String>DEFAULT_LOT_SIZE</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="9.Default" Name="DEFAULT_PROC_TIME" TypeEnum="String" Description="EQP_ARRANGE의 PROC_TIME이 0인 경우 사용합니다. 두 값이 모두 0이면 결과는 0이 됩니다.">
+                <InitialValue>
+                  <String>DEFAULT_PROC_TIME</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="9.Default" Name="DEFAULT_TACT_TIME" TypeEnum="String" Description="EQP_ARRANGE의 TACT_TIME이 0인 경우 사용합니다. 두 값이 모두 0이면 결과는 0이 됩니다.">
+                <InitialValue>
+                  <String>DEFAULT_TACT_TIME</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="9.Default" Name="DEFAULT_SETUP_TIME" TypeEnum="String" Description="SETUP_TIME_OPTION이 DEFAULT로 되어 있을 경우 설정된 값 사용">
+                <InitialValue>
+                  <String>DEFAULT_SETUP_TIME</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="9.Default" Name="WAITING_LOT_AT_ASSEMBLY_STEP" TypeEnum="String" Description="WIP이 조립 공정에 조립이 되지 않은 상태로 대기하고 있는 경우에 대한 기록">
+                <InitialValue>
+                  <String>WAITING_LOT_AT_ASSEMBLY_STEP</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="10.InputBatchOption" Name="PERIODIC" TypeEnum="String">
+                <InitialValue>
+                  <String>PERIODIC</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="10.InputBatchOption" Name="AT_ENGINE_START" TypeEnum="String">
+                <InitialValue>
+                  <String>AT_ENGINE_START</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="10.InputBatchOption" Name="SPECIFIC_RELEASE_TIME" TypeEnum="String">
+                <InitialValue>
+                  <String>SPECIFIC_RELEASE_TIME</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="10.InputBatchOption" Name="NORMAL" TypeEnum="String">
+                <InitialValue>
+                  <String>NORMAL</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="10.InputBatchOption" Name="ON_TARGET_TIME" TypeEnum="String">
+                <InitialValue>
+                  <String>ON_TARGET_TIME</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="11.ChangeType" Name="IN" TypeEnum="String">
+                <InitialValue>
+                  <String>IN</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="11.ChangeType" Name="OUT" TypeEnum="String">
+                <InitialValue>
+                  <String>OUT</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="11.ChangeType" Name="WAIT" TypeEnum="String">
+                <InitialValue>
+                  <String>WAIT</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="12.RouteType" Name="BOM" TypeEnum="String">
+                <InitialValue>
+                  <String>BOM</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="12.RouteType" Name="CHANGE" TypeEnum="String">
+                <InitialValue>
+                  <String>CHANGE</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="13.StageName" Name="RunPeg" TypeEnum="String">
+                <InitialValue>
+                  <String>RunPeg</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="13.StageName" Name="WaitPeg" TypeEnum="String">
+                <InitialValue>
+                  <String>WaitPeg</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="13.StageName" Name="PostRunPeg" TypeEnum="String">
+                <InitialValue>
+                  <String>PostRunPeg</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="13.StageName" Name="PostWaitPeg" TypeEnum="String">
+                <InitialValue>
+                  <String>PostWaitPeg</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="14.StageProperty" Name="Position" TypeEnum="String">
+                <InitialValue>
+                  <String>Position</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="15.NotFoundDestOption" Name="DUMMY" TypeEnum="String">
+                <InitialValue>
+                  <String>DUMMY</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="15.NotFoundDestOption" Name="ERROR" TypeEnum="String">
+                <InitialValue>
+                  <String>ERROR</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="16.Automation" Name="AUTO" TypeEnum="String">
+                <InitialValue>
+                  <String>AUTO</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="16.Automation" Name="MANUAL" TypeEnum="String">
+                <InitialValue>
+                  <String>MANUAL</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="18.SetupOption" Name="NONE" TypeEnum="String">
+                <InitialValue>
+                  <String>NONE</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="18.SetupOption" Name="USE_STEP_SETUP" TypeEnum="String">
+                <InitialValue>
+                  <String>USE_STEP_SETUP</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="18.SetupOption" Name="USE_EQP_SETUP" TypeEnum="String">
+                <InitialValue>
+                  <String>USE_EQP_SETUP</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="18.SetupOption" Name="CUSTOM" TypeEnum="String">
+                <InitialValue>
+                  <String>CUSTOM</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="19.MaterialType" Name="MAT" TypeEnum="String">
+                <InitialValue>
+                  <String>MAT</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="19.MaterialType" Name="PLAN" TypeEnum="String">
+                <InitialValue>
+                  <String>PLAN</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="20.WipState" Name="RUN" TypeEnum="String">
+                <InitialValue>
+                  <String>RUN</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="20.WipState" Name="HOLD" TypeEnum="String">
+                <InitialValue>
+                  <String>HOLD</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="20.WipState" Name="PREP" TypeEnum="String">
+                <InitialValue>
+                  <String>PREP</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="22.Pegging" Name="INVALID_INPUT" TypeEnum="String" Description="INVALID_INPUT">
+                <InitialValue>
+                  <String>INVALID_INPUT</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="98.Etc" Name="Delimiter" TypeEnum="String" Description="구분자">
+                <InitialValue>
+                  <String>SAPSDelimiter</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="PE0001" TypeEnum="String" Description="Either &quot;FR_PRODCUT_ID&quot; or &quot;TO_PRODUCT_ID&quot; cannot be found.">
+                <InitialValue>
+                  <String>PE0001</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0001" TypeEnum="String" Description="Product under &quot;DEMAND_ID&quot; cannot be found.">
+                <InitialValue>
+                  <String>IN0001</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="PE0002" TypeEnum="String" Description="IN_PLAN의 PRODUCT_ID가 null인 경우">
+                <InitialValue>
+                  <String>PE0002</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="PE0003" TypeEnum="String" Description="IN_PLAN의 PRODUCT_ID가 PRODUCT 테이블에 정의되지 않은 경우">
+                <InitialValue>
+                  <String>PE0003</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0002" TypeEnum="String" Description="PRODUCT 테이블의 PROCESS_ID가 PROCESS 테이블에 정의되지 않은 경우">
+                <InitialValue>
+                  <String>IN0002</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0003" TypeEnum="String" Description="FIRM_PLAN과 WIP에 중복된 WIP정보가 있을 경우">
+                <InitialValue>
+                  <String>IN0003</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0004" TypeEnum="String" Description="WIP의 PRODUCT_ID가 PRODUCT 테이블에 정의되지 않은 경우">
+                <InitialValue>
+                  <String>IN0004</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0005" TypeEnum="String" Description="WIP의 STEP_ID가 STEP_ROUTE에 정의되어 있지 않은 경우">
+                <InitialValue>
+                  <String>IN0005</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0006" TypeEnum="String" Description="WIP의 STEP_ID가 STD_STEP_INFO에 정의되어 있지 않은 경우">
+                <InitialValue>
+                  <String>IN0006</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0007" TypeEnum="String" Description="WIP의 EQP_ID가 EQP 테이블에 정의되지 않은 경우">
+                <InitialValue>
+                  <String>IN0007</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0008" TypeEnum="String" Description="WIP의 STATE에 사전 정의 되지 않은 State값이 입력 되어있을 경우 (NULL일 경우 포함)">
+                <InitialValue>
+                  <String>IN0008</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0009" TypeEnum="String" Description="FIRM_PLAN과 WIP에 중복된 WIP정보가 있을 경우">
+                <InitialValue>
+                  <String>IN0009</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0010" TypeEnum="String" Description="FIRM_PLAN의 PRODUCT_ID가 PRODUCT 테이블에 정의되지 않은 경우">
+                <InitialValue>
+                  <String>IN0010</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0011" TypeEnum="String" Description="FIRM_PLAN의 STEP_ID가 해당 PRODUCT(PROCESS)의 STEP이 아닌 경우">
+                <InitialValue>
+                  <String>IN0011</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0012" TypeEnum="String" Description="FIRM_PLAN의 STEP_ID가 STD_STEP_INFO에 정의되지 않은 경우">
+                <InitialValue>
+                  <String>IN0012</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0013" TypeEnum="String" Description="FIRM_PLAN의 EQP_ID가 EQP 테이블에 정의되지 않은 경우">
+                <InitialValue>
+                  <String>IN0013</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0014" TypeEnum="String" Description="FIRM_PLAN의 FIRM_TYPE에 사전 정의 되지 않은 FIRM_TYPE값이 입력 되어있을 경우(NULL일 경우 포함)">
+                <InitialValue>
+                  <String>IN0014</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0015" TypeEnum="String" Description="OUT_STOCK의 PRODUCT_ID가 PRODUCT 테이블에 정의되지 않은 경우">
+                <InitialValue>
+                  <String>IN0015</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0016" TypeEnum="String" Description="MATERIAL_BOM의 PRODCUT_ID가 PRODUCT 테이블에 정의되지 않은 경우">
+                <InitialValue>
+                  <String>IN0016</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0017" TypeEnum="String" Description="MATERIAL_BOM의 OPER_ID가 해당 PRODUCT(PROCESS)의 STEP이 아닌 경우">
+                <InitialValue>
+                  <String>IN0017</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="SI0001" TypeEnum="String" Description="When NOT_FOUND_DEST_OPTION is set to ERROR, the lot cannot be dispatched to any equipment due to the lack of the EQP_ARRANGE information.">
+                <InitialValue>
+                  <String>SI0001</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="SI0002" TypeEnum="String" Description="PROCESS에 FirstStep이 없는 경우(STEP_ROUTE에 정의되지 않은 경우)">
+                <InitialValue>
+                  <String>SI0002</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0018" TypeEnum="String" Description="STEP_ROUTE의 STEP_ID가 STD_STEP_INFO에 정의되지 않은 경우">
+                <InitialValue>
+                  <String>IN0018</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0019" TypeEnum="String" Description="STEP_ROUTE의 STEP_ID가 STD_STEP_INFO에 정의되지 않은 경우">
+                <InitialValue>
+                  <String>IN0019</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="SI0003" TypeEnum="String" Description="FirmPlan의 시작시간이 이미 지나버린 경우">
+                <InitialValue>
+                  <String>SI0003</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="SI0004" TypeEnum="String" Description="FirmPlan의 시작시간이 종료시점보다 이후일 경우">
+                <InitialValue>
+                  <String>SI0004</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="SI0005" TypeEnum="String" Description="FirmPlan의 시간과 PM시간이 겹치는 경우">
+                <InitialValue>
+                  <String>SI0005</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0020" TypeEnum="String" Description="FirmPlan의 Key가 중복되는 경우">
+                <InitialValue>
+                  <String>IN0020</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0021" TypeEnum="String" Description="FrimPlan의 Step이 Run중인 재공의 Step과 중복되는 경우">
+                <InitialValue>
+                  <String>IN0021</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0022" TypeEnum="String" Description="FirmPlan의 EQP_ID가 EQUIPMENT에 정의되지 않은 경우">
+                <InitialValue>
+                  <String>IN0022</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="SI0006" TypeEnum="String" Description="PRODUCT_ROUTE의 CHANGE_TYPE이 IN일 때 STEP_ROUTE가 조립 공정까지 정의되어 있지 않은 경우">
+                <InitialValue>
+                  <String>SI0006</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0023" TypeEnum="String" Description="PROCESS가 STEP_ROUTE에 정의되지 않은 경우">
+                <InitialValue>
+                  <String>IN0023</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0024" TypeEnum="String" Description="MATERIAL_BOM의 OPER_ID가 STD_STEP_INFO에 정의되지 않은 경우">
+                <InitialValue>
+                  <String>IN0024</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="21.KitOption" Name="OPTION01" TypeEnum="String" Description="WIP에 KIT_ID가 있는 경우 각 재공들의 수량을 기반으로 만들 수 있는 만큼 조립 재공의 수량으로 결정 후, 남은 수량에 대해 초기 공정 초기화 작업 수행">
+                <InitialValue>
+                  <String>OPTION01</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="21.KitOption" Name="OPTION02" TypeEnum="String" Description="WIP에 KIT_ID가 있는 경우 각 재공들의 수량을 기반으로 만들 수 있는 만큼을 조립 재공의 수량으로 결정 후, 남은 수량은 Unpegging 진행">
+                <InitialValue>
+                  <String>OPTION02</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="21.KitOption" Name="OPTION03" TypeEnum="String" Description="WIP에 KIT_ID가 있는 경우 각 재공 중 최대 수량을 기반으로 조립 재공의 수량을 결정">
+                <InitialValue>
+                  <String>OPTION03</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0025" TypeEnum="String" Description="SPLIT_INFO의 기준정보 입력이 올바르지 않은 경우">
+                <InitialValue>
+                  <String>IN0025</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0026" TypeEnum="String" Description="SPLIT_INFO의 CRITERIA가 사전 정의되어 있지 않은 값을 입력한 경우">
+                <InitialValue>
+                  <String>IN0026</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0027" TypeEnum="String" Description="SPLIT_INFO의 PRODUCT가 PRODUCT 테이블에 정의되어 있지 않은 경우">
+                <InitialValue>
+                  <String>IN0027</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0028" TypeEnum="String" Description="SPLIT_INFO의 STEP_ID가 STEP_ROUTE에 정의되어 있지 않은 경우">
+                <InitialValue>
+                  <String>IN0028</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="98.Etc" Name="PRODUCT_ID" TypeEnum="String">
+                <InitialValue>
+                  <String>PRODUCT_ID</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="98.Etc" Name="STEP_ID" TypeEnum="String">
+                <InitialValue>
+                  <String>STEP_ID</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0029" TypeEnum="String" Description="예약 재공의 설비정보가 올바르지 않은 경우">
+                <InitialValue>
+                  <String>IN0029</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="98.Etc" Name="BUSY" TypeEnum="String">
+                <InitialValue>
+                  <String>BUSY</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="22.Pegging" Name="NO_TARGET" TypeEnum="String">
+                <InitialValue>
+                  <String>NO_TARGET</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="22.Pegging" Name="EXCESS" TypeEnum="String">
+                <InitialValue>
+                  <String>EXCESS</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="22.Pegging" Name="NOT_FOUND_PRODUCT_ID" TypeEnum="String">
+                <InitialValue>
+                  <String>NOT_FOUND_PRODUCT_ID</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="22.Pegging" Name="NOT_FOUND_STEP_ID" TypeEnum="String">
+                <InitialValue>
+                  <String>NOT_FOUND_STEP_ID</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="22.Pegging" Name="DUPLICATED_WIP_INFO" TypeEnum="String">
+                <InitialValue>
+                  <String>DUPLICATED_WIP_INFO</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="22.Pegging" Name="NOT_DEFINED_WIP_STATE" TypeEnum="String">
+                <InitialValue>
+                  <String>NOT_DEFINED_WIP_STATE</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="22.Pegging" Name="NOT_EXIST_STEP_ROUTE" TypeEnum="String">
+                <InitialValue>
+                  <String>NOT_EXIST_STEP_ROUTE</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="22.Pegging" Name="NOT_FOUND_EQP_ID" TypeEnum="String">
+                <InitialValue>
+                  <String>NOT_FOUND_EQP_ID</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="USE_PART_MERGELOT" TypeEnum="String" Description="ProductType이 PART일때 MERGELOT을 사용할지 유무 ">
+                <InitialValue>
+                  <String>USE_PART_MERGELOT</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="FW_PART_CHANGE" TypeEnum="String" Description="FW 전개시 ProductRoute에 따라 제품 분기를 사용하는 경우">
+                <InitialValue>
+                  <String>FW_PART_CHANGE</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="98.Etc" Name="TOOL_ID" TypeEnum="String">
+                <InitialValue>
+                  <String>TOOL_ID</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0030" TypeEnum="String" Description="EQP_ARRANGE의 TACT TIME, PROC_TIME이 입력되어 있지 않은 경우">
+                <InitialValue>
+                  <String>IN0030</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="98.Etc" Name="PROPERTY" TypeEnum="String" Description="PRODUCT 의 PROPERTY 값 / SETUP INFO 에 사용되는 PRORPERTY">
+                <InitialValue>
+                  <String>PROPERTY</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="98.Etc" Name="PRODUCT" TypeEnum="String" Description="WIP PEG 판단에 사용되는 PRODUCT">
+                <InitialValue>
+                  <String>PRODUCT</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="2.DispatcherType" Name="MIN_SETUP_PROPERTY" TypeEnum="String">
+                <InitialValue>
+                  <String>MIN_SETUP_PROPERTY</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="9.Default" Name="DEFAULT_FACTORY_TIME" TypeEnum="String" Description="EXECUTION_CONFIG_OPTION에서 Factory Start Time을 정의하여 사용. ">
+                <InitialValue>
+                  <String>DEFAULT_FACTORY_TIME</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="9.Default" Name="DEFAULT_SHIFT_NAMES" TypeEnum="String" Description="EXECUTION_CONFIG_OPTION에서 Shift Name을 정의하여 사용">
+                <InitialValue>
+                  <String>DEFAULT_SHIFT_NAMES</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0031" TypeEnum="String" Description="EXECUTION_CONFIG_OPTION에 Factory Start Time이나 Shift Name이 정의되어 있지 않은 경우">
+                <InitialValue>
+                  <String>IN0031</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="3.TimeOption" Name="DayValue2" TypeEnum="Int32">
+                <InitialValue>
+                  <String>24</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0032" TypeEnum="String" Description="PEG_CONDITION에 데이터가 존재하지 않음. ">
+                <InitialValue>
+                  <String>IN0032</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0033" TypeEnum="String">
+                <InitialValue>
+                  <String>IN0033</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="99.ErrCode" Name="IN0034" TypeEnum="String" Description="EQP_UTILIZATION 기준정보가 올바르지 않은 경우">
+                <InitialValue>
+                  <String>IN0034</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="9.Default" Name="DEFAULT_UTILIZATION" TypeEnum="String" Description="설비 생산능력 기본값 (기본값 100) ">
+                <InitialValue>
+                  <String>DEFAULT_UTILIZATION</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="9.Default" Name="DEFAULT_EFFICIENCY" TypeEnum="String" Description="설비 작업능률 기본값 (기본값 100) ">
+                <InitialValue>
+                  <String>DEFAULT_EFFICIENCY</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1. Option" Name="APPLY_SHIFT_TIME" TypeEnum="String" Description="주/야 교체 기준 시간으로 계획시간 및 수량 관련 분할 처리 기능">
+                <InitialValue>
+                  <String>APPLY_SHIFT_TIME</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1. Option" Name="DECIMAL_POINT" TypeEnum="String" Description="(1 :소수점 이전 계획에 올림처리. 0 : 소수점 그대로 적용, -1 : 소수점 내림처리)">
+                <InitialValue>
+                  <String>DECIMAL_POINT</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1. Option" Name="USE_FORWARDPEG" TypeEnum="String" Description="포워드패깅 사용여부">
+                <InitialValue>
+                  <String>USE_FORWARDPEG</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+              <ctm:ArgumentInfo Category="1.Option" Name="USE_TOOL" TypeEnum="String" Description="툴 사용여부">
+                <InitialValue>
+                  <String>USE_TOOL</String>
+                </InitialValue>
+              </ctm:ArgumentInfo>
+            </ctm:ArgumentInfo-Array>
+          </ArgumentArray>
+        </FConstantItem>
+      </Constants>
+      <Enums>
+        <FDataClassFolder Name="Enums">
+          <Children Capacity="16">
+            <FDataClassItem Name="ErrorSeverity" IsEnum="True">
+              <Content>
+                <DataClassMeta Name="ErrorSeverity">
+                  <Properties>
+                    <cdm:PropertyMeta Name="INFO" PropertyType="" />
+                    <cdm:PropertyMeta Name="WARNING" PropertyType="" />
+                    <cdm:PropertyMeta Name="CRITICAL" PropertyType="" />
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="FirmType" IsEnum="True">
+              <Content>
+                <DataClassMeta Name="FirmType" Description="확정 계획 형태">
+                  <Properties>
+                    <cdm:PropertyMeta Name="DELAY" PropertyType="" MapField="DELAY">
+                      <DefaultValue>
+                        <String>0</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="NORMAL" PropertyType="" MapField="NORMAL">
+                      <DefaultValue>
+                        <String>1</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="SPLIT" PropertyType="" MapField="SPLIT">
+                      <DefaultValue>
+                        <String>2</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="ProductChangeType" IsEnum="True">
+              <Content>
+                <DataClassMeta Name="ProductChangeType">
+                  <Properties>
+                    <cdm:PropertyMeta Name="WAIT" PropertyType="" MapField="WAIT">
+                      <DefaultValue>
+                        <String>0</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="IN" PropertyType="" MapField="IN">
+                      <DefaultValue>
+                        <String>1</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="OUT" PropertyType="" Description="OUT">
+                      <DefaultValue>
+                        <String>2</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="ProductType" IsEnum="True">
+              <Content>
+                <DataClassMeta Name="ProductType">
+                  <Properties>
+                    <cdm:PropertyMeta Name="PART" PropertyType="" MapField="PART">
+                      <DefaultValue>
+                        <String>1</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="FG" PropertyType="" MapField="FG">
+                      <DefaultValue>
+                        <String>2</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SplitType" IsEnum="True">
+              <Content>
+                <DataClassMeta Name="SplitType">
+                  <Properties>
+                    <cdm:PropertyMeta Name="QTY" PropertyType="" MapField="QTY">
+                      <DefaultValue>
+                        <String>1</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="CNT" PropertyType="" MapField="CNT">
+                      <DefaultValue>
+                        <String>2</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="PARTIAL_QTY" PropertyType="" MapField="PARTIAL_QTY">
+                      <DefaultValue>
+                        <String>3</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="StepType" IsEnum="True">
+              <Content>
+                <DataClassMeta Name="StepType">
+                  <Properties>
+                    <cdm:PropertyMeta Name="IN" PropertyType="" MapField="IN">
+                      <DefaultValue>
+                        <String>1</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="OUT" PropertyType="" MapField="OUT">
+                      <DefaultValue>
+                        <String>2</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="TimeOptionType" IsEnum="True">
+              <Content>
+                <DataClassMeta Name="TimeOptionType">
+                  <Properties>
+                    <cdm:PropertyMeta Name="D" PropertyType="" Description="Day" MapField="D">
+                      <DefaultValue>
+                        <String>0</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="H" PropertyType="" Description="Hour" MapField="H">
+                      <DefaultValue>
+                        <String>1</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="M" PropertyType="" Description="Minute" MapField="M">
+                      <DefaultValue>
+                        <String>2</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="S" PropertyType="" Description="Second" MapField="S">
+                      <DefaultValue>
+                        <String>3</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="UseCriteriaWeightFactor" IsEnum="True">
+              <Content>
+                <DataClassMeta Name="UseCriteriaWeightFactor" Description="CRITERIA를 사용하는 Weight Factor">
+                  <Properties>
+                    <cdm:PropertyMeta Name="FIFO" PropertyType="" Description="FIFO" MapField="FIFO">
+                      <DefaultValue>
+                        <String>0</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="DUE_DATE" PropertyType="" Description="DUE_DATE" MapField="DUE_DATE">
+                      <DefaultValue>
+                        <String>1</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="DUE_LPST" PropertyType="" Description="DUE_LPST" MapField="DUE_LPST">
+                      <DefaultValue>
+                        <String>2</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="LIFO" PropertyType="" Description="LIFO" MapField="LIFO">
+                      <DefaultValue>
+                        <String>3</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="SPT" PropertyType="" Description="SPT" MapField="SPT">
+                      <DefaultValue>
+                        <String>4</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="LPT" PropertyType="" Description="LPT" MapField="LPT">
+                      <DefaultValue>
+                        <String>5</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+          </Children>
+        </FDataClassFolder>
+      </Enums>
+      <Children Capacity="4">
+        <FDataClassFolder Name="Pegging">
+          <Children Capacity="8">
+            <FDataClassItem Name="SmartAPSMoMaster">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" MapType="DEMAND" Name="SmartAPSMoMaster">
+                  <BaseClass>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csg:GeneralMoMaster" />
+                  </BaseClass>
+                  <Properties>
+                    <cdm:PropertyMeta Name="DemandID" PropertyType="string" />
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSMoPlan">
+              <Content>
+                <DataClassMeta Name="SmartAPSMoPlan">
+                  <BaseClass>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csg:GeneralMoPlan" />
+                  </BaseClass>
+                  <Properties>
+                    <cdm:PropertyMeta Name="CustomerID" PropertyType="string" />
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSPegPart">
+              <Content>
+                <DataClassMeta Name="SmartAPSPegPart">
+                  <BaseClass>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csg:GeneralPegPart" />
+                  </BaseClass>
+                  <Properties>
+                    <cdm:PropertyMeta Name="DemandID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="IsPartStepChanged" PropertyType="bool">
+                      <DefaultValue>
+                        <String>=false</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="ToProductId" PropertyType="string" />
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSPegTarget">
+              <Content>
+                <DataClassMeta Name="SmartAPSPegTarget">
+                  <BaseClass>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csg:GeneralPegTarget" />
+                  </BaseClass>
+                  <Properties>
+                    <cdm:PropertyMeta Name="DemandID" PropertyType="string" />
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSPlanWip">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" Name="SmartAPSPlanWip">
+                  <BaseClass>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csg:PlanWip" />
+                  </BaseClass>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>MapStep</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSStepTarget">
+              <Content>
+                <DataClassMeta Name="SmartAPSStepTarget">
+                  <BaseClass>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csd:StepTarget" />
+                  </BaseClass>
+                  <Properties>
+                    <cdm:PropertyMeta Name="MoPlan" PropertyType="custom.SmartAPSMoPlan" />
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+          </Children>
+        </FDataClassFolder>
+        <FDataClassFolder Name="Common">
+          <Children Capacity="8">
+            <FDataClassItem Name="SmartAPSStep">
+              <Content>
+                <DataClassMeta MapType="STEP_ROUTE" Name="SmartAPSStep">
+                  <BaseClass>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csg2:GeneralStep" />
+                  </BaseClass>
+                  <Properties>
+                    <cdm:PropertyMeta Name="StdStep" PropertyType="custom.SmartAPSStdStep" />
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSWipInfo">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" MapType="WIP" Name="SmartAPSWipInfo">
+                  <Interfaces>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csg2:IWipInfo" />
+                  </Interfaces>
+                  <Properties>
+                    <cdm:PropertyMeta Name="LotID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="UnitQty" PropertyType="double" />
+                    <cdm:PropertyMeta Name="Product" PropertyType="Mozart.SeePlan.General.DataModel.Product" />
+                    <cdm:PropertyMeta Name="Process" PropertyType="Mozart.SeePlan.General.DataModel.Process" />
+                    <cdm:PropertyMeta Name="InitialStep" PropertyType="Mozart.SeePlan.General.DataModel.GeneralStep" />
+                    <cdm:PropertyMeta Name="InitialEqp" PropertyType="Mozart.SeePlan.General.DataModel.Eqp" />
+                    <cdm:PropertyMeta Name="CurrentState" PropertyType="Mozart.SeePlan.Simulation.EntityState" />
+                    <cdm:PropertyMeta Name="WipProductID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="WipProcessID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="WipStepID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="WipEqpID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="WipState" PropertyType="string" />
+                    <cdm:PropertyMeta Name="WipStateTime" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="LastTrackInTime" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="LastProcessStartTime" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="LastTrackOutTime" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="LineID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="LineInTime" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="StepArrivalTime" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="OutQty" PropertyType="double" />
+                    <cdm:PropertyMeta Name="DemandID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="FirmPlans" PropertyType="Dictionary&lt;string,custom.SmartAPSFirmPlan&gt;">
+                      <DefaultValue>
+                        <String>= new Dictionary&lt;string,custom.SmartAPSFirmPlan&gt;()</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="KitID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="PrepEffEndTime" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="SplitCheck" PropertyType="bool">
+                      <DefaultValue>
+                        <String>false</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="ParentsLot" PropertyType="SmartAPSWipInfo" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>LotID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSProcess">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" MapType="PROCESS" Name="SmartAPSProcess">
+                  <BaseClass>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csg2:Process" />
+                  </BaseClass>
+                  <Properties>
+                    <cdm:PropertyMeta Name="StepType" PropertyType="StepType" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>ProcessID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSProduct">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" MapType="PRODUCT" Name="SmartAPSProduct">
+                  <BaseClass>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csg2:Product" />
+                  </BaseClass>
+                  <Properties>
+                    <cdm:PropertyMeta Name="LotSize" PropertyType="int" />
+                    <cdm:PropertyMeta Name="InputBatchSize" PropertyType="int" />
+                    <cdm:PropertyMeta Name="ProductType" PropertyType="ProductType" />
+                    <cdm:PropertyMeta Name="ProductName" PropertyType="string" MapField="PRODUCT_NAME" />
+                    <cdm:PropertyMeta Name="Property" PropertyType="Dictionary&lt;string,object&gt;" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>ProductID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSStdStep">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" MapType="STD_STEP_INFO" Name="SmartAPSStdStep">
+                  <Properties>
+                    <cdm:PropertyMeta Name="StdStepID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="StepName" PropertyType="string" />
+                    <cdm:PropertyMeta Name="StepTAT" PropertyType="double" />
+                    <cdm:PropertyMeta Name="StepYield" PropertyType="double" />
+                    <cdm:PropertyMeta Name="StepSetup" PropertyType="double" />
+                    <cdm:PropertyMeta Name="Capacity" PropertyType="double" />
+                    <cdm:PropertyMeta Name="TransferTime" PropertyType="double" />
+                    <cdm:PropertyMeta Name="StepSeq" PropertyType="double" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>StdStepID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSPMList">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" Name="SmartAPSPMList">
+                  <Properties>
+                    <cdm:PropertyMeta Name="LineID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="PM_Start_Time" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="PM_End_Time" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="PM_Run_Time" PropertyType="timeSpan" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="LineView" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>LineID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSProductRoute">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" Name="SmartAPSProductRoute">
+                  <Properties>
+                    <cdm:PropertyMeta Name="FromProductId" PropertyType="string" />
+                    <cdm:PropertyMeta Name="StepId" PropertyType="string" />
+                    <cdm:PropertyMeta Name="ToProductId" PropertyType="string" />
+                    <cdm:PropertyMeta Name="MoDemandId" PropertyType="string" />
+                    <cdm:PropertyMeta Name="MoProductId" PropertyType="string" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="FromStepDemandView" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>FromProductId</String>
+                            <String>StepId</String>
+                            <String>MoDemandId</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+          </Children>
+        </FDataClassFolder>
+        <FDataClassFolder Name="Simulation">
+          <Children Capacity="16">
+            <FDataClassItem Name="SmartAPSLotBatch">
+              <Content>
+                <DataClassMeta Name="SmartAPSLotBatch">
+                  <BaseClass>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csg3:LotBatch" />
+                  </BaseClass>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSLot">
+              <Content>
+                <DataClassMeta Name="SmartAPSLot">
+                  <BaseClass>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csg3:Lot" />
+                  </BaseClass>
+                  <Properties>
+                    <cdm:PropertyMeta Name="MergeKey" PropertyType="string">
+                      <DefaultValue>
+                        <String>=string.Empty</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="MergeInTime" PropertyType="DateTime">
+                      <DefaultValue>
+                        <String>=SimHelper.MinDateTime</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="MergeCnt" PropertyType="int">
+                      <DefaultValue>
+                        <String>=0</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="OrgQty" PropertyType="int">
+                      <DefaultValue>
+                        <String>=0</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="IsFirmPlanSplit" PropertyType="bool">
+                      <DefaultValue>
+                        <String>=false</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="ParentLot" PropertyType="custom.SmartAPSLot" />
+                    <cdm:PropertyMeta Name="ChildLots" PropertyType="List&lt;custom.SmartAPSLot&gt;">
+                      <DefaultValue>
+                        <String>= new List&lt;custom.SmartAPSLot&gt;()</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="FirmPlan" PropertyType="custom.SmartAPSFirmPlan" />
+                    <cdm:PropertyMeta Name="IsCarryOverSplit" PropertyType="bool">
+                      <DefaultValue>
+                        <String>=false</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="PrepEffEndTime" PropertyType="DateTime">
+                      <DefaultValue>
+                        <String>=SimHelper.MinDateTime</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="InputProcTime" PropertyType="double" Description="Input 정보로 부터 구한 proc time" />
+                    <cdm:PropertyMeta Name="InputTactTime" PropertyType="double" Description="Input 정보로 부터 구한 tact time" />
+                    <cdm:PropertyMeta Name="Utilization" PropertyType="double" Description="생산능력" />
+                    <cdm:PropertyMeta Name="Efficiency" PropertyType="double" Description="적용효율" />
+                    <cdm:PropertyMeta Name="ApplyProcTime" PropertyType="double" Description="생산능력, 적용효율이 반영된 proc time. InputProcTime*(100/Utilization)*(100/Efficiency) " />
+                    <cdm:PropertyMeta Name="ApplyTactTime" PropertyType="double" Description="생산능력, 적용효율이 반영된 tact time. InputTactTime*(100/Utilization)*(100/Efficiency) " />
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSPlanInfo">
+              <Content>
+                <DataClassMeta Name="SmartAPSPlanInfo">
+                  <BaseClass>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csg2:PlanInfo" />
+                  </BaseClass>
+                  <Properties>
+                    <cdm:PropertyMeta Name="Lot" PropertyType="custom.SmartAPSLot" />
+                    <cdm:PropertyMeta Name="MatBom" PropertyType="List&lt;IMatBom&gt;">
+                      <DefaultValue>
+                        <String>= new List&lt;SmartAPS.DataModel.IMatBom&gt;()</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSFirmPlan">
+              <Content>
+                <DataClassMeta Name="SmartAPSFirmPlan">
+                  <Properties>
+                    <cdm:PropertyMeta Name="LotID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="StepID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="EqpID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="StartTime" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="EndTime" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="FirmType" PropertyType="FirmType">
+                      <DefaultValue>
+                        <String>=FirmType.NORMAL</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="Key" PropertyType="string" />
+                    <cdm:PropertyMeta Name="SplitLots" PropertyType="List&lt;IHandlingBatch&gt;">
+                      <DefaultValue>
+                        <String>= new List&lt;Mozart.SeePlan.Simulation.IHandlingBatch&gt;()</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSInTarget">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" Name="SmartAPSInTarget">
+                  <Properties>
+                    <cdm:PropertyMeta Name="Product" PropertyType="custom.SmartAPSProduct" />
+                    <cdm:PropertyMeta Name="TargetDate" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="TargetQty" PropertyType="int" />
+                    <cdm:PropertyMeta Name="DemandID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="MoProductID" PropertyType="string" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>Product</String>
+                            <String>TargetDate</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                        <cdm:DataViewItem Name="ViewByProd" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>Product</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                        <cdm:DataViewItem Name="ViewByDemand" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>Product</String>
+                            <String>TargetDate</String>
+                            <String>DemandID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSOutAct">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" Name="SmartAPSOutAct">
+                  <Properties>
+                    <cdm:PropertyMeta Name="Product" PropertyType="custom.SmartAPSProduct" />
+                    <cdm:PropertyMeta Name="InQty" PropertyType="double">
+                      <DefaultValue>
+                        <String>=0</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="InDate" PropertyType="DateTime">
+                      <DefaultValue>
+                        <String>=SimHelper.MinDateTime</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>Product</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSPsi">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" Name="SmartAPSPsi">
+                  <Properties>
+                    <cdm:PropertyMeta Name="customerId" PropertyType="string" />
+                    <cdm:PropertyMeta Name="productId" PropertyType="string" />
+                    <cdm:PropertyMeta Name="productName" PropertyType="string" />
+                    <cdm:PropertyMeta Name="item" PropertyType="string" />
+                    <cdm:PropertyMeta Name="qty" PropertyType="double" />
+                    <cdm:PropertyMeta Name="date" PropertyType="string" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>customerId</String>
+                            <String>productId</String>
+                            <String>item</String>
+                            <String>date</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                        <cdm:DataViewItem Name="DateView" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>date</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSTool">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" MapType="TOOL" Name="SmartAPSTool">
+                  <Interfaces>
+                    <cdm:ReflectedBaseTypeInfo TargetType="css:IToolData" />
+                  </Interfaces>
+                  <Properties>
+                    <cdm:PropertyMeta Name="Tools" PropertyType="List&lt;string&gt;" />
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSWeightPreset">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" Name="SmartAPSWeightPreset">
+                  <BaseClass>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csd:WeightPreset" />
+                  </BaseClass>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>Name</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSEqp">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" Name="SmartAPSEqp">
+                  <BaseClass>
+                    <cdm:ReflectedBaseTypeInfo TargetType="csg2:Eqp" />
+                  </BaseClass>
+                  <Properties>
+                    <cdm:PropertyMeta Name="FifoType" PropertyType="string">
+                      <DefaultValue>
+                        <String>="FIFO"</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="Automation" PropertyType="string">
+                      <DefaultValue>
+                        <String>="AUTO"</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="StateCode" PropertyType="string" />
+                    <cdm:PropertyMeta Name="MaxLotBatchSize" PropertyType="int" />
+                    <cdm:PropertyMeta Name="BreakList" PropertyType="List&lt;PMSchedule&gt;">
+                      <DefaultValue>
+                        <String>= new List&lt;Mozart.SeePlan.DataModel.PMSchedule&gt;()</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="LoadingState" PropertyType="LoadingStates" />
+                    <cdm:PropertyMeta Name="FirmPlans" PropertyType="Dictionary&lt;string,custom.SmartAPSFirmPlan&gt;">
+                      <DefaultValue>
+                        <String>= new Dictionary&lt;string,custom.SmartAPSFirmPlan&gt;()</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="SetupInfo" PropertyType="List&lt;input.SETUP_INFO&gt;">
+                      <DefaultValue>
+                        <String>= new List&lt;input.SETUP_INFO&gt;()</String>
+                      </DefaultValue>
+                    </cdm:PropertyMeta>
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>EqpID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+            <FDataClassItem Name="SmartAPSFactoryBreakTime">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" Name="SmartAPSFactoryBreakTime">
+                  <Properties>
+                    <cdm:PropertyMeta Name="StartTime" PropertyType="DateTime" />
+                    <cdm:PropertyMeta Name="EndTime" PropertyType="DateTime" />
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
+          </Children>
+        </FDataClassFolder>
+      </Children>
+    </FDataClassRoot>
+  </Content>
+</vxml:Document>

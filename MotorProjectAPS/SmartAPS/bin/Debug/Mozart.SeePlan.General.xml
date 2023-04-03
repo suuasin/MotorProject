@@ -1,0 +1,371 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mozart.SeePlan.General</name>
+    </assembly>
+    <members>
+        <member name="P:Mozart.SeePlan.General.DataModel.Eqp.DispatchingRule">
+            <summary>
+            장비가 사용할 DispatchingRule
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.Eqp.SubEqps">
+            <summary>
+            SubEqp 목록을 반환합니다.
+            </summary>
+            <summary>
+            Returns the SubEqp list.
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.Eqp.HasSubEqps">
+            <summary>
+            등록된 SubEqp 목록이 있는지 판별합니다.
+            </summary>
+            <summary>
+            Determines if there are any registered SubEqp lists. 
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.Eqp.SubEqpCount">
+            <summary>
+            SubEqp 개수를 반환합니다.
+            </summary>
+            <summary>
+            Returns the total number of SubEqp
+            </summary>
+        </member>
+        <member name="M:Mozart.SeePlan.General.DataModel.Eqp.AddSubEqp(Mozart.SeePlan.General.DataModel.ISubEqp)">
+            <summary>
+            SubEqp를 등록합니다.
+            </summary>
+            <param name="subEqp"></param>
+            <summary>
+            Register SubEqp
+            </summary>
+            <param name="subEqp"></param>
+        </member>
+        <member name="M:Mozart.SeePlan.General.DataModel.Eqp.GetSubEqp(System.String)">
+            <summary>
+            eqpID에 맞는 SubEqp를 반환합니다.
+            </summary>
+            <param name="eqpid">찾고자 하는 장비ID 입니다.</param>
+            <returns>eqpid와 동일한 ISubEqp의 SubEqpID가 있는 경우 ISubEqp를 반환하고 없을 경우 Null 을 반환합니다.</returns>
+            <summary>
+            Returns the SubEqp matching with the requested equpID.
+            </summary>
+            <param name="eqpid">To search for equipment ID</param>
+            <returns> If there is SubEqpID of ISubEqp matching with eqpid, return ISubEqp, or else, return NULL</returns>
+        </member>
+        <member name="T:Mozart.SeePlan.General.DataModel.GeneralStep">
+            <summary>
+            공정(Step) 데이터 클래스
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.GeneralStep.PrevStep">
+            <summary>
+            This is the information of the previous Step.
+            </summary>
+        </member>
+        <member name="T:Mozart.SeePlan.General.DataModel.ISubEqp">
+            <summary>
+            한 장비를 구성하는 Sub 장비 모델입니다. 예를 들어 Chamber 장비의 경우 Chamber Frame 장비번호가 Parent 가 되며, 각 Chamber 가 SubEqp 가 되는 구조입니다. 
+            </summary>
+            <summary>
+                <para>The data model of the sub equipment that composes one equipment(Parent).</para>
+                <para>Chamber for instance, the identification number of the chamber frame is the parent, and each of the chambers are <em>SubEqp</em>.</para>
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.ISubEqp.Parent">
+            <summary>
+            SubEqp 가 포함되는 장비객체입니다. 
+            </summary>
+            <summary>
+            Gets or sets the parent equipment object containing the <em>SubEqp</em> information. 
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.ISubEqp.SubEqpID">
+            <summary>
+            서브 장비 ID입니다.
+            </summary>
+            <summary>
+            Gets or sets the equipment ID of the <em>SubEqp</em>. 
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.ISubEqp.State">
+            <summary>
+            서브 장비 상태 유형입니다. Up/Down 상태로 정의됩니다. 
+            Parent 장비가 가용한 상태일때에도 SubEqp 별로 가용상태가 다를 수 있습니다. 
+            </summary>
+            <summary>
+            Gets or sets the Up/Down state of the <em>SubEqp</em>
+            Each of the <em>SubEqp</em> state can differ although the parent equipment is in "Up" state. 
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.LotID">
+            <summary>
+            Lot ID
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.UnitQty">
+            <summary>
+            Lot을 구성하는 Unit 수량
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.Product">
+            <summary>
+            Product 정보
+            </summary>  
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.Process">
+            <summary>
+            초기 설정된 Process 정보
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.InitialStep">
+            <summary>
+            Current Step
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.InitialEqp">
+            <summary>
+            장비(예약, 로딩, 작업중, Unlod 상태인 경우만 가능)
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.CurrentState">
+            <summary>
+            재공 상태
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.WipProductID">
+            <summary>
+            초기 데이터베이스 상의 product id 
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.WipProcessID">
+            <summary>
+            초기 데이터베이스 상의 process id
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.WipStepID">
+            <summary>
+            초기 데이터베이스 상의 step id 
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.WipEqpID">
+            <summary>
+            초기 데이터베이스 상의 eqp id
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.WipState">
+            <summary>
+            초기 데이터베이스 상의 재공 상태
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.WipStateTime">
+            <summary>
+            상태 변경시각
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.LastTrackInTime">
+            <summary>
+            마지막 track in time
+            현재 상태가 port loading, processing 상태인 경우만 값 설정
+            </summary> 
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.LastProcessStartTime">
+            <summary>
+            마지막 process start time
+            현재 상태가 processing 상태인 경우만 값 설정
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.IWipInfo.LastTrackOutTime">
+            <summary>
+            이전 공정의 TrackOut 시각
+            </summary>
+        </member>
+        <member name="T:Mozart.SeePlan.General.DataModel.PlanInfo">
+            <summary>
+            공정별 장비 로딩 정보
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.PlanInfo.ProductID">
+            <summary>
+            Product ID
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.PlanInfo.ProcessID">
+            <summary>
+            Step ID
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.PlanInfo.LotID">
+            <summary>
+            LOT ID
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.DataModel.PlanInfo.UnitQty">
+            <summary>
+            Unit quantity of the workpiece.  
+            </summary>
+        </member>
+        <member name="M:Mozart.SeePlan.General.Pegging.PrepareWipControl.PrepareWip(Mozart.SeePlan.Pegging.PegPart)">
+            <summary>
+            Pegging 을 위한 Wip 정보를 생성하고 초기화를 수행합니다.
+            </summary>
+            <param name="pegPart">입력 PegPart 객체입니다.</param>
+            <returns>수정된 pegPart 객체입니다. 본 함수에서 결과값은 일반적으로 수정대상이 되지 않습니다.</returns>
+        </member>
+        <member name="M:Mozart.SeePlan.General.Pegging.PrepareTargetControl.PrepareTarget(Mozart.SeePlan.Pegging.PegPart)">
+            <summary>
+            Demand 에 대한 정보를 기반으로 PegTarget 정보를 생성합니다. 
+            </summary>
+            <param name="pegPart">입력 PegPart 객체입니다.</param>
+            <returns>생성된 PegPart 정보를 포함하는 MergedPegPart 객첵입니다.
+            입력 parameter 의 수정값입니다. </returns>
+            <remarks>
+            일반적으로 PeggerModel 의 Preflow 에서 호출되도록 Rule 을 배치하며
+            이때 PegPart는 MergedPegPart 로 Dummy 형태로 제공됩니다. 최종 가공된 
+            Out 기준 Demand 에 Mapping 되는 제품(Product)별로 PegPart 를 생성하고
+            생성된 PegPart 를 입력된 MergedPegPart 에 추가하는 작업을 수행합니다.
+            </remarks>
+        </member>
+        <member name="M:Mozart.SeePlan.General.Pegging.ManipulateDemandControl.ManipulateDemand(Mozart.SeePlan.Pegging.PegPart)">
+            <summary>
+            입력된 Demand 를 Pegging 의 Input Demand 로 변환하는 로직을 구현합니다.
+            </summary>
+            <param name="pegPart">입력 PegPart 객체입니다.</param>
+            <returns>결과 처리된 PegPart 객체입니다.</returns>
+            <remarks>
+            일반적으로 PeggerModel 의 Preflow 에서 호출되도록 Rule 을 배치하며
+            이때 PegPart는 MergedPegPart 로 Dummy 형태로 제공됩니다. 사용자 조직의
+            입력 Demand 정보를 가공하여 가공된 정보를 별도(InputMart)로 저장하는 작업을 수행합니다.
+            </remarks>
+        </member>
+        <member name="M:Mozart.SeePlan.General.Pegging.BuildInPlanControl.BuildInPlan(Mozart.SeePlan.Pegging.PegPart)">
+            <summary>
+            PegPart 의 잔여 Target 을 투입 배치를 구성하는 기준으로 재그룹핑하고 사용자 조직의 투입 룰을 고려하여 로직을 개발합니다.
+            </summary>
+            <param name="pegPart">입력 PegPart 객체입니다.
+            </param>
+            <returns>변경된 PegPart 정보입니다.</returns>
+            <remarks>
+            일반적으로 PeggerModel 의 Postflow 에서 호출되도록 Rule 을 배치하며
+            이때 PegPart는 MergedPegPart 로 제공됩니다. 투입계획 수립을 위해 
+            MergedPegPart.Items 의 개별 PegPart 에 대한 잔여 Target 을 가공하여 로직을 구현합니다.
+            </remarks>
+        </member>
+        <member name="T:Mozart.SeePlan.General.Pegging.GeneralMoMaster">
+            <summary>
+            제품별 Demand 집합
+            </summary>
+        </member>
+        <member name="T:Mozart.SeePlan.General.Pegging.GeneralMoPlan">
+            <summary>
+            제품별 단위기간(일,주)의 Demand 데이터클래스
+            </summary>
+        </member>
+        <member name="T:Mozart.SeePlan.General.Pegging.GeneralPegPart">
+            <summary>
+            Pegging 을 위한 Demand 집합 클래스
+            </summary>
+        </member>
+        <member name="T:Mozart.SeePlan.General.Pegging.GeneralPegTarget">
+            <summary>
+            Pegging 대상이 되는 단위 Demand(Target) 클래스
+            </summary>
+        </member>
+        <member name="T:Mozart.SeePlan.General.Pegging.PlanWip">
+            <summary>
+            Pegging 대상 Wip 정보 클래스
+            </summary>
+        </member>
+        <member name="T:Mozart.SeePlan.General.Simulation.LotBatch">
+            <summary>
+            Simulation 장비에 대한 데이터 클래스
+            </summary>
+        </member>
+        <member name="T:Mozart.SeePlan.General.Simulation.Lot">
+            <summary>
+            Semicon FAB 용 Simulation 작업물(Entity) 클래스
+            </summary>
+        </member>
+        <member name="M:Mozart.SeePlan.General.Simulation.Lot.#ctor">
+            <summary>
+            생성자입니다.
+            </summary>
+        </member>
+        <member name="M:Mozart.SeePlan.General.Simulation.Lot.#ctor(Mozart.SeePlan.General.DataModel.IWipInfo)">
+            <summary>
+            Creator from IWipInfo
+            </summary>
+            <param name="wip"></param>
+        </member>
+        <member name="M:Mozart.SeePlan.General.Simulation.Lot.#ctor(System.String,Mozart.SeePlan.General.DataModel.Product,System.String)">
+            <summary>
+            생성자입니다.
+            </summary>
+            <param name="lotID"></param>
+            <param name="prod"></param>
+            <param name="lineID"></param>
+        </member>
+        <member name="M:Mozart.SeePlan.General.Simulation.Lot.Init(System.String,Mozart.SeePlan.General.DataModel.Product,System.String)">
+            <summary>
+            Lot을 초기화 합니다.
+            </summary>
+            <param name="lotID"></param>
+            <param name="prod"></param>
+            <param name="lineID"></param>
+        </member>
+        <member name="P:Mozart.SeePlan.General.Simulation.Lot.OriginLineID">
+            <summary>
+            투입라인
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.Simulation.Lot.LineID">
+            <summary>
+            현재라인
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.Simulation.Lot.Product">
+            <summary>
+            Product
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.Simulation.Lot.Process">
+            <summary>
+            Process
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.Simulation.Lot.WipInfo">
+            <summary>
+            재공정보
+            </summary>
+        </member>
+        <member name="M:Mozart.SeePlan.General.Simulation.Lot.GetFirstStep">
+            <summary>
+            재공의 초기 Step 을 반환합니다.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.SeePlan.General.Simulation.Lot.Clone">
+            <summary>
+            Lot 을 복제합니다.
+            </summary>
+            <returns>복제된 작업물(lot)입니다.</returns>
+        </member>
+        <member name="P:Mozart.SeePlan.General.Simulation.Lot.CurrentProductID">
+            <summary>
+            Product code of lot.
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.Simulation.Lot.CurrentProcessID">
+            <summary>
+            Process ID of lot.
+            </summary>
+        </member>
+        <member name="P:Mozart.SeePlan.General.Simulation.Lot.CurrentStepID">
+            <summary>
+            Step ID of lot.
+            </summary>
+        </member>
+    </members>
+</doc>

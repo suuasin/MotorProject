@@ -1,0 +1,2673 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mozart.Simulation.Engine</name>
+    </assembly>
+    <members>
+        <member name="T:Mozart.Simulation.Engine.ActiveObject">
+            <summary>
+            This is a base class for all active object classes created by the user. 
+            Active object is the main building block of Simulation models; 
+            it can have parameters, ports, events, statecharts and embedded active objects. 
+            Active object is the unit of dynamic creation of destruction
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.#ctor(Mozart.Simulation.Engine.Coordinator)">
+            <summary>
+            Initializes a new instance of the ActiveObject
+            </summary>
+            <param name="engine">simulation engine</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.#ctor(Mozart.Simulation.Engine.ActiveObject)">
+            <summary>
+            Initializes a new instance of the ActiveObject
+            </summary>
+            <param name="ao"></param>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ActiveObject.Engine">
+            <summary>
+            simulation engine where this object belongs to
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ActiveObject.StartTime">
+            <summary>
+            이 개체가 속한 시뮬레이션 엔진의 시작 시간입니다.
+            </summary>
+            <summary>
+            The start time of the simulation engine to which the object belongs to.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ActiveObject.StopTime">
+            <summary>
+            이 개체가 속한 시뮬레이션 엔진의 종료 시간입니다.
+            </summary>
+            <summary>
+            The end time of the simulation engine to which the object belongs to. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ActiveObject.Now">
+            <summary>
+            이 개체가 속한 시뮬레이션 엔진의 현재 시간입니다.
+            </summary>
+            <summary>
+            The current time of the simulation engine to which the object belongs to. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ActiveObject.NowDT">
+            <summary>
+            이 개체가 속한 시뮬레이션 엔진의 System.DateTime 형식의 현재 시간입니다.
+            </summary>
+            <summary>
+            The the current time in System.DateTime type of the simulation engine, to which the object belongs to.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ActiveObject.DefaultRandomGenerator">
+            <summary>
+            이 개체가 속한 시뮬레이션 엔진에서 사용하는 난수 생성기를 가져오거나 설정합니다.
+            </summary>
+            <summary>
+            Gets or sets the random number generator used by the simulation engine to which the object belongs to. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ActiveObject.Parent">
+            <summary>
+            Gets the parent class
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ActiveObject.Name">
+            <summary>
+            Gets the name
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.Destroy">
+            <summary>
+            Must be called when the active object is dynamically disposed
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.Dispose">
+            <summary>
+            할당된 리소스를 해제합니다.
+            </summary>
+            <summary>
+            Releases all resources used by the current instance of the <em>ActiveOject</em> class. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.SetModified">
+            <summary>
+            개체의 일부 데이터가 변경되었다는 상태를 설정합니다.
+            </summary>
+            <summary>
+            Sets a state to notify some portion of the data of the specified active object is changed. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.OnModified">
+            <summary>
+            Notification to the active object meaning "some of your data may have changed during this event"
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.OnDispose">
+            <summary>
+            Must be called when the active object is dynamically disposed
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.OnStart">
+            <summary>
+            Is called after all activities are started in the object (initial events are scheduled) and onStartup() has been called for the embedded objects, but before any steps are made
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.OnStarted">
+            <summary>
+            embedded objects를 모두 시작 시킨 뒤 호출되는 이벤트입니다.
+            </summary>
+            <summary>
+            The event to call after all embedded objects are started.
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.OnCreate">
+            <summary>
+             Is called at the very end of create() method, i.e. when all parameters have been initialized, 
+             embedded objects are created (and their onCreate() has been called), 
+             but before any activities are started (no events are scheduled yet), thus also before the startup code is executed
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.OnDone">
+            <summary>
+            Is called after all activities are ended in the object and OnDone() has been called for the embedded objects
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ActiveObject.EmbeddedObjects">
+            <summary>
+            Active object에 추가된 자식 active object의 목록을 가져옵니다.
+            </summary>
+            <summary>
+            Gets the list of child active objects included to the specified active object.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ActiveObject.DynamicEvents">
+            <summary>
+            Active object에 추가된 DynamicEvent의 목록을 가져옵니다.
+            </summary>
+            <summary>
+            Gets the list of dynamic events included to the specified active object. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.AddTimeout(Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.ActionDelegate,System.Int32)">
+            <summary>
+            이 Active object를 발송자(sender)로 하여 시뮬레이션 엔진의 현재 시간 기준으로 정해진 시간 이후에 Action 대리자를 호출하는 DynamicEvent를 추가합니다.
+            </summary>
+            <param name="delay">DynamicEvent의 실행 지연 시간입니다.</param>
+            <param name="action">DynamicEvent가 실행될 때 호출되는 Action 대리자입니다.</param>
+            <param name="eventPriority">
+                <para>DynamicEvent의 우선순위 입니다.</para>
+                <para>동일한 시간에 발생하는 DynamicEvent가 시뮬레이션 엔진에 등록된 경우 우선순위가 높은(오름차순) DynamicEvent가 우선 실행 됩니다.</para>
+            </param>
+            <returns>추가된 DynamicEvent입니다.</returns>
+            <summary>
+            Adds a <em>DynamicEvent</em> to call the event handler defined within the method represented by the specified delegate, after the specified time in reference to the current time of the simulation, using the <em>ActiveObject</em> object that represents the sender of this <em>ActiveObject</em>.
+            </summary>
+            <param name="delay">The execution delay time of the <em>DynamicEvent</em>.</param>
+            <param name="action">The delegate that represents the event handler method, to call when this <em>DynamicEvent</em> is executed.</param>
+            <param name="eventPriority">
+                <para>The execution priority of the <em>DynamicEvent</em>.</para>
+                <para></para>When <em>DynamicEvent</em>s with same occurrence time is registered to the simulation engine, the <em>DynamicEvent</em> with higher <em>eventPriority</em> set(in ascending order) will execute first.
+            </param>
+            <returns>Returns the created <em>DynamicEvent</em> instance.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.AddTimeout(Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.ActionDelegate,System.Object,System.Int32)">
+            <summary>
+            이 Active object를 발송자(sender)로 하여 시뮬레이션 엔진의 현재 시간 기준으로 정해진 시간 이후에 Action 대리자를 호출하는 DynamicEvent를 추가합니다.
+            </summary>
+            <param name="delay">DynamicEvent의 실행 지연 시간입니다.</param>
+            <param name="action">DynamicEvent가 실행될 때 호출되는 Action 대리자입니다.</param>
+            <param name="args">Action 대리자에 전달될 Argument입니다.</param>
+            <param name="eventPriority">
+                <para>DynamicEvent의 우선순위 입니다.</para>
+                <para>동일한 시간에 발생하는 DynamicEvent가 시뮬레이션 엔진에 등록된 경우 우선순위가 높은(오름차순) DynamicEvent가 우선 실행 됩니다.</para>
+            </param>
+            <returns>추가된 DynamicEvent입니다.</returns>
+            <summary>
+            Adds a <em>DynamicEvent</em> to call the event handler defined within the method represented by the specified delegate, after the specified time in reference to the current time of the simulation, using the <em>ActiveObject</em> object that represents the sender of this <em>ActiveObject</em>.
+            </summary>
+            <param name="delay">The execution delay time of the <em>DynamicEvent</em>.</param>
+            <param name="action">The delegate that represents the event handler method, to call when this <em>DynamicEvent</em> is executed.</param>
+            <param name="args">The argument to send to the delegate.</param>
+            <param name="eventPriority">
+                <para>The execution priority of the <em>DynamicEvent</em>.</para>
+                <para></para>When <em>DynamicEvent</em>s with same occurrence time is registered to the simulation engine, the <em>DynamicEvent</em> with higher <em>eventPriority</em> set(in ascending order) will execute first.
+            </param>
+            <returns>Returns the created <em>DynamicEvent</em> instance.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.AddChild(Mozart.Simulation.Engine.ActiveObject)">
+            <summary>
+            주어진 active object를 embedded object를 추가하고, 이 active object를 부모로 설정합니다.
+            </summary>
+            <param name="ao">Embedded object로 추가할 active object입니다.</param>
+            <summary>
+            Adds the specified active object to the <em>EmbeddedObject</em> and set this active object to parent of the embedded object.
+            </summary>
+            <param name="ao">The active object to add to <em>EmbeddedObject</em>.</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ActiveObject.RemoveChild(Mozart.Simulation.Engine.ActiveObject)">
+            <summary>
+            주어진 active object를 embedded object에서 제거하고, 부모를 null로 설정합니다.
+            </summary>
+            <param name="ao">Embedded object에서 제거할 active object입니다.</param>
+            <summary>
+            Removes the specifed active object from the <em>EmbeddedObject</em>, and set parent to null. 
+            </summary>
+            <param name="ao">The active object to remove from the <em>EmbeddedObject</em>.</param>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.CalendarQueue`1">
+            <summary>
+            A fast O(1) priority queue intended for the simulation event set problem
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.CalendarQueue`1.Count">
+            <summary>
+            Gets the number of items contained in the queue.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.CalendarQueue`1.IsEmpty">
+            <summary>
+            test the quere is empty
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.CalendarQueue`1.Comparer">
+            <summary>
+            Gets the this comparer
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.CalendarQueue`1.#ctor">
+            <summary>
+            Initializes a new instance of the CalendarQueue class.
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.CalendarQueue`1.Enqueue(`0)">
+            <summary>
+            Inserts an item into the queue
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.CalendarQueue`1.Dequeue">
+            <summary>
+            Removes and returns the item at the head of the queue
+            </summary>
+            <returns>The type of object to store in the queue</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.CalendarQueue`1.Peek">
+            <summary>
+            returns the item at the head of the queue
+            </summary>
+            <returns>The type of object to store in the queue</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.CalendarQueue`1.Remove(`0)">
+            <summary>
+            Removes the first occurence of an item from the queue
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.CalendarQueue`1.Clear">
+            <summary>
+            Removes all items from the queue
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.CircularList`1">
+            <summary>
+            A CircularList is a list with its far end linked to its near end. 
+            Data items can be added or retrieved from either end. Data items can be removed 
+            from the front. The first data item can be rotated to the far end. One CircularList can be appended to another CircularList. 
+            A CircularList can be used to implement various data structures
+            </summary>
+            <typeparam name="T">type of T</typeparam>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.CircularList`1.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the CircularList class.
+            </summary>
+            <param name="maximum">maximum size</param>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.HeapPriorityQueue`1">
+            <summary>
+            Realization of a priority queue by means of a heap. A complete binary tree realized by means of an array list is used to represent the heap
+            </summary>
+            <typeparam name="T">The type of object to store in the queue</typeparam>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HeapPriorityQueue`1.#ctor">
+            <summary>
+            Initializes a new instance of the HeapPriorityQueue.
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HeapPriorityQueue`1.#ctor(System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Initializes a new instance of the HeapPriorityQueue with comparing priorities.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.HeapPriorityQueue`1.Item(System.Int32)">
+            <summary>
+            Gets indexer 
+            </summary>
+            <param name="index">index</param>
+            <returns>The type of object to store in the queue</returns>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.HeapPriorityQueue`1.Comparer">
+            <summary>
+            gets the this comparer
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HeapPriorityQueue`1.Clear">
+            <summary>
+            Removes all items from the queue
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HeapPriorityQueue`1.Enqueue(`0)">
+            <summary>
+            Inserts an item into the queue
+            </summary>
+            <param name="value">The type of object to store in the queue</param>
+        </member>
+        <member name="F:Mozart.Simulation.Engine.HeapPriorityQueue`1._minValue">
+            <summary>
+            Removes and returns the item at the head of the queue
+            </summary>
+            <returns>The type of object to store in the queue</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HeapPriorityQueue`1.Peek">
+            <summary>
+            Gets the item at the head of the queue
+            </summary>
+            <returns>The type of object to store in the queue</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HeapPriorityQueue`1.Remove(`0)">
+            <summary>
+            Removes the T item in the queue
+            </summary>
+            <param name="value">The type of object to store in the queue</param>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.HeapPriorityQueue`1.Count">
+            <summary>
+            Gets the number of enties in the queue
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.HeapPriorityQueue`1.IsReadOnly">
+            <summary>
+            Gets "ReadOnly" property
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HeapPriorityQueue`1.Contains(`0)">
+            <summary>
+            Tests containment of the T value in the queue
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HeapPriorityQueue`1.TrueForAll(System.Predicate{`0})">
+            <summary>
+            Evaluate whether an expression holds true across the heap
+            </summary>
+            <param name="match">Delegate to a matching predicate</param>
+            <returns>Whether the expression held true for all members of the heap</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HeapPriorityQueue`1.RemoveAll(System.Predicate{`0})">
+            <summary>
+            Remove all elements from the heap that match the specified condition
+            </summary>
+            <param name="match">Delegate to a matching predicate</param>
+            <returns>The number of elements removed</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HeapPriorityQueue`1.ForEach(System.Action{`0})">
+            <summary>
+            Invoke the given action across every element in the heap
+            </summary>
+            <remarks>
+            No ordering is implied by this method. The heap is treated as a set.
+            </remarks>
+            <param name="action">the action to invoke</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HeapPriorityQueue`1.FindAll(System.Predicate{`0})">
+            <summary>
+            Find the sub-heap of all the items in the heap that match the given condition
+            </summary>
+            <param name="match">Delegate to a matching predicate</param>
+            <returns>The sub-heap of all the items in the heap that match the given condition</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HeapPriorityQueue`1.Find(System.Predicate{`0},`0@)">
+            <summary>
+            Find an item in the heap that matches the given condition
+            </summary>
+            <remarks>
+            No ordering is implied by this method.
+            </remarks>
+            <param name="match">Delegate to a matching predicate</param>
+            <param name="result">Storage for the matched item (if found)</param>
+            <returns>Whether an item was found that matches the given condition</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HeapPriorityQueue`1.Exists(System.Predicate{`0})">
+            <summary>
+            Is there an item in the heap which matches the given condition?
+            </summary>
+            <param name="match">Delegate to a matching predicate</param>
+            <returns>Whether an item in the heap matches the given condition</returns>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Collections.HenriksenQueue`1.Comparer">
+            <summary>
+            gets the this comparer
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Collections.SplayTreeQueue`1">
+            <summary>
+            An implementation of <seealso cref="T:Mozart.Simulation.Engine.IPriorityQueue`1"/> using a splay tree.
+            This tree is like a binary search tree except that when it
+            is modified, the affected node is moved to the top.
+            The rebalancing scheme is simpler than for a <span  class="textit">red black</span>
+            tree and can avoid the worst case of the linked list.
+            This gives a 
+            <span class="MATH"><i>O</i>(log(<i>n</i>))</span> average time for adding or removing
+            an item, where <span class="MATH"><i>n</i></span> is the size of the item list.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Collections.SplayTreeQueue`1.Comparer">
+            <summary>
+            gets the this comparer
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Collections.SplayTreeQueue`1.Add(`0,System.Int32)">
+            <summary>
+            Creates a new Node object.
+            </summary>
+            <param name="item"></param>
+            <param name="parent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Collections.SplayTreeQueue`1.Splay(System.Int32)">
+             <summary>
+             Back to the root entry with a splay of a "bottom-up" type,
+            which takes as parameter the node back.
+            
+            Operation splay:
+            Until the element becomes the root, it is:
+             - If the father of the element is the root, it is the rotation
+               between the father and the element (case "zig").
+             - If the father of the element and the element is not a son of
+               same side (left-right or right-left), then it is
+               rotation between the father and the element ("zig-zag" simplified case).
+             - If the father of the element and the element son are on the same side
+               (left-right-left or right), then the rotation is
+               between the grandfather and father before rotate between
+               the father and the element (case "zig-zig").
+             </summary>
+             <param name="e"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Collections.SplayTreeQueue`1.Remove(System.Int32)">
+             <summary>
+             Removes the entry e of the tree.
+            
+             Procedure :
+             We first made ​​a splay of the entrance was removed for raising
+              the root. Once the root, it is removed. It then tries
+              the minimum element of the right subtree (which contains the Elements
+              which are larger than E) and, with a splay, it goes back to the
+              root of the subtree. This element, as it is the minimum
+              its subtree has not left son. He was therefore attached as
+              son left the left sub-tree.
+            
+            The reason for this procedure more complicated than the equivalent in
+              an ordinary binary tree is that for the guarantee of
+              access to amortized O (log n) time splay tree applies,
+              requires that each access (which requires a search) of an element
+              is accompanied by the splay of this element is the root.
+             </summary>
+             <param name="e"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Collections.SplayTreeQueue`1.FindNode(`0)">
+            <summary>
+            Finds the corresponding Node for an item.
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.IPriorityQueue`1">
+            <summary>
+            priority queues interface
+            </summary>
+            <typeparam name="T">The type of object to store in the queue</typeparam>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.IPriorityQueue`1.IsEmpty">
+            <summary>
+            test the quere is empty
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.IPriorityQueue`1.Comparer">
+            <summary>
+             Get/Sets queue item comparer
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.IPriorityQueue`1.Enqueue(`0)">
+            <summary>
+            Inserts an item into the queue
+            </summary>
+            <param name="value">type of T</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.IPriorityQueue`1.Dequeue">
+            <summary>
+            Removes and returns the item at the head of the queue
+            </summary>
+            <returns>Type of T</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.IPriorityQueue`1.Peek">
+            <summary>
+            Returns, but does not remove, the item at the head of the queue
+            </summary>
+            <returns>Type of T</returns>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.IPriorityQueue`1.Count">
+            <summary>
+            Gets the number of items contained in the queue.
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.IPriorityQueue`1.Remove(`0)">
+            <summary>
+            Removes value from the queue
+            </summary>
+            <param name="value"></param>
+            <returns>return true if success, else return false</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.IPriorityQueue`1.Clear">
+            <summary>
+            Removes all items from the queue
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.ListPriorityQueue`1">
+            <summary>
+            A ListPriorityQueue is an implementation of the PriorityQueue interface
+            </summary>
+            <typeparam name="T">The type of object to store in the queue</typeparam>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ListPriorityQueue`1.#ctor">
+            <summary>
+            Initializes a new instance of the ListPriorityQueue.( default capacity = 16 )
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ListPriorityQueue`1.#ctor(System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Initializes a new instance of the ListPriorityQueue ( with comparing priorities)
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ListPriorityQueue`1.#ctor(System.Int32,System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Initializes a new instance of the ListPriorityQueue(capacity, comparer)
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ListPriorityQueue`1.Count">
+            <summary>
+            Gets the number of items contained in the queue. 
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ListPriorityQueue`1.IsEmpty">
+            <summary>
+            Tests the quere is empty
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ListPriorityQueue`1.IsReadOnly">
+            <summary>
+            Gets the "ReadOnly" Property
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ListPriorityQueue`1.Capacity">
+            <summary>
+            Gets the number of entries in queue
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ListPriorityQueue`1.Comparer">
+            <summary>
+            Gets the comparer
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ListPriorityQueue`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="arrayIndex">last array index</param>
+        </member>
+        <member name="F:Mozart.Simulation.Engine.ListPriorityQueue`1.SearchThreshold">
+            <summary>
+            Search T value of items contained in the queue
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ListPriorityQueue`1.RemoveAt(System.Int32)">
+            <summary>
+            Removes entry at index 
+            </summary>
+            <param name="index"></param>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.SearchQueue`1">
+            <summary>
+            This queue is improved search performance, so remove, find function etc are fast.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.SearchQueue`1.#ctor">
+            <summary>
+            Initializes a new instance of the SearchQueue
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.SearchQueue`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Initializes a new instance of the SearchQueue
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.SearchQueue`1.Remove(`0)">
+            <summary>
+            Removes a T item in the queue
+            </summary>
+            <param name="item">The object to remove.</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.SearchQueue`1.Enqueue(`0)">
+            <summary>
+            Inserts an item into the end of the queue
+            </summary>
+            <param name="item">The object to add to the end of the queue.</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.SearchQueue`1.AddFirst(`0)">
+            <summary>
+            Adds the item at the head of the queue
+            </summary>
+            <param name="item">The type of object to store in the queue</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.SearchQueue`1.Peek">
+            <summary>
+            returns the item at the head of the queue
+            </summary>
+            <returns>The type of object to store in the queue</returns>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Coordinator">
+            <summary>
+            The simulation engine that drives the model execution. 
+            The engine maintains the event queue, 
+            the default random number generator, etc. 
+            Although there is one engine per simulation,  it is designed to have no static data.
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.#ctor(Mozart.Simulation.Engine.Experiment)">
+            <summary>
+            Constructs the engine and sets the seed of the default random number generator to 0.
+            </summary>
+            <param name="experiment"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.SynchronizeTime(Mozart.Simulation.Engine.Time)">
+            <summary>
+            Synchronize time inserts an item into the queue
+            </summary>
+            <param name="time"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.Start(Mozart.Simulation.Engine.ActiveObject)">
+            <summary>
+            Engine command applicable only in IDLE state (in other states does nothing and returns false). 
+            </summary>
+            <param name="root"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.Step">
+            <summary>
+            Makes at most one discrete step of the model (can be done from the PAUSED state only)
+            </summary>
+            <returns>false if the engine state does not allow for making a step</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.Run">
+            <summary>
+            Engine command applicable only in PAUSED state (in other states does nothing and returns false)
+            </summary>
+            <returns>false if the engine state does not allow running</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.RunFast">
+            <summary>
+             Runs the model in the fastest possible way in the same (calling) thread.
+            </summary>
+            <returns>false if the engine state does not allow running</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.StopFast">
+            <summary>
+             Stop the model in the fastest possible way in the same (calling) thread.
+            </summary>
+            <returns>false if the engine state does not allow running</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.Pause">
+            <summary>
+            Engine command applicable only in RUNNING state (in other states does nothing and returns false). 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.Stop">
+            <summary>
+            Engine command applicable only in any non-IDLE state (in IDLE state does nothing and returns false). 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.Done">
+            <summary>
+            Do done
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.Schedule(Mozart.Simulation.Engine.Event)">
+            <summary>
+            Inserts an item into the queue
+            </summary>
+            <param name="evt"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.Cancel(Mozart.Simulation.Engine.Event)">
+            <summary>
+            Remove an item the queue
+            </summary>
+            <param name="evt"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.CancelAll">
+            <summary>
+            All remove an item the queue 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.Submit(Mozart.Simulation.Engine.IPredicateEvent)">
+            <summary>
+            Registers an Predicate event instance in 'predicates' array. 
+            If the given Predicate event is already there, does nothing. Has constant complexity. 
+            </summary>
+            <param name="evt"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Coordinator.Unsubmit(Mozart.Simulation.Engine.IPredicateEvent)">
+            <summary>
+            Unregisters given Predicate event from the list 'predicates'. Is called by active objects on destroy. 
+            </summary>
+            <param name="evt"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.CoordinatorStateType">
+            <summary>
+            Coordinator state type
+            </summary>
+        </member>
+        <member name="F:Mozart.Simulation.Engine.CoordinatorStateType.Idle">
+            <summary>
+            Idle state
+            </summary>
+        </member>
+        <member name="F:Mozart.Simulation.Engine.CoordinatorStateType.Paused">
+            <summary>
+            Paused state
+            </summary>
+        </member>
+        <member name="F:Mozart.Simulation.Engine.CoordinatorStateType.Running">
+            <summary>
+            Running state
+            </summary>
+        </member>
+        <member name="F:Mozart.Simulation.Engine.CoordinatorStateType.Finished">
+            <summary>
+            Finished state
+            </summary>
+        </member>
+        <member name="F:Mozart.Simulation.Engine.CoordinatorStateType.Error">
+            <summary>
+            Error state
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.ConditionDelegate">
+            <summary>
+            TransitionCondition에서 Action을 실행할 수 있는지 여부를 판단하는 대리자입니다.
+            </summary>
+            <param name="sender">대리자를 호출한 개체입니다.</param>
+            <returns>판단의 결과입니다. true인 경우 Action을 실행할 수 있습니다. 그 외의 경우 Action을 실행할 수 없습니다.</returns>
+            <summary>
+            Represents the method that will determine whether the action(event) in <em>TransitionCondition</em> can be executed or not. 
+            </summary>
+            <param name="sender">The source of the action.</param>
+            <returns><em>true</em> to execute the action; otherwise <em>false</em>.</returns>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.TriggerDelegate">
+            <summary>
+            주어진 아규먼트를 사용하여 TransitionMessage에서 Action을 실행할 수 있는지 여부를 판단하는 대리자입니다.
+            </summary>
+            <param name="sender">대리자를 호출한 개체입니다.</param>
+            <param name="args">판단에 사용할 아규먼트 개체입니다.</param>
+            <returns>판단의 결과입니다. true인 경우 Action을 실행할 수 있습니다. 그 외의 경우 Action을 실행할 수 없습니다.</returns>
+            <summary>
+            Represents the method that will determine whether the action(event) in <em>TrasanctionMessage</em> can be executed or not with the specified argument.
+            </summary>
+            <param name="sender">The source of the action.</param>
+            <param name="args">The argument abject to determine whether to execute the action.</param>
+            <returns><em>true</em> to execute the action; otherwise <em>false</em>.</returns>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.GuardDelegate">
+            <summary>
+            Transition에서 Action을 실행할 수 있는지 여부를 판단하는 대리자입니다.
+            </summary>
+            <param name="sender">대리자를 호출한 개체입니다.</param>
+            <returns>판단의 결과입니다. true인 경우 Action을 실행할 수 있습니다. 그 외의 경우 Action을 실행할 수 없습니다.</returns>
+            <summary>
+            Represents the method to determine whether the action(event) in <em>Transiction</em> can be executed or not. 
+            </summary>
+            <param name="sender">The source of the action.</param>
+            <returns><em>true</em> to execute the action; otherwise <em>false</em>.</returns>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.ActionDelegate">
+            <summary>
+            정해진 로직을 실행하는 대리자입니다.
+            </summary>
+            <param name="sender">대리자를 호출한 개체입니다.</param>
+            <param name="args">실행에 사용할 아규먼트 개체입니다.</param>
+            <summary>
+            Represents the method that will handle an action(event). 
+            </summary>
+            <param name="sender">The source of the action.</param>
+            <param name="args">An object that contains action arguments.</param>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.DynamicEvent">
+            <summary>
+            This class is a base class for dynamic events created by the user. Dynamic events are used to schedule any number of 
+            concurrent and independent events; a typical object that uses dynamic event would be a Delay object that can delay arbitrary 
+            number of entities concurrently. The event gets scheduled when a DynamicEvent is instantiated. 
+            Upon execution of the dynamic event the instance is deleted. When the ActiveObject is destroyed, 
+            all dynamic events belonging to it are discarded
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.DynamicEvent.#ctor(Mozart.Simulation.Engine.ActiveObject,Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.ActionDelegate,System.Object)">
+            <summary>
+            A base class constructor for dynamic events
+            </summary>
+            <param name="ao"> ActiveObject</param>
+            <param name="t">event time</param>
+            <param name="action">action delegate</param>
+            <param name="args">event argument</param>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.DynamicEvent.Action">
+            <summary>
+            Gets the Action Delegate
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.DynamicEvent.Arguments">
+            <summary>
+            Gets the Arguments
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.DynamicEvent.Restart(Mozart.Simulation.Engine.Time)">
+            <summary>
+            등록된 DynamicEvent를 취소하고, 지정된 시간 이후에 실행되도록 다시 등록록합니다.
+            </summary>
+            <param name="t"></param>
+            <summary>
+            Cancels the <em>DynamicEvent</em>, and restarts the <em>DynamicEvent</em> after the specified time is passed. 
+            </summary>
+            <param name="t"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.DynamicEvent.Cancel">
+            <summary>
+            등록된 DynamicEvent를 취소합니다.
+            </summary>
+            <summary>
+            Cancles the <em>DynamicEvent</em> execution.
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Event">
+            <summary>
+            Base class for all constructs in MOZART modeling language that are able to schedule discrete events,
+            like Event, DynamicEvent and Transition.
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Event.#ctor(Mozart.Simulation.Engine.ActiveObject)">
+             <summary>
+            
+             </summary>
+             <param name="owner">ActiveObject</param>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.EventCondition">
+            <summary>
+            Event with trigger of type condition. The event is executed when the condition becomes true. 
+            If the active object has continuously changing variables, the numeric engine constantly monitors the condition. 
+            In purely discrete models the condition is tested when something changes in the active obejct, i.e. when onChange() is called.
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.EventCondition.#ctor(Mozart.Simulation.Engine.ActiveObject,Mozart.Simulation.Engine.ConditionDelegate,Mozart.Simulation.Engine.ActionDelegate)">
+            <summary>
+            Initializes a new instance of the EventCondition
+            </summary>
+            <param name="ao"></param>
+            <param name="condition"></param>
+            <param name="action"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.EventCondition.#ctor(Mozart.Simulation.Engine.ActiveObject,Mozart.Simulation.Engine.ConditionDelegate,Mozart.Simulation.Engine.ActionDelegate,System.Object)">
+            <summary>
+            Initializes a new instance of the EventCondition
+            </summary>
+            <param name="ao"></param>
+            <param name="condition"></param>
+            <param name="action"></param>
+            <param name="args"></param>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.EventCondition.IsMonitoring">
+            <summary>
+            Returns true if this event is currently monitoring (waiting on) its condition
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.EventCondition.Arguments">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.EventCondition.Reset">
+            <summary>
+            Cancels the currently scheduled event, if any
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.EventCondition.Restart">
+            <summary>
+            Restart waiting on the condition
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.EventCondition.ContinueMonitoring">
+            <summary>
+            Check if this event is currently monitoring (waiting on) its condition
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.EventCondition.Start">
+            <summary>
+            Should be called whe the active objects starts
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.EventCondition.TestCondition">
+            <summary>
+            Test the Condition
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.EventCondition.OnActivate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.EventTimeout">
+            <summary>
+            Event with trigger of type timeout. The event occurs exactly in timeout time after 
+            it is started. Optionally, the event may be made cylcic and set to occur at startup
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.EventTimeout.#ctor(Mozart.Simulation.Engine.ActiveObject,Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.ActionDelegate)">
+            <summary>
+            Initializes a new instance of the EventTimeout
+            </summary>
+            <param name="ao">ActiveObject</param>
+            <param name="t">Time</param>
+            <param name="action">ActionDelegate</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.EventTimeout.#ctor(Mozart.Simulation.Engine.ActiveObject,Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.ActionDelegate,System.Boolean)">
+            <summary>
+            Initializes a new instance of the EventTimeout
+            </summary>
+            <param name="ao">ActiveObject</param>
+            <param name="t">Time</param>
+            <param name="action">ActionDelegate</param>
+            <param name="doesOccurAtStartup">bool</param>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.EventTimeout.Timeout">
+            <summary>
+            Gets the timeout time
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.EventTimeout.Reset">
+            <summary>
+            Cancels the currently scheduled event, if any
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.EventTimeout.Restart">
+            <summary>
+            Cancels the currently scheduled event, if any, and schedules the next occurrence according to the Timeout specified
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.EventTimeout.Restart(Mozart.Simulation.Engine.Time)">
+            <summary>
+            Cancels the currently scheduled event, if any, and schedules the next occurrence according to the Timeout specified
+            </summary>
+            <param name="t">Timeout Time</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.EventTimeout.Start">
+            <summary>
+            Cancels the currently scheduled event, if any, and schedules the next occurrence in time t
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Experiment">
+            <summary>
+            A base class for all Simulation experiments. 
+            Experiment describes how would one like to run the model
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Experiment.CommandType">
+            <summary>
+            Type of command
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Experiment.Engine">
+            <summary>
+            Gets the simulation engine
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Experiment.DefaultRandomGenerator">
+            <summary>
+            Gets and Sets the default random generator
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Experiment.Now">
+            <summary>
+            Gets the current time of simulation 
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Experiment.NowDT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Experiment.GetState">
+            <summary>
+            Gets the current state of the experiment
+            </summary>
+            <returns>IDLE, PAUSED, RUNNING, FINISHED, ERROR</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Experiment.IsCommandEnabled(Mozart.Simulation.Engine.Experiment.CommandType)">
+            <summary>
+            Checks if a command can be executed
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Experiment.Runs">
+            <summary>
+            Number of Replication 
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Experiment.Root">
+            <summary>
+            Gets the root active object
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Experiment.Reset">
+            <summary>
+            Reset all data associated with the experiment
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Experiment.Run">
+            <summary>
+            Starts the experiment execution from the current state
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Experiment.Step">
+            <summary>
+            Performs one step of experiment execution
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Experiment.Pause">
+            <summary>
+            Pauses the experiment execution
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Experiment.Stop">
+            <summary>
+            Terminates the experiment execution
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.ExperimentMultipleRuns">
+            <summary>
+            The simplest possible experiment consisting of a single simulation run
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.ExperimentSimulation">
+            <summary>
+            The simplest possible experiment consisting of a single simulation run. 
+            One should implement the CreateRoot() method in a subclass to set a particular model to this experiment.
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ExperimentSimulation.#ctor">
+            <summary>
+            Initializes a new instance of the ExperimentSimulation
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ExperimentSimulation.Engine">
+            <summary>
+            Simulation Engine
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ExperimentSimulation.Run">
+            <summary>
+            Runs the model from the current state
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ExperimentSimulation.Step">
+            <summary>
+            Performs one step of the model execution
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ExperimentSimulation.Pause">
+            <summary>
+            Pauses the model execution
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ExperimentSimulation.Stop">
+            <summary>
+            Terminates the model execution, destroys and forgets the model and calls garbage collector, but keeps all experiment data
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.ExperimentSimulation.Reset">
+            <summary>
+            Resets the modle execution
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.ExperimentSimulation.Root">
+            <summary>
+            Gets the root of engine 
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.IPredicateEvent">
+            <summary>
+            IPredicateEvent Interface
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Port">
+            <summary>
+            Port is a universal interface of an active object via which it can send and receive messages - arbitrary objects. 
+            Ports are used to graphically connect objects that do not need to know anything about each other type or structure.
+            
+            There are two major types of links a port maintains: connections to the ports of objects on the same hierarchy level (embedded in the same active object) or "mappings" to the ports of embedded objects or statecharts. In the first case a message sent at one port is received at the other. In case of mapping the message sent at the inner port is forwarded out at the outer port, and vice versa: message received at the outer port is received by the inner port or by the statechart. The user may define his own actions that are executed upon reception or sending the message that may prevent the port from continuing the message processing
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Port.#ctor(Mozart.Simulation.Engine.ActiveObject)">
+            <summary>
+            Initializes a new instance of the Port
+            </summary>
+            <param name="ao">ActiveObject</param>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Port.Owner">
+            <summary>
+            Gets the active object that owns the port
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Port.Engine">
+            <summary>
+            Gets the Simulation Engine
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Port.UpLinks">
+            <summary>
+            Gets an unmodifiable list with mapped ports on active objects which own the current active object (owner of port)
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Port.DownLinks">
+            <summary>
+            Gets an unmodifiable list with mapped ports on active objects embedded in the current active object (owner of port)
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Port.FlatLinks">
+            <summary>
+            Gets an unmodifiable list with connected ports
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Port.Statecharts">
+            <summary>
+            Gets  an unmodifiable list with mapped statecharts of the current active object (owner of this port)
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Port.Connect(Mozart.Simulation.Engine.Port)">
+            <summary>
+            Connects the port to another port of an object on the same level
+            </summary>
+            <param name="port"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Port.Disconnect(Mozart.Simulation.Engine.Port)">
+            <summary>
+            Disconnects the port from another port of an object on the same level
+            </summary>
+            <param name="port"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Port.Map(Mozart.Simulation.Engine.Port)">
+            <summary>
+            Maps (connects) the port to a port of an embedded object
+            </summary>
+            <param name="port"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Port.Map(Mozart.Simulation.Engine.Statechart)">
+            <summary>
+            Maps (connects) the port to a statechart of the same active object
+            </summary>
+            <param name="statechart"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Port.Unmap(Mozart.Simulation.Engine.Port)">
+            <summary>
+            Unmaps (disconnects) the port from a port of an embedded object
+            </summary>
+            <param name="port"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Port.Unmap(Mozart.Simulation.Engine.Statechart)">
+            <summary>
+            Unmaps (disconnects) the port from the statechart of the same active object
+            </summary>
+            <param name="statechart"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Port.DisconnectAndUnmapAll">
+            <summary>
+            Disconnects and Unmaps all the port of an embeded object
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Port.Send(System.Object)">
+            <summary>
+            Send the message out
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Port.Receive(System.Object)">
+            <summary>
+            Receives an incoming message
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.State">
+            <summary>
+            state of the statechart 
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.State.Name">
+            <summary>
+            Gets the name of state
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.State.Action">
+            <summary>
+            Gets the action delegate of the state
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.State.Transitions">
+            <summary>
+            Get all the transition linked to the state
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Statechart">
+            <summary>
+            Statechart - the most advanced construct to describe event- and time-driven behavior. 
+            Statechart has states and transitions. Transitions may be triggered by timeouts or rates, messages received by the statechart, and conditions. 
+            Transition execution may lead to a state change where a new set of transitions becomes active. States in the statechart may be hierarchical, 
+            i.e. contain other states and transitions. The actual structure of state diagram is stored in the active object.
+            There are two ways to send a message to the statechart:
+            - call ReceiveMessage() method, and
+            - call Start() method.
+            ReceiveMessage() assumes no queuing for incoming messages.
+            If the received message cannot immediately cause scheduling of a transition, it is discarded. Therefore, if, for example, 
+            there are two transitions: one (from state S0 to S1) triggered by message A, and another (from S1 to S2) triggered by message B, 
+            and the statechart receives messages A and B at the same time while in the state S0, only first transition will be taken, and message B will be discarded. 
+            This is different to Simulation. Start() supports queuing for incoming messages and has exactly same semantics as in Simulation. 
+            The message added to the queue by Start() can be consumed either immediately or after a number of zero-time steps of the statechart, 
+            otherwise it will be discarded. In the example above both transitions will be taken if the messages A and B are received via Start() method.
+            Using Start() is less efficient than using ReceiveMessage() both time and memory-wise, so if you do care and are sure that no "chains" of zero-time message-triggered transitions can happen, use receiveMessage()
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Statechart.#ctor(Mozart.Simulation.Engine.ActiveObject)">
+            <summary>
+            Initializes a new instance of the Statechart
+            </summary>
+            <param name="owner"></param>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Statechart.Owner">
+            <summary>
+            Gets the active object that owns the statechart
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Statechart.ActiveState">
+            <summary>
+            Gets the currently active state of the statechart
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Statechart.InitialState">
+            <summary>
+            Gets the initial state of the statechart
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Statechart.States">
+            <summary>
+            Get all states of the statechart
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Statechart.ActiveTransitions">
+            <summary>
+            Get all active transitions of the statechart
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Dataset">
+            <summary>
+            A data set capable of storing 2D (X,Y) data of type double and maintaining 
+            the up-to-date minimum and maximum of the stored data for each dimension. 
+            The data set keeps a given limited number of the latest data items.
+            
+            Please note that adding a new item when the dataset is full will cause loss of 
+            the oldest sample and, if the lost item contained minimum or maximum, will 
+            initiate a new search for min/max, which may be quite time consuming for large 
+            datasets. Therefore for large datasets it is recommended to have the size not 
+            less than the number of items yoiu plan to add.
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Histogram">
+            <summary>
+            The chart that displays a collection of histograms. The X axis always is scaled to fit 
+            all histogram data ranges. The histograms are also scaled along the Y axis so that 
+            the highest bar of each histogram occupies the full height of the picture. 
+            The PDF bars, the CDF line and the mean location can be shown optionally. 
+            The chart has a collection of HistogramData objects and the collection of associated 
+             visual appearance descriptions. The chart may have scale text labels and a grid
+             
+             This is the base histogram class which keeps an exact tally of
+            all values input, i.e., a bucket is created for each new value.
+            This can take up a lot of space in a given simulation, so other
+            (less precise) histogram classes are also provided. 
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Histogram.Bucket">
+            <summary>
+            Histogram bucket class
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Histogram.#ctor">
+            <summary>
+            Initializes a new instance of the Histogram
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Histogram.BucketCount">
+            <summary>
+            Gets the number of Bucket 
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Histogram.Item(System.Int32)">
+            <summary>
+            Gets the bucket at index
+            </summary>
+            <param name="index">indexer</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Histogram.Quantile(System.Double)">
+            <summary>
+            Return the p-quantile. 
+            
+            Quantiles are points taken at regular intervals from the cumulative distribution function (CDF) 
+            of a random variable. Dividing ordered data into q essentially equal-sized data subsets 
+            is the motivation for q-quantiles
+            
+            This function provides a means of obtaining the p-quantile of a distribution, i.e., the
+            value below which p-percent of the distribution lies. 
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Histogram.Contains(System.Double)">
+            <summary>
+            Check if this value is contains
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Histogram.Find(System.Double)">
+            <summary>
+            Finds the bucket in the bucket list
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Histogram.Reset">
+            <summary>
+            Resets the this bucket list
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Histogram.Add(System.Double)">
+            <summary>
+            Adds the item in the bucket list
+            </summary>
+            <param name="value">stat.value</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Histogram.AddBucket(System.Int32,System.Double)">
+            <summary>
+            Adds the item in the bucket list
+            </summary>
+            <param name="index">index of list</param>
+            <param name="value">stat.value</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Histogram.AddBucket(System.Int32,System.Double,System.Boolean)">
+            <summary>
+            Adds the item in the bucket list
+            </summary>
+            <param name="index">index of list</param>
+            <param name="value">stat.value</param>
+            <param name="isCreateOnly">if createOnly then we want an empty bucket, set 'true'</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Histogram.Create(System.Double)">
+            <summary>
+            Create the item
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Histogram.Search(System.Double)">
+            <summary>
+            Searchs for specified object index
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.HistogramSimple">
+            <summary>
+            Data of a histogram with a fixed minimum, maximum and number of intervals. 
+            The outlaying samples are registered in special "too low" and "too high" intervals
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HistogramSimple.#ctor(System.Double,System.Double,System.Int32)">
+            <summary>
+            Initializes a new instance of the HistogramSimple
+            </summary>
+            <param name="min">minimum range</param>
+            <param name="max">maximum range</param>
+            <param name="size">size</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HistogramSimple.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the HistogramSimple
+            </summary>
+            <param name="min">minimum range</param>
+            <param name="max">maximum range</param>
+            <param name="width">width</param>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.HistogramSimple.Width">
+            <summary>
+            Gets the width
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.HistogramSimple.Min">
+            <summary>
+            Gets the minimum range
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.HistogramSimple.Max">
+            <summary>
+            Gets the maximum range
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HistogramSimple.FindIndex(System.Double)">
+            <summary>
+            Searchs for specified bucket
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HistogramSimple.Reset">
+            <summary>
+            Resets the this bucket list
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HistogramSimple.Add(System.Double)">
+            <summary>
+            Adds the item in the bucket list
+            </summary>
+            <param name="value">stat.value</param>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.HistogramSmart">
+            <summary>
+             This histogram class maintains a fixed number of buckets.
+             When the number of buckets required to maintain all of the
+             values given is about to be exceeded a merge operation is
+             performed. This takes a pair of buckets and merges their values
+             according to the policy selected when the histogram was created.
+             The policies are:
+            
+             (1) ACCUMULATE - this creates a new bucket with the same name as
+            	 the largest of the buckets, and it has the sum of the two
+            	 old bucket entries as its entry number.
+             (2) MEAN - this creates a new bucket with the name as the mean of
+            	 the two old buckets, and it has the sum of the two old bucket
+            	 entries as its entry number.
+             (3) MAX - this creates a new bucket with the name as the largest of
+            	 the buckets, and it has the same number of entries.
+             (4) MIN - this creates a new bucket with the name as the smallest of
+            	 the two buckets, and it has the same number of entries.
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.HistogramSmart.MergeMethods">
+            <summary>
+            MergeMethods : Enum
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HistogramSmart.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the HistogramSmart
+            </summary>
+            <param name="maxIndex">maximum index</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HistogramSmart.#ctor(System.Int32,Mozart.Simulation.Engine.HistogramSmart.MergeMethods)">
+            <summary>
+            Initializes a new instance of the HistogramSmart
+            </summary>
+            <param name="maxIndex">maximum index</param>
+            <param name="m">type of MergeMethods</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HistogramSmart.Add(System.Double)">
+            <summary>
+            Adds the item in the HistogramSmart
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.HistogramSmart.MergeBuckets">
+            <summary>
+            Merge the bucket list
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Statistics">
+            <summary>
+            Statistics on a series of data samples of type double.
+            </summary>
+        </member>
+        <member name="F:Mozart.Simulation.Engine.Statistics.DefaultConfidenceLevel">
+            <summary>
+            Default confidence level (.95 or 95%)
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Statistics.SampleCount">
+            <summary>
+            collected sample count
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Statistics.Min">
+            <summary>
+             collected minimum value
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Statistics.Max">
+            <summary>
+            collected maximum value
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Statistics.Mean">
+            <summary>
+            mean value
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Statistics.Variance">
+            <summary>
+             variance
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Statistics.StdDeviation">
+            <summary>
+             standard deviation
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Statistics.Confidence">
+            <summary>
+            gets confidence by default confidence level
+            </summary>
+            <returns>confidence</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Statistics.Confidence(System.Double)">
+            <summary>
+            gets confidence by given cofidence level
+            </summary>
+            <param name="level"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Statistics.Reset">
+            <summary>
+            reset statistics
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Statistics.Add(System.Double)">
+            <summary>
+            add sample value
+            </summary>
+            <param name="value">sample</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Statistics.Confidence(System.Double,System.Double,System.Double)">
+            <summary>
+            Gets the confidence interval half-width for level (e.g., .95)
+            </summary>
+            <param name="stdDev">standard deviation</param>
+            <param name="df">degree of freedom</param>
+            <param name="level">confidence level</param>
+            <returns>confidence interval half-width</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Statistics.InvertT(System.Double,System.Double)">
+            <summary>
+               COMPUTE pth QUANTILE OF THE t DISTRIBUTION
+            This function computes the upper pth quantile of the t dis-
+            tribution (the value of t for which the area under the curve
+            from t to +infinity is equal to p). It is a transliteration
+            of the 'STUDTP' function given in Appendix C of "Principles
+            of Discrete Event Simulation", G. S. Fishman, Wiley, 1978.
+            </summary>
+            <param name="p"> significance value</param>
+            <param name="df">degrees of freedom</param>
+            <returns>t-value</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Statistics.InvertZ(System.Double)">
+             <summary>
+             Calculate z-value given p level for standard Normal Distribution.
+             From K. Pawlikowski (www.cosc.canterbury.ac.nz)
+            
+             This function computes the pth upper quantile of the stand-
+             ard normal distribution (i.e., the value of z for which the
+             are under the curve from z to +infinity is equal to p).  'Z'
+             is a transliteration of the 'STDZ' function in Appendix C of
+             "Principles of Discrete Event Simulation", G. S. Fishman,
+             Wiley, 1978.   The  approximation used initially appeared in
+             in  "Approximations for Digital Computers", C. Hastings, Jr.,
+             Princeton U. Press, 1955.
+             </summary>
+             <param name="p">significance value</param>
+             <returns>z-value</returns>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.StatisticsContinuous">
+            <summary>
+            Statistics on a value that persists in continuous time but changes only at discrete 
+            time moments (like e.g. queue length). The samples must be added to this statistics 
+            with ascending time stamps. The mean, variance, etc. methods assume the last
+            value adde holds until the time of call
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.StatisticsContinuous.#ctor(Mozart.Simulation.Engine.ISimulationClock)">
+            <summary>
+            Initializes a new instance of the StatisticsContinuous
+            </summary>
+            <param name="ao"></param>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.StatisticsContinuous.Mean">
+            <summary>
+            Gets the mean of the statistics at the time of last update, or 0 if no samples have been added
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.StatisticsContinuous.Variance">
+            <summary>
+            Gets the variance of the statistics at the time of last update, or 0 if no samples have been added
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.StatisticsContinuous.StdDeviation">
+            <summary>
+            Gets the standard deviation of the statistics
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.StatisticsContinuous.Confidence(System.Double)">
+            <summary>
+            Gets the mean confidence of the statistics at the level
+            </summary>
+            <param name="level"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.StatisticsContinuous.Reset">
+            <summary>
+            Discards all statistics accumulated
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.StatisticsContinuous.Add(System.Double)">
+            <summary>
+            Adds a new data sample to the statistics, i.e. notifies the statistics about the value change at the given time
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.StatisticsContinuous.MeanConfidence">
+            <summary>
+            Gets this mean confidence of the statistics
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.StatisticsDiscrete">
+            <summary>
+            Statistics on a series of data samples of type double. 
+            Compared to StatisticsContinuous, data samples here have no
+            relation to time (like e.g. products cost or patients LOS)
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.StatisticsDiscrete.#ctor">
+            <summary>
+            Initializes a new instance of the StatisticsDiscrete
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.StatisticsDiscrete.Mean">
+            <summary>
+            Gets the mean of the statistics, or 0 if no samples have been added
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.StatisticsDiscrete.Variance">
+            <summary>
+            Gets the variance
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.StatisticsDiscrete.StdDeviation">
+            <summary>
+            Gets the standard deviation of the samples
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.StatisticsDiscrete.Reset">
+            <summary>
+            Discards all statistics accumulated
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.StatisticsDiscrete.Add(System.Double)">
+            <summary>
+            Adds a sample value to the statistics
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.StatisticsDiscrete.MeanConfidence">
+            <summary>
+            Gets the mean confidence interval of the statistics, or 0 if no samples have been added
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Strings">
+            <summary>
+              지역화된 문자열 등을 찾기 위한 강력한 형식의 리소스 클래스입니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Strings.ResourceManager">
+            <summary>
+              이 클래스에서 사용하는 캐시된 ResourceManager 인스턴스를 반환합니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Strings.Culture">
+            <summary>
+              이 강력한 형식의 리소스 클래스를 사용하여 모든 리소스 조회에 대해 현재 스레드의 CurrentUICulture 속성을
+              재정의합니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Strings.EXCEPTION_ARG_NULL">
+            <summary>
+              {0}: Invalid parameter {1} passed to method: null과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Strings.EXCEPTION_ARG_VIOLATE_MIN_SIZE">
+            <summary>
+              Value of argument ({0}) must be greater then {1}. 과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Strings.EXCEPTION_CHILD_ALEADY_HAS_PARENT">
+            <summary>
+              Can&apos;t add child active-object, parent already assigned, remove first과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Strings.EXCEPTION_COLLECTION_WAS_MODIFIED">
+            <summary>
+              The collection was modified.과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Strings.EXCEPTION_ENUMERATION_FINISHED">
+            <summary>
+              The enumeration has finished.과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Strings.EXCEPTION_ENUMERATION_NOT_STARTED">
+            <summary>
+              The enumeration has not started.과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Strings.EXCEPTION_INVALID_INDEX_LENGTH">
+            <summary>
+              invalid index/length과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Strings.EXCEPTION_NON_POSITIVE_ARG">
+            <summary>
+              Cannot take the log of a non-positive number:과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Strings.EXCEPTION_QUEUE_COUNT_IS_NOT_ZERO">
+            <summary>
+              Queue is empty, but Count is not zero!과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Strings.EXCEPTION_QUEUE_COUNT_IS_NOT_ZERO2">
+            <summary>
+              Queue is empty, but Count is not zero! Count is :{0}과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Strings.EXCEPTION_REMOVE_TARGET_IS_NOT_CONTAINS">
+            <summary>
+              Can&apos;t remove child active-object, not contains과(와) 유사한 지역화된 문자열을 찾습니다.
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Threading.PriorityBlockingQueue`1">
+            <summary>
+            thread safe priority queue class
+            </summary>
+            <typeparam name="T">The type of object to store in the queue</typeparam>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Threading.PriorityBlockingQueue`1.Count">
+            <summary>
+            Gets the number of items contained in the queue.
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Threading.PriorityBlockingQueue`1.Enqueue(`0)">
+            <summary>
+            Adds an object to the end of the queue.
+            </summary>
+            <param name="obj">The object to add to the queue.</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Threading.PriorityBlockingQueue`1.Dequeue(System.Int64)">
+            <summary>
+            Removes and returns the item at the head of the queue
+            </summary>
+            <param name="timeout"></param>
+            <returns>Type of T</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Threading.PriorityBlockingQueue`1.Dequeue">
+            <summary>
+            Removes and returns the item at the head of the queue
+            </summary>
+            <returns>Type of T</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Threading.PriorityBlockingQueue`1.Peek">
+            <summary>
+            Returns, but does not remove, the item at the head of the queue
+            </summary>
+            <returns>Type of T</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Threading.PriorityBlockingQueue`1.Peek(System.Int64)">
+            <summary>
+            Returns, but does not remove, the item at the head of the queue
+            </summary>
+            <returns>Type of T</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Threading.PriorityBlockingQueue`1.Clear">
+            <summary>
+            Removes all items from the queue
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Threading.PriorityBlockingQueue`1.Close">
+            <summary>
+            Close the blocking queue
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Threading.Promise">
+            <remarks>
+            The caller may choose to check
+            for the result at a later time, or immediately and it may block or not. Both the caller and responder have to
+            know the promise.
+            </remarks>
+            <summary>
+            Allows a thread to submit an asynchronous request and to wait for the result.
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Threading.Promise.HasResult">
+            <summary>
+            Checks whether result is available. Does not block.
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Threading.Promise.Reset">
+            <summary>
+            Clears the result and causes all waiting threads to return
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Threading.Promise.SetResult(System.Object)">
+            <summary>
+            Sets the result and notifies any threads waiting for it
+            </summary>
+            <param name="value">The object to set as the result.</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Threading.Promise.GetResult(System.Int64)">
+            <summary>
+            Returns the result, but never throws a TimeoutException; returns null instead.
+            </summary>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Threading.Promise.WaitResult(System.Int64)">
+            <summary>
+            Blocks until a result is available, or timeout milliseconds have elapsed
+            </summary>
+            <param name="timeout">Maximum time to wait for result.</param>
+            <returns>Promise result</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Threading.Promise.DoWaitResult(System.Int64)">
+            <summary>
+            Blocks until a result is available, or timeout milliseconds have elapsed.
+            Needs to be called with a lock held on 'this'
+            </summary>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Time">
+            <summary>시간 정보를 나타냅니다.</summary>
+            <summary>The time information used by the simulation engine.</summary>
+        </member>
+        <member name="F:Mozart.Simulation.Engine.Time.TicksPerMillisecond">
+            <summary>밀리언초당 가지는 Tick 수 입니다.</summary>
+            <summary>Number of Ticks per millisecond.</summary>
+        </member>
+        <member name="F:Mozart.Simulation.Engine.Time.TicksPerSecond">
+            <summary>초당 가지는 Tick 수 입니다.</summary>
+            <summary>Number of Ticks per second.</summary>
+        </member>
+        <member name="F:Mozart.Simulation.Engine.Time.MinValue">
+            <summary>
+            	<para>
+            		<strong>
+            			<em>Time</em>
+            		</strong>의 최소 값입니다.</para>
+            	<para>
+            		<strong>
+            			<em>double.MinValue</em>
+            		</strong> 를 이용하여 <strong><em>Time</em></strong>의 Instance를 생성합니다.</para>
+            </summary>
+            <summary>
+            	<para>
+            	Minimum value of 
+            	<strong>
+            	<em>Time</em>
+            	</strong></para>
+            	<para>
+            	Creates instance for <strong><em>Time</em></strong> using <strong><em>double.MinValue</em></strong>
+            	</para>
+            </summary>
+        </member>
+        <member name="F:Mozart.Simulation.Engine.Time.MaxValue">
+            <summary>
+            	<para>
+            		<strong>
+            			<em>Time</em>
+            		</strong>의 최대 값입니다.</para>
+            	<para>
+            		<strong>
+            			<em>double.MaxValue</em>
+            		</strong> 를 이용하여 <strong><em>Time</em></strong>의 Instance를 생성합니다.</para>
+            </summary>
+            <summary>
+            	<para>
+            	Maximum value of 
+            	<strong>
+            	<em>Time</em>
+            	</strong></para>
+            	<para>
+            	Creates instance for <strong><em>Time</em></strong> using <strong><em>double.MaxValue</em></strong>
+            	</para>
+            </summary>
+        </member>
+        <member name="F:Mozart.Simulation.Engine.Time.Infinity">
+            <summary>
+            	<para>
+            		<strong>
+            			<em>Time</em>
+            		</strong>의 무한P 값입니다.</para>
+            	<para>
+            		<strong>
+            			<em>double.PositiveInfinity</em>
+            		</strong> 를 이용하여 <strong><em>Time</em></strong>의 Instance를 생성합니다.</para>
+            </summary>
+            <summary>
+            	<para>
+            	Infinite P value of 
+            	<strong>
+            	<em>Time</em>
+            	</strong></para>
+            	<para>
+            	Creates instance for <strong><em>Time</em></strong> using <strong><em>double.PositiveInfinity</em></strong>
+            	</para>
+            </summary>
+        </member>
+        <member name="F:Mozart.Simulation.Engine.Time.Zero">
+            <summary>
+            	<para>
+            		<strong>
+            			<em>Time</em>
+            		</strong>의 Zero 값입니다.</para>
+            </summary>
+            <summary>
+            	<para>
+            	Zero value of 
+            	<strong>
+            	<em>Time</em>
+            	</strong></para>
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Time.IsInfinity">
+            <summary>시간이 무한대 값인지 여부를 확인합니다.</summary>
+            <value>무한대 값이면 true, 아니면 false를 반환합니다.</value>
+            <summary>Determines if time value is infinite.</summary>
+            <value>If time value is infinite return true, or else, return false.</value>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Time.IsMinOrMax">
+            <summary>시간 값이 최소, 최대 값인지 확인합니다.</summary>
+            <value>최소, 최대 값일 경우 True, 아니면 false를 반환합니다.</value>
+            <summary>Determines if time value is min/max</summary>
+            <value>If time value is min/max return true, or else, return false.</value>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.#ctor(System.Double)">
+            <summary>
+            	<para>Time 정보의 새 인스턴스를 지정된 double 형식으로 초기화 합니다.</para>
+            	<para>double의 정수 단위는 초입니다.</para>
+            </summary>
+            <param name="time">시간(초) 입니다.</param>
+            <summary>
+            	<para>Initializes the new designated instance of Time information to double.</para>
+            	<para>The whole number part of double is considered as seconds.</para>
+            </summary>
+            <param name="time">Time(seconds)</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.#ctor(System.DateTime)">
+            <summary>Time 정보의 새 인스턴스를 지정된 DateTime 형식으로 초기화 합니다.</summary>
+            <param name="dt">DateTime 시간 입니다.</param>
+            <summary>Initializes the new designated instance of Time information to DateTime type.</summary>
+            <param name="dt">DateTime format time.</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.#ctor(System.TimeSpan)">
+            <summary>Time 정보의 새 인스턴스를 지정된 TimeSpan 형식으로 초기화 합니다.</summary>
+            <param name="ts">TimeSpan 형식의 시간입니다.</param>
+            <summary>Initializes the new designated instance of Time information to TimeSpan</summary>
+            <param name="ts">TimeSpan format time.</param>        
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Implicit(System.Double)~Mozart.Simulation.Engine.Time">
+            <summary>
+            double 형태의 시간 값을 Time 형태로 변경합니다.
+            </summary>
+            <param name="time">시간 값입니다.</param>
+            <returns>Time 형태로 변환된 시간입니다.</returns>
+            <summary>
+            Converts double type time value to Time type.
+            </summary>
+            <param name="time">Time value.</param>
+            <returns>Returns the time converted to Time type.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Implicit(System.DateTime)~Mozart.Simulation.Engine.Time">
+            <summary>
+            DateTime 형태의 시간 값을 Time 형태로 변경합니다.
+            </summary>
+            <param name="time">시간 값입니다.</param>
+            <returns>Time 형태로 변환된 시간입니다.</returns>
+            <summary>
+            Converts DateTime type time value to Time type.
+            </summary>
+            <param name="time">Time value.</param>
+            <returns>Returns the time converted to Time type.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Implicit(System.TimeSpan)~Mozart.Simulation.Engine.Time">
+            <summary>
+            TimeSpan 형태의 시간 값을 Time 형태로 변경합니다.
+            </summary>
+            <param name="time">시간 값입니다.</param>
+            <returns>Time 형태로 변환된 시간입니다.</returns>
+            <summary>
+            Converts TimeSpan type time value to Time type.
+            </summary>
+            <param name="time">Time value.</param>
+            <returns>Returns the time converted to Time type.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Explicit(Mozart.Simulation.Engine.Time)~System.Double">
+            <summary>
+            Time 형태의 시간 값을 double 형태로 변경합니다.
+            </summary>
+            <param name="t">시간 값입니다.</param>
+            <returns>double 형태로 변환된 시간입니다.</returns>
+            <summary>
+            Converts Time type time value to double.
+            </summary>
+            <param name="t">Time value.</param>
+            <returns>Returns the time converted to double.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Explicit(Mozart.Simulation.Engine.Time)~System.DateTime">
+            <summary>
+            Time 형태의 시간 값을 DateTime 형태로 변경합니다.
+            </summary>
+            <param name="t">시간 값입니다.</param>
+            <returns>DateTime 형태로 변환된 시간입니다.</returns>
+            <summary>
+            Converts Time type time value to DateTime.
+            </summary>
+            <param name="t">Time value.</param>
+            <returns>Returns the time converted to DateTime.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Explicit(Mozart.Simulation.Engine.Time)~System.TimeSpan">
+            <summary>
+            Time 형태의 시간 값을 TimeSpan 형태로 변경합니다.
+            </summary>
+            <param name="t">시간 값입니다.</param>
+            <returns>TimeSpan 형태로 변환된 시간입니다.</returns>
+            <summary>
+            Converts Time type time value to TimeSpan.
+            </summary>
+            <param name="t">Time value.</param>
+            <returns>Returns the time converted to TimeSpan .</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Addition(Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.Time)">
+            <summary>
+            	<strong>
+            		<em>a</em>
+            	</strong> 와 <strong><em>b</em></strong> 의 시간을 합산합니다.</summary>
+            <param name="a">추가할 첫번째 시간정보입니다.</param>
+            <param name="b">추가할 두번째 시간정보입니다.</param>
+            <returns>시간정보를 합산 값입니다.</returns>
+            <summary>
+            Adds the time in <strong><em>a</em></strong> and <strong><em>b</em></strong>
+            </summary>
+            <param name="a">Time value a.</param>
+            <param name="b">Time value b.</param>
+            <returns>Return the sum of time a and b </returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Subtraction(Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.Time)">
+            <summary>지정된 <strong><em>Time</em></strong> 을 지정된 다른 <strong><em>Time</em></strong> 정보에서 뺍니다.</summary>
+            <param name="a">기준 시간정보입니다.</param>
+            <param name="b">뺄 시간정보입니다.</param>
+            <returns>두 시간정보를 뺀 값입니다.</returns>
+            <summary>
+            Subtract <strong><em>Time(a)</em></strong> from <strong><em>Time(b)</em></strong>
+            </summary>
+            <param name="a">Minuend time value a</param>
+            <param name="b">Subtrahend time value b</param>
+            <returns>Returns the subtraction result of a-b.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Multiply(System.Double,Mozart.Simulation.Engine.Time)">
+            <summary>
+            지정된<strong><em> double</em></strong> 에서 지정된 Time 형태의 값을 곱합니다.
+            </summary>
+            <param name="s">double 형식의 값입니다.</param>
+            <param name="t">Time 형식의 시간 값입니다.</param>
+            <returns>두 시간을 곱한 결과값입니다.</returns>
+            <summary>
+            Multiply <strong><em>double</em></strong>type value to Time type value. 
+            </summary>
+            <param name="s">double type value.</param>
+            <param name="t">Time type value.</param>
+            <returns>Return the multiplied time value.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Multiply(Mozart.Simulation.Engine.Time,System.Double)">
+            <summary>
+            지정된<strong><em> double</em></strong> 에서 지정된 Time 형태의 값을 곱합니다.
+            </summary>
+            <param name="t">Time 형식의 시간 값입니다.</param>
+            <param name="s">double 형식의 값입니다.</param>
+            <returns>두 시간을 곱한 결과갑입니다.</returns>
+            <summary>
+            Multiply <strong><em>double</em></strong>type value to Time type value. 
+            </summary>
+            <param name="s">double type value.</param>
+            <param name="t">Time type value.</param>
+            <returns>Return the multiplied time value.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Division(Mozart.Simulation.Engine.Time,System.Double)">
+            <summary>지정된<strong><em> Time</em></strong> 에서 지정된 double 형태의 값을 나눕니다.</summary>
+            /// <param name="t">Time 형식의 시간 값입니다.</param>
+            <param name="s">double 형식의 값입니다.</param>
+            <returns>두 시간을 나눈 결과값입니다.</returns>
+            <summary>
+            Divide <strong><em>Time</em></strong>type value by double type value. 
+            </summary>
+            <param name="t">Time type value(numerator).</param>
+            <param name="s">double type value.(denominator)</param>
+            <returns>Return the divided time value.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Division(Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.Time)">
+            <summary>지정된 <strong><em>Time</em></strong>에서 지정된 다른 <strong><em>Time</em></strong> 값을 나눕니다.</summary>
+            /// <param name="t">Time 형식의 시간 값입니다.</param>
+            <param name="s">double 형식의 값입니다.</param>
+            <returns>두 시간을 나눈 결과값입니다.</returns>
+            <summary>
+            Divides <strong><em>Time</em></strong>type value by another <strong><em>Time</em></strong>type value
+            </summary>
+            /// <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+            <returns>The result of dividing <em>a</em> by <em>b</em>.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Modulus(Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.Time)">
+            <summary>
+            지정된 <strong><em>Time</em></strong>에서 지정된 다른 <strong><em>Time</em></strong> 값을 나눈 나머지를 구합니다..
+            </summary>
+            <param name="a">Time 형식의 시간 값입니다.</param>
+            <param name="b">Time 형식의 시간 값입니다.</param>
+            <returns>두시간을 나눈 나머지 값입니다.</returns>
+            <summary>
+            Divide <strong><em>Time</em></strong>type value by another <strong><em>Time</em></strong>type value and get the quotient.
+            </summary>
+            <param name="a">Time type value(numerator).</param>
+            <param name="b">Time type value.(denominator)</param>
+            <returns>Return the quotient.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_LessThan(Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.Time)">
+            <summary>
+            Time을 비교합니다.
+            </summary>
+            <param name="a">Time 형식의 시간 값입니다.</param>
+            <param name="b">Time 형식의 시간 값입니다.</param>
+            <returns>Time b 가 클 경우 true, 아닐 경우 false 를 반환합니다.</returns>
+            <summary>
+            Compares Time.
+            </summary>
+            <param name="a">Time type time value.</param>
+            <param name="b">Time type time value. </param>
+            <returns>If Time b value is larger than Time a, return true, or else, return false.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_LessThanOrEqual(Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.Time)">
+            <summary>
+            a가 b보다 작거나 같은지 확인합니다.
+            </summary>
+            <param name="a">Time 형식의 시간 값입니다.</param>
+            <param name="b">Time 형식의 시간 값입니다.</param>
+            <returns>a 가 b보다 작거나 같은 경우 true, 아닐 경우 false 입니다.</returns>
+            <summary>
+            Checks if a is smaller or equal to b
+            </summary>
+            <param name="a">Time type time value.</param>
+            <param name="b">Time type time value. </param>
+            <returns>If a is smaller or equal to b, return true, or else, return false.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Equality(Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.Time)">
+            <summary>
+            a가 b랑 같은지 확인합니다.
+            </summary>
+            <param name="a">Time 형식의 시간 값입니다.</param>
+            <param name="b">Time 형식의 시간 값입니다.</param>
+            <returns>두 시간이 같을 경우 true, 아닐 경우 false 입니다.</returns>
+            <summary>
+            Checks if a is equal to b
+            </summary>
+            <param name="a">Time type time value.</param>
+            <param name="b">Time type time value. </param>
+            <returns>If a is equal to b, return true, or else, return false.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Equality(Mozart.Simulation.Engine.Time,System.Double)">
+            <summary>
+            a가 b랑 같은지 확인합니다.
+            </summary>
+            <param name="t">Time 형식의 시간 값입니다.</param>
+            <param name="d">double 형식의 시간 값입니다.</param>
+            <returns>>두 시간이 같을 경우 true, 아닐 경우 false 입니다.</returns>
+            <summary>
+            Checks if t is equal to d
+            </summary>
+            <param name="t">Time type time value.</param>
+            <param name="d">double type time value. </param>
+            <returns>If t is equal to d, return true, or else, return false.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Equality(System.Double,Mozart.Simulation.Engine.Time)">
+            <summary>
+            d가 t랑 같은지 확인합니다.
+            </summary>
+            <param name="t">double 형식의 시간 값입니다.</param>
+            <param name="d">Tim 형식의 시간 값입니다.</param>
+            <returns>>두 시간이 같을 경우 true, 아닐 경우 false 입니다.</returns>
+            <summary>
+            Checks if d is equal to t
+            </summary>
+            <param name="t">Time type time value.</param>
+            <param name="d">double type time value. </param>
+            <returns>If d is equal to t, return true, or else, return false.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Inequality(Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.Time)">
+            <summary>
+            d가 t랑 시간이 다른지 확인합니다.
+            </summary>
+            <param name="t">Time 형식의 시간 값입니다.</param>
+            <param name="d">Time 형식의 시간 값입니다.</param>
+            <returns>>두 시간이 다를 경우 true, 같을 경우 false 입니다.</returns>
+            <summary>
+            Checks if a is different from b
+            </summary>
+            <param name="a">The first <em>Time</em> to compare with <em>b</em>.</param>
+            <param name="b">The second <em>Time</em> to compare with <em>a</em>.</param>
+            <returns><em>true</em> if <em>a</em> and <em>b</em> is different; otherwise <em>false</em>.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Inequality(Mozart.Simulation.Engine.Time,System.Double)">
+            <summary>
+            d가 t랑 같은지 확인합니다.
+            </summary>
+            <param name="t">Time 형식의 시간 값입니다.</param>
+            <param name="d">double 형식의 시간 값입니다.</param>
+            <returns>>두 시간이 다를 경우 true, 같을 경우 false 입니다.</returns>
+            <summary>
+            Checks if d is equal to t
+            </summary>
+            <param name="t">Time type time value.</param>
+            <param name="d">double type time value. </param>
+            <returns>If d is not equal to t, return true, or else, return false.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_Inequality(System.Double,Mozart.Simulation.Engine.Time)">
+            <summary>
+            d가 t랑 같은지 확인합니다.
+            </summary>
+            <param name="t">double 형식의 시간 값입니다.</param>
+            <param name="d">Time 형식의 시간 값입니다.</param>
+            <returns>>두 시간이 다를 경우 true, 같을 경우 false 입니다.</returns>
+            <summary>
+            Checks if t is equal to d
+            </summary>
+            <param name="t">Time type time value.</param>
+            <param name="d">double type time value. </param>
+            <returns>If t is not equal to d, return true, or else, return false.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_GreaterThanOrEqual(Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.Time)">
+            <summary>
+            a가 b보다 크거나 같은지 확인합니다.
+            </summary>
+            <param name="a">Time 형식의 시간 값입니다.</param>
+            <param name="b">Time 형식의 시간 값입니다.</param>
+            <returns>a가 b보다 크거나 같을 경우 true, 아니면 false 입니다.</returns>
+            <summary>
+            Checks if a is larger or equal to b
+            </summary>
+            <param name="a">Time type time value.</param>
+            <param name="b">Time type time value. </param>
+            <returns>If a is larger or equal to b, return true, or else, return false.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_GreaterThan(Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.Time)">
+            <summary>
+            a가 b보다 큰지 확인합니다.
+            </summary>
+            <param name="a">Time 형식의 시간 값입니다.</param>
+            <param name="b">Time 형식의 시간 값입니다.</param>
+            <returns>a가 b보다 클 경우 true, 아니면 false 입니다.</returns>
+            <summary>
+            Checks if a is larger than to b
+            </summary>
+            <param name="a">Time type time value.</param>
+            <param name="b">Time type time value. </param>
+            <returns>If a is larger than b, return true, or else, return false.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.op_UnaryNegation(Mozart.Simulation.Engine.Time)">
+            <summary>지정된 인스턴스의 부정 값을 값으로 가지는 <strong><em>Time</em></strong> 을 반환합니다.</summary>
+            <summary>Return Time with the value of negative value of the designated instance.</summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.Min(Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.Time)">
+            <summary>두 시간을 비교해서 작은 값을 찾습니다.</summary>
+            <param name="a">비교할 시간 값 입니다.</param>
+            <param name="b">비교할 시간 값 입니다.</param>
+            <returns>두 시간 중 a가 같거나 클 경우 b를 반환하고, 아닐 경우 a를 반환합니다.</returns>
+            <summary>Compare both time and search for smaller time.</summary>
+            <param name="a">Time value a for comparison.</param>
+            <param name="b">Time vaule b for comparison.</param>
+            <returns>If Time a is equal to or larger than Time b, return b, or else, return a. </returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.Max(Mozart.Simulation.Engine.Time,Mozart.Simulation.Engine.Time)">
+            <summary>두 시간을 비교하여 큰 값을 찾습니다.</summary>
+            <param name="a">비교할 시간 값 입니다.</param>
+            <param name="b">비교할 시간 값 입니다.</param>
+            <returns>두 시간 중 a가 b보다 작거나 같을 경우 b를 반환하고, 아닐 경우 a를 반환합니다.</returns>
+            <summary>Compare both time and search for larger time.</summary>
+            <param name="a">Time value a for comparison.</param>
+            <param name="b">Time vaule b for comparison.</param>
+            <returns>If Time a is equal to or smaller than Time b, return b, or else, return a. </returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.Min(Mozart.Simulation.Engine.Time)">
+            <summary>입력한 시간과 기존 시간 값을 비교하여 작은 값을 찾습니다.</summary>
+            <param name="b">비교하고자 하는 시간 값 입니다.</param>
+            <summary>Compares the input time with the previous time value and searchs for the smaller time value.</summary>
+            <param name="b">Time value to be used for comparison.</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.Max(Mozart.Simulation.Engine.Time)">
+            <summary>입력한 시간과 기존 시간 값을 비교하여 큰 값을 찾습니다.</summary>
+            <param name="b">비교하고자 하는 시간 값 입니다.</param>
+            <summary>Compares the input time with the previous time value and searchs for the larger time value.</summary>
+            <param name="b">Time value to be used for comparison.</param>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.Abs">
+            <summary>시간 값을 절대 값을 적용하여 Time 형식으로 변환해줍니다.</summary>
+            <summary>Apply absolute value to the time value and conver to Time type data.</summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.Ceiling">
+            <summary>시간(초) 미만의 값을 올림하여 <em>Time</em> 형태로 반환합니다.</summary>
+            <returns>소수부분을 올림한 Time 값 입니다.</returns>
+            <summary>Round up value under seconds and return as <em>Time</em> type data.</summary>
+            <returns>Return the Time value with decimal numbers rounded up.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.Floor">
+            <summary>시간 정보에 소수점 내림을 수행하여 시간을 계산합니다. 초 미만 단위는 제거됩니다.</summary>
+            <summary>Calculates time by rounding down the decimal numbers. Time unit below seconds are removed.</summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.Round">
+            <summary>
+            시간을 반올림합니다.
+            </summary>
+            <returns></returns>
+            <summary>
+            Round up time.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Time.IsValid">
+            <summary>
+            	<para>시간 정보가 정상적으로 되어있는지 검증합니다.</para>
+            	<para>시간 정보는 <strong><em>IsInfinity</em></strong> 이거나 <strong><em>double.IsNan</em></strong>일 때 문제가 있다고 판단합니다.</para>
+            </summary>
+            <value>시간 정보가 정상이면 <strong>True</strong>, 아니면 <strong>False</strong>를 반환합니다.</value>
+            <summary>
+            	<para>Verifies if the time information is set properly.</para>
+            	
+            	<para>It is considered as improper time if the information is <strong><em>IsInfinity</em></strong></para> or <strong><em>double.IsNan</em></strong>
+            </summary>
+            <value>If time information is normal, return <strong><em>true</em></strong>, or else, return <strong><em>false</em></strong></value>.
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.Equals(System.Object)">
+            <summary>두 시간정보가 동일한지 비교합니다.</summary>
+            <param name="obj">비교할 시간정보입니다.</param>
+            <returns>
+            	<strong>
+            		<em>obj</em>
+            	</strong>가 <strong><em>Time</em></strong> 형식이면 같을 경우 True 이고, <strong><em>obj</em></strong> 가 <strong><em>Time</em></strong> 형식이 아닐 경우
+            False 입니다.</returns>
+            <summary>Compares two time information is same.</summary>
+            <param name="obj">Time information to be compared.</param>
+            <returns>
+            If <strong><em>obj</em></strong> is <strong><em>Time</em></strong> type, return True 
+            and if <strong><em>obj</em></strong> is not a <strong><em>Time</em></strong> type, return False.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.GetHashCode">
+            <summary>
+            HashCode를 반환합니다.
+            </summary>
+            <returns>this.time 에 대한 HashCode 를 반환합니다.</returns>
+            <summary>
+            Returns HashCode.
+            </summary>
+            <returns>Returns the HashCode for this.time.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.ToString">
+            <summary>
+            문자열로 변환합니다.
+            </summary>
+            <returns>DateTime 형태의 문자열로 반환합니다.</returns>
+            <summary>
+            Return as string type.
+            </summary>
+            <returns>Return as DateTime type string.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.ToString(System.String)">
+            <summary>
+            format 형태에 따라 값을 반환합니다.
+            </summary>
+            <param name="format">ts나 dt 를 사용할수 있습니다.</param>
+            <returns>TimeSpan 형태의 문자열이나, DateTime 형태의 문자열을 반환합니다.</returns>
+            <summary>
+            Return value according to format type.
+            </summary>
+            <param name="format">dt or ts can be used.</param>
+            <returns>Returns either TimeSpan or DateTime type string.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.CompareTo(Mozart.Simulation.Engine.Time)">
+            <summary>시간을 비교합니다. 두 시간을 비교하여 값이 작은지, 큰지, 또는 같은지를 나타내는 정수를 반환합니다.</summary>
+            <param name="other">비교하고자 하는 시간 정보입니다.</param>
+            <returns>같은 경우 0, other 보다 작은 경우 - 1 , 큰 경우 1 을 반환합니다.</returns>
+            <requirements>MOZART 모든 버전에서 사용가능합니다.</requirements>
+            <summary>Compares time. Returns the integer value for the comparison result (smaller, larger or equal)</summary>
+            <param name="other">Time information for comparison.</param>
+            <returns>If the result is equal, return 0, smaller than other, return -1, larger than other, reutnr 1.</returns>
+            <requirements>This is used in all MOZART versions.</requirements>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.Parse(System.String)">
+            <summary>string에서 <strong><em>Time</em></strong>형식으로 변환합니다.</summary>
+            <summary>Convert string type to <strong><em>Time</em></strong> type.</summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.Parse(System.String,System.IFormatProvider)">
+            <summary>문화권별 서식 지정정보를 반영하여 string에서 <strong><em>Time</em></strong>으로 변환합니다.</summary>
+            <summary>Converts the string representation of a date and time to its <em>Time</em> equivalent by use culture-specific format information and a formatting style.</summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.TryParse(System.String,Mozart.Simulation.Engine.Time@)">
+            <summary>TimeSpan에서 지정된 default format 형태의 text를 Time 형태로 변경합니다.</summary>
+            <param name="text">변경하고자 하는 Time 정보입니다.</param>
+            <param name="time">
+            	<strong>[OUT]</strong> 반환된 Time 정보입니다.</param>
+            <returns>변경 됐을 경우 True, 아닐 경우 False 를 반환합니다.</returns>
+            <summary>Convert the designated default format text from TimeSpan to Time type.</summary>
+            <param name="text">Time information to be converted.</param>
+            <param name="time">
+            	<strong>[OUT]</strong> Returned Time information</param>
+            <returns>If Time is converted, return true, or else, return false.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.TryParse(System.String,System.IFormatProvider,Mozart.Simulation.Engine.Time@)">
+            <summary>format이 지정된 text를 Time 형태로 변경합니다.</summary>
+            <param name="text">변경하고자 하고자하는 Text 정보 입니다.</param>
+            <param name="time">
+            	<strong>[OUT]</strong> 반환된 Time 정보입니다.</param>
+            <param name="formatProvider">문화권별 서식 지정 정보를 제공하는 개체입니다.</param>
+            <returns>변경 됐을 경우 True, 아닐 경우 False 를 반환합니다.</returns>
+            <summary>Convert text using the designated format to Time type.</summary>
+            <param name="text">Text information to be converted.</param>
+            <param name="time">
+            	<strong>[OUT]</strong> Returned Time information.</param>
+            <param name="formatProvider">Object providing other country language format.</param>
+            <returns>If Text is converted, return true, or else, return false.</returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.FromHours(System.Double)">
+            <summary>지정된 시간(분)을 나타내는 Time을 반환합니다.</summary>
+            <param name="hours">
+            	<strong>
+            		<em>Time</em>
+            	</strong>으로 바꾸고자하는 시간(시) 입니다.</param>
+            <returns>
+            	<para>Type : <see cref="T:Mozart.Simulation.Engine.Time">Mozart.Simulation.Engine</see></para>
+            	<para>value를 나타내는 개체입니다.</para>
+            </returns>
+            <summary>Return Time type expressing the designated time(hour)</summary>
+            <param name="hours">The time value to express as <strong><em>Time</em></strong> type.</param>
+            <returns>
+            	<para>Type : <see cref="T:Mozart.Simulation.Engine.Time">Mozart.Simulation.Engine</see></para>
+            	<para> The time value to express as <strong><em>Time</em></strong> type.</para>
+            </returns>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.FromMinutes(System.Double)">
+            <summary>지정된 시간(분)을 나타내는 Time을 반환합니다.</summary>
+            <param name="minutes">
+            	<strong>
+            		<em>Time</em>
+            	</strong> 으로 바꾸고자 하는 시간(분)입니다.</param>
+            <summary>Returns Time type expressing the designated time(minute).</summary>
+            <param name="minutes">The time value to express as <strong><em>Time</em></strong> type.</param>
+            <return>The time value to express as <strong><em>Time</em></strong> type.</return>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Time.FromSeconds(System.Double)">
+            <summary>
+            	<para>
+            지정된 시간(초)를 나타내는 Time을 반환합니다. 여기에서 지정된 값은 초 단위로 반올림합니다.
+            	</para>
+            </summary>
+            <param name="seconds">
+            	<strong>
+            		<em>Time</em>
+            	</strong>으로 바꾸자 하는 시간(초)입니다.</param>
+            <returns></returns>
+            <summary>Return Time type expressing the designated time(seconds). The designated value will be rounded up to seconds.</summary>
+            <param name="seconds">The time value to express as <strong><em>Time</em></strong> type. </param>
+            <return>The time value to express as <strong><em>Time</em></strong> type.</return>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Time.TotalDays">
+            <summary>
+            시간(날짜)의 정수 부분과 소수 부분으로 표시된 현재 TimeSpan 구조체의 값을 가져옵니다.
+            </summary>
+            <summary>
+            Gets the current TimeSpan structure of whole number and decimal point number of the time(date). 
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Time.TotalHours">
+            <summary>
+            시간(시간)의 정수 부분과 소수 부분으로 표시된 현재 TimeSpan 구조체의 값을 가져옵니다.
+            </summary>
+            <summary>
+            Gets the current TimeSpan structure of whole number and decimal point number of the time(hour). 
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Time.TotalMinutes">
+            <summary>
+            시간(분)의 정수 부분과 소수 부분으로 표시된 현재 TimeSpan 구조체의 값을 가져옵니다.
+            </summary>
+            <summary>
+            Gets the current TimeSpan structure of whole number and decimal point number of the time(minute). 
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Time.TotalSeconds">
+            <summary>
+            시간(초)의 정수 부분과 소수 부분으로 표시된 현재 TimeSpan 구조체의 값을 가져옵니다.
+            </summary>
+            <summary>
+            Gets the current TimeSpan structure of whole number and decimal point number of the time(seconds). 
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.TimeEventHandler">
+            <summary>
+            Time event handler
+            </summary>
+            <param name="sender">event sender</param>
+            <param name="e">time event argument</param>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.TimeEventArgs">
+            <summary>
+            Time Event Argument
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.Transition">
+            <summary>
+            Base class for all kinds of statechart transitions: TransitionTimeout, TransitionRate, TransitionCondition and TransitionMessage
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Transition.Statechart">
+            <summary>
+            Gets the statechart of the transition
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Transition.ExitState">
+            <summary>
+            Gets the exited state of the transition
+            </summary>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.Transition.EnterState">
+            <summary>
+            Gets entered state of the transition
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.Transition.Start">
+            <summary>
+            Starts the transition
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.TransitionCondition">
+            <summary>
+            Statechart transition with trigger of type condition. The transition is executed when the condition becomes true. 
+            If the active object has continuously changing variables, the numeric engine constantly monitors the condition. 
+            In purely discrete models the condition is tested when something changes in the active obejct,
+            i.e. when onChange() is called. If the guard appears to be false when the transition is about to execute, 
+            it is not taken and becomes inactive until the next next condition evaluation.
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.TransitionCondition.#ctor(Mozart.Simulation.Engine.Statechart,Mozart.Simulation.Engine.ConditionDelegate,Mozart.Simulation.Engine.GuardDelegate,Mozart.Simulation.Engine.ActionDelegate,Mozart.Simulation.Engine.State,Mozart.Simulation.Engine.State)">
+            <summary>
+            
+            </summary>
+            <param name="sc">statechart</param>
+            <param name="condition">condition delegate</param>
+            <param name="guard">guard delegate</param>
+            <param name="action">action delegete</param>
+            <param name="exitState">exit state</param>
+            <param name="enterState">enter state</param>
+        </member>
+        <member name="P:Mozart.Simulation.Engine.TransitionCondition.IsMonitoring">
+            <summary>
+            Check if this transition condition is currently monitoring its condition
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.TransitionCondition.ContinueMonitoring">
+            <summary>
+            Turns on this monitoring flag of this transition
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.TransitionCondition.Start">
+            <summary>
+            Should be called when the statechart enters to the transition's source state
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.TransitionCondition.Cancel">
+            <summary>
+            Should be called when this transition becomes deactivated e.g. as a result of alternative transition being taken
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.TransitionMessage">
+            <summary>
+            Statechart transition with trigger of type message. Such transition is executed when the statechart receives a message (integer or Object) 
+            that conforms with the transition trigger. If the guard appears to be false when the transition is about to execute, 
+            it is not taken and becomes inactive until the next message arrival.
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.TransitionMessage.Start">
+            <summary>
+             Should be called whe the statechart enters to the transition's source state
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.TransitionMessage.Cancel">
+            <summary>
+            Should be called when this transition becomes deactivated e.g. as a result of alternative transition being taken
+            </summary>
+        </member>
+        <member name="T:Mozart.Simulation.Engine.TransitionTimeout">
+            <summary>
+            Statechart transition with trigger of type timeout. 
+            Is executed with the timeout specified (counted from the moment the statechart came to the transition's source state). 
+            If the guard appears to be false when the transition is about to execute, it is not taken and becomes inactive
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.TransitionTimeout.Cancel">
+            <summary>
+            Should be called when this transition becomes deactivated e.g. as a result of alternative transition being taken
+            </summary>
+        </member>
+        <member name="M:Mozart.Simulation.Engine.TransitionTimeout.Execute">
+            <summary>
+            Should be called whe the statechart enters to the transition's source state
+            </summary>
+        </member>
+    </members>
+</doc>
