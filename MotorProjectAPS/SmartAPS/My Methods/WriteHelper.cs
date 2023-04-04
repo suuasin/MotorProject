@@ -313,7 +313,7 @@ namespace SmartAPS
             OutputMart.Instance.PRODUCT_ROUTE_LOG.Add(prl);
         }
 
-        public static void WriteMaterialHistory(IMatBom bom, string matId, string lotId, double qty, double useQty, string useType)
+        public static void WriteMaterialHistory(IMatBom bom, string matId, string lotId, double useQty, string useType, double qty = 0)
         {
             MATERIAL_HISTORY mh = CreateHelper.CreateMaterialHistory();
 

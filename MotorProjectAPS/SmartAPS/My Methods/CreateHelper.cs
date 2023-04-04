@@ -653,6 +653,12 @@ namespace SmartAPS
             if(lot.Process.LastStep.StepID == lot.CurrentStepID)
                 plan.ProcessID = lot.CurrentProductID;
             plan.LotID = lot.LotID;
+            //step = lot.Product.Process.FindStep(step.StepID) as SmartAPSStep;
+
+            if (plan.ProductID == "Prod_Stator_01")
+            {
+
+            }
 
             var mbs = MaterialManager.Instance.FindMatBoms(lot.Product, step);
 

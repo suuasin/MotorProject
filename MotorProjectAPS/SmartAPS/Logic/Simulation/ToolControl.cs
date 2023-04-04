@@ -19,13 +19,22 @@ namespace SmartAPS.Logic.Simulation
     {
         public bool IS_NEED_TOOL_SETTINGS0(Mozart.SeePlan.Simulation.AoEquipment eqp, ILot lot, ref bool handled, bool prevReturnValue)
         {
-            //bool useTOOL = ConfigHelper.GetConfig<bool>(Constants.USE_TOOL);
-            //if (useTOOL)
-            //{
-            //    if (lot.CurrentStep.StepID != "IA")
-            //        return false;
-            //}
+            SmartAPSLot tlot = lot as SmartAPSLot;
+            bool useTOOL = ConfigHelper.GetConfig<bool>(Constants.USE_TOOL);
+
+            if (useTOOL)
+            {
+                var tools = InputMart.Instance.TOOL_ARRANGEView.FindRows(tlot.LineID, tlot.CurrentStepID, tlot.CurrentProductID);
+
+                if (tools.Count() == 0)
+                    return false;
+
+                return true;
+            }
+
             return false;
+
+           
         }
 
         public IToolData GET_TOOL_DATA0(AoEquipment eqp, ILot lot, ref bool handled, IToolData prevReturnValue)

@@ -192,7 +192,7 @@ namespace SmartAPS.Logic.Simulation
                 var isInf = mb.MatPlans.Where(r => r.IsInfinite).Count() > 0;
                 var compQty = mb.CompQty * lot.UnitQty;
 
-                if (isInf == false && compQty > 0)
+                if (/*isInf == false && */compQty > 0)
                 {
                     //자재 중 현재 시간에 사용 가능한 자재를 가져온다.
                     //가능한 자재중 빨리 들어온 자재, 수량이 적은 순으로 정렬 한다.
@@ -202,20 +202,25 @@ namespace SmartAPS.Logic.Simulation
 
                     foreach (var mat in mats)
                     {
-                        if (mat.Qty >= compQty)
+                        if (isInf == false && mat.Qty >= compQty)
                         {
-                            WriteHelper.WriteMaterialHistory(mb, mat.MaterialID, lot.LotID, mat.Qty, compQty, mat.MatType.ToString());
+                            WriteHelper.WriteMaterialHistory(mb, mat.MaterialID, lot.LotID, compQty, mat.MatType.ToString(), mat.Qty);
                             mat.Qty -= compQty;
                             compQty = 0;
                             //자재 사용량이 모두 찼으면 종료
                             break;
                         }
-                        else
+                        else if (isInf == false && mat.Qty < compQty)
                         {
-                            WriteHelper.WriteMaterialHistory(mb, mat.MaterialID, lot.LotID, mat.Qty, mat.Qty, mat.MatType.ToString());
+                            WriteHelper.WriteMaterialHistory(mb, mat.MaterialID, lot.LotID, mat.Qty, mat.MatType.ToString(), mat.Qty);
                             compQty -= mat.Qty;
                             mat.Qty = 0;
                         }
+                        if (isInf == true)
+                        {
+                            WriteHelper.WriteMaterialHistory(mb, mat.MaterialID, lot.LotID, compQty, mat.MatType.ToString());
+                        }
+
                     }
                 }
             }
