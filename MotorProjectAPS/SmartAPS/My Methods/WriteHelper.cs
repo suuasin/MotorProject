@@ -317,9 +317,11 @@ namespace SmartAPS
         {
             MATERIAL_HISTORY mh = CreateHelper.CreateMaterialHistory();
 
+            var matType = InputMart.Instance.MATERIAL.Rows.Where(x => x.MAT_TYPE == bom.MaterialType);
+            var mat = InputMart.Instance.SmartAPSMat.Rows.Where(x => x.MatType == bom.MaterialType && x.Key == matId);
             mh.VERSION_NO = ModelContext.Current.VersionNo;
-            mh.MAT_ID = matId;
-            mh.MAT_TYPE = bom.MaterialType;
+            mh.MAT_ID = matType.FirstOrDefault().MAT_ID;
+            mh.MAT_TYPE = matType != null && matType.Count() > 0 ? matType.FirstOrDefault().MAT_TYPE : null;//bom.MaterialType;
             mh.PRODUCT_ID = bom.Product.ProductID;
             mh.STEP_ID = bom.Step.StepID;
             mh.LOT_ID = lotId;
@@ -328,6 +330,8 @@ namespace SmartAPS
             mh.USE_DATE = AoFactory.Current.NowDT;
             mh.USE_TYPE = useType;
             mh.MATERIAL_HISTORY_ID = Guid.NewGuid().ToString();
+            mh.SUPPLIER = mat != null && mat.Count() > 0 ? mat.FirstOrDefault().Supplier : null;
+            
 
             OutputMart.Instance.MATERIAL_HISTORY.Add(mh);
         }

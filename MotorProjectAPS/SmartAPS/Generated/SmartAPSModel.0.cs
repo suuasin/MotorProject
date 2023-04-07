@@ -35,7 +35,7 @@ namespace SmartAPS
     /// </summary>
     public partial class GlobalParameters : Parameters
     {
-        private string _company = "KAMTEC";
+        private string _company = "MOTORFACT";
         public virtual string company
         {
             get
@@ -88,7 +88,7 @@ namespace SmartAPS
                 _period = value;
             }
         }
-        private string _site = "DJ";
+        private string _site = "MT";
         public virtual string site
         {
             get
@@ -585,6 +585,21 @@ namespace SmartAPS
                 return this.GetTable<REPLENISH_PLAN>();
             }
         }
+        private EntityView<REPLENISH_PLAN> _REPLENISH_PLANView;
+        /// <summary>
+        /// Keys: MAT_ID, REPLENISH_DATE
+        /// </summary>
+        public EntityView<REPLENISH_PLAN> REPLENISH_PLANView
+        {
+            get
+            {
+                if ((this._REPLENISH_PLANView == null))
+                {
+                    this._REPLENISH_PLANView = this.CreateView<REPLENISH_PLAN>(this.REPLENISH_PLAN, null, "MAT_ID,REPLENISH_DATE", Mozart.Data.Entity.IndexType.Hashtable);
+                }
+                return this._REPLENISH_PLANView;
+            }
+        }
         public EntityTable<MATERIAL> MATERIAL
         {
             get
@@ -779,6 +794,8 @@ namespace SmartAPS
             this._SETUP_INFOView = null;
             this.DisposeIfNeeds(this._SETUP_INFOTimeView);
             this._SETUP_INFOTimeView = null;
+            this.DisposeIfNeeds(this._REPLENISH_PLANView);
+            this._REPLENISH_PLANView = null;
             this.DisposeIfNeeds(this._SPLIT_INFOView);
             this._SPLIT_INFOView = null;
             this.DisposeIfNeeds(this._TOOL_ARRANGEView);

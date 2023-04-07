@@ -1189,7 +1189,7 @@ namespace SmartAPS.Inputs
     }
     /// <summary>
     /// 
-    /// Keys: MAT_ID, MAT_TYPE
+    /// Keys: MAT_ID, MAT_TYPE, SUPPLIER
     /// </summary>
     [Table(Name="REPLENISH_PLAN")]
     public partial class REPLENISH_PLAN : EntityObject
@@ -1228,6 +1228,12 @@ namespace SmartAPS.Inputs
         /// </summary>
         [Column()]
         public System.DateTime REPLENISH_DATE { get; set; }
+
+        /// <summary>
+        /// 공급업체
+        /// </summary>
+        [Column(IsPrimaryKey=true, PrimaryKeyOrder=2)]
+        public string SUPPLIER { get; set; }
 
         public REPLENISH_PLAN ShallowCopy()
         {

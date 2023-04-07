@@ -357,7 +357,7 @@ namespace SmartAPS
         {
             MatPlan plan = SAPSObjectMapper.CreateMatPlan();
 
-            plan.MaterialID = entity.MAT_ID;
+            plan.MaterialID = entity.MAT_ID + Guid.NewGuid().ToString();
             plan.MaterialType = entity.MAT_TYPE;
             plan.Qty = entity.MAT_QTY;
             plan.IsInfinite = false;
@@ -645,7 +645,8 @@ namespace SmartAPS
         }
 
         public static SmartAPSPlanInfo CreatePlanInfo(SmartAPSLot lot, SmartAPSStep step)
-        {
+        {   
+            
             SmartAPSPlanInfo plan = SAPSObjectMapper.Create<SmartAPSPlanInfo>(step);
             plan.Lot = lot;
             plan.ProductID = lot.Product.ProductID;
@@ -653,18 +654,12 @@ namespace SmartAPS
             if(lot.Process.LastStep.StepID == lot.CurrentStepID)
                 plan.ProcessID = lot.CurrentProductID;
             plan.LotID = lot.LotID;
-            //step = lot.Product.Process.FindStep(step.StepID) as SmartAPSStep;
-
-            if (plan.ProductID == "Prod_Stator_01")
-            {
-
-            }
 
             var mbs = MaterialManager.Instance.FindMatBoms(lot.Product, step);
 
             foreach (var mb in mbs)
                 plan.MatBom.Add(mb);
-
+        
             return plan;
         }
 

@@ -1282,6 +1282,18 @@
                 </DataClassMeta>
               </Content>
             </FDataClassItem>
+            <FDataClassItem Name="SmartAPSMat">
+              <Content>
+                <DataClassMeta IsEntityObject="True" GenerateContainer="True" ContainerType="EntityTable" Name="SmartAPSMat">
+                  <Properties>
+                    <cdm:PropertyMeta Name="Key" PropertyType="string" />
+                    <cdm:PropertyMeta Name="MatID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="MatType" PropertyType="string" />
+                    <cdm:PropertyMeta Name="Supplier" PropertyType="string" />
+                  </Properties>
+                </DataClassMeta>
+              </Content>
+            </FDataClassItem>
           </Children>
         </FDataClassFolder>
         <FDataClassFolder Name="Simulation">
@@ -1367,6 +1379,7 @@
                         <String>= new List&lt;SmartAPS.DataModel.IMatBom&gt;()</String>
                       </DefaultValue>
                     </cdm:PropertyMeta>
+                    <cdm:PropertyMeta Name="Supplier" PropertyType="string" />
                   </Properties>
                 </DataClassMeta>
               </Content>

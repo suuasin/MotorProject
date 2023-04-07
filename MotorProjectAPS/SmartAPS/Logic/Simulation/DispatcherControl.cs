@@ -218,7 +218,7 @@ namespace SmartAPS.Logic.Simulation
                         }
                         if (isInf == true)
                         {
-                            WriteHelper.WriteMaterialHistory(mb, mat.MaterialID, lot.LotID, compQty, mat.MatType.ToString());
+                            WriteHelper.WriteMaterialHistory(mb, mat.MaterialID, lot.LotID, compQty, mat.MatType.ToString()); 
                         }
 
                     }

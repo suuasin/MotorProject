@@ -192,6 +192,13 @@ namespace SmartAPS
                 return this._SmartAPSProductRouteFromStepDemandView;
             }
         }
+        public EntityTable<SmartAPSMat> SmartAPSMat
+        {
+            get
+            {
+                return this.GetTable<SmartAPSMat>();
+            }
+        }
         public EntityTable<SmartAPSInTarget> SmartAPSInTarget
         {
             get

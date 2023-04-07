@@ -172,8 +172,18 @@ namespace SmartAPS.Logic
         {
             MatPlan plan = CreateHelper.CreateMatPlan(entity);
 
+            SmartAPSMat mat = new SmartAPSMat();
+
+
             if (plan == null)
                 return false;
+
+            mat.Key = plan.MaterialID;
+            mat.MatType = entity.MAT_TYPE;
+            mat.MatID = entity.MAT_ID;
+            mat.Supplier = entity.SUPPLIER;
+
+            InputMart.Instance.SmartAPSMat.ImportRow(mat);
 
             MaterialManager.Instance.Materials.Add(plan);
 

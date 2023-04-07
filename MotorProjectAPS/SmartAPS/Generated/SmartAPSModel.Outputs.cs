@@ -98,6 +98,12 @@ namespace SmartAPS.Outputs
         [Column(IsPrimaryKey=true, PrimaryKeyOrder=6)]
         public string MATERIAL_HISTORY_ID { get; set; }
 
+        /// <summary>
+        /// 공급업체
+        /// </summary>
+        [Column()]
+        public string SUPPLIER { get; set; }
+
         public MATERIAL_HISTORY ShallowCopy()
         {
 			var x = (MATERIAL_HISTORY) this.MemberwiseClone();

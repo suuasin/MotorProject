@@ -24,12 +24,12 @@
           </ctm:ArgumentInfo>
           <ctm:ArgumentInfo Category="0. Basic" Name="company" TypeEnum="String">
             <InitialValue>
-              <String>KAMTEC</String>
+              <String>MOTORFACT</String>
             </InitialValue>
           </ctm:ArgumentInfo>
           <ctm:ArgumentInfo Category="0. Basic" Name="site" TypeEnum="String">
             <InitialValue>
-              <String>DJ</String>
+              <String>MT</String>
             </InitialValue>
           </ctm:ArgumentInfo>
           <ctm:ArgumentInfo Category="0. Basic" Name="system" TypeEnum="String">
@@ -1035,7 +1035,20 @@ FROM
                       </DefaultValue>
                     </cdm:PropertyMeta>
                     <cdm:PropertyMeta Name="REPLENISH_DATE" PropertyType="DateTime" Description="자재 충전 일자 입니다." />
+                    <cdm:PropertyMeta Name="SUPPLIER" PropertyType="string" Description="공급업체" IsPrimaryKey="True" />
                   </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>MAT_ID</String>
+                            <String>REPLENISH_DATE</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
                 </cdm:DataMetaInfo>
               </MetaInfo>
               <ActiveAction>
@@ -1550,6 +1563,7 @@ FROM
                     <cdm:PropertyMeta Name="USE_DATE" PropertyType="DateTime" Description="사용 된 날짜 입니다." />
                     <cdm:PropertyMeta Name="USE_TYPE" PropertyType="string" Description="사용된 자재 종류 입니다. (MAT : 기존 자재, PLAN : 자재 계획 자재)" />
                     <cdm:PropertyMeta Name="MATERIAL_HISTORY_ID" PropertyType="string" Description="Material History ID" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="SUPPLIER" PropertyType="string" Description="공급업체" />
                   </Properties>
                 </cdm:DataMetaInfo>
               </MetaInfo>

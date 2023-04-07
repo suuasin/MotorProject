@@ -925,6 +925,24 @@ tracker = EntityObject.DetachedTracker;
         }
     }
     [System.SerializableAttribute()]
+    public partial class SmartAPSMat : EntityObject
+    {
+        public virtual string Key { get; set; }
+
+        public virtual string MatID { get; set; }
+
+        public virtual string MatType { get; set; }
+
+        public virtual string Supplier { get; set; }
+
+        public SmartAPSMat ShallowCopy()
+        {
+			var x = (SmartAPSMat) this.MemberwiseClone();
+			x.InitCopy();
+            return x;
+        }
+    }
+    [System.SerializableAttribute()]
     public partial class SmartAPSLotBatch : Mozart.SeePlan.General.Simulation.LotBatch, IEntityObject, IEditableObject
     {
         public SmartAPSLotBatch()
@@ -1224,6 +1242,8 @@ tracker = EntityObject.DetachedTracker;
                 _MatBom = value;
             }
         }
+        public virtual string Supplier { get; set; }
+
         #region IEntityObject implementations
         [System.NonSerializedAttribute()]
         private int rbtreeNodeId;
