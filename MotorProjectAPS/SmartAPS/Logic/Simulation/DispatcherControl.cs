@@ -191,9 +191,26 @@ namespace SmartAPS.Logic.Simulation
             {
                 var isInf = mb.MatPlans.Where(r => r.IsInfinite).Count() > 0;
                 var compQty = mb.CompQty * lot.UnitQty;
-
+                int daJucha = int.Parse(GetJuCha(da.NowDT));
+                List<IMatPlan> matlist = new List<IMatPlan>();
                 if (/*isInf == false && */compQty > 0)
                 {
+                    //자재가 매주 들어오는데 해당 replenish date 주차에 들어온 자재가 다음 주차까지 재고가 남아있다면 남은 자재를 다음
+                    //주차에 사용하지 못하게 dispatching 시점의 주차보다 replenishdate 주차가 적은 자재중에서 MatDiv가 PlanMat인 것만 추출한 후에 삭제
+                    var filterMat = mb.MatPlans.Where(x => x.MatType == MatType.Plan && int.Parse(GetJuCha(x.ReplenishDate)) < daJucha);
+                    foreach (var fm in filterMat)
+                    {
+                        var sms = InputMart.Instance.SmartAPSMatView.FindRows(fm.MaterialID).Where(x => x.MatDiv == "PlanMat");
+                        foreach (var sm in sms)
+                        {
+                            if (fm.MaterialID == sm.Key)
+                                matlist.Add(fm);
+                        }
+                    }
+                    foreach (var ml in matlist)
+                        mb.MatPlans.Remove(ml);
+                    
+
                     //자재 중 현재 시간에 사용 가능한 자재를 가져온다.
                     //가능한 자재중 빨리 들어온 자재, 수량이 적은 순으로 정렬 한다.
                     var mats = mb.MatPlans.Where(r => r.ReplenishDate <= da.NowDT && r.Qty > 0)
@@ -202,6 +219,7 @@ namespace SmartAPS.Logic.Simulation
 
                     foreach (var mat in mats)
                     {
+
                         if (isInf == false && mat.Qty >= compQty)
                         {
                             WriteHelper.WriteMaterialHistory(mb, mat.MaterialID, lot.LotID, compQty, mat.MatType.ToString(), mat.Qty);
@@ -218,7 +236,7 @@ namespace SmartAPS.Logic.Simulation
                         }
                         if (isInf == true)
                         {
-                            WriteHelper.WriteMaterialHistory(mb, mat.MaterialID, lot.LotID, compQty, mat.MatType.ToString()); 
+                            WriteHelper.WriteMaterialHistory(mb, mat.MaterialID, lot.LotID, compQty, mat.MatType.ToString());
                         }
 
                     }
@@ -227,6 +245,16 @@ namespace SmartAPS.Logic.Simulation
 
             //Filter 시 등록 되었던 Filter 정보를 모두 해제해준다.
             MaterialManager.Instance.RemoveFilter(wips[0], lot.CurrentStep);
+        }
+
+        static string GetJuCha(DateTime Date)
+
+        {
+            System.Globalization.CultureInfo myCI = new System.Globalization.CultureInfo("ko-KR");
+
+            return myCI.Calendar.GetWeekOfYear
+
+            (Date, System.Globalization.CalendarWeekRule.FirstFourDayWeek, System.DayOfWeek.Monday).ToString();
         }
 
         public void ON_DISPATCHED1(DispatchingAgent da, AoEquipment aeqp, IHandlingBatch[] wips, ref bool handled)

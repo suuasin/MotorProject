@@ -935,6 +935,8 @@ tracker = EntityObject.DetachedTracker;
 
         public virtual string Supplier { get; set; }
 
+        public virtual string MatDiv { get; set; }
+
         public SmartAPSMat ShallowCopy()
         {
 			var x = (SmartAPSMat) this.MemberwiseClone();

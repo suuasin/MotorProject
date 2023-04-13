@@ -1290,7 +1290,19 @@
                     <cdm:PropertyMeta Name="MatID" PropertyType="string" />
                     <cdm:PropertyMeta Name="MatType" PropertyType="string" />
                     <cdm:PropertyMeta Name="Supplier" PropertyType="string" />
+                    <cdm:PropertyMeta Name="MatDiv" PropertyType="string" />
                   </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>Key</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
                 </DataClassMeta>
               </Content>
             </FDataClassItem>

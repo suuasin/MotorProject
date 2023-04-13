@@ -1027,15 +1027,16 @@ FROM
               <MetaInfo>
                 <cdm:DataMetaInfo Name="REPLENISH_PLAN" Description="자재 재충전 계획에 대한 정보입니다.&#xD;&#xA;">
                   <Properties>
-                    <cdm:PropertyMeta Name="MAT_ID" PropertyType="string" Description="자재 ID 입니다." IsPrimaryKey="True" />
-                    <cdm:PropertyMeta Name="MAT_TYPE" PropertyType="string" Description="자재 종류 입니다." IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="MAT_ID" PropertyType="string" Description="자재 ID 입니다." />
+                    <cdm:PropertyMeta Name="MAT_TYPE" PropertyType="string" Description="자재 종류 입니다." />
                     <cdm:PropertyMeta Name="MAT_QTY" PropertyType="double" Description="자재 충전 수량 입니다.">
                       <DefaultValue>
                         <String>0</String>
                       </DefaultValue>
                     </cdm:PropertyMeta>
                     <cdm:PropertyMeta Name="REPLENISH_DATE" PropertyType="DateTime" Description="자재 충전 일자 입니다." />
-                    <cdm:PropertyMeta Name="SUPPLIER" PropertyType="string" Description="공급업체" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="SUPPLIER" PropertyType="string" Description="공급업체" />
+                    <cdm:PropertyMeta Name="MAT_DIV" PropertyType="string" Description="PlanWip인지 FixWip인지 구분" />
                   </Properties>
                   <ViewInfo>
                     <cdm:DataViewInfo>
@@ -1564,6 +1565,7 @@ FROM
                     <cdm:PropertyMeta Name="USE_TYPE" PropertyType="string" Description="사용된 자재 종류 입니다. (MAT : 기존 자재, PLAN : 자재 계획 자재)" />
                     <cdm:PropertyMeta Name="MATERIAL_HISTORY_ID" PropertyType="string" Description="Material History ID" IsPrimaryKey="True" />
                     <cdm:PropertyMeta Name="SUPPLIER" PropertyType="string" Description="공급업체" />
+                    <cdm:PropertyMeta Name="MAT_DIV" PropertyType="string" Description="PlanWip인지 FixWip인지 구분" />
                   </Properties>
                 </cdm:DataMetaInfo>
               </MetaInfo>

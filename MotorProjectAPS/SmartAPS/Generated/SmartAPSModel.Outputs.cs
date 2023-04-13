@@ -104,6 +104,12 @@ namespace SmartAPS.Outputs
         [Column()]
         public string SUPPLIER { get; set; }
 
+        /// <summary>
+        /// PlanWip인지 FixWip인지 구분
+        /// </summary>
+        [Column()]
+        public string MAT_DIV { get; set; }
+
         public MATERIAL_HISTORY ShallowCopy()
         {
 			var x = (MATERIAL_HISTORY) this.MemberwiseClone();

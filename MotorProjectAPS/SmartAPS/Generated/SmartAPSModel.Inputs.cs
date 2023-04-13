@@ -1187,23 +1187,19 @@ namespace SmartAPS.Inputs
             return x;
         }
     }
-    /// <summary>
-    /// 
-    /// Keys: MAT_ID, MAT_TYPE, SUPPLIER
-    /// </summary>
     [Table(Name="REPLENISH_PLAN")]
     public partial class REPLENISH_PLAN : EntityObject
     {
         /// <summary>
         /// 자재 ID 입니다.
         /// </summary>
-        [Column(IsPrimaryKey=true)]
+        [Column()]
         public string MAT_ID { get; set; }
 
         /// <summary>
         /// 자재 종류 입니다.
         /// </summary>
-        [Column(IsPrimaryKey=true, PrimaryKeyOrder=1)]
+        [Column()]
         public string MAT_TYPE { get; set; }
 
         private double _MAT_QTY = 0D;
@@ -1232,8 +1228,14 @@ namespace SmartAPS.Inputs
         /// <summary>
         /// 공급업체
         /// </summary>
-        [Column(IsPrimaryKey=true, PrimaryKeyOrder=2)]
+        [Column()]
         public string SUPPLIER { get; set; }
+
+        /// <summary>
+        /// PlanWip인지 FixWip인지 구분
+        /// </summary>
+        [Column()]
+        public string MAT_DIV { get; set; }
 
         public REPLENISH_PLAN ShallowCopy()
         {

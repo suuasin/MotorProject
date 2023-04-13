@@ -199,6 +199,21 @@ namespace SmartAPS
                 return this.GetTable<SmartAPSMat>();
             }
         }
+        private EntityView<SmartAPSMat> _SmartAPSMatView;
+        /// <summary>
+        /// Key: Key
+        /// </summary>
+        public EntityView<SmartAPSMat> SmartAPSMatView
+        {
+            get
+            {
+                if ((this._SmartAPSMatView == null))
+                {
+                    this._SmartAPSMatView = this.CreateView<SmartAPSMat>(this.SmartAPSMat, null, "Key", Mozart.Data.Entity.IndexType.Hashtable);
+                }
+                return this._SmartAPSMatView;
+            }
+        }
         public EntityTable<SmartAPSInTarget> SmartAPSInTarget
         {
             get
@@ -580,6 +595,8 @@ namespace SmartAPS
             this._SmartAPSPMListLineView = null;
             this.DisposeIfNeeds(this._SmartAPSProductRouteFromStepDemandView);
             this._SmartAPSProductRouteFromStepDemandView = null;
+            this.DisposeIfNeeds(this._SmartAPSMatView);
+            this._SmartAPSMatView = null;
             this.DisposeIfNeeds(this._SmartAPSInTargetView);
             this._SmartAPSInTargetView = null;
             this.DisposeIfNeeds(this._SmartAPSInTargetViewByProd);

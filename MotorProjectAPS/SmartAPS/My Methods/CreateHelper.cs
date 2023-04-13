@@ -357,6 +357,7 @@ namespace SmartAPS
         {
             MatPlan plan = SAPSObjectMapper.CreateMatPlan();
 
+            //key로 사용할 수 있게 아이디 생성
             plan.MaterialID = entity.MAT_ID + Guid.NewGuid().ToString();
             plan.MaterialType = entity.MAT_TYPE;
             plan.Qty = entity.MAT_QTY;

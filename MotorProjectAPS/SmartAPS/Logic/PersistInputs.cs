@@ -171,9 +171,7 @@ namespace SmartAPS.Logic
         public bool OnAfterLoad_REPLENISH_PLAN(REPLENISH_PLAN entity)
         {
             MatPlan plan = CreateHelper.CreateMatPlan(entity);
-
             SmartAPSMat mat = new SmartAPSMat();
-
 
             if (plan == null)
                 return false;
@@ -182,9 +180,9 @@ namespace SmartAPS.Logic
             mat.MatType = entity.MAT_TYPE;
             mat.MatID = entity.MAT_ID;
             mat.Supplier = entity.SUPPLIER;
+            mat.MatDiv = entity.MAT_DIV;
 
             InputMart.Instance.SmartAPSMat.ImportRow(mat);
-
             MaterialManager.Instance.Materials.Add(plan);
 
             return true;
