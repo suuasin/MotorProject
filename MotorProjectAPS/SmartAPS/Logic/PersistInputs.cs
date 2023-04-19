@@ -17,6 +17,7 @@ using Mozart.Task.Execution.Persists;
 using Mozart.SeePlan.DataModel;
 using Mozart.SeePlan.Simulation;
 using Mozart.Data.Entity;
+using System.Data;
 
 namespace SmartAPS.Logic
 {
@@ -166,26 +167,6 @@ namespace SmartAPS.Logic
 
                 preset.FactorList.Add(factor);
             }
-        }
-
-        public bool OnAfterLoad_REPLENISH_PLAN(REPLENISH_PLAN entity)
-        {
-            MatPlan plan = CreateHelper.CreateMatPlan(entity);
-            SmartAPSMat mat = new SmartAPSMat();
-
-            if (plan == null)
-                return false;
-
-            mat.Key = plan.MaterialID;
-            mat.MatType = entity.MAT_TYPE;
-            mat.MatID = entity.MAT_ID;
-            mat.Supplier = entity.SUPPLIER;
-            mat.MatDiv = entity.MAT_DIV;
-
-            InputMart.Instance.SmartAPSMat.ImportRow(mat);
-            MaterialManager.Instance.Materials.Add(plan);
-
-            return true;
         }
 
         public bool OnAfterLoad_SPLIT_INFO(SPLIT_INFO entity)
@@ -703,5 +684,67 @@ namespace SmartAPS.Logic
                 InputMart.Instance.PEG_CONDITION.ImportRow(NewPeg);
             }
         }
+
+        public bool OnAfterLoad_MAT_SUPPLIER(MAT_SUPPLIER entity)
+        {
+            return true;
+        }
+        //public bool OnAfterLoad_REPLENISH_PLAN(REPLENISH_PLAN entity)
+        //{
+        //    var unit = InputMart.Instance.MATERIAL_BOMView.FindRows(entity.MAT_TYPE).FirstOrDefault();
+        //    if (entity.MAT_TYPE == unit.MAT_TYPE)
+        //    {
+        //        entity.UNIT = unit.UNIT;
+        //    }
+        //    return true;
+        //}
+
+        public void OnAction_REPLENISH_PLAN(IPersistContext context)
+        {
+            var repDt = InputMart.Instance.REPLENISH_PLAN.DefaultView;
+
+            var tempDic = new Dictionary<Tuple<string, DateTime>, List<REPLENISH_PLAN>>();
+
+            foreach (REPLENISH_PLAN rp in repDt)
+            {
+                string matID = rp.MAT_ID;
+                DateTime repDate = rp.REPLENISH_DATE;
+
+                var aaa = InputMart.Instance.REPLENISH_PLANView.FindRows(matID, repDate).ToList();
+                var key = Tuple.Create(matID, repDate);
+
+                if (tempDic.ContainsKey(key))
+                    continue;
+                else
+                    tempDic.Add(key, aaa);
+
+            }
+
+            foreach(var item in tempDic)
+            {
+                string supplier = string.Empty;
+
+                MatPlan plan = CreateHelper.CreateMatPlan(item.Value, out supplier);
+
+                SmartAPSMat mat = new SmartAPSMat();
+                if (plan != null)
+                {                    
+                    mat.Key = plan.MaterialID;
+                    mat.MatType = plan.MaterialType;
+                    mat.MatID = item.Value.FirstOrDefault().MAT_ID;
+                    mat.Supplier = supplier;
+                    mat.MatDiv = item.Value.FirstOrDefault().MAT_DIV;
+                    mat.Unit = item.Value.FirstOrDefault().UNIT;
+                }
+
+                InputMart.Instance.SmartAPSMat.ImportRow(mat);
+                MaterialManager.Instance.Materials.Add(plan);
+
+            }
+           
+           
+        }
+
+       
     }
 }

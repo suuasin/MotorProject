@@ -1037,6 +1037,7 @@ FROM
                     <cdm:PropertyMeta Name="REPLENISH_DATE" PropertyType="DateTime" Description="자재 충전 일자 입니다." />
                     <cdm:PropertyMeta Name="SUPPLIER" PropertyType="string" Description="공급업체" />
                     <cdm:PropertyMeta Name="MAT_DIV" PropertyType="string" Description="PlanWip인지 FixWip인지 구분" />
+                    <cdm:PropertyMeta Name="UNIT" PropertyType="string" />
                   </Properties>
                   <ViewInfo>
                     <cdm:DataViewInfo>
@@ -1125,7 +1126,19 @@ FROM
                     <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="자재가 필요한 공정의 ID 입니다." IsPrimaryKey="True" />
                     <cdm:PropertyMeta Name="MAT_TYPE" PropertyType="string" Description="자재 종류 입니다." IsPrimaryKey="True" />
                     <cdm:PropertyMeta Name="COMP_QTY" PropertyType="double" Description="UNIT당 필요한 자재 수량입니다." />
+                    <cdm:PropertyMeta Name="UNIT" PropertyType="string" />
                   </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>MAT_TYPE</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
                 </cdm:DataMetaInfo>
               </MetaInfo>
               <ActiveAction>
@@ -1543,6 +1556,53 @@ FROM
                 <cdd:InputItemOptions />
               </Options>
             </cdd:DataItem>
+            <cdd:DataItem Name="MAT_SUPPLIER" Category="RESOURCE">
+              <MetaInfo>
+                <cdm:DataMetaInfo Name="MAT_SUPPLIER">
+                  <Properties>
+                    <cdm:PropertyMeta Name="SUPPLIER" PropertyType="string" />
+                    <cdm:PropertyMeta Name="MAT_ID" PropertyType="string" />
+                    <cdm:PropertyMeta Name="CAPA" PropertyType="string" />
+                    <cdm:PropertyMeta Name="PRIORITY" PropertyType="int" />
+                  </Properties>
+                  <ViewInfo>
+                    <cdm:DataViewInfo>
+                      <Items Capacity="4">
+                        <cdm:DataViewItem Name="View" IndexType="Hashtable">
+                          <Keys Capacity="4">
+                            <String>MAT_ID</String>
+                          </Keys>
+                        </cdm:DataViewItem>
+                      </Items>
+                    </cdm:DataViewInfo>
+                  </ViewInfo>
+                </cdm:DataMetaInfo>
+              </MetaInfo>
+              <ActiveAction>
+                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="True" def:name="MAT_SUPPLIER_Default">
+                  <Commands>
+                    <cdd:DataCommand Name="Select" IsBindTable="True">
+                      <CommandText>SELECT 
+	A.SUPPLIER,
+	A.MAT_ID,
+	A.CAPA,
+	A.PRIORITY
+FROM 
+	MAT_SUPPLIER A</CommandText>
+                    </cdd:DataCommand>
+                    <cdd:DataCommand Name="Insert" IsBindTable="True" />
+                    <cdd:DataCommand Name="Update" IsBindTable="True" />
+                    <cdd:DataCommand Name="Delete" IsBindTable="True" />
+                  </Commands>
+                </cdd:DataAction>
+              </ActiveAction>
+              <Actions>
+                <cdd:DataAction ref:name="MAT_SUPPLIER_Default" />
+              </Actions>
+              <Options>
+                <cdd:InputItemOptions />
+              </Options>
+            </cdd:DataItem>
           </cdd:DataItem-Array>
         </ItemArray>
       </Inputs>
@@ -1561,6 +1621,7 @@ FROM
                     <cdm:PropertyMeta Name="LOT_ID" PropertyType="string" Description="자재가 사용된 LOT입니다." IsPrimaryKey="True" />
                     <cdm:PropertyMeta Name="QTY" PropertyType="double" Description="사용 전 자재 수량입니다." />
                     <cdm:PropertyMeta Name="USE_QTY" PropertyType="double" Description="사용 된 자재 수량 입니다." />
+                    <cdm:PropertyMeta Name="UNIT" PropertyType="string" Description="자재 단위" />
                     <cdm:PropertyMeta Name="USE_DATE" PropertyType="DateTime" Description="사용 된 날짜 입니다." />
                     <cdm:PropertyMeta Name="USE_TYPE" PropertyType="string" Description="사용된 자재 종류 입니다. (MAT : 기존 자재, PLAN : 자재 계획 자재)" />
                     <cdm:PropertyMeta Name="MATERIAL_HISTORY_ID" PropertyType="string" Description="Material History ID" IsPrimaryKey="True" />
@@ -3298,14 +3359,6 @@ VALUES
               </Items>
             </cdd:DataSource>
           </Entry>
-          <Entry>
-            <String>DBCONN_MES</String>
-            <cdd:DataSource Name="DBCONN_MES" Description="">
-              <Items Capacity="4">
-                <cdd:DataSourceItem Name="Dev_MES" ProviderName="SqlServer" ConnectionString="Database=active_sungwon;Data Source=192.168.11.74;User ID=emes;Password=emes;" />
-              </Items>
-            </cdd:DataSource>
-          </Entry>
         </Items>
       </DataSources>
       <PersistOutput>
@@ -3364,7 +3417,7 @@ VALUES
           <Items Capacity="5">
             <GroupItem IsPerformance="True" IsPreloading="True" Name="* Preloading *" />
             <GroupItem IsPerformance="True" Name="EXECUTION Persists">
-              <Items Capacity="6">
+              <Items Capacity="4">
                 <EntityItem IsPerformance="True" Name="EXECUTION_OPTION_CONFIG" />
                 <EntityItem IsPerformance="True" Name="CONFIG" />
                 <EntityItem IsPerformance="True" Name="PLAN_REPORT_TARGET" />
@@ -3384,15 +3437,16 @@ VALUES
               </Items>
             </GroupItem>
             <GroupItem IsPerformance="True" Name="RESOURCE Persists">
-              <Items Capacity="14">
+              <Items Capacity="15">
                 <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_PRESET_INFO" Name="PRESET_INFO" Action="OnAction_PRESET_INFO" />
                 <EntityItem IsPerformance="True" Name="SETUP_INFO" />
                 <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_EQUIPMENT" Name="EQUIPMENT" />
                 <EntityItem IsPerformance="True" Name="LINE_INFO" />
                 <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_EQP_ARRANGE" Name="EQP_ARRANGE" />
+                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_MAT_SUPPLIER" Name="MAT_SUPPLIER" />
                 <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_FACTORY_BREAK" Name="FACTORY_BREAK" />
                 <EntityItem IsPerformance="True" Name="PM_PLAN" />
-                <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_REPLENISH_PLAN" Name="REPLENISH_PLAN" />
+                <EntityItem IsPerformance="True" Name="REPLENISH_PLAN" Action="OnAction_REPLENISH_PLAN" />
                 <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_MATERIAL" Name="MATERIAL" />
                 <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_MATERIAL_BOM" Name="MATERIAL_BOM" />
                 <EntityItem IsPerformance="True" OnAfterLoadItem="OnAfterLoad_SPLIT_INFO" Name="SPLIT_INFO" />

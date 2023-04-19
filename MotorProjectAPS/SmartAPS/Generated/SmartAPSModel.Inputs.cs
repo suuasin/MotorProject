@@ -1237,6 +1237,9 @@ namespace SmartAPS.Inputs
         [Column()]
         public string MAT_DIV { get; set; }
 
+        [Column()]
+        public string UNIT { get; set; }
+
         public REPLENISH_PLAN ShallowCopy()
         {
 			var x = (REPLENISH_PLAN) this.MemberwiseClone();
@@ -1334,6 +1337,9 @@ namespace SmartAPS.Inputs
         /// </summary>
         [Column()]
         public double COMP_QTY { get; set; }
+
+        [Column()]
+        public string UNIT { get; set; }
 
         public MATERIAL_BOM ShallowCopy()
         {
@@ -1697,6 +1703,28 @@ namespace SmartAPS.Inputs
         public SHIFT_TIME_CONFIG ShallowCopy()
         {
 			var x = (SHIFT_TIME_CONFIG) this.MemberwiseClone();
+			x.InitCopy();
+            return x;
+        }
+    }
+    [Table(Name="MAT_SUPPLIER")]
+    public partial class MAT_SUPPLIER : EntityObject
+    {
+        [Column()]
+        public string SUPPLIER { get; set; }
+
+        [Column()]
+        public string MAT_ID { get; set; }
+
+        [Column()]
+        public string CAPA { get; set; }
+
+        [Column()]
+        public int PRIORITY { get; set; }
+
+        public MAT_SUPPLIER ShallowCopy()
+        {
+			var x = (MAT_SUPPLIER) this.MemberwiseClone();
 			x.InitCopy();
             return x;
         }

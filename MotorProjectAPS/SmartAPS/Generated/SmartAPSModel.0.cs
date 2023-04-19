@@ -614,6 +614,21 @@ namespace SmartAPS
                 return this.GetTable<MATERIAL_BOM>();
             }
         }
+        private EntityView<MATERIAL_BOM> _MATERIAL_BOMView;
+        /// <summary>
+        /// Key: MAT_TYPE
+        /// </summary>
+        public EntityView<MATERIAL_BOM> MATERIAL_BOMView
+        {
+            get
+            {
+                if ((this._MATERIAL_BOMView == null))
+                {
+                    this._MATERIAL_BOMView = this.CreateView<MATERIAL_BOM>(this.MATERIAL_BOM, null, "MAT_TYPE", Mozart.Data.Entity.IndexType.Hashtable);
+                }
+                return this._MATERIAL_BOMView;
+            }
+        }
         public EntityTable<OUT_ACT> OUT_ACT
         {
             get
@@ -751,6 +766,28 @@ namespace SmartAPS
                 return this.GetTable<SHIFT_TIME_CONFIG>();
             }
         }
+        public EntityTable<MAT_SUPPLIER> MAT_SUPPLIER
+        {
+            get
+            {
+                return this.GetTable<MAT_SUPPLIER>();
+            }
+        }
+        private EntityView<MAT_SUPPLIER> _MAT_SUPPLIERView;
+        /// <summary>
+        /// Key: MAT_ID
+        /// </summary>
+        public EntityView<MAT_SUPPLIER> MAT_SUPPLIERView
+        {
+            get
+            {
+                if ((this._MAT_SUPPLIERView == null))
+                {
+                    this._MAT_SUPPLIERView = this.CreateView<MAT_SUPPLIER>(this.MAT_SUPPLIER, null, "MAT_ID", Mozart.Data.Entity.IndexType.Hashtable);
+                }
+                return this._MAT_SUPPLIERView;
+            }
+        }
         protected override void ClearMyModel()
         {
             base.ClearMyModel();
@@ -796,6 +833,8 @@ namespace SmartAPS
             this._SETUP_INFOTimeView = null;
             this.DisposeIfNeeds(this._REPLENISH_PLANView);
             this._REPLENISH_PLANView = null;
+            this.DisposeIfNeeds(this._MATERIAL_BOMView);
+            this._MATERIAL_BOMView = null;
             this.DisposeIfNeeds(this._SPLIT_INFOView);
             this._SPLIT_INFOView = null;
             this.DisposeIfNeeds(this._TOOL_ARRANGEView);
@@ -804,6 +843,8 @@ namespace SmartAPS
             this._PEG_CONDITIONView = null;
             this.DisposeIfNeeds(this._EQP_UTILIZATIONView);
             this._EQP_UTILIZATIONView = null;
+            this.DisposeIfNeeds(this._MAT_SUPPLIERView);
+            this._MAT_SUPPLIERView = null;
         }
         /// <summary>
         /// Global Pararamters

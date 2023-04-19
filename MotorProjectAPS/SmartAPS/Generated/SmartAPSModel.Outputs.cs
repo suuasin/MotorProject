@@ -81,6 +81,12 @@ namespace SmartAPS.Outputs
         public double USE_QTY { get; set; }
 
         /// <summary>
+        /// 자재 단위
+        /// </summary>
+        [Column()]
+        public string UNIT { get; set; }
+
+        /// <summary>
         /// 사용 된 날짜 입니다.
         /// </summary>
         [Column()]

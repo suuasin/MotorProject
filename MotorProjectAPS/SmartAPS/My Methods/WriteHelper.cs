@@ -332,6 +332,7 @@ namespace SmartAPS
             mh.MATERIAL_HISTORY_ID = Guid.NewGuid().ToString();
             mh.SUPPLIER = mat != null && mat.Count() > 0 ? mat.FirstOrDefault().Supplier : null;
             mh.MAT_DIV = mat != null && mat.Count() > 0 ? mat.FirstOrDefault().MatDiv : null;
+            mh.UNIT = mat != null && mat.Count() > 0 ? mat.FirstOrDefault().Unit : null;
 
             OutputMart.Instance.MATERIAL_HISTORY.Add(mh);
         }

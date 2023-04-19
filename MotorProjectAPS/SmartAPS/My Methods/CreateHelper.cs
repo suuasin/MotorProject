@@ -280,6 +280,8 @@ namespace SmartAPS
             bom.Product = prod;
             bom.Step = step;
             bom.CompQty = entity.COMP_QTY;
+         
+
 
             var mats = MaterialManager.Instance.FindMatPlans(bom.MaterialType);
             if (mats != null && mats.Count() > 0)
@@ -353,23 +355,53 @@ namespace SmartAPS
             return plan;
         }
 
-        public static MatPlan CreateMatPlan(REPLENISH_PLAN entity)
+        public static MatPlan CreateMatPlan(List<REPLENISH_PLAN> entity, out string supplier)
         {
+            //MAT이 Plan인 경우 MatPlan생성하는 경우
             MatPlan plan = SAPSObjectMapper.CreateMatPlan();
 
-            //key로 사용할 수 있게 아이디 생성
-            plan.MaterialID = entity.MAT_ID + Guid.NewGuid().ToString();
-            plan.MaterialType = entity.MAT_TYPE;
-            plan.Qty = entity.MAT_QTY;
-            plan.IsInfinite = false;
-            plan.ReplenishDate = entity.REPLENISH_DATE;
-            plan.MatType = MatType.Plan;
+            if (entity.Count() > 1)
+            {
+                string matID = entity.FirstOrDefault().MAT_ID;
+
+                //var aaa = InputMart.Instance.MAT_SUPPLIER;
+
+                supplier = InputMart.Instance.MAT_SUPPLIERView.FindRows(matID).OrderBy(x=>x.PRIORITY).FirstOrDefault().SUPPLIER;
+                string supply = supplier;
+                var findItem = entity.Find(x => x.SUPPLIER == supply);
+
+                plan.MaterialID = findItem.MAT_ID + Guid.NewGuid().ToString();
+                plan.MaterialType = findItem.MAT_TYPE;
+                plan.Qty = findItem.MAT_QTY;
+                plan.IsInfinite = false;
+                plan.ReplenishDate = findItem.REPLENISH_DATE;
+                plan.MatType = MatType.Plan;
+            }
+            else
+            {
+                supplier = entity.FirstOrDefault().SUPPLIER;
+                plan.MaterialID = entity.FirstOrDefault().MAT_ID + Guid.NewGuid().ToString();
+                plan.MaterialType = entity.FirstOrDefault().MAT_TYPE;
+                plan.Qty = entity.FirstOrDefault().MAT_QTY;
+                plan.IsInfinite = false;
+                plan.ReplenishDate = entity.FirstOrDefault().REPLENISH_DATE;
+                plan.MatType = MatType.Plan;
+            }
+
+            //plan.MaterialID = entity.MAT_ID + Guid.NewGuid().ToString();
+            //plan.MaterialType = entity.MAT_TYPE;
+            //plan.Qty = entity.MAT_QTY;
+            //plan.IsInfinite = false;
+            //plan.ReplenishDate = entity.REPLENISH_DATE;
+            //plan.MatType = MatType.Plan;
 
             return plan;
+
         }
 
         public static MatPlan CreateMatPlan(MATERIAL entity)
         {
+            //MAT이 INV인 경우 MatPlan생성하는 경우
             MatPlan plan = SAPSObjectMapper.CreateMatPlan();
 
             plan.MaterialID = entity.MAT_ID;
@@ -388,8 +420,6 @@ namespace SmartAPS
 
             wip.LotID = CreateLotID(prod.ProductID);
 
-            //if (wip.LotID == "10W210825D001-006_2441_27")
-            //    Console.Write("A");
 
             wip.WipProductID = prod.ProductID;
             wip.WipProcessID = prod.Process.ProcessID;

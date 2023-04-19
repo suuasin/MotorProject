@@ -1291,6 +1291,7 @@
                     <cdm:PropertyMeta Name="MatType" PropertyType="string" />
                     <cdm:PropertyMeta Name="Supplier" PropertyType="string" />
                     <cdm:PropertyMeta Name="MatDiv" PropertyType="string" />
+                    <cdm:PropertyMeta Name="Unit" PropertyType="string" />
                   </Properties>
                   <ViewInfo>
                     <cdm:DataViewInfo>

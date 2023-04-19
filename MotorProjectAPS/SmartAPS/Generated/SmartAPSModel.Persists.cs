@@ -125,12 +125,14 @@ namespace SmartAPS.Persists
                 this.Action("LINE_INFO", null);
                 this.Load<EQP_ARRANGE>("EQP_ARRANGE", false, true, fPersistInputs.OnAfterLoad_EQP_ARRANGE);
                 this.Action("EQP_ARRANGE", null);
+                this.Load<MAT_SUPPLIER>("MAT_SUPPLIER", false, true, fPersistInputs.OnAfterLoad_MAT_SUPPLIER);
+                this.Action("MAT_SUPPLIER", null);
                 this.Load<FACTORY_BREAK>("FACTORY_BREAK", false, true, fPersistInputs.OnAfterLoad_FACTORY_BREAK);
                 this.Action("FACTORY_BREAK", null);
                 this.Load<PM_PLAN>("PM_PLAN", false, true, null);
                 this.Action("PM_PLAN", null);
-                this.Load<REPLENISH_PLAN>("REPLENISH_PLAN", false, true, fPersistInputs.OnAfterLoad_REPLENISH_PLAN);
-                this.Action("REPLENISH_PLAN", null);
+                this.Load<REPLENISH_PLAN>("REPLENISH_PLAN", false, true, null);
+                this.Action("REPLENISH_PLAN", fPersistInputs.OnAction_REPLENISH_PLAN);
                 this.Load<MATERIAL>("MATERIAL", false, true, fPersistInputs.OnAfterLoad_MATERIAL);
                 this.Action("MATERIAL", null);
                 this.Load<MATERIAL_BOM>("MATERIAL_BOM", false, true, fPersistInputs.OnAfterLoad_MATERIAL_BOM);
