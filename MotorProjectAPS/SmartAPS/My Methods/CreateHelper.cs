@@ -561,8 +561,6 @@ namespace SmartAPS
             SmartAPSLot lot = SAPSObjectMapper.Create<SmartAPSLot>(wip);
 
 
-            //if (lot.LotID == "10W210825D001-006_2441_27")
-            //    Console.Write("A");
 
             lot.WipInfo = wip;
             lot.Product = wip.Product;

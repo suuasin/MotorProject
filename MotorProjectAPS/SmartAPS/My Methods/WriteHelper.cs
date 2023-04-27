@@ -126,6 +126,7 @@ namespace SmartAPS
                 ep.VERSION_NO = ModelContext.Current.VersionNo;
                 ep.LINE_ID = lot.LineID;
                 ep.LOT_ID = lot.LotID;
+                ep.FROM_LOT_ID = lot.FromLotID;
                 ep.EQP_STATE_CODE = state.ToString();
                 ep.PRODUCT_ID = lot.Product.ProductID;
                 ep.PROCESS_ID = lot.Process.ProcessID;

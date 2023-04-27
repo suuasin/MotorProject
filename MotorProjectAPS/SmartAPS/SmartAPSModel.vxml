@@ -57,7 +57,7 @@
           <KeyMapArray>
             <String-Array>
               <String>DEMAND_HIS=VERSION_NO,DEMAND_VER,DEMAND_ID,PRODUCT_ID,CUSTOMER_ID,DUE_DATE,DEMAND_QTY,PRIORITY,DEMAND_HIS_ID</String>
-              <String>MATERIAL_HISTORY=VERSION_NO,MATERIAL_HISTORY_ID,MAT_ID,MAT_TYPE,PRODUCT_ID,STEP_ID,LOT_ID,QTY,USE_QTY,USE_DATE,USE_TYPE</String>
+              <String>MATERIAL_HISTORY=VERSION_NO,MAT_ID,MAT_TYPE,PRODUCT_ID,STEP_ID,LOT_ID,QTY,USE_QTY,UNIT,USE_DATE,USE_TYPE,SUPPLIER,MATERIAL_HISTORY_ID,MAT_DIV</String>
               <String>PRESET_INFO_HIS=VERSION_NO,PRESET_ID,FACTOR_ID,FACTOR_TYPE,FACTOR_WEIGHT,ORDER_TYPE,SEQUENCE,CRITERIA,DESCRIPTION</String>
               <String>WIP_HIS=VERSION_NO,LOT_ID,LINE_ID,PRODUCT_ID,PROCESS_ID,STEP_ID,UNIT_QTY,EQP_ID,LINE_IN_TIME,STEP_ARRIVE_TIME,STATE,STATE_TIME,OUT_QTY,DEMAND_ID</String>
               <String>ANALYSIS_PSI=VERSION_NO,CUSTOMER_ID,PRODUCT_ID,PRODUCT_NAME,ITEM,QTY,RTF_RATE,PSI_DATE,ANALYSIS_PSI_ID</String>
@@ -69,7 +69,7 @@
               <String>STEP_TARGET=VERSION_NO,PRODUCT_ID,STEP_ID,IN_QTY,OUT_QTY,TARGET_DATE,MO_DEMAND_ID,MO_PRODUCT_ID,MO_DUE_DATE,STEP_TARGET_ID</String>
               <String>UNPEG_HISTORY=VERSION_NO,LINE_ID,LOT_ID,STEP_ID,PRODUCT_ID,LOT_QTY,STATE,REMAIN_QTY,UNPEG_CATEGORY,UNPEG_REASON,UNPEG_HISTORY_ID,UNIT_QTY,UNPEG_QTY</String>
               <String>EQP_DISPATCH_LOG=VERSION_NO,EQP_ID,DISPATCHING_TIME,PRESET_ID,INIT_WIP_CNT,FILTERED_WIP_CNT,SELECTED_WIP_CNT,SELECTED_WIP,FILTERED_WIP_LOG,DISPATCH_WIP_LOG</String>
-              <String>EQP_PLAN=VERSION_NO,LINE_ID,EQP_ID,LOT_ID,PRODUCT_ID,PROCESS_ID,STEP_ID,PROCESS_QTY,DISPATCH_IN_TIME,START_TIME,END_TIME,MACHINE_STATE,EQP_PLAN_ID,STEP_TYPE,STEP_IN_TIME,EQP_START_TIME,EQP_END_TIME,EQP_STATE_CODE,DUE_DATE,TARGET_DATE,AUTOMATION,DEMAND_ID,INPUT_PROC_TIME,INPUT_TACT_TIME,UTILIZATION,EFFICIENCY,APPLY_PROC_TIME,APPLY_TACT_TIME</String>
+              <String>EQP_PLAN=VERSION_NO,LINE_ID,EQP_ID,LOT_ID,PRODUCT_ID,STEP_ID,STEP_TYPE,PROCESS_QTY,STEP_IN_TIME,EQP_START_TIME,EQP_END_TIME,EQP_STATE_CODE,TARGET_DATE,DEMAND_ID,DUE_DATE,AUTOMATION,EQP_PLAN_ID,TOOL_ID,INPUT_PROC_TIME,INPUT_TACT_TIME,UTILIZATION,EFFICIENCY,APPLY_PROC_TIME,APPLY_TACT_TIME</String>
               <String>LOAD_HISTORY=VERSION_NO,LOAD_HISTORY_ID,LINE_ID,EQP_ID,TARGET_DATE,INFO_GZIP,INFO_GZIP_2,INFO_GZIP_3</String>
               <String>LOAD_STAT=VERSION_NO,LOAD_STAT_ID,LINE_ID,EQP_ID,TARGET_DATE,SETUP,BUSY,IDLERUN,IDLE,PM,DOWN</String>
               <String>RELEASE_HISTORY=VERSION_NO,BATCH_ID,LOT_ID,PRODUCT_ID,RELEASE_DATE,INPUT_STEP_ID,QTY</String>
@@ -78,6 +78,7 @@
               <String>TOOL_SEIZE_LOG=VERSION_NO,TOOL_ID,EQP_ID,SEIZE_TIME,RELEASE_TIME,TOOL_LIST,AVAILABLES,CAPACITY,SEIZED_INFOS</String>
               <String>UNKIT_REMAIN_WIPLOG=VERSION_NO,LOT_ID,MERGE_KEY,WAIT_START,WAITING_MINUTES,ORG_QTY,REMAIN_QTY,MERGE_CNT</String>
               <String>UNLOADED_LOTLOG=VERSION_NO,UNLOADED_LOTLOG_ID,LOT_ID,LAST_STEP_ID,PRODUCT_ID,UNIT_QTY</String>
+              <String>REPLENISH_PLAN=MAT_ID,MAT_TYPE,MAT_QTY,REPLENISH_DATE,SUPPLIER,MAT_DIV,UNIT</String>
             </String-Array>
           </KeyMapArray>
         </ctm:ArgCache>
@@ -1054,17 +1055,30 @@ FROM
                 </cdm:DataMetaInfo>
               </MetaInfo>
               <ActiveAction>
-                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="REPLENISH_PLAN_Default">
+                <cdd:DataAction Name="Default" DataSource="DB_MSIT" IsAdapters="False" def:name="REPLENISH_PLAN_Default">
                   <Commands>
-                    <cdd:DataCommand Name="Cmd1">
-                      <CommandText>SELECT 
-	A.MAT_ID, 
-	A.MAT_TYPE, 
-	A.QTY AS MAT_QTY, 
-	A.REPLENISH_DATE
-FROM 
-	REPLENISH_PLAN A
-</CommandText>
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
+                      <CommandText>INSERT INTO 
+	REPLENISH_PLAN 
+	(
+	MAT_ID, 
+	MAT_TYPE, 
+	MAT_QTY, 
+	REPLENISH_DATE, 
+	SUPPLIER, 
+	MAT_DIV, 
+	UNIT) 
+VALUES 
+	(@MAT_ID, @MAT_TYPE, @MAT_QTY, @REPLENISH_DATE, @SUPPLIER, @MAT_DIV, @UNIT)</CommandText>
+                      <Parameters>
+                        <cdd:DataParameter Name="@MAT_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MAT_TYPE" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MAT_QTY" DbType="Double" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@REPLENISH_DATE" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@SUPPLIER" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MAT_DIV" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@UNIT" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                      </Parameters>
                     </cdd:DataCommand>
                   </Commands>
                 </cdd:DataAction>
@@ -1624,29 +1638,19 @@ FROM
                     <cdm:PropertyMeta Name="UNIT" PropertyType="string" Description="자재 단위" />
                     <cdm:PropertyMeta Name="USE_DATE" PropertyType="DateTime" Description="사용 된 날짜 입니다." />
                     <cdm:PropertyMeta Name="USE_TYPE" PropertyType="string" Description="사용된 자재 종류 입니다. (MAT : 기존 자재, PLAN : 자재 계획 자재)" />
-                    <cdm:PropertyMeta Name="MATERIAL_HISTORY_ID" PropertyType="string" Description="Material History ID" IsPrimaryKey="True" />
                     <cdm:PropertyMeta Name="SUPPLIER" PropertyType="string" Description="공급업체" />
+                    <cdm:PropertyMeta Name="MATERIAL_HISTORY_ID" PropertyType="string" Description="Material History ID" IsPrimaryKey="True" />
                     <cdm:PropertyMeta Name="MAT_DIV" PropertyType="string" Description="PlanWip인지 FixWip인지 구분" />
                   </Properties>
                 </cdm:DataMetaInfo>
               </MetaInfo>
               <ActiveAction>
-                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="MATERIAL_HISTORY_Default">
+                <cdd:DataAction Name="Default" DataSource="DB_MSIT" IsAdapters="False" def:name="MATERIAL_HISTORY_Default">
                   <Commands>
-                    <cdd:DataCommand Name="Cmd1">
-                      <CommandText>DELETE FROM 
-	APSLIB.MATERIAL_HISTORY 
-WHERE 
-	(VERSION_NO = @VERSION_NO)</CommandText>
-                      <Parameters>
-                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                      </Parameters>
-                    </cdd:DataCommand>
-                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
                       <CommandText>INSERT INTO 
-	APSLIB.MATERIAL_HISTORY 
+	MATERIAL_HISTORY 
 	(
-	MATERIAL_HISTORY_ID, 
 	VERSION_NO, 
 	MAT_ID, 
 	MAT_TYPE, 
@@ -1655,22 +1659,29 @@ WHERE
 	LOT_ID, 
 	QTY, 
 	USE_QTY, 
+	UNIT, 
 	USE_DATE, 
-	USE_TYPE) 
+	USE_TYPE, 
+	SUPPLIER, 
+	MATERIAL_HISTORY_ID, 
+	MAT_DIV) 
 VALUES 
-	(@MATERIAL_HISTORY_ID, @VERSION_NO, @MAT_ID, @MAT_TYPE, @PRODUCT_ID, @STEP_ID, @LOT_ID, @QTY, @USE_QTY, @USE_DATE, @USE_TYPE)</CommandText>
+	(@VERSION_NO, @MAT_ID, @MAT_TYPE, @PRODUCT_ID, @STEP_ID, @LOT_ID, @QTY, @USE_QTY, @UNIT, @USE_DATE, @USE_TYPE, @SUPPLIER, @MATERIAL_HISTORY_ID, @MAT_DIV)</CommandText>
                       <Parameters>
-                        <cdd:DataParameter Name="@MATERIAL_HISTORY_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@MAT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@MAT_TYPE" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@PRODUCT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@STEP_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@LOT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@USE_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@VERSION_NO" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MAT_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MAT_TYPE" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PRODUCT_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@LOT_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@QTY" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@USE_QTY" DbType="Double" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@UNIT" Size="50" DbType="AnsiString" SourceVersion="Current" />
                         <cdd:DataParameter Name="@USE_DATE" DbType="DateTime" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@USE_TYPE" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@USE_TYPE" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@SUPPLIER" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MATERIAL_HISTORY_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@MAT_DIV" Size="50" DbType="AnsiString" SourceVersion="Current" />
                       </Parameters>
                     </cdd:DataCommand>
                   </Commands>
@@ -2179,6 +2190,7 @@ VALUES
                     <cdm:PropertyMeta Name="LINE_ID" PropertyType="string" Description="장비가 위치한 라인 ID" />
                     <cdm:PropertyMeta Name="EQP_ID" PropertyType="string" Description="장비 ID" IsPrimaryKey="True" />
                     <cdm:PropertyMeta Name="LOT_ID" PropertyType="string" Description="장비에서 작업한 LOT ID" IsPrimaryKey="True" />
+                    <cdm:PropertyMeta Name="FROM_LOT_ID" PropertyType="string" Description="머지되어 새로 생성한 LOT의 부모LOT들을 기록" />
                     <cdm:PropertyMeta Name="PRODUCT_ID" PropertyType="string" Description="작업대상 LOT 의 PRODUCT ID" />
                     <cdm:PropertyMeta Name="PROCESS_ID" PropertyType="string" Description="작업대상 LOT 의 PROCESS ID" />
                     <cdm:PropertyMeta Name="STEP_ID" PropertyType="string" Description="작업대상 LOT 의 작업 공정 ID" IsPrimaryKey="True" />
@@ -2204,9 +2216,9 @@ VALUES
                 </cdm:DataMetaInfo>
               </MetaInfo>
               <ActiveAction>
-                <cdd:DataAction Name="Default" DataSource="DBCONN_APS" IsAdapters="False" def:name="EQP_PLAN_Default">
+                <cdd:DataAction Name="Default" DataSource="DB_MSIT" IsAdapters="False" def:name="EQP_PLAN_Default">
                   <Commands>
-                    <cdd:DataCommand Name="Cmd1">
+                    <cdd:DataCommand Name="Cmd1" IsBindTable="True">
                       <CommandText>INSERT INTO 
 	EQP_PLAN 
 	(
@@ -2215,100 +2227,52 @@ VALUES
 	EQP_ID, 
 	LOT_ID, 
 	PRODUCT_ID, 
-	PROCESS_ID, 
 	STEP_ID, 
+	STEP_TYPE, 
 	PROCESS_QTY, 
-	DISPATCH_IN_TIME, 
-	START_TIME, 
-	END_TIME, 
-	MACHINE_STATE) 
+	STEP_IN_TIME, 
+	EQP_START_TIME, 
+	EQP_END_TIME, 
+	EQP_STATE_CODE, 
+	TARGET_DATE, 
+	DEMAND_ID, 
+	DUE_DATE, 
+	AUTOMATION, 
+	EQP_PLAN_ID, 
+	TOOL_ID, 
+	INPUT_PROC_TIME, 
+	INPUT_TACT_TIME, 
+	UTILIZATION, 
+	EFFICIENCY, 
+	APPLY_PROC_TIME, 
+	APPLY_TACT_TIME) 
 VALUES 
-	(
-	@VERSION_NO, 
-	@LINE_ID, 
-	@EQP_ID, 
-	@LOT_ID, 
-	@PRODUCT_ID, 
-	@PROCESS_ID, 
-	@STEP_ID, 
-	@PROCESS_QTY, 
-	@DISPATCH_IN_TIME, 
-	@START_TIME, 
-	@END_TIME, 
-	@MACHINE_STATE)
-</CommandText>
+	(@VERSION_NO, @LINE_ID, @EQP_ID, @LOT_ID, @PRODUCT_ID, @STEP_ID, @STEP_TYPE, @PROCESS_QTY, @STEP_IN_TIME, @EQP_START_TIME, @EQP_END_TIME, @EQP_STATE_CODE, @TARGET_DATE, @DEMAND_ID, @DUE_DATE, @AUTOMATION, @EQP_PLAN_ID, @TOOL_ID, @INPUT_PROC_TIME, @INPUT_TACT_TIME, @UTILIZATION, @EFFICIENCY, @APPLY_PROC_TIME, @APPLY_TACT_TIME)</CommandText>
                       <Parameters>
                         <cdd:DataParameter Name="@VERSION_NO" Size="50" DbType="AnsiString" SourceVersion="Current" />
                         <cdd:DataParameter Name="@LINE_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
                         <cdd:DataParameter Name="@EQP_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
                         <cdd:DataParameter Name="@LOT_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
                         <cdd:DataParameter Name="@PRODUCT_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@PROCESS_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
                         <cdd:DataParameter Name="@STEP_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@PROCESS_QTY" DbType="Decimal" Precision="5" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@DISPATCH_IN_TIME" DbType="DateTime" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@START_TIME" DbType="DateTime" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@END_TIME" DbType="DateTime" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@MACHINE_STATE" DbType="Decimal" Precision="5" SourceVersion="Current" />
-                      </Parameters>
-                    </cdd:DataCommand>
-                    <cdd:DataCommand Name="Cmd2" IsBindTable="True">
-                      <CommandText>INSERT INTO 
-	APSLIB.EQP_PLAN 
-	(
-	EQP_PLAN_ID, 
-	VERSION_NO, 
-	LINE_ID, 
-	EQP_ID, 
-	LOT_ID, 
-	PRODUCT_ID, 
-	PROCESS_ID, 
-	STEP_ID,
-	STEP_TYPE,
-	PROCESS_QTY, 
-	STEP_IN_TIME, 
-	EQP_START_TIME, 
-	EQP_END_TIME, 
-	EQP_STATE_CODE, 
-	DUE_DATE,
-	TARGET_DATE,
-	AUTOMATION,
-	DEMAND_ID,
-	INPUT_PROC_TIME,
-	INPUT_TACT_TIME,
-	UTILIZATION, 
-	EFFICIENCY,
-	APPLY_PROC_TIME,
-	APPLY_TACT_TIME
-	) 
-VALUES 
-	(@EQP_PLAN_ID, @VERSION_NO, @LINE_ID, @EQP_ID, @LOT_ID, @PRODUCT_ID, @PROCESS_ID, @STEP_ID, @STEP_TYPE, @PROCESS_QTY, @STEP_IN_TIME, @EQP_START_TIME, @EQP_END_TIME, @EQP_STATE_CODE, @DUE_DATE, @TARGET_DATE, @AUTOMATION, @DEMAND_ID,
-	 @INPUT_PROC_TIME, @INPUT_TACT_TIME, @UTILIZATION, @EFFICIENCY, @APPLY_PROC_TIME, @APPLY_TACT_TIME)</CommandText>
-                      <Parameters>
-                        <cdd:DataParameter Name="@EQP_PLAN_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@VERSION_NO" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@LINE_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@EQP_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@LOT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@PRODUCT_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@PROCESS_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@STEP_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@PROCESS_QTY" DbType="Decimal" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@STEP_TYPE" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@PROCESS_QTY" DbType="Double" SourceVersion="Current" />
                         <cdd:DataParameter Name="@STEP_IN_TIME" DbType="DateTime" SourceVersion="Current" />
                         <cdd:DataParameter Name="@EQP_START_TIME" DbType="DateTime" SourceVersion="Current" />
                         <cdd:DataParameter Name="@EQP_END_TIME" DbType="DateTime" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@EQP_STATE_CODE" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@DUE_DATE" DbType="DateTime" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@DEMAND_ID" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@STEP_TYPE" Size="255" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EQP_STATE_CODE" Size="50" DbType="AnsiString" SourceVersion="Current" />
                         <cdd:DataParameter Name="@TARGET_DATE" DbType="DateTime" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@AUTOMATION" Size="255" DbType="AnsiString" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@INPUT_PROC_TIME" DbType="Double" Precision="10" Scale="3" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@INPUT_TACT_TIME" DbType="Double" Precision="10" Scale="3" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@UTILIZATION" DbType="Double" Precision="10" Scale="3" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@EFFICIENCY" DbType="Double" Precision="10" Scale="3" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@APPLY_PROC_TIME" DbType="Double" Precision="10" Scale="3" SourceVersion="Current" />
-                        <cdd:DataParameter Name="@APPLY_TACT_TIME" DbType="Double" Precision="10" Scale="3" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DEMAND_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@DUE_DATE" DbType="DateTime" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@AUTOMATION" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EQP_PLAN_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@TOOL_ID" Size="50" DbType="AnsiString" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@INPUT_PROC_TIME" DbType="Double" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@INPUT_TACT_TIME" DbType="Double" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@UTILIZATION" DbType="Double" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@EFFICIENCY" DbType="Double" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@APPLY_PROC_TIME" DbType="Double" SourceVersion="Current" />
+                        <cdd:DataParameter Name="@APPLY_TACT_TIME" DbType="Double" SourceVersion="Current" />
                       </Parameters>
                     </cdd:DataCommand>
                   </Commands>
@@ -3356,6 +3320,14 @@ VALUES
             <cdd:DataSource Name="DBCONN_APS" Description="">
               <Items Capacity="4">
                 <cdd:DataSourceItem Name="kamtec" ProviderName="IBM.Data.DB2.iSeries" ConnectionString="Data Source=175.200.81.7;UserID=QSECOFR;Password=goddns;" />
+              </Items>
+            </cdd:DataSource>
+          </Entry>
+          <Entry>
+            <String>DB_MSIT</String>
+            <cdd:DataSource Name="DB_MSIT" Description="">
+              <Items Capacity="4">
+                <cdd:DataSourceItem Name="master" ProviderName="System.Data.SqlClient" ConnectionString="Data Source=192.168.2.249;User ID=sa;Password=mozart;Persist Security Info=True;" />
               </Items>
             </cdd:DataSource>
           </Entry>

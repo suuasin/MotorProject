@@ -110,11 +110,6 @@ namespace SmartAPS.Logic.Simulation
                 }
             }
 
-            if (slot.LotID == "10W210825D001-005_2440_25")
-            {
-
-            }
-
             if (ConfigHelper.GetConfig<bool>(Constants.FW_PART_CHANGE))
             {
                 if (next != null)

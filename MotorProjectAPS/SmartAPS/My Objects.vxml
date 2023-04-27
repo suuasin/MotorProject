@@ -1323,10 +1323,12 @@
             <FDataClassItem Name="SmartAPSLot">
               <Content>
                 <DataClassMeta Name="SmartAPSLot">
+                  <Orders1>OriginLineID,LineID,Product,Process,WipInfo,CurrentProductID,CurrentProcessID,CurrentStepID,Route,LotID,FromLotID,UnitQty,UnitQtyDouble,Steps,PreviousPlan,CurrentPlan,Plans,IsStarted,IsFinished,PreviousStep,CurrentStep,WeightInfo,ToolSettings,DispatchInTime,ReleaseTime,LotState,CurrentState,StateTime,Priority,Resources,HasResources,Contents,HasContents,NumOfUnits,MergeKey,MergeInTime,MergeCnt,OrgQty,IsFirmPlanSplit,ParentLot,ChildLots,FirmPlan,IsCarryOverSplit,PrepEffEndTime,InputProcTime,InputTactTime,Utilization,Efficiency,ApplyProcTime,ApplyTactTime</Orders1>
                   <BaseClass>
                     <cdm:ReflectedBaseTypeInfo TargetType="csg3:Lot" />
                   </BaseClass>
                   <Properties>
+                    <cdm:PropertyMeta Name="FromLotID" PropertyType="string" />
                     <cdm:PropertyMeta Name="MergeKey" PropertyType="string">
                       <DefaultValue>
                         <String>=string.Empty</String>

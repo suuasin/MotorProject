@@ -166,23 +166,28 @@ namespace SmartAPS.Logic.Simulation
 
                         var qty = Convert.ToInt32(Math.Ceiling(splot.UnitQty * rate));
 
-                        foreach (var fent in fents)
+                        foreach (var fent in fents) //
                         {
-                            var sfent = fent as SmartAPSLot;
+                            var sfent = fent as SmartAPSLot; //sfent가 부모가 되는 lot이 담겨있음
 
                             if (sfent.UnitQty <= 0)
                                 continue;
 
-                            if (sfent.UnitQty >= qty)
+                            if (sfent.UnitQty >= qty)// 여기에 자식lot 저장
                             {
                                 WriteHelper.WriteProdChangeLog(sfent, splot, qty, splot.UnitQty, route.ROUTE_TYPE);
+                               
+                                //splot.FromLotID += sfent.LotID + "/";
                                 sfent.UnitQty -= qty;
                                 sfent.MergeCnt++;
+                                
+                                
                                 break;
                             }
                             else
                             {
                                 WriteHelper.WriteProdChangeLog(sfent, splot, sfent.UnitQty, splot.UnitQty, route.ROUTE_TYPE);
+                                splot.FromLotID += sfent.LotID + " ";
                                 qty -= sfent.UnitQty;
                                 sfent.UnitQty = 0;
                                 sfent.MergeCnt++;
